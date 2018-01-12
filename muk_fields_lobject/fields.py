@@ -23,6 +23,7 @@ import re
 import hashlib
 import logging
 import psycopg2
+import tempfile
 
 from odoo import _
 from odoo import models, api, fields
@@ -46,7 +47,11 @@ class LargeObject(fields.Field):
         if isinstance(value, bytes):
             lobject.write(value)
         else:
-            lobject.write(value.read())
+            while True:
+                chunk = value.read(4096)
+                if not chunk:
+                    break
+                lobject.write(chunk)
         return lobject.oid
 
     def convert_to_record(self, value, record):
@@ -56,6 +61,22 @@ class LargeObject(fields.Field):
                 return human_size(lobject.seek(0, 2))
             elif record._context.get('oid'):
                 return lobject.oid
+            elif record._context.get('stream'):
+                file = tempfile.TemporaryFile()
+                while True:
+                    chunk = lobject.read(4096)
+                    if not chunk:
+                        file.seek(0)
+                        return file
+                    file.write(chunk)
             else:
                 return lobject.read()
         return False
+    
+    def convert_to_export(self, value, record):
+        if value:
+            lobject = record.env.cr._cnx.lobject(value, 'rb')
+            if record._context.get('export_raw_data'):
+                return lobject.read()
+            return base64.b64encode(lobject.read())
+        return ''
