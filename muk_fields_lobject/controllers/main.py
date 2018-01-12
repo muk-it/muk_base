@@ -21,15 +21,18 @@
 
 import base64
 import logging
+import hashlib
+import mimetypes
 
-import werkzeug.utils
-import werkzeug.wrappers
+from werkzeug import utils
+from  werkzeug import wrappers
 
 from odoo import _
 from odoo import tools
 from odoo import http
 from odoo.http import request
 from odoo.http import Response
+from odoo.tools import pycompat
 from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
@@ -43,26 +46,27 @@ class LargeObjectController(http.Controller):
         '/web/lobject/<int:id>/<string:filename>',
         '/web/lobject/<string:model>/<int:id>/<string:field>',
         '/web/lobject/<string:model>/<int:id>/<string:field>/<string:filename>'], type='http', auth="public")
-    def content_common(self, model='ir.attachment', id=None, field='datas', filename=None,
-        filename_field='datas_fname', mimetype=None, download=None, access_token=None):
+    def content_common(self, xmlid=None, model='ir.attachment', id=None, field='datas', filename=None,
+                       filename_field='datas_fname', mimetype=None, download=None, access_token=None):
+        
+        print(model, id, field, filename, filename_field)
+        
         obj = None
         if xmlid:
             obj = request.env.ref(xmlid, False)
-        elif id and model in env.registry:
+        elif id and model in request.env.registry:
             obj = request.env[model].browse(int(id))
         if not obj or not obj.exists() or field not in obj:
-            return (404, [], None)
+            return request.not_found()
         try:
             last_update = obj['__last_update']
         except AccessError:
-            return (403, [], None)
+            return wrappers.Response(status=403, headers=[])
         status, headers, content = None, [], None
         content = obj.with_context({'stream': True})[field] or b''
         if not filename:
             if filename_field in obj:
                 filename = obj[filename_field]
-            elif module_resource_path:
-                filename = os.path.basename(module_resource_path)
             else:
                 filename = "%s-%s-%s" % (obj._name, obj.id, field)
         mimetype = 'mimetype' in obj and obj.mimetype or False
@@ -73,7 +77,6 @@ class LargeObjectController(http.Controller):
         retag = '"%s"' % hashlib.md5(pycompat.to_text(content).encode('utf-8')).hexdigest()
         status = status or (304 if etag == retag else 200)
         headers.append(('ETag', retag))
-        headers.append(('Cache-Control', 'max-age=%s' % (STATIC_CACHE if unique else 0)))
         if download:
             headers.append(('Content-Disposition', http.content_disposition(filename)))
         return wrappers.Response(content, headers=headers, direct_passthrough=True, status=status)
