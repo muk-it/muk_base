@@ -25,6 +25,12 @@
     "description": """ 
         Provides a field to store bytes as PostgreSQL
         large objects.
+        
+        PostgreSQL offers support for large objects,
+        which provide stream-style access to user data
+        that is stored in a special large-object structure.
+        They are useful with data values too large to be
+        manipulated conveniently as a whole.
     """,
     "version": '11.0.1.0.0',   
     "category": 'Extra Tools',   
