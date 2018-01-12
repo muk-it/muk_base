@@ -59,14 +59,14 @@ from odoo.addons.muk_fields_lobject import fields as lobject_fields
 
 class LargeObjectModel(models.Model):
 
-	data_content = lobject_fields.LargeObject(string="Data")
+    data_content = lobject_fields.LargeObject(string="Data")
 
-	@api.multi
+    @api.multi
     def data(self):
         for record in self:
-        	bytes = record.data_content
-			oid = record.with_context({'oid': True}).data_content
-        	size = record.with_context({'bin_size': True}).data_content
+            bytes = record.data_content
+            oid = record.with_context({'oid': True}).data_content
+            size = record.with_context({'bin_size': True}).data_content
             stream = record.with_context({'stream': True}).data_content
 		    	</code>
 			</pre>
