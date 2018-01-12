@@ -57,8 +57,10 @@ class LargeObject(fields.Field):
     def convert_to_record(self, value, record):
         if value:
             lobject = record.env.cr._cnx.lobject(value, 'rb')
-            if record._context.get('bin_size') or record._context.get('bin_size_' + self.name):
+            if record._context.get('human_size'):
                 return human_size(lobject.seek(0, 2))
+            elif record._context.get('bin_size'):
+                return lobject.seek(0, 2)
             elif record._context.get('oid'):
                 return lobject.oid
             elif record._context.get('stream'):
