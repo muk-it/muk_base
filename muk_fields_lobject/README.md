@@ -1,15 +1,15 @@
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
-[![Build Status](https://travis-ci.org/muk-it/muk_web.svg?branch=11.0)](https://travis-ci.org/muk-it/muk_web)
-[![codecov](https://codecov.io/gh/muk-it/muk_web/branch/11.0/graph/badge.svg)](https://codecov.io/gh/muk-it/muk_web)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/eff47569926c435d98a3187623615bc4)](https://www.codacy.com/app/keshrath/muk_web?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=muk-it/muk_web&amp;utm_campaign=Badge_Grade)
+# MuK Large Objects Field
 
-# MuK Odoo Web Modules
+PostgreSQL offers support for large objects, which provide stream-style access to user data that is stored in a special large-object structure. They are useful with data values too large to be manipulated conveniently as a whole.
 
-addon | version | summary
---- | --- | ---
-[muk_web_client](muk_web_client/) | 11.0 | Odoo Web Client Extension
-[muk_web_client_refresh](muk_web_client_refresh/) | 11.0 | Web Client Refresh
-[muk_web_preview](muk_web_preview/) | 11.0 | Preview Dialog
-[muk_web_preview_attachment](muk_web_preview_attachment/) | 11.0 | Preview Dialog Attachment
-[muk_web_share](muk_web_share/) | 11.0 | Share Dialog
+Psycopg allows access to the large object using the `lobject` class. Objects are generated using the `connection.lobject()` factory method. Data can be retrieved either as bytes or as Unicode strings.
 
+Psycopg large object support efficient import/export with file system files using the `lo_import()` and `lo_export()` libpq functions.
+
+Changed in version 2.6: added support for large objects greated than 2GB. Note that the support is enabled only if all the following conditions are verified:
+
+* the Python build is 64 bits;
+* the extension was built against at least libpq 9.3;
+* the server version is at least PostgreSQL 9.3 (server_version must be >= 90300).
+
+If Psycopg was built with 64 bits large objects support (i.e. the first two contidions above are verified), the `psycopg2.__version__` constant will contain the lo64 flag. If any of the contition is not met several lobject methods will fail if the arguments exceed 2GB.
