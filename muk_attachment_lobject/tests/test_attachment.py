@@ -53,7 +53,4 @@ class AttachmentTestCase(common.TransactionCase):
             'name': "Test",
             'datas': base64.b64encode(b"\xff data")})
         self.assertTrue(attach.datas)
-        
-        _logger.info(self.env.cr.execute(" \lo_list"))
-        
         attach.unlink()
