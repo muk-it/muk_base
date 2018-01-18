@@ -40,7 +40,7 @@
         "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
     ],
     'depends': [
-        'muk_dms',
+        'muk_fields_lobject',
     ],
     "data": [
         "views/dms_actions.xml",
