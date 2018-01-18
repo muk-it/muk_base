@@ -41,6 +41,9 @@ class LargeObject(fields.Field):
     }
     
     def convert_to_column(self, value, record, values=None):
+        oid = record.with_context({'oid': True})[self.name]
+        if oid:
+            record.env.cr._cnx.lobject(oid, 'rb').unlink()
         if not value:
             return None
         lobject = record.env.cr._cnx.lobject(0, 'wb')

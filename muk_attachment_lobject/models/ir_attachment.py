@@ -35,6 +35,8 @@ from odoo.exceptions import AccessError, ValidationError
 from odoo.tools import config, human_size, ustr, html_escape
 from odoo.tools.mimetypes import guess_mimetype
 
+from odoo.addons.muk_fields_lobject import fields as lobject_fields
+
 _logger = logging.getLogger(__name__)
 
 class LObjectIrAttachment(models.Model):
@@ -54,12 +56,15 @@ class LObjectIrAttachment(models.Model):
             attach.write({'datas': attach.datas})
         return True
     
-    @api.depends('store_fname', 'db_datas', 'store_document')
+    @api.depends('store_fname', 'db_datas', 'store_lobject')
     def _compute_datas(self):
         bin_size = self._context.get('bin_size')
         for attach in self:
             if attach.store_lobject:
-                attach.datas = base64.b64encode(attach.store_lobject)
+                if bin_size:
+                    attach.datas = attach.store_lobject
+                else:
+                    attach.datas = base64.b64encode(attach.store_lobject)
             else:
                 super(LObjectIrAttachment, attach)._compute_datas()
         
