@@ -22,16 +22,15 @@
 ###################################################################################
 
 {
-    "name": "MuK Documents Attachment",
-    "summary": """Documents as Attachment Storage""",
+    "name": "MuK Large Objects Attachment",
+    "summary": """Large Objects Attachment Location""",
     "description": """ 
-        MuK Documents is a module to create, manage and
-        view files directly within Odoo. MuK Documents
-        Attachment allows to store Odoo Attachments
-        inside the Document Management System.
+        Provides a new attachment location to save attachment as large
+        objects. To enable the large object storage option change the
+        `ir_attachment.location` parameter to `lobject`.
     """,
-    "version": '11.0.1.0.4',   
-    "category": 'Document Management',   
+    "version": '11.0.1.0.0',   
+    "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
     "author": "MuK IT",
