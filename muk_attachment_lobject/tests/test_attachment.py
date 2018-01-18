@@ -53,8 +53,8 @@ class AttachmentTestCase(common.TransactionCase):
             'name': "Test",
             'datas': base64.b64encode(b"\xff data")})
         self.assertTrue(attach.datas)
-        oid = attach.with_context({'oid': True}).datas
+        oid = attach.with_context({'oid': True}).store_lobject
         self.assertTrue(oid)
         attach.write({'datas': base64.b64encode(b"\xff data")})
-        self.assertTrue(oid == attach.with_context({'oid': True}).datas)
+        self.assertTrue(oid == attach.with_context({'oid': True}).store_lobject)
         attach.unlink()
