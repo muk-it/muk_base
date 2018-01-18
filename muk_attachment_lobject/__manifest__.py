@@ -37,22 +37,13 @@
     "author": "MuK IT",
     "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
-        "Kerrim Abdelhamed <kerrim.adbelhamed@mukit.at>",
     ],
     'depends': [
         'muk_fields_lobject',
     ],
     "data": [
-        "views/dms_actions.xml",
-        "views/dms_file_view.xml",
-        "views/res_config_view.xml",
-        "views/ir_attachment_view.xml",
     ],
     "demo": [
-        "demo/dms_settings_demo.xml",
-        "demo/dms_directory_demo.xml",
-        "demo/dms_config_demo.xml",
-        "demo/dms_attachment_demo.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",
