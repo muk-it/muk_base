@@ -24,6 +24,7 @@ import pytz
 import hashlib
 import logging
 import psycopg2
+import dateutil
 
 from odoo import _
 from odoo import models, api, fields
