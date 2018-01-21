@@ -50,7 +50,7 @@ class AttachmentTestCase(common.TransactionCase):
         result = self.attachment.read_group(
             domain=[],
             fields=['name'],
-            groupby='date:hour')
+            groupby='create_date:hour')
         _logger.warning(result)
         self.assertTrue(result)
         
