@@ -49,7 +49,7 @@ class AttachmentTestCase(common.TransactionCase):
     def test_groupy(self):
         result = self.attachment.read_group(
             domain=[],
-            fields=['name'],
+            fields=['name', 'create_date'],
             groupby='create_date:hour')
         _logger.warning(result)
         self.assertTrue(result)
