@@ -27,7 +27,7 @@ import tempfile
 
 from odoo import _
 from odoo import models, api, fields
-from odoo.tools import ustr, pycompat, human_size
+from odoo.tools import ustr, human_size
 
 _logger = logging.getLogger(__name__)
 
