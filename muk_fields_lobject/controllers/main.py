@@ -32,7 +32,6 @@ from odoo import tools
 from odoo import http
 from odoo.http import request
 from odoo.http import Response
-from odoo.tools import pycompat
 from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
@@ -71,7 +70,7 @@ class LargeObjectController(http.Controller):
             mimetype = mimetypes.guess_type(filename)[0]
         headers += [('Content-Type', mimetype), ('X-Content-Type-Options', 'nosniff')]
         etag = bool(request) and request.httprequest.headers.get('If-None-Match')
-        retag = '"%s"' % hashlib.md5(pycompat.to_text(content).encode('utf-8')).hexdigest()
+        retag = '"%s"' % hashlib.md5(content).hexdigest()
         status = status or (304 if etag == retag else 200)
         headers.append(('ETag', retag))
         if download:
