@@ -46,7 +46,7 @@ class LargeObjectController(http.Controller):
         '/web/lobject/<int:id>/<string:filename>',
         '/web/lobject/<string:model>/<int:id>/<string:field>',
         '/web/lobject/<string:model>/<int:id>/<string:field>/<string:filename>'], type='http', auth="public")
-    def content_common(self, xmlid=None, model='ir.attachment', id=None, field='datas', filename=None,
+    def content_lobject(self, xmlid=None, model='ir.attachment', id=None, field='datas', filename=None,
                        filename_field='datas_fname', mimetype=None, download=None, access_token=None):
         obj = None
         if xmlid:
