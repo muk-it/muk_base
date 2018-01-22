@@ -41,7 +41,7 @@
         "Mathias Markl <mathias.markl@mukit.at>",
     ],
     "depends": [
-        "base",
+        "web",
     ],
     "data": [
     ],
