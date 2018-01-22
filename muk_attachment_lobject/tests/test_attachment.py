@@ -77,7 +77,8 @@ class AttachmentTestCase(common.HttpCase):
         self.assertTrue(human_size)
         stream = attach.with_context({'stream': True}).store_lobject
         self.assertTrue(stream.read())
-        
+    
+    @unittest.skip("skip")
     def test_download(self): 
         self.param.set_param('ir_attachment.location', 'lobject')
         attach = self.attachment.create({
