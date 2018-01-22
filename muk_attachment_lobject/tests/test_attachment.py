@@ -85,7 +85,9 @@ class AttachmentTestCase(common.HttpCase):
             'datas': base64.b64encode(b"\xff data")})
         attach._cr.commit()
         self.authenticate('admin', 'admin')
-        url = "/web/lobject/{}".format(
-            attach.id
+        url = "/web/lobject/{}/{}/{}".format(
+            'ir.attachment',
+            attach.id,
+            'store_lobject'
         )
         self.url_open(url)
