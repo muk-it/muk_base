@@ -78,7 +78,6 @@ class AttachmentTestCase(common.HttpCase):
         stream = attach.with_context({'stream': True}).store_lobject
         self.assertTrue(stream.read())
     
-    @unittest.skip("skip")
     def test_download(self): 
         self.param.set_param('ir_attachment.location', 'lobject')
         attach = self.attachment.create({
@@ -86,10 +85,8 @@ class AttachmentTestCase(common.HttpCase):
             'datas': base64.b64encode(b"\xff data")})
         self.authenticate('admin', 'admin')
         url = "/web/lobject"
-        params = {'id': attach.id}
-        url_parts = list(urlparse(url))
-        query = dict(parse_qsl(url_parts[4]))
-        query.update(params)
-        url_parts[4] = urlencode(query)
-        url = urlunparse(url_parts)
-        self.assertTrue(self.url_open(url))    
+        url = "/web/lobject/{}".format(
+            attach.id
+        )
+        r = self.url_open(url)
+        self.assertTrue(r)   
