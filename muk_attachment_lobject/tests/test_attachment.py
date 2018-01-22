@@ -78,5 +78,4 @@ class AttachmentTestCase(common.HttpCase):
             'name': "Test",
             'datas': base64.b64encode(b"\xff data")})
         self.authenticate('admin', 'admin')
-        self.assertTrue(self.url_open("/web/lobject/ir.attachment/%s/%s/%s" % (
-                attach.id, 'datas', attach.datas_fname)))      
+        self.assertTrue(self.url_open("/web/lobject/%s" % attach.id))      
