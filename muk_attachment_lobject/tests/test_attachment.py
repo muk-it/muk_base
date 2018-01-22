@@ -84,9 +84,7 @@ class AttachmentTestCase(common.HttpCase):
             'name': "Test",
             'datas': base64.b64encode(b"\xff data")})
         self.authenticate('admin', 'admin')
-        url = "/web/lobject"
         url = "/web/lobject/{}".format(
             attach.id
         )
-        r = self.url_open(url)
-        self.assertTrue(r)   
+        self.url_open(url)
