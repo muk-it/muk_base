@@ -25,7 +25,7 @@ import hashlib
 import mimetypes
 
 from werkzeug import utils
-from  werkzeug import wrappers
+from werkzeug import wrappers
 
 from odoo import _
 from odoo import tools
