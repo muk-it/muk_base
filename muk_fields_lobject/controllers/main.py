@@ -39,7 +39,7 @@ _logger = logging.getLogger(__name__)
 
 class LargeObjectController(http.Controller):
 
-    @http.route(['/web/content',
+    @http.route(['/web/lobject',
         '/web/lobject/<string:xmlid>',
         '/web/lobject/<string:xmlid>/<string:filename>',
         '/web/lobject/<int:id>',
