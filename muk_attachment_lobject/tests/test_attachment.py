@@ -34,7 +34,7 @@ from odoo.tests import common
 
 _logger = logging.getLogger(__name__)
 
-class AttachmentTestCase(common.TransactionCase):
+class AttachmentTestCase(common.HttpCase):
     
     at_install = False
     post_install = True
@@ -58,4 +58,25 @@ class AttachmentTestCase(common.TransactionCase):
         self.assertTrue(oid)
         attach.write({'datas': base64.b64encode(b"\xff data")})
         self.assertTrue(oid != attach.with_context({'oid': True}).store_lobject)
+        self.assertTrue(attach.export_data(['datas']))
+        self.assertTrue(attach.export_data(['datas'], raw_data=True))
         attach.unlink()
+        
+    def test_lobject(self):
+        self.param.set_param('ir_attachment.location', 'lobject')
+        attach = self.attachment.create({
+            'name': "Test",
+            'datas': base64.b64encode(b"\xff data")})
+        human_size = attach.with_context({'human_size': True}).store_lobject
+        self.assertTrue(human_size)
+        stream = attach.with_context({'stream': True}).store_lobject
+        self.assertTrue(stream.read())
+        
+    def test_download(self): 
+        self.param.set_param('ir_attachment.location', 'lobject')
+        attach = self.attachment.create({
+            'name': "Test",
+            'datas': base64.b64encode(b"\xff data")})
+        self.authenticate('admin', 'admin')
+        self.assertTrue(self.url_open("/web/lobject/ir.attachment/%s/%s/%s" % (
+                attach.id, 'datas', attach.datas_fname)))      
