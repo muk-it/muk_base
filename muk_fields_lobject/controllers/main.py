@@ -54,6 +54,7 @@ class LargeObjectController(http.Controller):
         elif id and model in request.env.registry:
             obj = request.env[model].browse(int(id))
         if not obj or not obj.exists() or field not in obj:
+            _logger.info(not obj, not obj.exists(), field not in obj)
             return request.not_found()
         try:
             last_update = obj['__last_update']
