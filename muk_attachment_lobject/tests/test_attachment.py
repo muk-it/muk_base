@@ -90,4 +90,6 @@ class AttachmentTestCase(common.HttpCase):
             attach.id,
             'store_lobject'
         )
-        self.url_open(url)
+        self.assertTrue(self.url_open(url))
+        attach.unlink()
+        attach._cr.commit()
