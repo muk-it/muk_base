@@ -56,7 +56,7 @@ class LargeObjectController(http.Controller):
         if not obj or not obj.exists() or field not in obj:
             _logger.info(str(not obj))
             _logger.info(str(not obj.exists()))
-            _logger.info(str(field not in obj)))
+            _logger.info(str(field not in obj))
             return request.not_found()
         try:
             last_update = obj['__last_update']
