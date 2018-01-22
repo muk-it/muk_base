@@ -83,6 +83,7 @@ class AttachmentTestCase(common.HttpCase):
         attach = self.attachment.create({
             'name': "Test",
             'datas': base64.b64encode(b"\xff data")})
+        attach._cr.commit()
         self.authenticate('admin', 'admin')
         url = "/web/lobject/{}".format(
             attach.id
