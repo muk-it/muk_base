@@ -51,6 +51,5 @@ class AttachmentTestCase(common.TransactionCase):
             domain=[],
             fields=['name', 'create_date'],
             groupby='create_date:hour')
-        _logger.warning(result)
         self.assertTrue(result)
         
