@@ -28,6 +28,12 @@ import logging
 import unittest
 import requests
 
+from urllib.parse import urlunparse
+from urllib.parse import urlparse
+from urllib.parse import parse_qsl
+from urllib.parse import urlencode
+from contextlib import closing
+
 import odoo
 from odoo import _
 from odoo.tests import common
