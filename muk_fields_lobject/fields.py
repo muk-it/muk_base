@@ -58,7 +58,7 @@ class LargeObject(fields.Field):
         return lobject.oid
 
     def convert_to_record(self, value, record):
-        if value:
+        if value and isinstance(value, int):
             lobject = record.env.cr._cnx.lobject(value, 'rb')
             if record._context.get('human_size'):
                 return human_size(lobject.seek(0, 2))
@@ -76,7 +76,7 @@ class LargeObject(fields.Field):
                     file.write(chunk)
             else:
                 return lobject.read()
-        return False
+        return value
     
     def convert_to_export(self, value, record):
         if value:

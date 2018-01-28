@@ -39,7 +39,9 @@ def large_object_unlink(self):
         field = self._fields[name]
         if field.type == 'lobject' and field.store:
             for record in self:
-                oids.append(record.with_context({'oid': True})[name])
+                oid = record.with_context({'oid': True})[name]
+                if oid:
+                    oids.append(oid)
     unlink(self)
     for oid in oids:
         lobject = self.env.cr._cnx.lobject(oid, 'rb').unlink()
