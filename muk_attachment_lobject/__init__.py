@@ -25,6 +25,13 @@ from . import models
 
 from odoo import api, SUPERUSER_ID
 
+def _install_force_storage(cr, registry):
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    config = env['ir.config_parameter'].sudo()
+    config.set_param('ir_attachment.location', 'lobject')
+    attachment = env['ir.attachment']
+    attachment.sudo().force_storage()
+    
 def _uninstall_force_storage(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
     config = env['ir.config_parameter'].sudo()

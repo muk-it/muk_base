@@ -29,7 +29,7 @@
         objects. To enable the large object storage option change the
         `ir_attachment.location` parameter to `lobject`.
     """,
-    "version": '11.0.1.0.0',   
+    "version": '11.0.1.0.1',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -56,5 +56,7 @@
     },
     "application": False,
     "installable": True,
+    "auto_install": False,
+    "post_init_hook": "_install_force_storage",
     "uninstall_hook": "_uninstall_force_storage",
 }
