@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    MuK Document Management System
@@ -21,9 +19,9 @@
 #
 ###################################################################################
 
-from . import models
-
 from odoo import api, SUPERUSER_ID
+
+from . import models
 
 def _install_force_storage(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})

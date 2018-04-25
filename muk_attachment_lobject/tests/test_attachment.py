@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    MuK Document Management System
@@ -21,21 +19,10 @@
 #
 ###################################################################################
 
-import os
-import json
 import base64
 import logging
 import unittest
-import requests
 
-from urllib.parse import urlunparse
-from urllib.parse import urlparse
-from urllib.parse import parse_qsl
-from urllib.parse import urlencode
-from contextlib import closing
-
-import odoo
-from odoo import _
 from odoo.tests import common
 
 _logger = logging.getLogger(__name__)
@@ -67,29 +54,8 @@ class AttachmentTestCase(common.HttpCase):
         self.assertTrue(attach.export_data(['datas']))
         self.assertTrue(attach.export_data(['datas'], raw_data=True))
         attach.unlink()
-        
-    def test_lobject(self):
-        self.param.set_param('ir_attachment.location', 'lobject')
-        attach = self.attachment.create({
-            'name': "Test",
-            'datas': base64.b64encode(b"\xff data")})
-        human_size = attach.with_context({'human_size': True}).store_lobject
-        self.assertTrue(human_size)
-        stream = attach.with_context({'stream': True}).store_lobject
-        self.assertTrue(stream.read())
     
-    def test_download(self): 
+    @unittest.skip("The test takes a long time and is therefore skipped by default.")
+    def test_migration(self):
         self.param.set_param('ir_attachment.location', 'lobject')
-        attach = self.attachment.create({
-            'name': "Test",
-            'datas': base64.b64encode(b"\xff data")})
-        attach._cr.commit()
-        self.authenticate('admin', 'admin')
-        url = "/web/lobject/{}/{}/{}".format(
-            'ir.attachment',
-            attach.id,
-            'store_lobject'
-        )
-        self.assertTrue(self.url_open(url))
-        attach.unlink()
-        attach._cr.commit()
+        self.attachment.force_storage()

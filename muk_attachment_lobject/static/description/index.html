@@ -21,6 +21,17 @@
 					<code>lobject</code>
 					.
 				</p>
+				<h5 style="padding-top: 10px;">Advantages over the in-database storage</h5>
+				<ul>
+					<li>Better RAM efficiency (This is more important for large files than for small ones.)</li>
+					<li>Possibility to easily dump the base without the large objects (This can be useful for reproducing bugs.)</li>
+				</ul>
+				<h5 style="padding-top: 10px;">Advantages over the file system storage</h5>
+				<ul>
+					<li>Large objects are transactional (fully ACID)</li>
+					<li>They work out of the box in multi-system setups (So there is no need for NFS or similar file sharing tools.)</li>
+					<li>Enables you to easily create backups of the entire system</li>
+				</ul>
 			</div>
 		</div>
 	</div>

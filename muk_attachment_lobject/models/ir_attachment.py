@@ -1,5 +1,3 @@
-## -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    MuK Document Management System
@@ -22,20 +20,13 @@
 ###################################################################################
 
 import base64
-import hashlib
-import itertools
 import logging
 import mimetypes
-import os
-import re
-from collections import defaultdict
 
-from odoo import api, fields, models, tools, SUPERUSER_ID, _
-from odoo.exceptions import AccessError, ValidationError
-from odoo.tools import config, human_size, ustr, html_escape
-from odoo.tools.mimetypes import guess_mimetype
+from odoo import api, models, _
+from odoo.exceptions import AccessError
 
-from odoo.addons.muk_fields_lobject import fields as lobject_fields
+from odoo.addons.muk_fields_lobject.fields import LargeObject
 
 _logger = logging.getLogger(__name__)
 
@@ -43,16 +34,16 @@ class LObjectIrAttachment(models.Model):
     
     _inherit = 'ir.attachment'
 
-    store_lobject = lobject_fields.LargeObject(
+    store_lobject = LargeObject(
         string="Data")
     
     @api.model
     def force_storage(self):
-        """Override force_storage without calling super,
-           cause domain need to be edited."""
         if not self.env.user._is_admin():
             raise AccessError(_('Only administrators can execute this action.'))
-        for attach in self.search(['|', ['res_field', '=', False], ['res_field', '!=', False]]):
+        attachments = self.search(['|', ['res_field', '=', False], ['res_field', '!=', False]])
+        for index, attach in enumerate(attachments):
+            _logger.info(_("Migrate Attachment %s of %s") % (index, len(attachments)))
             attach.write({'datas': attach.datas})
         return True
     
@@ -64,7 +55,7 @@ class LObjectIrAttachment(models.Model):
                 if bin_size:
                     attach.datas = attach.store_lobject
                 else:
-                    attach.datas = base64.b64encode(attach.store_lobject)
+                    attach.datas = attach.with_context({'base64': True}).store_lobject
             else:
                 super(LObjectIrAttachment, attach)._compute_datas()
         
@@ -88,3 +79,14 @@ class LObjectIrAttachment(models.Model):
                     self._file_delete(fname)
             else:
                 super(LObjectIrAttachment, attach)._inverse_datas()
+                
+    def _compute_mimetype(self, values):
+        mimetype = super(LObjectIrAttachment, self)._compute_mimetype(values)
+        if not mimetype or mimetype == 'application/octet-stream':
+            mimetype = None
+            for attach in self:
+                if attach.mimetype:
+                    mimetype = attach.mimetype
+                if not mimetype and attach.datas_fname:
+                    mimetype = mimetypes.guess_type(attach.datas_fname)[0]
+        return mimetype or 'application/octet-stream'

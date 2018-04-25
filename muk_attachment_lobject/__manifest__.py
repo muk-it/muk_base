@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    MuK Document Management System
@@ -24,12 +22,7 @@
 {
     "name": "MuK Large Objects Attachment",
     "summary": """Large Objects Attachment Location""",
-    "description": """ 
-        Provides a new attachment location to save attachment as large
-        objects. To enable the large object storage option change the
-        `ir_attachment.location` parameter to `lobject`.
-    """,
-    "version": '11.0.1.0.1',   
+    "version": '11.0.2.0.0',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
