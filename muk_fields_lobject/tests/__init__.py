@@ -1,6 +1,6 @@
 ###################################################################################
 # 
-#    Copyright (C) 2018 MuK IT GmbH
+#    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,36 +17,4 @@
 #
 ###################################################################################
 
-{
-    "name": "MuK Large Objects",
-    "summary": """PGSQL Large Objects Support""",
-    "version": '11.0.2.0.0',   
-    "category": 'Extra Tools',   
-    "license": "AGPL-3",
-    "website": "http://www.mukit.at",
-    "author": "MuK IT",
-    "contributors": [
-        "Mathias Markl <mathias.markl@mukit.at>",
-    ],
-    "depends": [
-        "base",
-    ],
-    "data": [
-    ],
-    "demo": [
-    ],
-    "qweb": [
-        "static/src/xml/*.xml",
-    ],
-    "images": [
-        'static/description/banner.png'
-    ],
-    "external_dependencies": {
-        "python": [],
-        "bin": [],
-    },
-    "auto_install": True,
-    "application": False,
-    "installable": True,
-    
-}
+from . import test_lobject

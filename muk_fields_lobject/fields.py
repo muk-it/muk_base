@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2018 MuK IT GmbH
@@ -19,15 +17,14 @@
 #
 ###################################################################################
 
-import re
+import base64
 import hashlib
 import logging
-import psycopg2
+import binascii
 import tempfile
 
-from odoo import _
-from odoo import models, api, fields
-from odoo.tools import ustr, pycompat, human_size
+from odoo import fields
+from odoo.tools import human_size
 
 _logger = logging.getLogger(__name__)
 
@@ -48,7 +45,15 @@ class LargeObject(fields.Field):
             return None
         lobject = record.env.cr._cnx.lobject(0, 'wb')
         if isinstance(value, bytes):
-            lobject.write(value)
+            try:
+                if base64.b64encode(base64.b64decode(value)) == value:
+                    lobject.write(base64.b64decode(value))
+                else:
+                    lobject.write(value)
+            except binascii.Error:
+                lobject.write(value)
+        elif isinstance(value, str):
+            lobject.write(base64.b64decode(value.encode('ascii')))
         else:
             while True:
                 chunk = value.read(4096)
@@ -66,6 +71,8 @@ class LargeObject(fields.Field):
                 return lobject.seek(0, 2)
             elif record._context.get('oid'):
                 return lobject.oid
+            elif record._context.get('base64'):
+                return base64.b64encode(lobject.read())
             elif record._context.get('stream'):
                 file = tempfile.TemporaryFile()
                 while True:
@@ -74,6 +81,13 @@ class LargeObject(fields.Field):
                         file.seek(0)
                         return file
                     file.write(chunk)
+            elif record._context.get('checksum'):
+                checksum = hashlib.md5()
+                while True:
+                    chunk = lobject.read(4096)
+                    if not chunk:
+                        return checksum.hexdigest()
+                    checksum.update(chunk)
             else:
                 return lobject.read()
         return value

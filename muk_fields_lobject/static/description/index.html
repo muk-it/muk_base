@@ -55,11 +55,11 @@
 
 			<pre>
 		    	<code>
-from odoo.addons.muk_fields_lobject import fields as lobject_fields
+from odoo.addons.muk_fields_lobject.fields import LargeObject
 
 class LargeObjectModel(models.Model):
 
-    data_content = lobject_fields.LargeObject(string="Data")
+    data_content = LargeObject(string="Data")
 
     @api.multi
     def data(self):

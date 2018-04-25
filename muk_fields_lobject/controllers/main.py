@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2018 MuK IT GmbH
@@ -19,62 +17,53 @@
 #
 ###################################################################################
 
-import base64
 import logging
-import hashlib
-import mimetypes
 
 from werkzeug import utils
 from werkzeug import wrappers
 
-from odoo import _
-from odoo import tools
 from odoo import http
 from odoo.http import request
-from odoo.http import Response
-from odoo.tools import pycompat
-from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
+    
+def lobject_content(xmlid=None, model=None, id=None, field='content', unique=False,
+                    filename=None, filename_field='content_fname', download=False, mimetype=None,
+                    default_mimetype='application/octet-stream', access_token=None, env=None):
+    return request.registry['ir.http'].lobject_content(
+        xmlid=xmlid, model=model, id=id, field=field, unique=unique, filename=filename,
+        filename_field=filename_field, download=download, mimetype=mimetype,
+        default_mimetype=default_mimetype, access_token=access_token, env=env)
 
 class LargeObjectController(http.Controller):
-
+    
     @http.route(['/web/lobject',
         '/web/lobject/<string:xmlid>',
         '/web/lobject/<string:xmlid>/<string:filename>',
         '/web/lobject/<int:id>',
         '/web/lobject/<int:id>/<string:filename>',
+        '/web/lobject/<int:id>-<string:unique>',
+        '/web/lobject/<int:id>-<string:unique>/<string:filename>',
         '/web/lobject/<string:model>/<int:id>/<string:field>',
         '/web/lobject/<string:model>/<int:id>/<string:field>/<string:filename>'], type='http', auth="public")
-    def content_lobject(self, xmlid=None, model='ir.attachment', id=None, field='datas', filename=None,
-                       filename_field='datas_fname', mimetype=None, download=None, access_token=None):
-        obj = None
-        if xmlid:
-            obj = request.env.ref(xmlid, False)
-        elif id and model in request.env.registry:
-            obj = request.env[model].browse(int(id))
-        if not obj or not obj.exists() or field not in obj:
-            return request.not_found()
-        try:
-            last_update = obj['__last_update']
-        except AccessError:
-            return wrappers.Response(status=403, headers=[])
-        status, headers, content = None, [], None
-        content = obj.with_context({'stream': True})[field] or b''
-        if not filename:
-            if filename_field in obj:
-                filename = obj[filename_field]
-            else:
-                filename = "%s-%s-%s" % (obj._name, obj.id, field)
-        mimetype = 'mimetype' in obj and obj.mimetype or False
-        if not mimetype and filename:
-            mimetype = mimetypes.guess_type(filename)[0]
-        headers += [('Content-Type', mimetype), ('X-Content-Type-Options', 'nosniff')]
-        etag = bool(request) and request.httprequest.headers.get('If-None-Match')
-        retag = '"%s"' % hashlib.md5(pycompat.to_text(content).encode('utf-8')).hexdigest()
-        status = status or (304 if etag == retag else 200)
-        headers.append(('ETag', retag))
-        if download:
-            headers.append(('Content-Disposition', http.content_disposition(filename)))
-        return wrappers.Response(content, headers=headers, direct_passthrough=True, status=status)
+    def content_lobject(self, xmlid=None, model=None, id=None, field='content',
+                        filename=None, filename_field='content_fname', unique=None, mimetype=None,
+                        download=None, data=None, token=None, access_token=None):
         
+        status, headers, content = lobject_content(
+            xmlid=xmlid, model=model, id=id, field=field, unique=unique, filename=filename,
+            filename_field=filename_field, download=download, mimetype=mimetype,
+            access_token=access_token)
+        if status == 304:
+            response = wrappers.Response(status=status, headers=headers)
+        elif status == 301:
+            return utils.redirect(content, code=301)
+        elif status != 200:
+            response = request.not_found()
+        else:
+            headers.append(('Content-Length', content.seek(0, 2)))
+            content.seek(0, 0)
+            response =  wrappers.Response(content, headers=headers, status=status, direct_passthrough=True)
+        if token:
+            response.set_cookie('fileToken', token)
+        return response

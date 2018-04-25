@@ -1,6 +1,6 @@
 ###################################################################################
 # 
-#    Copyright (C) 2018 MuK IT GmbH
+#    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,25 +17,24 @@
 #
 ###################################################################################
 
+import os
 import logging
 
-from odoo import models
+from odoo.tests import common
 
+from odoo.addons.muk_fields_lobject.fields import LargeObject
+
+_path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
-unlink = models.BaseModel.unlink
-
-def large_object_unlink(self):
-    oids = []
-    for name in self._fields:
-        field = self._fields[name]
-        if field.type == 'lobject' and field.store:
-            for record in self:
-                oid = record.with_context({'oid': True})[name]
-                if oid:
-                    oids.append(oid)
-    unlink(self)
-    for oid in oids:
-        self.env.cr._cnx.lobject(oid, 'rb').unlink()
+class LargeObjectTestCase(common.TransactionCase):
     
-models.BaseModel.unlink = large_object_unlink
+    def setUp(self):
+        super(LargeObjectTestCase, self).setUp()
+
+    def tearDown(self):
+        super(LargeObjectTestCase, self).tearDown()
+        
+    def test_import(self):
+        self.assertEqual(LargeObject.type, "lobject")
+        
