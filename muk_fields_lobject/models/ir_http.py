@@ -31,7 +31,7 @@ class LargeObjectControllerIrHttp(models.AbstractModel):
     _inherit = 'ir.http'
     
     @classmethod
-    def lobject_content(self, xmlid=None, model=None, id=None, field='content', unique=False,
+    def lobject_content(cls, xmlid=None, model=None, id=None, field='content', unique=False,
                         filename=None, filename_field='content_fname', download=False, mimetype=None,
                         default_mimetype='application/octet-stream', access_token=None, env=None):
         obj = None
@@ -65,5 +65,5 @@ class LargeObjectControllerIrHttp(models.AbstractModel):
         headers.append(('ETag', retag))
         headers.append(('Cache-Control', 'max-age=%s' % (STATIC_CACHE if unique else 0)))
         if download:
-            headers.append(('Content-Disposition', self.content_disposition(filename)))
+            headers.append(('Content-Disposition', cls.content_disposition(filename)))
         return (status, headers, content)
