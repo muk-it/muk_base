@@ -23,8 +23,8 @@
     "version": '11.0.2.0.0',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
-    "website": "http://www.mukit.at",
-    "live_test_url": "https://demo.mukit.at",
+    "website": "https://www.mukit.at",
+    "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
     "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
