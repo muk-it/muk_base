@@ -26,16 +26,13 @@
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
+    "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
     "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
     ],
     'depends': [
         'muk_fields_lobject',
-    ],
-    "data": [
-    ],
-    "demo": [
     ],
     "qweb": [
         "static/src/xml/*.xml",
