@@ -21,7 +21,7 @@ To install unoconv please follow the instructions (`here <https://github.com/dag
 Make sure that unoconv can be executed from the console and the conversion 
 is done correctly.
 
-To set an individual path for the LibroOffice installation, the config
+To set an individual path for the LibreOffice installation, the config
 variable ``uno_path`` can be set accordingly in the Odoo config.
 
 Under Windows you should rename the ``unoconv`` file to ``unoconv.py`` and set
