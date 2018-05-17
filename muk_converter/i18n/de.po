@@ -1,0 +1,678 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* muk_converter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-17 19:15+0000\n"
+"PO-Revision-Date: 2018-05-17 21:18+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: de\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "BIB"
+msgstr "BIB"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "BMP"
+msgstr "BMP"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "CSV"
+msgstr "CSV"
+
+#. module: muk_converter
+#: model:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_checksum
+msgid "Checksum"
+msgstr "Checksum"
+
+#. module: muk_converter
+#: model:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
+msgid "Close"
+msgstr "Schließen"
+
+#. module: muk_converter
+#: model:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
+msgid "Conversion Complete"
+msgstr "Konvertierung abgeschlossen"
+
+#. module: muk_converter
+#: model:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
+msgid "Convert"
+msgstr "Konvertieren"
+
+#. module: muk_converter
+#: code:addons/muk_converter/wizards/convert.py:86
+#: model:ir.actions.act_window,name:muk_converter.action_converter_convert
+#: model:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
+#, python-format
+msgid "Convert File"
+msgstr "Konverter Datei"
+
+#. module: muk_converter
+#: model:ir.model,name:muk_converter.model_muk_converter_converter
+msgid "Converter"
+msgstr "Konverter"
+
+#. module: muk_converter
+#: model:ir.model,name:muk_converter.model_muk_converter_store
+msgid "Converter Store"
+msgstr "Konverter Speicher"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_create_uid
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_create_date
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "DBF"
+msgstr "DBF"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "DIF"
+msgstr "DIF"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "DOC"
+msgstr "DOC"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "DOC6"
+msgstr "DOC6"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "DOC95"
+msgstr "DOC95"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "DOCBOOK"
+msgstr "DOCBOOK"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "DOCX"
+msgstr "DOCX"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "DOCX7"
+msgstr "DOCX7"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_content
+msgid "Data"
+msgstr "Persönliche Daten"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_display_name
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_converter_display_name
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,state:0
+msgid "Download"
+msgstr "Download"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "EMF"
+msgstr "EMF"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "EPS"
+msgstr "EPS"
+
+#. module: muk_converter
+#: model:ir.model.fields,help:muk_converter.field_muk_converter_convert_type
+msgid "Either a binary file or an url can be converted"
+msgstr "Es kann entweder eine Binärdatei oder eine URL konvertiert werden."
+
+#. module: muk_converter
+#: selection:muk_converter.convert,state:0
+msgid "Export"
+msgstr "Export"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "FODG"
+msgstr "FODG"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "FODP"
+msgstr "FODP"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "FODS"
+msgstr "FODS"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "FODT"
+msgstr "FODT"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_input_binary
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_output_binary
+#: selection:muk_converter.convert,type:0
+msgid "File"
+msgstr "Datei"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_input_name
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_output_name
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_content_fname
+msgid "Filename"
+msgstr "Dateiname"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_format
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_format
+msgid "Format"
+msgstr "Format"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "GIF"
+msgstr "GIF"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "HTML"
+msgstr "HTML"
+
+#. module: muk_converter
+#: model:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
+msgid "Here is the converted file:"
+msgstr "Hier ist die konvertierte Datei:"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_id
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_converter_id
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_id
+msgid "ID"
+msgstr "ID"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "JPG"
+msgstr "JPG"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "LATEX"
+msgstr "LATEX"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert___last_update
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_converter___last_update
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_write_uid
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_write_date
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "MEDIAWIKI"
+msgstr "MEDIAWIKI"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "MET"
+msgstr "MET"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_name
+msgid "Name"
+msgstr "Name"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "ODD"
+msgstr "ODD"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "ODG"
+msgstr "ODG"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "ODP"
+msgstr "ODP"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "ODS"
+msgstr "ODS"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "ODT"
+msgstr "ODT"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "OOXML"
+msgstr "OOXML"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "OTG"
+msgstr "OTG"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "OTP"
+msgstr "OTP"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "OTS"
+msgstr "OTS"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "OTT"
+msgstr "OTT"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PBM"
+msgstr "PBM"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PCT"
+msgstr "PCT"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PDB"
+msgstr "PDB"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PDF"
+msgstr "PDF"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PGM"
+msgstr "PGM"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PNG"
+msgstr "PNG"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "POT"
+msgstr "POT"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "POTM"
+msgstr "POTM"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PPM"
+msgstr "PPM"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PPS"
+msgstr "PPS"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PPT"
+msgstr "PPT"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PPTX"
+msgstr "PPTX"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PSW"
+msgstr "PSW"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PWP"
+msgstr "PWP"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "PXL"
+msgstr "PXL"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "RAS"
+msgstr "RAS"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "RTF"
+msgstr "RTF"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDA"
+msgstr "SDA"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDC"
+msgstr "SDC"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDC3"
+msgstr "SDC3"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDC4"
+msgstr "SDC4"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDD"
+msgstr "SDD"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDD3"
+msgstr "SDD3"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDD4"
+msgstr "SDD4"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDW"
+msgstr "SDW"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDW3"
+msgstr "SDW3"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SDW4"
+msgstr "SDW4"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SLK"
+msgstr "SLK"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "STC"
+msgstr "STC"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "STD"
+msgstr "STD"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "STI"
+msgstr "STI"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "STW"
+msgstr "STW"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SVG"
+msgstr "SVG"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SVM"
+msgstr "SVM"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SWF"
+msgstr "SWF"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SXC"
+msgstr "SXC"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SXD"
+msgstr "SXD"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SXD3"
+msgstr "SXD3"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SXD5"
+msgstr "SXD5"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SXI"
+msgstr "SXI"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "SXW"
+msgstr "SXW"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_state
+msgid "State"
+msgstr "Status"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "TEXT"
+msgstr "TEXT"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "TIFF"
+msgstr "TIFF"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "TXT"
+msgstr "TXT"
+
+#. module: muk_converter
+#: model:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
+msgid ""
+"The file has been successfully converted and can now be used.\n"
+"\t\t\t\t\t\tYou can download the file by clicking on the link below."
+msgstr "Die Datei wurde erfolgreich konvertiert und kann nun verwendet werden. Mit einem Klick auf den angeführten Link kann die Datei heruntergeladen werden."
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_type
+msgid "Type"
+msgstr "Typ"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "UOP"
+msgstr "UOP"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "UOS"
+msgstr "UOS"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "UOT"
+msgstr "UOT"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,type:0
+msgid "URL"
+msgstr "URL"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert_input_url
+msgid "Url"
+msgstr "URL"
+
+#. module: muk_converter
+#: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store_used_date
+msgid "Used on"
+msgstr "Used on"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "VOR"
+msgstr "VOR"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "VOR3"
+msgstr "VOR3"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "VOR4"
+msgstr "VOR4"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "VOR5"
+msgstr "VOR5"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "WMF"
+msgstr "WMF"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "WPS"
+msgstr "WPS"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XHTML"
+msgstr "XHTML"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XLS"
+msgstr "XLS"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XLS5"
+msgstr "XLS5"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XLS95"
+msgstr "XLS95"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XLSX"
+msgstr "XLSX"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XLT"
+msgstr "XLT"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XLT5"
+msgstr "XLT5"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XLT95"
+msgstr "XLT95"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XPM"
+msgstr "XPM"
+
+#. module: muk_converter
+#: selection:muk_converter.convert,format:0
+msgid "XPMBIB"
+msgstr "XPMBIB"
+
+#. module: muk_converter
+#: model:ir.model,name:muk_converter.model_ir_autovacuum
+msgid "ir.autovacuum"
+msgstr "ir.autovacuum"
+
+#. module: muk_converter
+#: model:ir.model,name:muk_converter.model_muk_converter_convert
+msgid "muk_converter.convert"
+msgstr "muk_converter.convert"

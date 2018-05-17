@@ -38,27 +38,52 @@ from odoo.tools.mimetypes import guess_mimetype
 _logger = logging.getLogger(__name__)
 
 FORMATS = [
-    "bib", "doc", "doc6", "doc95", "docbook", "docx", "docx7", "fodt", "html", "latex", "mediawiki",
-    "odt", "ooxml", "ott", "pdb", "pdf", "psw", "rtf", "sdw", "sdw4", "sdw3", "stw", "sxw", "text",
-    "txt", "uot", "vor", "vor4", "vor3", "wps", "xhtml", "bmp", "emf", "eps", "fodg", "gif", "html",
-    "jpg", "met", "odd", "otg", "pbm", "pct", "pdf", "pgm", "png", "ppm", "ras", "std", "svg", "svm",
-    "swf", "sxd", "sxd3", "sxd5", "sxw", "tiff", "vor", "vor3", "wmf", "xhtml", "xpm", "bmp", "emf",
-    "eps", "fodp", "gif", "html", "jpg", "met", "odg", "odp", "otp", "pbm", "pct", "pdf", "pgm", "png",
-    "potm", "pot", "ppm", "pptx", "pps", "ppt", "pwp", "ras", "sda", "sdd", "sdd3", "sdd4", "sxd",
-    "sti", "svg", "svm", "swf", "sxi", "tiff", "uop", "vor", "vor3", "vor4", "vor5", "wmf", "xhtml",
-    "xpm", "csv", "dbf", "dif", "fods", "html", "ods", "ooxml", "ots", "pdf", "pxl", "sdc", "sdc4",
-    "sdc3", "slk", "stc", "sxc", "uos", "vor3", "vor4", "vor", "xhtml", "xls", "xls5", "xls95", "xlt",
-    "xlt5", "xlt95", "xlsx",
+    "bib", "bmp", "csv", "dbf", "dif", "doc", "doc6", "doc95", "docbook", "docx", "docx7", "emf",
+    "eps", "fodg", "fodp", "fods", "fodt", "gif", "html", "jpg", "latex", "mediawiki", "met", "odd",
+    "odg", "odp", "ods", "odt", "ooxml", "otg", "otp", "ots", "ott", "pbm", "pct", "pdb", "pdf", "pgm",
+    "png", "pot", "potm", "ppm", "pps", "ppt", "pptx", "psw", "pwp", "pxl", "ras", "rtf", "sda", "sdc",
+    "sdc3", "sdc4", "sdd", "sdd3", "sdd4", "sdw", "sdw3", "sdw4", "slk", "stc", "std", "sti", "stw",
+    "svg", "svm", "swf", "sxc", "sxd", "sxd3", "sxd5", "sxi", "sxw", "text", "tiff", "txt", "uop", "uos",
+    "uot", "vor", "vor3", "vor4", "vor5", "wmf", "wps", "xhtml", "xls", "xls5", "xls95", "xlsx", "xlt",
+    "xlt5", "xlt95", "xpm""bib", "bmp", "csv", "dbf", "dif", "doc", "doc6", "doc95", "docbook", "docx",
+    "docx7", "emf", "eps", "fodg", "fodp", "fods", "fodt", "gif", "html", "jpg", "latex", "mediawiki",
+    "met", "odd", "odg", "odp", "ods", "odt", "ooxml", "otg", "otp", "ots", "ott", "pbm", "pct", "pdb",
+    "pdf", "pgm", "png", "pot", "potm", "ppm", "pps", "ppt", "pptx", "psw", "pwp", "pxl", "ras", "rtf",
+    "sda", "sdc", "sdc3", "sdc4", "sdd", "sdd3", "sdd4", "sdw", "sdw3", "sdw4", "slk", "stc", "std",
+    "sti", "stw", "svg", "svm", "swf", "sxc", "sxd", "sxd3", "sxd5", "sxi", "sxw", "text", "tiff",
+    "txt", "uop", "uos", "uot", "vor", "vor3", "vor4", "vor5", "wmf", "wps", "xhtml", "xls", "xls5",
+    "xls95", "xlsx", "xlt", "xlt5", "xlt95", "xpm"
+]
+
+IMPORTS = [
+    "bmp", "csv", "dbf", "dif", "doc", "docx", "dot", "emf", "eps", "epub", "fodg", "fodp", "fods",
+    "fodt", "gif", "gnm", "gnumeric", "htm", "html", "jpeg", "jpg", "met", "mml", "odb", "odf", "odg",
+    "odp", "ods", "odt", "pbm", "pct", "pdb", "pdf", "pgm", "png", "pot", "ppm", "pps", "ppt", "pptx",
+    "psw", "pxl", "ras", "rtf", "sda", "sdc", "sdd", "sdp", "sdw", "sgl", "slk", "stc", "std", "sti",
+    "stw", "svg", "svm", "swf", "sxc", "sxd", "sxi", "sxm", "sxw", "tif", "tiff", "txt", "uof", "uop",
+    "uos", "uot", "vor", "wmf", "wri", "xls", "xlsx", "xlt", "xlw", "xml", "xpm""bmp", "csv", "dbf",
+    "dif", "doc", "docx", "dot", "emf", "eps", "epub", "fodg", "fodp", "fods", "fodt", "gif", "gnm",
+    "gnumeric", "htm", "html", "jpeg", "jpg", "met", "mml", "odb", "odf", "odg", "odp", "ods", "odt",
+    "pbm", "pct", "pdb", "pdf", "pgm", "png", "pot", "ppm", "pps", "ppt", "pptx", "psw", "pxl", "ras",
+    "rtf", "sda", "sdc", "sdd", "sdp", "sdw", "sgl", "slk", "stc", "std", "sti", "stw", "svg", "svm",
+    "swf", "sxc", "sxd", "sxi", "sxm", "sxw", "tif", "tiff", "txt", "uof", "uop", "uos", "uot", "vor",
+    "wmf", "wri", "xls", "xlsx", "xlt", "xlw", "xml", "xpm"
 ]
 
 def formats():
     return FORMATS
+
+def imports():
+    return IMPORTS
 
 def unoconv_environ():
     env = os.environ.copy()
     uno_path = config.get('uno_path', False)
     if uno_path:
         env['UNO_PATH'] = config['uno_path']
+        
+    env['UNO_PATH'] = "C:\\Program Files\\LibreOffice 5\\program"    
+    
     return env
 
 def convert(input_path, output_path, doctype="document", format="pdf"):
@@ -103,9 +128,9 @@ def convert_binary(binary, mimetype=None, filename=None, export="binary", doctyp
     """
     def get_extension(filename, mimetype):
         if not filename and mimetype:
-            return mimetypes.guess_extension(mimetype)
+            return mimetypes.guess_extension(mimetype)[1:].strip().lower()
         elif filename:
-            return os.path.splitext(filename)[1]
+            return os.path.splitext(filename)[1][1:].strip().lower()
         return None
     if not mimetype and not filename:
         mimetype = guess_mimetype(binary, default=False)
@@ -116,9 +141,11 @@ def convert_binary(binary, mimetype=None, filename=None, export="binary", doctyp
         raise ValueError("The file extension could not be determined.")
     if format not in FORMATS:
         raise ValueError("Invalid export format.")
+    if extension not in IMPORTS:
+        raise ValueError("Invalid import format.")
     tmp_dir = tempfile.mkdtemp()
     try:
-        tmp_wpath = os.path.join(tmp_dir, "tmpfile" + extension)
+        tmp_wpath = os.path.join(tmp_dir, "tmpfile." + extension)
         tmp_ppath = os.path.join(tmp_dir, "tmpfile." + format)
         if os.name == 'nt':
             tmp_wpath = tmp_wpath.replace("\\", "/")

@@ -28,6 +28,12 @@ _logger = logging.getLogger(__name__)
 def formats():
     return unoconv.formats()
 
+def selection_formats():
+    return list(map(lambda format: (format, format.upper()), unoconv.formats()))
+
+def imports():
+    return unoconv.imports()
+
 def convert(filename, content, format):
     return unoconv.convert_binary(binary=content, filename=filename, format=format)
 
