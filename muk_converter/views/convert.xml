@@ -45,7 +45,8 @@
 						You can download the file by clicking on the link below.
 					</p>
 					<p>
-						Here is the converted file: <field name="output_binary" filename="output_name"/>
+						Here is the converted file: 
+						<field name="output_binary" filename="output_name" options="{'no_export': True}"/>
 					</p>
 				</div>
 				<footer states="export">
