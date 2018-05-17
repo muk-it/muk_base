@@ -24,6 +24,7 @@ import requests
 import werkzeug
 
 from odoo.http import request
+from odoo.tools import config
 
 _logger = logging.getLogger(__name__)
 
@@ -37,7 +38,7 @@ def get_route(url):
     params = dict(urllib.parse.parse_qsl(query_string))
     if len(match) > 1:
         params.update(match[1])
-    return method, params
+    return method, params, path
 
 def make_error_response(status, message):
     exception = werkzeug.exceptions.HTTPException()
@@ -47,9 +48,16 @@ def make_error_response(status, message):
 
 def get_response(url):
     if not bool(urllib.parse.urlparse(url).netloc):
-        method, params = get_route(url)
-        response = method(**params)
-        return response.status_code, response.headers, response.data
+        base_url = request.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        method, params, path = get_route(url)
+        params.update({'csrf_token': request.csrf_token()})
+        session = requests.Session()
+        session.cookies['session_id'] = request.session.sid
+        try:
+            response = session.post("%s%s" % (base_url, path), params)
+            return response.status_code, response.headers, response.content
+        except requests.exceptions.RequestException as exception:
+            return exception.response.status_code, exception.response.headers, exception.response.reason
     else:
         try:
             response = requests.get(url)

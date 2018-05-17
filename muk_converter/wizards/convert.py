@@ -102,7 +102,7 @@ class ConverterWizard(models.TransientModel):
                 if extension not in converter.imports():
                     raise ValueError("Invalid import format.")
                 else:
-                    return export(record, content, "%s.%s" % (uuid.uuid4(), extension))
+                    return export(record, content, record.input_name or "%s.%s" % (uuid.uuid4(), extension))
         elif record.input_name and record.input_binary:
             return export(record, base64.b64decode(record.input_binary), record.input_name)
         else:

@@ -20,7 +20,7 @@
 {
     "name": "MuK Converter",
     "summary": """Universal Converter""",
-    "version": '11.0.1.1.0',   
+    "version": '11.0.1.1.1',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "https://www.mukit.at",
