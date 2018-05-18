@@ -82,7 +82,7 @@ def unoconv_environ():
     if uno_path:
         env['UNO_PATH'] = config['uno_path']
         
-    env['UNO_PATH'] = "C:\\Program Files\\LibreOffice 5\\program"    
+    #env['UNO_PATH'] = "C:\\Program Files\\LibreOffice 5\\program"    
     
     return env
 
