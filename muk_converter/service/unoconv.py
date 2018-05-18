@@ -81,9 +81,6 @@ def unoconv_environ():
     uno_path = config.get('uno_path', False)
     if uno_path:
         env['UNO_PATH'] = config['uno_path']
-        
-    #env['UNO_PATH'] = "C:\\Program Files\\LibreOffice 5\\program"    
-    
     return env
 
 def convert(input_path, output_path, doctype="document", format="pdf"):
