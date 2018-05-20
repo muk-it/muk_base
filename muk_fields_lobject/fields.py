@@ -99,3 +99,5 @@ class LargeObject(fields.Field):
                 return lobject.read()
             return base64.b64encode(lobject.read())
         return ''
+    
+fields.LargeObject = LargeObject
