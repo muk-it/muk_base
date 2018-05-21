@@ -18,11 +18,7 @@ clicking on the install button.
 Configuration
 =============
 
-The converter uses a store to avoid the repeated conversion of the same file.
-To avoid unnecessary memory consumption, Odoo's AutoVaccum Cron Job empties
-the store accordingly. The system parameter ``muk_converter.max_store`` can
-be used to set the maximum number of elements that can be in the store after
-cleaning. By default, this value is set to 20.
+No additional configuration is needed to use this module.
 
 Usage
 =============
