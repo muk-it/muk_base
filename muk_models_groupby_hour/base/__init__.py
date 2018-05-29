@@ -1,5 +1,7 @@
 ###################################################################################
 # 
+#    MuK Document Management System
+#
 #    Copyright (C) 2018 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -17,7 +19,4 @@
 #
 ###################################################################################
 
-from . import helper
-from . import patch
-from . import parse_rst
-from . import utils_os
+from . import models

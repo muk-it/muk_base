@@ -20,7 +20,7 @@
 {
     "name": "MuK Large Objects",
     "summary": """PGSQL Large Objects Support""",
-    "version": '11.0.2.1.0',   
+    "version": '11.0.2.2.0',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "https://www.mukit.at",
@@ -42,8 +42,8 @@
         "python": [],
         "bin": [],
     },
-    "auto_install": True,
+    "auto_install": False,
     "application": False,
     "installable": True,
-    
+    "post_load": "_patch_system",
 }

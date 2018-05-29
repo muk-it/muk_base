@@ -21,7 +21,7 @@ import logging
 
 from odoo import api, models, fields
 
-from odoo.addons.muk_fields_lobject.fields import LargeObject
+from odoo.addons.muk_fields_lobject.fields.lobject import LargeObject
 
 _logger = logging.getLogger(__name__)
 

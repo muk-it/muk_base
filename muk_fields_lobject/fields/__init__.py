@@ -1,4 +1,4 @@
-###################################################################################
+ ###################################################################################
 # 
 #    Copyright (C) 2018 MuK IT GmbH
 #
@@ -17,7 +17,7 @@
 #
 ###################################################################################
 
-from . import helper
-from . import patch
-from . import parse_rst
-from . import utils_os
+from . import lobject
+
+# backward compatibility
+from .lobject import LargeObject

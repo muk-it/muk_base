@@ -19,13 +19,15 @@
 
 import logging
 
-from odoo import models
+from odoo import models, api
+
+from odoo.addons.muk_utils.tools import patch
 
 _logger = logging.getLogger(__name__)
 
-unlink = models.BaseModel.unlink
-
-def large_object_unlink(self):
+@api.multi
+@patch.monkey_patch_model(models.BaseModel)
+def unlink(self):
     oids = []
     for name in self._fields:
         field = self._fields[name]
@@ -34,8 +36,6 @@ def large_object_unlink(self):
                 oid = record.with_context({'oid': True})[name]
                 if oid:
                     oids.append(oid)
-    unlink(self)
+    unlink.super(self)
     for oid in oids:
         self.env.cr._cnx.lobject(oid, 'rb').unlink()
-    
-models.BaseModel.unlink = large_object_unlink

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2018 MuK IT GmbH
@@ -30,11 +28,13 @@ from odoo import _
 from odoo import models, api, fields
 from odoo.tools import ustr, pycompat, human_size
 
+from odoo.addons.muk_utils.tools import patch
+
 _logger = logging.getLogger(__name__)
-
-_read_group_process_groupby = models.BaseModel._read_group_process_groupby
-
-def _read_group_process_groupby_hour(self, gb, query):
+        
+@api.model   
+@patch.monkey_patch_model(models.BaseModel)
+def _read_group_process_groupby(self, gb, query):
     split = gb.split(':')
     field_type = self._fields[split[0]].type
     gb_function = split[1] if len(split) == 2 else None
@@ -56,8 +56,4 @@ def _read_group_process_groupby_hour(self, gb, query):
             'tz_convert': tz_convert,
             'qualified_field': qualified_field
         }
-    return _read_group_process_groupby(self, gb, query)
-    
-     
-    
-models.BaseModel._read_group_process_groupby = _read_group_process_groupby_hour
+    return _read_group_process_groupby.super(self, gb, query)

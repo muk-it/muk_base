@@ -17,5 +17,7 @@
 #
 ###################################################################################
 
-from . import http
 from . import tools
+
+def _patch_system():
+    from . import http

@@ -17,7 +17,8 @@
 #
 ###################################################################################
 
-from . import helper
-from . import patch
-from . import parse_rst
-from . import utils_os
+from odoo import fields
+
+from odoo.addons.muk_fields_lobject.fields.lobject import LargeObject
+
+fields.LargeObject = LargeObject

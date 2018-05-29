@@ -1,6 +1,6 @@
 ###################################################################################
 # 
-#    Copyright (C) 2017 MuK IT GmbH
+#    Copyright (C) 2018 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,24 +17,27 @@
 #
 ###################################################################################
 
-import os
 import logging
 
-from odoo.tests import common
+from odoo import api
 
-from odoo.addons.muk_fields_lobject.fields.lobject import LargeObject
-
-_path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
-class LargeObjectTestCase(common.TransactionCase):
-    
-    def setUp(self):
-        super(LargeObjectTestCase, self).setUp()
+def monkey_patch(cls):
+    def decorate(func):
+        name = func.__name__
+        func.super = getattr(cls, name, None)
+        setattr(cls, name, func)
+        return func
+    return decorate
 
-    def tearDown(self):
-        super(LargeObjectTestCase, self).tearDown()
-        
-    def test_import(self):
-        self.assertEqual(LargeObject.type, "lobject")
-        
+def monkey_patch_model(cls):
+    def decorate(func):
+        name = func.__name__
+        super = getattr(cls, name, None)
+        func.super = super
+        wrapped = api.guess(api.propagate(name, func))
+        wrapped.super = super
+        setattr(cls, name, wrapped)
+        return func
+    return decorate

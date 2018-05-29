@@ -20,3 +20,6 @@
 from . import fields
 from . import models
 from . import controllers
+
+def _patch_system():
+    from . import base

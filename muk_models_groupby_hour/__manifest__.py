@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 ###################################################################################
 # 
 #    Copyright (C) 2018 MuK IT GmbH
@@ -22,10 +20,7 @@
 {
     "name": "MuK Groupby Hour",
     "summary": """Group records by hour""",
-    "description": """ 
-        Allow records to be grouped by hour.
-    """,
-    "version": '11.0.1.0.1',   
+    "version": '11.0.2.0.0',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -34,11 +29,9 @@
         "Mathias Markl <mathias.markl@mukit.at>",
     ],
     "depends": [
-        "base",
+        "muk_utils",
     ],
     "data": [
-    ],
-    "demo": [
     ],
     "qweb": [
         "static/src/xml/*.xml",
@@ -50,8 +43,8 @@
         "python": [],
         "bin": [],
     },
-    "auto_install": True,
+    "auto_install": False,
     "application": False,
     "installable": True,
-    
+    "post_load": "_patch_system",
 }
