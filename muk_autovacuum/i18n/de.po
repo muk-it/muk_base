@@ -1,0 +1,173 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* muk_autovacuum
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-22 19:26+0000\n"
+"PO-Revision-Date: 2018-01-22 20:30+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: de\n"
+"X-Generator: Poedit 2.0.5\n"
+
+#. module: muk_autovacuum
+#: model:ir.actions.act_window,name:muk_autovacuum.action_rule
+#: model:ir.model,name:muk_autovacuum.model_muk_autovacuum_rules
+#: model:ir.ui.menu,name:muk_autovacuum.menu_rules
+#: model:ir.ui.view,arch_db:muk_autovacuum.view_refresh_rule_tree
+msgid "Auto Vacuum Rules"
+msgstr "Auto Vacuum Regeln"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: muk_autovacuum
+#: selection:muk_autovacuum.rules,time_type:0
+msgid "Days"
+msgstr "Tage"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,help:muk_autovacuum.field_muk_autovacuum_rules_time
+msgid "Delete older data than x."
+msgstr "Lösche ältere Daten als x."
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,help:muk_autovacuum.field_muk_autovacuum_rules_protect_starred
+msgid "Do not delete starred records."
+msgstr "Einträge mit einem Stern werden nicht gelöscht."
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_field
+msgid "Field"
+msgstr "Feld"
+
+#. module: muk_autovacuum
+#: code:addons/muk_autovacuum/models/ir_autovacuum.py:84
+#, python-format
+msgid "GC'd %s %s records"
+msgstr "GC'd %s %s records"
+
+#. module: muk_autovacuum
+#: code:addons/muk_autovacuum/models/ir_autovacuum.py:80
+#, python-format
+msgid "GC'd %s attachments from %s entries"
+msgstr "GC'd %s attachments from %s entries"
+
+#. module: muk_autovacuum
+#: selection:muk_autovacuum.rules,time_type:0
+msgid "Hours"
+msgstr "Stunden"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_id
+msgid "ID"
+msgstr "ID"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: muk_autovacuum
+#: selection:muk_autovacuum.rules,time_type:0
+msgid "Minutes"
+msgstr "Minuten"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_model
+msgid "Model"
+msgstr "Modell"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,help:muk_autovacuum.field_muk_autovacuum_rules_model
+msgid "Model on which the rule is applied."
+msgstr "Model welches die Regel zuordnet ist."
+
+#. module: muk_autovacuum
+#: selection:muk_autovacuum.rules,time_type:0
+msgid "Months"
+msgstr "Monate"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_only_inactive
+msgid "Only Archived"
+msgstr "Nur archivierte Einträge"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_only_attachments
+msgid "Only Attachments"
+msgstr "Nur Anhänge"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,help:muk_autovacuum.field_muk_autovacuum_rules_only_inactive
+msgid "Only delete archived records."
+msgstr "Es werden nur archivierte Einträge gelöscht."
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,help:muk_autovacuum.field_muk_autovacuum_rules_only_attachments
+msgid "Only delete record attachments."
+msgstr "Es werden nur Anhänge gelöscht."
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_protect_starred
+msgid "Protect Starred"
+msgstr "Schütze Einträge mit Stern"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_sequence
+msgid "Sequence"
+msgstr "Nummernfolge"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_time
+msgid "Time"
+msgstr "Zeit"
+
+#. module: muk_autovacuum
+#: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules_time_type
+msgid "Time Unit"
+msgstr "Interval"
+
+#. module: muk_autovacuum
+#: selection:muk_autovacuum.rules,time_type:0
+msgid "Weeks"
+msgstr "Wochen"
+
+#. module: muk_autovacuum
+#: selection:muk_autovacuum.rules,time_type:0
+msgid "Years"
+msgstr "Jahre"
+
+#. module: muk_autovacuum
+#: model:ir.model,name:muk_autovacuum.model_ir_autovacuum
+msgid "ir.autovacuum"
+msgstr "ir.autovacuum"
