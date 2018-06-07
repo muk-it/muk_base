@@ -59,11 +59,3 @@ class Store(models.Model):
     def _compute_name(self):
         for record in self:
             record.name = "%s (%s)" % (record.content_fname, record.checksum)
-            
-    @api.model
-    def garbage_collector(self):
-        param = self.env['ir.config_parameter'].sudo()
-        max_store = param.get_param("muk_converter.max_store", default=20)
-        records = self.search([], order='used_date asc')
-        if len(records) > int(max_store):
-            records[max_store:].unlink()

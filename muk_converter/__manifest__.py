@@ -20,7 +20,7 @@
 {
     "name": "MuK Converter",
     "summary": """Universal Converter""",
-    "version": '11.0.1.1.4',   
+    "version": '11.0.1.1.5',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "https://www.mukit.at",
@@ -31,12 +31,14 @@
     ],
     "depends": [
         "muk_utils",
+        "muk_autovacuum",
         "muk_fields_lobject",
     ],
     "data": [
         "security/ir.model.access.csv",
         "views/convert.xml",
         "data/params.xml",
+        "data/autovacuum.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",

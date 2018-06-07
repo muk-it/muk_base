@@ -19,4 +19,3 @@
 
 from . import converter
 from . import store
-from . import ir_autovacuum
