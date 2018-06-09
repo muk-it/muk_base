@@ -1,6 +1,6 @@
 ###################################################################################
 # 
-#    Copyright (C) 2018 MuK IT GmbH
+#    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,5 +17,37 @@
 #
 ###################################################################################
 
-from . import models
-from . import tools
+{
+    "name": "MuK Security",
+    "summary": """Security Features""",
+    "version": "11.0.1.0.0",
+    "category": "Extra Tools",
+    "license": "AGPL-3",
+    "website": "http://www.mukit.at",
+    "live_test_url": "https://demo.mukit.at/web/login",
+    "author": "MuK IT",
+    "contributors": [
+        "Mathias Markl <mathias.markl@mukit.at>",
+    ],
+    "depends": [
+        "muk_utils",
+    ],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/lock.xml",
+        "views/groups.xml",
+    ],
+    "qweb": [
+        "static/src/xml/*.xml",
+    ],
+    "images": [
+        'static/description/banner.png'
+    ],
+    "external_dependencies": {
+        "python": [],
+        "bin": [],
+    },
+    "auto_install": True,
+    "application": False,
+    "installable": True,
+}

@@ -17,5 +17,9 @@
 #
 ###################################################################################
 
-from . import models
-from . import tools
+from . import lock
+from . import locking
+from . import access
+from . import groups
+from . import access_groups
+from . import res_groups

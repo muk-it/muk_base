@@ -1,0 +1,108 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* muk_utils
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-07 14:50+0000\n"
+"PO-Revision-Date: 2018-06-07 14:50+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_base_display_name
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_display_name
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_locking_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_base_id
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_id
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_locking_id
+msgid "ID"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_base___last_update
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock___last_update
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_locking___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model,name:muk_utils.model_muk_utils_lock
+msgid "Lock"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_locked_by
+msgid "Locked by"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model,name:muk_utils.model_muk_utils_base
+msgid "MuK Base Model"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model,name:muk_utils.model_muk_utils_locking
+msgid "MuK Locking Model"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_name
+msgid "Name"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_lock_ref
+msgid "Object Reference"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_operation
+msgid "Operation"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_token
+msgid "Token"
+msgstr ""
+
+#. module: muk_utils
+#: selection:muk_utils.lock,locked_by_ref:0
+msgid "User"
+msgstr ""
+
+#. module: muk_utils
+#: model:ir.model.fields,field_description:muk_utils.field_muk_utils_lock_locked_by_ref
+msgid "User Reference"
+msgstr ""
+
