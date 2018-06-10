@@ -17,11 +17,19 @@
 #
 ###################################################################################
 
+import time
 import logging
+import datetime
+import dateutil
+
+from pytz import timezone
 
 from odoo import _
 from odoo import models, api, fields
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, Warning
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
+from odoo.tools import DEFAULT_SERVER_DATETIME_FORMAT
+from odoo.tools.safe_eval import safe_eval, test_python_expr
 
 _logger = logging.getLogger(__name__)
 
@@ -58,7 +66,8 @@ class AutoVacuumRules(models.Model):
         selection=[
             ('time', 'Time Based'),
             ('size', 'Size Based'),
-            ('domain', 'Domain Based')],
+            ('domain', 'Domain Based'),
+            ('code', 'Code Based')],
         string='Rule Type', 
         default='time',
         required=True)
@@ -89,7 +98,8 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('required', True)], 
             'size': [('invisible', True)], 
-            'domain': [('invisible', True)]})
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]})
     
     time_type = fields.Selection(
         selection=[
@@ -104,7 +114,8 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('required', True)], 
             'size': [('invisible', True)], 
-            'domain': [('invisible', True)]})
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]})
     
     time = fields.Integer(
         string='Time', 
@@ -112,7 +123,8 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('required', True)], 
             'size': [('invisible', True)], 
-            'domain': [('invisible', True)]},
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]},
         help="Delete older data than x.")
     
     size_type = fields.Selection(
@@ -124,7 +136,8 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('invisible', True)], 
             'size': [('required', True)], 
-            'domain': [('invisible', True)]})
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]})
     
     size_parameter = fields.Many2one(
         comodel_name='ir.config_parameter', 
@@ -133,7 +146,8 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('invisible', True)], 
             'size': [('required', True)], 
-            'domain': [('invisible', True)]})
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]})
     
     size_parameter_value = fields.Integer(
         compute='_compute_size_parameter_value',
@@ -141,7 +155,8 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('invisible', True)], 
             'size': [('readonly', True)], 
-            'domain': [('invisible', True)]},
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]},
         help="Delete records with am index greater than x.")
     
     size_order = fields.Char(
@@ -150,7 +165,8 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('invisible', True)], 
             'size': [('required', True)], 
-            'domain': [('invisible', True)]},
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]},
         help="Order by which the index is defined.")
     
     size = fields.Integer(
@@ -159,16 +175,27 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('invisible', True)], 
             'size': [('required', True)], 
-            'domain': [('invisible', True)]},
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]},
         help="Delete records with am index greater than x.")
     
     domain = fields.Char(
-        string='Before Update Domain',
+        string='Domain',
         states={
             'time': [('invisible', True)], 
             'size': [('invisible', True)], 
-            'domain': [('required', True)]},
+            'domain': [('required', True)], 
+            'code': [('invisible', True)]},
         help="Delete all records which match the domain.")
+    
+    code = fields.Text(
+        string='Code',
+        states={
+            'time': [('invisible', True)], 
+            'size': [('invisible', True)], 
+            'domain': [('invisible', True)] ,
+            'code': [('required', True)]},
+        help="Code which will be executed during the clean up.")
     
     protect_starred = fields.Boolean(
         string='Protect Starred', 
@@ -176,7 +203,8 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('invisible', False)], 
             'size': [('invisible', True)], 
-            'domain': [('invisible', True)]},
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]},
         help="Do not delete starred records.")
     
     only_inactive = fields.Boolean(
@@ -185,13 +213,39 @@ class AutoVacuumRules(models.Model):
         states={
             'time': [('invisible', False)],
             'size': [('invisible', True)],
-            'domain': [('invisible', True)]},
+            'domain': [('invisible', True)], 
+            'code': [('invisible', True)]},
         help="Only delete archived records.")
     
     only_attachments = fields.Boolean(
         string='Only Attachments', 
         default=False,
+        states={
+            'time': [('invisible', False)],
+            'size': [('invisible', False)],
+            'domain': [('invisible', False)], 
+            'code': [('invisible', True)]},
         help="Only delete record attachments.")
+    
+    #----------------------------------------------------------
+    # Functions
+    #----------------------------------------------------------
+    
+    def _get_eval_context(self):
+        return {
+            'env': self.env,
+            'model': self.env[self.model_name],
+            'uid': self.env.user.id,
+            'user': self.env.user,
+            'time': time,
+            'datetime': datetime,
+            'dateutil': dateutil,
+            'timezone': timezone,
+            'date_format': DEFAULT_SERVER_DATE_FORMAT,
+            'datetime_format': DEFAULT_SERVER_DATETIME_FORMAT,
+            'Warning': Warning,
+            'logger': logging.getLogger("%s (%s)" % (__name__, self.name)),
+        }
     
     #----------------------------------------------------------
     # View
@@ -225,15 +279,23 @@ class AutoVacuumRules(models.Model):
     # Create, Update, Delete
     #----------------------------------------------------------
     
+    @api.constrains('code')
+    def _check_code(self):
+        for record in self.sudo().filtered('code'):
+            message = test_python_expr(expr=record.code.strip(), mode="exec")
+            if message:
+                raise ValidationError(message)
+    
     @api.constrains(
-        'state', 'model', 'domain',
+        'state', 'model', 'domain', 'code',
         'time_field', 'time_type', 'time',
         'size_type', 'size_parameter', 'size_order', 'size')
-    def validate(self):
+    def _validate(self):
         validators = {
             'time': lambda rec: rec.time_field and rec.time_type and rec.time,
             'size': lambda rec: rec.size_order and (rec.size_parameter or rec.size),
             'domain': lambda rec: rec.domain,
+            'code': lambda rec: rec.code,
         }
         for record in self:
             if not validators[record.state](record):

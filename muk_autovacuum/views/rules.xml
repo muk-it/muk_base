@@ -94,7 +94,7 @@
 				            </group>
 			            </group>
 	                </page>
-	                <page string="Size Settings" name='time' autofocus="autofocus"
+	                <page string="Size Settings" name='size' autofocus="autofocus"
 	                    attrs="{'invisible': [('state', '!=', 'size')]}">
 						<group>
 			                <group>
@@ -111,10 +111,32 @@
 				            </group>
 			            </group>
 	                </page>
-	                <page string="Domain Settings" name='time' autofocus="autofocus"
+	                <page string="Domain Settings" name='domain' autofocus="autofocus"
 	                	attrs="{'invisible': [('state', '!=', 'domain')]}">
 						<field name="domain" widget="domain" options="{'model': 'model_name'}" />
 	                </page>
+	                <page string="Code Settings" name='code' autofocus="autofocus"
+	                	attrs="{'invisible': [('state', '!=', 'code')]}">
+						<field name="code" widget="ace" options="{'mode': 'python'}" 
+							placeholder="Enter Python code here. Help about Python expression is available in the help tab of this document."/>
+	                </page>
+	                <page string="Help" attrs="{'invisible': [('state', '!=', 'code')]}">
+                        <group>
+                            <div style="margin-top: 4px;">
+                                <h3>Help with Python expressions</h3>
+                                <p>Various fields may use Python code or Python expressions. The following variables can be used:</p>
+                                <ul>
+                                	<li><code>uid</code>, <code>user</code>: User on which the rule is triggered</li>
+                                    <li><code>env</code>: Odoo Environment on which the rule is triggered</li>
+                                    <li><code>model</code>: Odoo Model of the record on which the rule is triggered</li>
+                                    <li><code>time</code>, <code>datetime</code>, <code>dateutil</code>, <code>timezone</code>: useful Python libraries</li>
+                                    <li><code>date_format</code>, <code>datetime_format</code>: server date and time formats</li>
+                                    <li><code>logger.info(message)</code>: Python logging framework</li>
+                                    <li><code>Warning</code>: Warning Exception to use with <code>raise</code></li>
+                                </ul>
+                            </div>
+                        </group>
+                    </page>
 	        	</notebook>
 	        </sheet>
 		</form>
