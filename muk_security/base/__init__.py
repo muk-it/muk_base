@@ -1,5 +1,7 @@
 ###################################################################################
 # 
+#    MuK Document Management System
+#
 #    Copyright (C) 2018 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -17,12 +19,5 @@
 #
 ###################################################################################
 
-from . import lock
-from . import locking
-from . import access
-from . import access_groups
-from . import security_groups
-from . import res_groups
-from . import res_users
-from . import ir_rule
-from . import ir_model_access
+from . import api
+from . import models

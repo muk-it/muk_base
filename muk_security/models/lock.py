@@ -29,21 +29,32 @@ class Lock(models.Model):
     _description = "Lock"
 
     name = fields.Char(
-        compute='_compute_name',
-        string="Name")
+        compute='_compute_lock_ref_data',
+        string="Name",
+        store=True)
 
     locked_by = fields.Char(
         string="Locked by",
         required=True)
     
-    locked_by_ref = fields.Reference(
-        selection=[('res.users', 'User')],
-        string="User Reference")
+    locked_by_ref = fields.Many2one(
+        comodel_name='res.users',
+        string="Locked by")
 
     lock_ref = fields.Reference(
         selection=[],
-        string="Object Reference",
+        string="Reference",
         required=True)
+    
+    lock_ref_model = fields.Char(
+        compute='_compute_lock_ref_data',
+        string="Reference Model",
+        store=True)
+    
+    lock_ref_id = fields.Char(
+        compute='_compute_lock_ref_data',
+        string="Reference ID",
+        store=True)
     
     token = fields.Char(
         string="Token")
@@ -52,6 +63,10 @@ class Lock(models.Model):
         string="Operation")
     
     @api.depends('lock_ref')
-    def _compute_name(self):
+    def _compute_lock_ref_data(self):
         for record in self:
-            record.name = "Lock for " + str(record.lock_ref.name)
+            record.update({
+                'name': "Lock for " + str(record.lock_ref.display_name),
+                'lock_ref_model': record.lock_ref._name,
+                'lock_ref_id': record.lock_ref.id})
+            

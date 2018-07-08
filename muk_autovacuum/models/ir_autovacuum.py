@@ -62,8 +62,10 @@ class AutoVacuum(models.AbstractModel):
                 if rule.state == 'time':
                     computed_time = datetime.datetime.utcnow() - _types[rule.time_type](rule.time)
                     domain = [(rule.time_field.name, '<', computed_time.strftime(DEFAULT_SERVER_DATETIME_FORMAT))]
-                    if rule.protect_starred and "starred" in rule.model.field_id.mapped("name"):
-                        domain.append(('starred', '=', False))
+                    if rule.protect_starred:
+                       for field in rule.model.field_id:
+                           if field.name in ['starred', 'favorite', 'is_starred', 'is_favorite']:
+                                domain.append((field.name, '=', False))
                     if rule.only_inactive and "active" in rule.model.field_id.mapped("name"):
                         domain.append(('active', '=', False))
                     _logger.info(_("GC domain: %s"), domain)

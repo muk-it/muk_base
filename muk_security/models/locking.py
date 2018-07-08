@@ -20,6 +20,7 @@
 import os
 import hashlib
 import logging
+import itertools
 
 from odoo import _
 from odoo import models, api, fields
@@ -40,12 +41,29 @@ class BaseModelLocking(models.AbstractModel):
     locked = fields.Many2one(
         comodel_name='muk_security.lock', 
         compute='_compute_lock', 
-        string="Locked",)
+        string="Locked")
+    
+    locked_state = fields.Boolean(
+        compute='_compute_lock', 
+        string="Locked")
+    
+    locked_by = fields.Many2one(
+        related='locked.locked_by_ref',
+        comodel_name='res.users',
+        string="Locked by")
     
     editor = fields.Boolean(
         compute='_compute_editor', 
         string="Editor")
 
+    #----------------------------------------------------------
+    # Functions
+    #----------------------------------------------------------
+
+    @api.model
+    def generate_operation_key(self):
+        return hashlib.sha1(os.urandom(128)).hexdigest()
+        
     #----------------------------------------------------------
     # Locking
     #----------------------------------------------------------
@@ -67,7 +85,7 @@ class BaseModelLocking(models.AbstractModel):
                 token = hashlib.sha1(os.urandom(128)).hexdigest()
                 lock = self.env['muk_security.lock'].sudo().create({
                     'locked_by': user and user.name or "System",
-                    'locked_by_ref': user and user._name + ',' + str(user.id) or None,
+                    'locked_by_ref': user and user.id or None,
                     'lock_ref': record._name + ',' + str(record.id),
                     'token': token,
                     'operation': operation})
@@ -88,8 +106,13 @@ class BaseModelLocking(models.AbstractModel):
     @api.model
     def unlock_operation(self, operation, *largs, **kwargs):
         locks = self.env['muk_security.lock'].sudo().search([('operation', '=', operation)])
+        references = [
+            list((k, list(map(lambda rec: rec.lock_ref_id, v)))) 
+               for k, v in itertools.groupby(
+                   locks.sorted(key=lambda rec: rec.lock_ref_model),
+                   lambda rec: rec.lock_ref_model)]
         locks.sudo().unlink()
-        return True
+        return references
     
     @api.multi
     def is_locked(self, *largs, **kwargs):
@@ -113,7 +136,7 @@ class BaseModelLocking(models.AbstractModel):
     def _checking_lock_user(self, *largs, **kwargs):
         for record in self:
             lock = record.is_locked()
-            if lock and lock.locked_by_ref and not lock.locked_by_ref != self.env.user:
+            if lock and lock.locked_by_ref and not lock.locked_by_ref.id != self.env.user.id:
                 raise AccessError(_("The record (%s[%s]) is locked by a user, so it can't be changes or deleted.") %
                                    (self._name, self.id))
                 
@@ -123,6 +146,8 @@ class BaseModelLocking(models.AbstractModel):
         for record in self:
             lock = record.is_locked()
             if lock and lock.operation and lock.operation != operation:
+                print(operation, lock.operation)
+                raise IOError
                 raise AccessError(_("The record (%s[%s]) is locked, so it can't be changes or deleted.") %
                                    (self._name, self.id))
     
@@ -149,14 +174,19 @@ class BaseModelLocking(models.AbstractModel):
                     raise AccessError(_("The record is already locked by another user. (%s)") % lock.locked_by_ref.name)
                 else:
                     raise AccessError(_("The record is already locked."))
+        return True
 
     #----------------------------------------------------------
     # Read, View 
     #----------------------------------------------------------
-        
+    
+    @api.multi
     def _compute_lock(self):
         for record in self:
-            record.locked = record.is_locked()
+            locked = record.is_locked()
+            record.update({
+                'locked_state': bool(locked),
+                'locked': locked})
     
     @api.depends('locked')  
     def _compute_editor(self):
@@ -169,51 +199,53 @@ class BaseModelLocking(models.AbstractModel):
 
     @api.multi
     def write(self, vals):
-        operation = hashlib.sha1(os.urandom(128)).hexdigest()
+        operation = self.generate_operation_key()
         vals = self._before_write_operation(vals, operation)
-        result = super(BaseModelLocking, self).write(vals)
+        process_operation = self.env.context['operation'] if 'operation' in self.env.context else operation
+        result = super(BaseModelLocking, self.with_context(operation=process_operation)).write(vals)
         for record in self:
             record._after_write_record_operation(vals, operation)
         result = self._after_write_operation(result, vals, operation)
         return result
 
+    @api.multi
     def _before_write_operation(self, vals, operation, *largs, **kwargs):
         if 'operation' in self.env.context:
             self._checking_lock(self.env.context['operation'])
-        elif operation:
-            self._checking_lock(operation)
         else:
-            self._checking_lock_user()
+            self._checking_lock(operation)
         return vals
     
+    @api.multi
     def _after_write_record_operation(self, vals, operation, *largs, **kwargs):
         return vals    
-        
+    
+    @api.multi
     def _after_write_operation(self, result, vals, operation, *largs, **kwargs):
         return result
 
     @api.multi
     def unlink(self):  
-        operation = hashlib.sha1(os.urandom(128)).hexdigest()
-        operation_info = self._before_unlink_operation(operation)
-        operation_infos = []
+        operation = self.generate_operation_key()
+        self._before_unlink_operation(operation)
         for record in self:
-            operation_infos.append(record._before_unlink_record_operation(operation))
-        result = super(BaseModelLocking, self).unlink()
-        self._after_unlink_operation(result, operation_info, operation_infos, operation)
+            record._before_unlink_record_operation(operation)
+        process_operation = self.env.context['operation'] if 'operation' in self.env.context else operation
+        result = super(BaseModelLocking, self.with_context(operation=process_operation)).unlink()
+        self._after_unlink_operation(result, operation)
         return result
     
+    @api.multi
     def _before_unlink_operation(self, operation, *largs, **kwargs):
         if 'operation' in self.env.context:
             self._checking_lock(self.env.context['operation'])
-        elif operation:
-            self._checking_lock(operation)
         else:
-            self._checking_lock_user()
-        return {}
+            self._checking_lock(operation)
     
+    @api.multi
     def _before_unlink_record_operation(self, operation, *largs, **kwargs):
-        return {}    
-        
-    def _after_unlink_operation(self, result, operation_info, operation_infos, operation, *largs, **kwargs):
+        pass
+    
+    @api.multi
+    def _after_unlink_operation(self, result, operation, *largs, **kwargs):
         pass

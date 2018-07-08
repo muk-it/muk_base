@@ -20,7 +20,7 @@
 {
     "name": "MuK Security",
     "summary": """Security Features""",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.1.0",
     "category": "Extra Tools",
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -31,11 +31,14 @@
     ],
     "depends": [
         "muk_utils",
+        "muk_autovacuum",
     ],
     "data": [
+        "security/security.xml",
         "security/ir.model.access.csv",
         "views/lock.xml",
         "views/groups.xml",
+        "data/autovacuum.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",
@@ -50,4 +53,5 @@
     "auto_install": True,
     "application": False,
     "installable": True,
+    "post_load": "_patch_system",
 }

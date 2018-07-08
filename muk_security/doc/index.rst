@@ -2,7 +2,7 @@
 MuK Security
 ============
 
-Technical module to provide some utility features and libraries that can be used
+Technical module to provide some utility and security features that can be used
 in other applications. This module has no direct effect on the running system.
 
 Installation
@@ -23,7 +23,7 @@ No additional configuration is needed to use this module.
 Usage
 =============
 
-This module has no direct visible effect on the system. It provide utility features.
+This module has no direct visible effect on the system. It provide security features.
 
 Credits
 =======

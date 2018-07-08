@@ -33,6 +33,14 @@ class BaseModelExtension(models.AbstractModel):
     #----------------------------------------------------------
     
     @api.multi
+    def notify_change(self, values, *largs, **kwargs):
+        pass
+    
+    @api.multi
+    def trigger_computation(self, fields, *largs, **kwargs):
+        pass
+    
+    @api.multi
     def check_existence(self):
         records = self.exists()
         if not (len(records) == 0 or (len(records) == 1 and records.id == False)):
@@ -44,15 +52,18 @@ class BaseModelExtension(models.AbstractModel):
     # Read
     #----------------------------------------------------------
     
+    @api.model
     def browse(self, arg=None, prefetch=None):
         arg = self._before_browse(arg)
         result = super(BaseModelExtension, self).browse(arg, prefetch)
         result = self._after_browse(result)
         return result
     
+    @api.model
     def _before_browse(self, arg, *largs, **kwargs):
         return arg
 
+    @api.model
     def _after_browse(self, result, *largs, **kwargs):
         return result
     
@@ -61,16 +72,22 @@ class BaseModelExtension(models.AbstractModel):
         fields = self._before_read(fields)
         result = super(BaseModelExtension, self).read(fields, load)
         for index, record in enumerate(self.exists()):
-            result[index] = record._after_read_record(result[index])
+            try:
+                result[index] = record._after_read_record(result[index])  
+            except IndexError:
+                _logger.exception("Something went wrong!")
         result = self._after_read(result)
         return result
     
+    @api.multi
     def _before_read(self, fields, *largs, **kwargs):
         return fields
 
+    @api.multi
     def _after_read_record(self, values, *largs, **kwargs):
         return values
-
+    
+    @api.multi
     def _after_read(self, result, *largs, **kwargs):
         return result
     
@@ -84,9 +101,11 @@ class BaseModelExtension(models.AbstractModel):
         result = self._after_search(result)
         return result
     
+    @api.model
     def _before_search(self, args, offset, limit, order, count, *largs, **kwargs):
         return args, offset, limit, order, count
     
+    @api.model
     def _after_search(self, result, *largs, **kwargs):
         return result
     
@@ -97,9 +116,11 @@ class BaseModelExtension(models.AbstractModel):
         result = self._after_name_search(result)
         return result
     
+    @api.model
     def _before_name_search(self, name, args, operator, limit, *largs, **kwargs):
         return name, args, operator, limit
 
+    @api.model
     def _after_name_search(self, result, *largs, **kwargs):
         return result
     
@@ -110,9 +131,11 @@ class BaseModelExtension(models.AbstractModel):
         result = self._after_read_group(result)
         return result
     
+    @api.model
     def _before_read_group(self, domain, fields, groupby, offset, limit, orderby, lazy, *largs, **kwargs):
         return domain, fields, groupby, offset, limit, orderby, lazy
 
+    @api.model
     def _after_read_group(self, result, *largs, **kwargs):
         return result
         
@@ -127,28 +150,39 @@ class BaseModelExtension(models.AbstractModel):
         result = result._after_create(vals)
         return result
     
+    @api.model
     def _before_create(self, vals, *largs, **kwargs):
         return vals
         
+    @api.model
     def _after_create(self, vals, *largs, **kwargs):
+        self._check_recomputation(vals, [])
         return self
 
     @api.multi
     def write(self, vals):
+        olds = []
         vals = self._before_write(vals)
+        if 'track_old_values' in self.env.context:
+            olds = [{key: record[key] for key in vals} for record in self]
         result = super(BaseModelExtension, self).write(vals)
         for record in self:
             record._after_write_record(vals)
-        result = self._after_write(result, vals)
+        result = self._after_write(result, vals, olds)
         return result
     
+    @api.multi
     def _before_write(self, vals, *largs, **kwargs):
         return vals
     
+    @api.multi
     def _after_write_record(self, vals, *largs, **kwargs):
         return vals    
         
-    def _after_write(self, result, vals, *largs, **kwargs):
+    @api.multi
+    def _after_write(self, result, vals, olds, *largs, **kwargs):
+        self._check_recomputation(vals, olds)
+        self._check_notification(vals)
         return result
 
     @api.multi
@@ -161,11 +195,28 @@ class BaseModelExtension(models.AbstractModel):
         self._after_unlink(result, info, infos)
         return result
     
+    @api.multi
     def _before_unlink(self, *largs, **kwargs):
         return {}
     
+    @api.multi
     def _before_unlink_record(self, *largs, **kwargs):
         return {}    
-        
+    
+    @api.multi
     def _after_unlink(self, result, info, infos, *largs, **kwargs):
+        pass
+    
+    #----------------------------------------------------------
+    # Helper
+    #----------------------------------------------------------
+    
+    @api.multi
+    def _check_recomputation(self, vals, olds, *largs, **kwargs):
+        # self.trigger_computation(fields)
+        pass
+    
+    @api.multi
+    def _check_notification(self, vals, *largs, **kwargs):
+        # self.notify_change(change)
         pass

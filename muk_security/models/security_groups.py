@@ -1,6 +1,6 @@
 ###################################################################################
 # 
-#    Copyright (C) 2018 MuK IT GmbH
+#    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,12 +17,27 @@
 #
 ###################################################################################
 
-from . import lock
-from . import locking
-from . import access
-from . import access_groups
-from . import security_groups
-from . import res_groups
-from . import res_users
-from . import ir_rule
-from . import ir_model_access
+from odoo import models, fields, api
+
+class AccessGroups(models.Model):
+    
+    _name = 'muk_security.groups'
+    _description = "Access Groups"
+    _inherit = 'muk_utils.groups'
+    
+    #----------------------------------------------------------
+    # Database
+    #----------------------------------------------------------
+    
+    perm_read = fields.Boolean(
+        string='Read Access')
+    
+    perm_create = fields.Boolean(
+        string='Create Access')
+    
+    perm_write = fields.Boolean(
+        string='Write Access')
+    
+    perm_unlink = fields.Boolean(
+        string='Unlink Access')
+ 

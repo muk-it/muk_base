@@ -205,7 +205,12 @@ class AutoVacuumRules(models.Model):
             'size': [('invisible', True)], 
             'domain': [('invisible', True)], 
             'code': [('invisible', True)]},
-        help="Do not delete starred records.")
+        help="""Do not delete starred records.
+            Checks for the following fields:
+                - starred
+                - favorite
+                - is_starred
+                - is_favorite""")
     
     only_inactive = fields.Boolean(
         string='Only Archived', 

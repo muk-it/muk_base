@@ -29,36 +29,13 @@ class AccessGroups(models.Model):
     
     _inherit = "res.groups"
 
-     #----------------------------------------------------------
+    #----------------------------------------------------------
     # Database
     #----------------------------------------------------------
     
-    groups = fields.Many2many(
+    security_groups = fields.Many2many(
         comodel_name='muk_security.groups',
-        relation='muk_groups_groups_rel',
+        relation='muk_security_groups_groups_rel',
         column1='rid',
         column2='gid',
         string='Groups')
-    
-    #----------------------------------------------------------
-    # Create, Update, Delete
-    #----------------------------------------------------------
-    
-    @api.multi
-    def write(self, vals):
-        result = super(AccessGroups, self).write(vals)
-        if any(field in vals for field in ['users']):
-            for record in self:
-                for group in record.groups:
-                    group.trigger_computation(['users'])
-        return result
-    
-    @api.multi
-    def unlink(self):
-        groups = self.env['muk_security.groups']
-        for record in self:
-            groups |= record.groups
-        result = super(AccessGroups, self).unlink()
-        for group in groups:
-            group.trigger_computation(['users'])
-        return result

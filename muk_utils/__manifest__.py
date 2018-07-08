@@ -20,7 +20,7 @@
 {
     "name": "MuK Utils",
     "summary": """Utility Features""",
-    "version": '11.0.1.0.6',   
+    "version": '11.0.1.0.8',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "https://www.mukit.at",
@@ -31,6 +31,9 @@
     ],
     "depends": [
         "base",
+    ],
+    "data": [
+        "data/ir_cron.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",

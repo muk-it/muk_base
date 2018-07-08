@@ -65,7 +65,7 @@
 					</group>
 				</group>
 				<notebook>
-					<page string="Users">
+					<page name="users" string="Users">
 						<field name="users">
 							<tree string="Users">
 								<field name="name" />
@@ -75,7 +75,7 @@
 							</tree>
 						</field>
 					</page>
-					<page string="Groups">
+					<page name="groups" string="Groups">
 						<field name="groups">
 							<tree string="Groups">
 								<field name="name" />
@@ -83,7 +83,7 @@
 							</tree>
 						</field>
 					</page>
-					<page string="Explicit Users">
+					<page name="extra_users" string="Explicit Users">
 						<field name="explicit_users">
 							<tree string="Explicit Users">
 								<field name="name" />
