@@ -43,15 +43,6 @@ class AutoVacuum(models.AbstractModel):
     _inherit = 'ir.autovacuum'
     
     @api.model
-    def _eval_context(self):
-        return {
-            'datetime': datetime,
-            'dateutil': dateutil,
-            'time': time,
-            'uid': self.env.uid,
-            'user': self.env.user}
-    
-    @api.model
     def power_on(self, *args, **kwargs):
         res = super(AutoVacuum, self).power_on(*args, **kwargs)
         rules = self.env['muk_autovacuum.rules'].sudo().search([], order='sequence asc')
@@ -79,7 +70,7 @@ class AutoVacuum(models.AbstractModel):
                         records = model.with_context({'active_test': False}).search([], order=rule.size_order, limit=limit)
                 elif rule.state == 'domain':
                     _logger.info(_("GC domain: %s"), rule.domain)
-                    domain = safe_eval(rule.domain, self._eval_context())
+                    domain = safe_eval(rule.domain, rules._get_eval_domain_context())
                     records = model.with_context({'active_test': False}).search(domain)
                 if rule.only_attachments:
                     attachments = self.env['ir.attachment'].sudo().search([
@@ -93,5 +84,5 @@ class AutoVacuum(models.AbstractModel):
                     records.unlink()
                     _logger.info(_("GC'd %s %s records"), count, rule.model.model)
             elif rule.state == 'code':
-                safe_eval(rule.code.strip(), rule._get_eval_context(), mode="exec")        
+                safe_eval(rule.code.strip(), rules._get_eval_code_context(rule), mode="exec")        
         return res

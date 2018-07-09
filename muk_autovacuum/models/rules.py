@@ -236,10 +236,21 @@ class AutoVacuumRules(models.Model):
     # Functions
     #----------------------------------------------------------
     
-    def _get_eval_context(self):
+    @api.model
+    def _get_eval_domain_context(self):
+        return {
+            'datetime': datetime,
+            'dateutil': dateutil,
+            'time': time,
+            'uid': self.env.uid,
+            'user': self.env.user
+        }
+    
+    @api.model
+    def _get_eval_code_context(self, rule):
         return {
             'env': self.env,
-            'model': self.env[self.model_name],
+            'model': self.env[rule.model_name],
             'uid': self.env.user.id,
             'user': self.env.user,
             'time': time,
@@ -249,7 +260,7 @@ class AutoVacuumRules(models.Model):
             'date_format': DEFAULT_SERVER_DATE_FORMAT,
             'datetime_format': DEFAULT_SERVER_DATETIME_FORMAT,
             'Warning': Warning,
-            'logger': logging.getLogger("%s (%s)" % (__name__, self.name)),
+            'logger': logging.getLogger("%s (%s)" % (__name__, rule.name)),
         }
     
     #----------------------------------------------------------
