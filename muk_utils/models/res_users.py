@@ -27,8 +27,6 @@ from odoo.exceptions import ValidationError
 
 from odoo.addons.base.res import res_users
 
-from odoo.addons.muk_security.tools import helper
-
 _logger = logging.getLogger(__name__)
 
 class ResUser(models.Model):
