@@ -54,21 +54,21 @@ class ResUser(models.Model):
                 
     @api.multi
     def write(self, vals):
-        group_ids = self.mapped('groups_id.id')
         result = super(ResUser, self).write(vals)
-        group_ids += [vals[k] for k in vals if res_users.is_selection_groups(k) and vals[k]]
-        group_ids += [vals[k] for k in vals if res_users.is_boolean_group(k) and vals[k]]
+        vals = self._remove_reified_groups(vals)
         if any(field in vals for field in ['groups_id']):
-            group_ids += self.mapped('groups_id.id')
-        if group_ids:
-            model_recs = defaultdict(set)
-            model_names = self.pool.descendants(['muk_utils.groups'], '_inherit', '_inherits')
-            for model_name in model_names:
-                model = self.env[model_name].sudo()
-                if not model._abstract:
-                     model_recs[model_name] = model.search([['groups', 'in', group_ids]])
-            for tuple in model_recs.items():
-                tuple[1].trigger_computation(['users'])
+            group_ids = [command[1] for command in vals['groups_id'] if command[0] == 4 or command[0] == 3]
+            group_ids += [id for command in vals['groups_id'] if command[0] == 6 for id in command[2]]
+            group_ids = list(set(group_ids))
+            if group_ids:
+                model_recs = defaultdict(set)
+                model_names = self.pool.descendants(['muk_utils.groups'], '_inherit', '_inherits')
+                for model_name in model_names:
+                    model = self.env[model_name].sudo()
+                    if not model._abstract:
+                        model_recs[model_name] = model.search([['groups', 'in', group_ids]])
+                for tuple in model_recs.items():
+                    tuple[1].trigger_computation(['users'])
         return result
     
     @api.multi
@@ -82,4 +82,3 @@ class ResUser(models.Model):
         result = super(ResUser, self).unlink()
         for tuple in model_recs.items():
             tuple[1].trigger_computation(['users'])
-        return result
