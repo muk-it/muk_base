@@ -35,6 +35,8 @@ from contextlib import closing
 from odoo.tools import config
 from odoo.tools.mimetypes import guess_mimetype
 
+from odoo.addons.muk_utils.tools import utils_os
+
 _logger = logging.getLogger(__name__)
 
 FORMATS = [
@@ -123,17 +125,7 @@ def convert_binary(binary, mimetype=None, filename=None, export="binary", doctyp
     :return: Returns the output depending on the given format.
     :raises ValueError: The file extension could not be determined or the format is invalid.
     """
-    def get_extension(filename, mimetype):
-        if not filename and mimetype:
-            return mimetypes.guess_extension(mimetype)[1:].strip().lower()
-        elif filename:
-            return os.path.splitext(filename)[1][1:].strip().lower()
-        return None
-    if not mimetype and not filename:
-        mimetype = guess_mimetype(binary, default=False)
-    if not mimetype and filename:
-        mimetype = mimetypes.guess_type(urllib.request.pathname2url(filename))[0]
-    extension = get_extension(filename, mimetype)
+    extension = utils_os.get_extension(filename, mimetype)
     if not extension:
         raise ValueError("The file extension could not be determined.")
     if format not in FORMATS:

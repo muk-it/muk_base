@@ -26,7 +26,6 @@
         <field name="size_type">parameter</field>
         <field name="size_parameter" ref="muk_converter.muk_converter_max_store"/>
         <field name="size_order">used_date desc</field>
-        <field name="protect_starred" eval="False"/>
     </record>
     
 </odoo>
