@@ -18,7 +18,13 @@
 ###################################################################################
 
 import os
+import io
+import base64
+import shutil
+import urllib
 import logging
+import tempfile
+import mimetypes
 
 _logger = logging.getLogger(__name__)
 
@@ -38,3 +44,14 @@ def unique_name(name, names, escape_suffix=False):
             suffix += 1
             name = compute_name(name, suffix, escape_suffix)
         return name
+    
+def get_extension(filename, mimetype):
+    if not mimetype and not filename:
+        mimetype = guess_mimetype(binary, default=False)
+    if not mimetype and filename:
+        mimetype = mimetypes.guess_type(urllib.request.pathname2url(filename))[0]
+    if not filename and mimetype:
+        return mimetypes.guess_extension(mimetype)[1:].strip().lower()
+    elif filename:
+        return os.path.splitext(filename)[1][1:].strip().lower()
+    return None
