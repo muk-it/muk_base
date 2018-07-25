@@ -45,7 +45,16 @@ of document pages, and the conversion between PostScript and PDF files.
 
 To install Ghostscript please follow the instructions (`here <https://www.ghostscript.com/download.html>`_).
 
+ImageMagick 
+-------------
 
+ImageMagick can be used to create, edit, compose, or convert bitmap images. It can read and write
+images in a variety of formats (over 200) including PNG, JPEG, GIF, HEIC, TIFF, DPX, EXR, WebP,
+Postscript, PDF, and SVG. Use ImageMagick to resize, flip, mirror, rotate, distort, shear and
+transform images, adjust image colors, apply various special effects, or draw text, lines, polygons,
+ellipses and Bezier curves.
+
+To install ImageMagick please follow the instructions (`here <https://www.imagemagick.org/script/download.php>`_).
 
 Installation
 ============
