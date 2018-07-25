@@ -68,7 +68,7 @@ IMPORTS = [
     "gnumeric", "htm", "html", "jpeg", "jpg", "met", "mml", "odb", "odf", "odg", "odp", "ods", "odt",
     "pbm", "pct", "pdb", "pdf", "pgm", "png", "pot", "ppm", "pps", "ppt", "pptx", "psw", "pxl", "ras",
     "rtf", "sda", "sdc", "sdd", "sdp", "sdw", "sgl", "slk", "stc", "std", "sti", "stw", "svg", "svm",
-    "swf", "sxc", "sxd", "sxi", "sxm", "sxw", "tif", "tiff", "txt", "uof", "uop", "uos", "uot", "vor",
+    "swf", "sxc", "sxd", "sxi", "sxm", "sxw", "tif", "tiff", "text", "uof", "uop", "uos", "uot", "vor",
     "wmf", "wri", "xls", "xlsx", "xlt", "xlw", "xml", "xpm"
 ]
 
