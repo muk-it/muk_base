@@ -50,7 +50,7 @@ def get_extension(filename, mimetype):
         mimetype = guess_mimetype(binary, default=False)
     if not mimetype and filename:
         mimetype = mimetypes.guess_type(urllib.request.pathname2url(filename))[0]
-    if not filename and mimetype:
+    if mimetype and mimetype != 'application/octet-stream':
         return mimetypes.guess_extension(mimetype)[1:].strip().lower()
     elif filename:
         return os.path.splitext(filename)[1][1:].strip().lower()
