@@ -35,6 +35,17 @@ FFmpeg is a complete, cross-platform solution to record, convert and stream audi
 
 To install FFmpeg please follow the instructions (`here <https://www.ffmpeg.org/download.html>`_).
 
+Ghostscript  
+-------------
+
+Ghostscript is a suite of software based on an interpreter for Adobe Systems PostScript and
+Portable Document Format (PDF) page description languages. Its main purposes are the
+rasterization or rendering of such page description language files, for the display or printing
+of document pages, and the conversion between PostScript and PDF files.
+
+To install Ghostscript please follow the instructions (`here <https://www.ghostscript.com/download.html>`_).
+
+
 
 Installation
 ============
