@@ -48,7 +48,7 @@ def unique_name(name, names, escape_suffix=False):
             name = compute_name(name, suffix, escape_suffix)
         return name
     
-def get_extension(filename, mimetype):
+def get_extension(binary, filename, mimetype):
     if not mimetype and not filename:
         mimetype = guess_mimetype(binary, default=False)
     if not mimetype and filename:
