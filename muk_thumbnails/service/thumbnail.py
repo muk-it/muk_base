@@ -58,7 +58,7 @@ except ImportError:
     _logger.warn('Cannot `import moviepy`.')
 
 FORMATS = [
-    "png", "jpg"
+    "png", "jpg", "jepg"
 ]
 
 VIDEO_IMPORTS = [
@@ -78,10 +78,10 @@ WAND_IMPORTS = [
     "mat", "miff", "mono", "mng", "m2v", "mpeg", "mpc", "mpr", "mrw", "msl", "mtv", "mvg", "nef", "yuv",
     "orf", "otb", "p7", "palm", "pam", "clipboard", "pbm", "pcd", "pcds", "pcl", "pcx", "pdb", "jpe",
     "pef", "pes", "pfa", "pfb", "pfm", "pgm", "picon", "pict", "pix", "png8", "png00", "png24", "tiff", 
-    "png32", "png48", "png64", "pnm", "ppm", "ps", "ps2", "ps3", "psb", "psd", "ptif", "pwp", "rad", "bmp2",
-    "raf", "rgb", "rgba", "rgf", "rla", "rle", "sct", "sfw", "sgi", "shtml", "sid", " mrsid", "jpeg", "bmp3",
-    "sparse-color", "sun", "text", "tga", "txt", "ubrl", "ubrl6", "uyvy", "vicar", "viff", "wbmp", "jpg", 
-    "wdp", "webp", "wmf", "wpg", "x", "xbm", "xcf", "xpm", "xwd", "x3f", "ycbcr", "ycbcra", "png", "uil"
+    "png32", "png48", "png64", "pnm", "ppm", "ps", "ps2", "ps3", "psb", "psd", "ptif", "pwp", "rad", 
+    "raf", "rgb", "rgba", "rgf", "rla", "rle", "sct", "sfw", "sgi", "shtml", "sid", " mrsid", "jpeg", 
+    "sparse-color", "sun", "tga", "ubrl", "ubrl6", "uyvy", "vicar", "viff", "wbmp", "jpg", "png", "uil", 
+    "wdp", "webp", "wmf", "wpg", "x", "xbm", "xcf", "xpm", "xwd", "x3f", "ycbcr", "ycbcra", "bmp3", "bmp2",
 ]
 
 def formats():
