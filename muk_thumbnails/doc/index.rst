@@ -28,6 +28,14 @@ Under Windows you should rename the ``unoconv`` file to ``unoconv.py`` and set
 the corresponding path for the ``uno_path`` variable. Since it does not work
 reliably with the environment variable ``UNO_PATH``.
 
+FFmpeg 
+-------------
+
+FFmpeg is a complete, cross-platform solution to record, convert and stream audio and video.
+
+To install FFmpeg please follow the instructions (`here <https://www.ffmpeg.org/download.html>`_).
+
+
 Installation
 ============
 
