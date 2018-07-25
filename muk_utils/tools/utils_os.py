@@ -49,12 +49,13 @@ def unique_name(name, names, escape_suffix=False):
         return name
     
 def get_extension(binary, filename, mimetype):
+    extension = None
     if not mimetype and not filename:
         mimetype = guess_mimetype(binary, default=False)
     if not mimetype and filename:
         mimetype = mimetypes.guess_type(urllib.request.pathname2url(filename))[0]
-    if mimetype and mimetype != 'application/octet-stream':
-        return mimetypes.guess_extension(mimetype)[1:].strip().lower()
-    elif filename:
-        return os.path.splitext(filename)[1][1:].strip().lower()
-    return None
+    if filename:
+        extension = os.path.splitext(filename)[1][1:].strip().lower() 
+    if not extension and mimetype and mimetype != 'application/octet-stream':
+        extension = mimetypes.guess_extension(mimetype)[1:].strip().lower()
+    return extension
