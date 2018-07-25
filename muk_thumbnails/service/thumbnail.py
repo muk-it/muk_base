@@ -39,8 +39,10 @@ _logger = logging.getLogger(__name__)
 
 try:
     from wand.image import Image
+    from wand.color import Color
 except ImportError:
     Image = False
+    Color = False
     _logger.warn('Cannot `import wand`.')
     
 try:
@@ -68,13 +70,13 @@ PDF_IMPORTS = [
 ]
 
 WAND_IMPORTS = [
-    "aai", "art", "arw", "avi", "avs", "bpg", "brf", "cals", "cgm", "cin", "cip", "cmyk", "cmyka",
+    "aai", "art", "arw", "avi", "avs", "bpg", "brf", "cals", "cgm", "cin", "cip", "cmyk", "cmyka", "svg",
     "cr2", "crw", "cur", "cut", "dcm", "dcr", "dcx", "dds", "dib", "djvu", "dng", "dot", "dpx", "tim",
-    "emf", "epdf", "epi", "eps", "eps2", "eps3", "epsf", "epsi", "ept", "exr", "fax", "fig", "fits",
+    "emf", "epdf", "epi", "eps", "eps2", "eps3", "epsf", "epsi", "ept", "exr", "fax", "fig", "fits", 
     "fpx", "gplt", "gray", "graya", "hdr", "hdr", "heic", "hpgl", "hrz", "html", "ico", "info", "ttf",
     "inline", "isobrl", "isobrl6", "jbig", "jng", "jp2", "jpt", "j2c", "j2k", "jxr", "json", "man", "bmp", 
     "mat", "miff", "mono", "mng", "m2v", "mpeg", "mpc", "mpr", "mrw", "msl", "mtv", "mvg", "nef", "yuv",
-    "orf", "otb", "p7", "palm", "pam", "clipboard", "pbm", "pcd", "pcds", "pcl", "pcx", "pdb", "pdf", "jpe",
+    "orf", "otb", "p7", "palm", "pam", "clipboard", "pbm", "pcd", "pcds", "pcl", "pcx", "pdb", "jpe",
     "pef", "pes", "pfa", "pfb", "pfm", "pgm", "picon", "pict", "pix", "png8", "png00", "png24", "tiff", 
     "png32", "png48", "png64", "pnm", "ppm", "ps", "ps2", "ps3", "psb", "psd", "ptif", "pwp", "rad", "bmp2",
     "raf", "rgb", "rgba", "rgf", "rla", "rle", "sct", "sfw", "sgi", "shtml", "sid", " mrsid", "jpeg", "bmp3",
@@ -120,20 +122,26 @@ def create_thumbnail(binary, mimetype=None, filename=None, export="binary", form
     image_extension = extension
     if extension in WAND_IMPORTS:
         image_data = binary
-    elif not image_data and extension in PDF_IMPORTS:
-        reader = PyPDF2.PdfFileReader(io.BytesIO(binary))
+    elif not image_data and (extension in PDF_IMPORTS or extension in unoconv.IMPORTS):
+        pdf_data = binary if extension in PDF_IMPORTS else None
+        if not pdf_data:
+            image_extension = "pdf"
+            pdf_data = unoconv.convert_binary(binary, mimetype, filename)
+        reader = PyPDF2.PdfFileReader(io.BytesIO(pdf_data))
         writer = PyPDF2.PdfFileWriter()
-        writer.addPage(reader.getPage(page))
-        thumbnail_bytes = io.BytesIO()
-        thumbnail_pdf.write(thumbnail_bytes)
-        image_data = thumbnail_bytes.seek(0)
-        image_extension = "pdf"
-    elif not image_data and extension in unoconv.IMPORTS:
-        image_data = unoconv.convert_binary(binary, mimetype, filename)
-        image_extension = "pdf"
+        if reader.getNumPages() >= page:
+            writer.addPage(reader.getPage(page))
+        else:
+            writer.addPage(reader.getPage(0))
+        pdf_bytes = io.BytesIO()
+        writer.write(pdf_bytes)
+        image_data = pdf_bytes.getvalue()
     if image_data:
         with Image(blob=image_data, format=image_extension) as thumbnail:
             thumbnail.format = format
+            if image_extension == "pdf":
+                thumbnail.background_color = Color('white')
+                thumbnail.alpha_channel = 'remove'
             if image_resize:
                 thumbnail.transform(resize=image_resize)
             if image_crop:
@@ -171,6 +179,8 @@ def create_thumbnail(binary, mimetype=None, filename=None, export="binary", form
                             writer.append_data(image)
                 elif clip.duration > int(frame):
                     clip.save_frame(tmp_opath, t=int(frame))
+                else:
+                    clip.save_frame(tmp_opath, t=int(0))
                 if os.path.isfile(tmp_opath):
                     with open(tmp_opath, 'rb') as file:
                         if export == 'file':
