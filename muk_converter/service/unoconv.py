@@ -125,7 +125,7 @@ def convert_binary(binary, mimetype=None, filename=None, export="binary", doctyp
     :return: Returns the output depending on the given format.
     :raises ValueError: The file extension could not be determined or the format is invalid.
     """
-    extension = utils_os.get_extension(filename, mimetype)
+    extension = utils_os.get_extension(binary, filename, mimetype)
     if not extension:
         raise ValueError("The file extension could not be determined.")
     if format not in FORMATS:
