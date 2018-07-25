@@ -5,6 +5,39 @@ MuK Thumbnails
 Technical module to provide some utility features and libraries that can be used
 in other applications. This module has no direct effect on the running system.
 
+Requirements
+=============
+
+Unoconv
+-------------
+
+Universal Office Converter (unoconv) is a command line tool to convert any
+document format that LibreOffice can import to any document format that
+LibreOffice can export. It makes use of the LibreOffice's UNO bindings for
+non-interactive conversion of documents.
+
+To install unoconv please follow the instructions (`here <https://github.com/dagwieers/unoconv>`_).
+
+Make sure that unoconv can be executed from the console and the conversion 
+is done correctly.
+
+To set an individual path for the LibreOffice installation, the config
+variable ``uno_path`` can be set accordingly in the Odoo config.
+
+Under Windows you should rename the ``unoconv`` file to ``unoconv.py`` and set
+the corresponding path for the ``uno_path`` variable. Since it does not work
+reliably with the environment variable ``UNO_PATH``.
+
+Installation
+============
+
+To install this module, you need to:
+
+Download the module and add it to your Odoo addons folder. Afterward, log on to
+your Odoo server and go to the Apps menu. Trigger the debug modus and update the
+list by clicking on the "Update Apps List" link. Now install the module by
+clicking on the install button.
+
 Configuration
 =============
 
