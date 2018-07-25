@@ -26,6 +26,9 @@ import logging
 import tempfile
 import mimetypes
 
+from odoo.tools import config
+from odoo.tools.mimetypes import guess_mimetype
+
 _logger = logging.getLogger(__name__)
 
 def unique_name(name, names, escape_suffix=False):
