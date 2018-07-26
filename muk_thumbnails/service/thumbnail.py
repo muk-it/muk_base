@@ -19,6 +19,7 @@
 
 import os
 import io
+import sys
 import PyPDF2
 import base64
 import shutil
@@ -62,7 +63,7 @@ FORMATS = [
 ]
 
 VIDEO_IMPORTS = [
-    "mp4", "ogv", "webm"
+    "mp4", "mov", "wav", "avi", "mpg", "flv", "wmv", "webm"
 ]
 
 PDF_IMPORTS = [
@@ -202,6 +203,9 @@ def create_thumbnail(binary, mimetype=None, filename=None, export="binary", form
                 except Exception as e:
                     sys.exc_clear()
         finally:
-            shutil.rmtree(tmp_dir)
+            try:
+                shutil.rmtree(tmp_dir)
+            except PermissionError:
+                _logger.warn("Temporary directory could not be deleted.")
     else:
         raise ValueError("No output could be generated.")
