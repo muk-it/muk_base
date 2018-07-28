@@ -11,7 +11,7 @@ Installation
 To install this module, you need to:
 
 Download the module and add it to your Odoo addons folder. Afterward, log on to
-your Odoo server and go to the Apps menu. Trigger the debug modus and update the
+your Odoo server and go to the Apps menu. Trigger the debug mode and update the
 list by clicking on the "Update Apps List" link. Now install the module by
 clicking on the install button.
 
@@ -36,6 +36,20 @@ underscores are replaced by a dash.
 
 ``sudo -H pip3 install --extra-index-url https://nexus.mukit.at/repository/odoo/simple odoo11-addon-muk-utils``
 
+Once the installation has been successfully completed, the app is already in the
+correct folder. Log on to your Odoo server and go to the Apps menu. Trigger the 
+debug mode and update the list by clicking on the "Update Apps List" link. Now
+install the module by clicking on the install button.
+
+The biggest advantage of this variant is that you can now also update the app
+using the "pip" command. To do this, enter the following command in your console:
+
+``pip install --upgrade --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>``
+
+When the process is finished, restart your server and update the application in 
+Odoo. The steps are the same as for the installation only the button has changed
+from "Install" to "Upgrade".
+
 You can also view available Apps directly in our `repository <https://nexus.mukit.at/#browse/browse:odoo>`_
 and find a more detailed installation guide on our `website <https://mukit.at/page/open-source>`_.
 
@@ -43,6 +57,23 @@ For modules licensed under OPL-1, you will receive access data when you purchase
 the module. If the modules were not purchased directly from
 `MuK IT <https://www.mukit.at/>`_ please contact our support (support@mukit.at)
 with a confirmation of purchase to receive the corresponding access data.
+
+Upgrade
+============
+
+To upgrade this module, you need to:
+
+Download the module and add it to your Odoo addons folder. Restart the server
+and log on to your Odoo server. Select the Apps menu and upgrade the module by
+clicking on the upgrade button.
+
+If you installed the module using the "pip" command, you can also update the
+module in the same way. Just type the following command into the console:
+
+``pip install --upgrade --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>``
+
+When the process is finished, restart your server and update the application in 
+Odoo, just like you would normally.
 
 Configuration
 =============
