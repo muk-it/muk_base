@@ -15,6 +15,35 @@ your Odoo server and go to the Apps menu. Trigger the debug modus and update the
 list by clicking on the "Update Apps List" link. Now install the module by
 clicking on the install button.
 
+Another way to install this module is via the package management for Python
+(`PyPI <https://pypi.org/project/pip/>`_).
+
+To install our modules using the package manager make sure
+`odoo-autodiscover <https://pypi.org/project/odoo-autodiscover/>`_ is installed
+correctly. Then open a console and install the module by entering the following
+command:
+
+``pip install --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>``
+
+The module name consists of the Odoo version and the module name, where
+underscores are replaced by a dash.
+
+**Module:** 
+
+``odoo<version>-addon-<module_name>``
+
+**Example:**
+
+``sudo -H pip3 install --extra-index-url https://nexus.mukit.at/repository/odoo/simple odoo11-addon-muk-utils``
+
+You can also view available Apps directly in our `repository <https://nexus.mukit.at/#browse/browse:odoo>`_
+and find a more detailed installation guide on our `website <https://mukit.at/page/open-source>`_.
+
+For modules licensed under OPL-1, you will receive access data when you purchase
+the module. If the modules were not purchased directly from
+`MuK IT <https://www.mukit.at/>`_ please contact our support (support@mukit.at)
+with a confirmation of purchase to receive the corresponding access data.
+
 Configuration
 =============
 
