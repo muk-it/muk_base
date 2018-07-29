@@ -18,6 +18,3 @@
 ###################################################################################
 
 from . import lobject
-
-# backward compatibility
-from .lobject import LargeObject
