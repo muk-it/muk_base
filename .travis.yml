@@ -25,7 +25,7 @@ env:
   - TESTS="1" ODOO_REPO="odoo/odoo"
 
 before_install:
-  - sudo apt-get update && apt-get install -yq unoconv libav-tools ghostscript imagemagick
+  - sudo apt-get install -y unoconv libav-tools ghostscript imagemagick
   - pip install moviepy Wand
 
 install:
