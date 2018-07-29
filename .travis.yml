@@ -10,7 +10,6 @@ sudo: false
 cache: pip
 
 addons:
-  postgresql: "10.0"
   apt:
     packages:
       - unoconv
