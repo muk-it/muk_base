@@ -12,6 +12,7 @@ cache: pip
 addons:
   apt:
     packages:
+      - libreoffice 
       - unoconv
       - ghostscript
       - imagemagick
