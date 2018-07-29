@@ -25,8 +25,8 @@ env:
   - TESTS="1" ODOO_REPO="odoo/odoo"
 
 before_install:
-  - sudo apt-get install -y unoconv libav-tools ghostscript imagemagick
-  - sudo cp /usr/lib/python2.7/dist-packages/uno* ~/.virtualenv/python3.5.5/lib/python3.5/site-packages/
+  - sudo apt-get install -y python3.5 unoconv libav-tools ghostscript imagemagick
+  - sudo cp /usr/lib/python3.5/dist-packages/uno* ~/.virtualenv/python3.5.5/lib/python3.5/site-packages/
   - pip3 install moviepy Wand
 
 install:
