@@ -12,7 +12,9 @@ cache: pip
 addons:
   apt:
     packages:
-      - libreoffice 
+      - libreoffice-calc
+      - libreoffice-draw
+      - libreoffice-impress
       - libreoffice-writer
       - unoconv
       - ghostscript
