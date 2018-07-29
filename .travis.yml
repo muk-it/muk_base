@@ -13,10 +13,10 @@ addons:
   postgresql: "10.0"
   apt:
     packages:
-      - ffmpeg
       - unoconv
       - ghostscript
       - imagemagick
+      - libav-tools
       - expect-dev
       - python-lxml
       - python-simplejson
