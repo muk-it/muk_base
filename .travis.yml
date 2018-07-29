@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - "3.5_with_system_site_packages"
+  - "3.4_with_system_site_packages"
  
 notifications:
   email: false
