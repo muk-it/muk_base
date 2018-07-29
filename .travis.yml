@@ -26,6 +26,7 @@ env:
 
 before_install:
   - sudo apt-get install -y unoconv libav-tools ghostscript imagemagick
+  - sudo cp /usr/lib/python3.5/dist-packages/unoconv* ~/.virtualenv/python3.5.5/lib/python3.5/site-packages/
   - pip3 install moviepy Wand
 
 install:
