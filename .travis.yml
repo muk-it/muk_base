@@ -26,7 +26,7 @@ env:
 
 before_install:
   - sudo apt-get install -y unoconv libav-tools ghostscript imagemagick
-  - pip install moviepy Wand
+  - pip3 install moviepy Wand
 
 install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
