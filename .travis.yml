@@ -1,7 +1,7 @@
 language: python
 
 python:
-  - "3.5"
+  - "3.5_with_system_site_packages"
  
 notifications:
   email: false
@@ -23,9 +23,6 @@ env:
 
   matrix:
   - TESTS="1" ODOO_REPO="odoo/odoo"
-
-virtualenv:
-  system_site_packages: true
 
 before_install:
   - sudo apt-get install -y unoconv libav-tools ghostscript imagemagick
