@@ -1,7 +1,4 @@
-language: python
-
-python:
-  - 3.5
+language: generic
  
 notifications:
   email: false
@@ -12,10 +9,11 @@ cache: pip
 addons:
   apt:
     packages:
+      - python3
       - expect-dev
-      - python-lxml
-      - python-simplejson
-      - python-serial
+      - python3-lxml
+      - python3-simplejson
+      - python3-serial
       
 env:
   global:
@@ -25,8 +23,7 @@ env:
   - TESTS="1" ODOO_REPO="odoo/odoo"
 
 before_install:
-  - sudo apt-get install -y python3.5 unoconv libav-tools ghostscript imagemagick
-  - sudo cp /usr/lib/python*/dist-packages/uno* /home/travis/virtualenv/python3.5.5/lib/python3.5/site-packages/
+  - sudo apt-get install -y unoconv libav-tools ghostscript imagemagick
   - pip3 install moviepy Wand
 
 install:
