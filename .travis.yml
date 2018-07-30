@@ -6,7 +6,7 @@ python:
 notifications:
   email: false
   
-sudo: true
+sudo: false
 cache: pip
 
 addons:
