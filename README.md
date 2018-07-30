@@ -42,23 +42,8 @@ Apps menu. Trigger the debug mode and update the list by clicking on the
 "Update Apps List" link. Now install the module by clicking on the
 install button.
 
-The biggest advantage of this variant is that you can now also update
-the app using the "pip" command. To do this, enter the following command
-in your console:
-
-`pip install --upgrade --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>`
-
-When the process is finished, restart your server and update the
-application in Odoo. The steps are the same as for the installation only
-the button has changed from "Install" to "Upgrade".
-
 You can also view available Apps directly in our [repository] and find a
 more detailed installation guide on our [website].
-
-For modules licensed under OPL-1, you will receive access data when you
-purchase the module. If the modules were not purchased directly from
-[MuK IT] please contact our support (<support@mukit.at>) with a
-confirmation of purchase to receive the corresponding access data.
 
 ### Upgrade
 
