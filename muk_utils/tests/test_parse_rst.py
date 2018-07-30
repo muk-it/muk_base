@@ -22,6 +22,7 @@ import logging
 
 from odoo.tests import common
 
+from odoo.addons.muk_utils.tools import helper
 from odoo.addons.muk_utils.tools import parse_rst
 
 _path = os.path.dirname(os.path.dirname(__file__))
@@ -37,3 +38,6 @@ class ParseReStructuredTextTestCase(common.HttpCase):
         
     def test_rst2html(self):
         self.assertTrue(parse_rst.rst2html("Test"))
+        
+    def test_slugify(self):
+        self.assertTrue(helper.slugify("Test"))
