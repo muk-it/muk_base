@@ -19,6 +19,7 @@
 
 import os
 import logging
+import unittest
 
 from odoo.tests import common
 
@@ -37,15 +38,18 @@ class ConverterTestCase(common.TransactionCase):
         
     def test_formats(self):
         self.assertTrue(converter.formats())
-        
+    
+    @unittest.skipIf(os.environ.get('TRAVIS', False), "Skipped for Travis CI")
     def test_convert(self):
         with open(os.path.join(_path, 'tests/data', 'sample.png'), 'rb') as file:
             self.assertTrue(converter.convert('sample.png', file.read(), "pdf"))
-            
+    
+    @unittest.skipIf(os.environ.get('TRAVIS', False), "Skipped for Travis CI")
     def test_convert2pdf(self):
         with open(os.path.join(_path, 'tests/data', 'sample.png'), 'rb') as file:
             self.assertTrue(converter.convert2pdf('sample.png', file.read()))
-            
+    
+    @unittest.skipIf(os.environ.get('TRAVIS', False), "Skipped for Travis CI")
     def test_convert2html(self):
         with open(os.path.join(_path, 'tests/data', 'sample.png'), 'rb') as file:
             self.assertTrue(converter.convert2html('sample.png', file.read()))

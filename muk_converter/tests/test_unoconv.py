@@ -19,6 +19,7 @@
 
 import os
 import logging
+import unittest
 
 from odoo.tests import common
 
@@ -34,7 +35,8 @@ class UnoconvTestCase(common.TransactionCase):
 
     def tearDown(self):
         super(UnoconvTestCase, self).tearDown()
-        
+    
+    @unittest.skipIf(os.environ.get('TRAVIS', False), "Skipped for Travis CI")
     def test_convert_binary(self):
         with open(os.path.join(_path, 'tests/data', 'sample.png'), 'rb') as file:
             self.assertTrue(unoconv.convert_binary(file.read()))
