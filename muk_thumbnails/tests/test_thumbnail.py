@@ -19,6 +19,7 @@
 
 import os
 import logging
+import unittest
 
 from odoo.tests import common
 
@@ -34,11 +35,13 @@ class ThumbnailTestCase(common.TransactionCase):
 
     def tearDown(self):
         super(ThumbnailTestCase, self).tearDown()
-        
+    
+    @unittest.skipIf(os.environ.get('TRAVIS', False), "Skipped for Travis CI")
     def test_thumbnail_unoconv(self):
         with open(os.path.join(_path, 'tests/data', 'sample.xls'), 'rb') as file:
            self.assertTrue(thumbnail.create_thumbnail(binary=file.read(), filename='sample.xls'))
-       
+    
+    @unittest.skipIf(os.environ.get('TRAVIS', False), "Skipped for Travis CI")
     def test_thumbnail_video(self):
         with open(os.path.join(_path, 'tests/data', 'sample.mp4'), 'rb') as file:
            self.assertTrue(thumbnail.create_thumbnail(binary=file.read(), filename='sample.mp4'))
