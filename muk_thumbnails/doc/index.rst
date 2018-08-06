@@ -56,6 +56,27 @@ ellipses and Bezier curves.
 
 To install ImageMagick please follow the instructions (`here <https://www.imagemagick.org/script/download.php>`_).
 
+Wand 
+-------------
+
+Wand is a ctypes-based simple ImageMagick binding for Python. It is used to interact with ImageMagick via a Python interface.
+
+To install Wand please follow the instructions (`here <http://docs.wand-py.org/en/0.4.1/guide/install.html>`_).
+
+Imageio 
+-------------
+
+Imageio is a Python library that provides an easy interface to read and write a wide range of image data, including animated images, volumetric data, and scientific formats.
+
+To install Imageio please follow the instructions (`here <https://pypi.org/project/imageio/>`_).
+
+MoviePy 
+-------------
+
+MoviePy is a Python module for video editing, which can be used for basic operations (like cuts, concatenations, title insertions), video compositing (a.k.a. non-linear editing), video processing, or to create advanced effects. It can read and write the most common video formats, including GIF.
+
+To install MoviePy please follow the instructions (`here <https://zulko.github.io/moviepy/install.html>`_).
+
 Installation
 ============
 
