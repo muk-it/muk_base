@@ -20,7 +20,7 @@
 {
     "name": "MuK Autovacuum",
     "summary": """Configure automatic garbage collection""",
-    "version": "11.0.2.1.3",
+    "version": "11.0.2.1.4",
     "category": "Extra Tools",
     "license": "AGPL-3",
     "website": "https://www.mukit.at",
