@@ -1,5 +1,0 @@
-id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-
-access_security_groups_user,security_groups_user,model_muk_security_groups,base.group_user,1,1,1,1
-
-access_security_lock_admin,security_lock_admin,model_muk_security_lock,base.group_erp_manager,1,0,0,1
