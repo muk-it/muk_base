@@ -56,7 +56,7 @@ def get_response(url):
         try:
             response = session.post("%s%s" % (base_url, path), params)
             return response.status_code, response.headers, response.content
-        except requests.exceptions.RequestException as exception:
+        except Exception as exception:
             try:
                 custom_cert = config.get("muk_custom_certificate", False)
                 _logger.debug("Using Certificate: {}".format(custom_cert))
