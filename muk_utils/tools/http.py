@@ -57,13 +57,15 @@ def get_response(url):
             response = session.post("%s%s" % (base_url, path), params)
             return response.status_code, response.headers, response.content
         except Exception as exception:
+            _logger.info("Trying custom certificate")
             custom_cert = config.get("muk_custom_certificate", False)
-            _logger.info("Using Certificate: {}".format(custom_cert))
             try:
+                _logger.info("Using Certificate: {}".format(custom_cert))
                 response = session.post("%s%s" % (base_url, path), params, verify=custom_cert)
                 return response.status_code, response.headers, response.reason
             except Exception as e:
                 try:
+                    _logger.info("Custom Certificate didn't work")
                     response = session.post("%s%s" % (base_url, path), params, verify=False)
                     return response.status_code, response.headers, response.reason
                 except Exception as e:
