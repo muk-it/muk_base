@@ -55,19 +55,19 @@ def get_response(url):
         session = requests.Session()
         session.cookies['session_id'] = request.session.sid
         try:
-            response = session.get("%s%s" % (base_url, path), params, verify=False)
+            response = session.post("%s%s" % (base_url, path), params=params, verify=False)
             return response.status_code, response.headers, response.content
         except Exception as exception:
             _logger.info("Trying custom certificate")
             custom_cert = config.get("muk_custom_certificate", False)
             try:
                 _logger.info("Using Certificate: {}".format(custom_cert))
-                response = session.post("%s%s" % (base_url, path), params, verify=custom_cert)
+                response = session.post("%s%s" % (base_url, path), params=params, verify=custom_cert)
                 return response.status_code, response.headers, response.reason
             except Exception as e:
                 try:
                     _logger.info("Custom Certificate didn't work")
-                    response = session.post("%s%s" % (base_url, path), params, verify=False)
+                    response = session.post("%s%s" % (base_url, path), params=params, verify=False)
                     return response.status_code, response.headers, response.reason
                 except Exception as e:
                     _logger.exception("Request failed!")
