@@ -57,11 +57,19 @@ def get_response(url):
             response = session.post("%s%s" % (base_url, path), params)
             return response.status_code, response.headers, response.content
         except requests.exceptions.RequestException as exception:
-            return exception.response.status_code, exception.response.headers, exception.response.reason
+            try:
+                return exception.response.status_code, exception.response.headers, exception.response.reason
+            except Exception as e:
+                _logger.exception("Request failed!")
+                return 501, [], str(e)
     else:
         try:
             response = requests.get(url)
             return response.status_code, response.headers, response.content
         except requests.exceptions.RequestException as exception:
-            return exception.response.status_code, exception.response.headers, exception.response.reason
+            try:
+                return exception.response.status_code, exception.response.headers, exception.response.reason
+            except Exception as e:
+                _logger.exception("Request failed!")
+                return 501, [], str(e)
     
