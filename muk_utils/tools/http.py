@@ -73,7 +73,7 @@ def get_response(url):
                     return 501, [], str(e)
     else:
         try:
-            response = requests.get(url)
+            response = requests.post(url)
             return response.status_code, response.headers, response.content
         except requests.exceptions.RequestException as exception:
             try:
