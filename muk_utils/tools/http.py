@@ -55,7 +55,7 @@ def get_response(url):
         session = requests.Session()
         session.cookies['session_id'] = request.session.sid
         try:
-            response = session.post("%s%s" % (base_url, path), params=params)
+            response = session.post("%s%s" % (base_url, path), params=params, verify=False)
             return response.status_code, response.headers, response.content
         except:
             _logger.info("Trying custom certificate")
