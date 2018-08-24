@@ -47,6 +47,7 @@ def make_error_response(status, message):
     return exception
 
 def get_response(url):
+    _logger.info(url)
     if not bool(urllib.parse.urlparse(url).netloc):
         base_url = request.env['ir.config_parameter'].sudo().get_param('web.base.url')
         method, params, path = get_route(url)
@@ -54,9 +55,9 @@ def get_response(url):
         session = requests.Session()
         session.cookies['session_id'] = request.session.sid
         try:
-            response = session.post("%s%s" % (base_url, path), params, verify=False)
+            response = session.get("%s%s" % (base_url, path), params, verify=False)
             return response.status_code, response.headers, response.content
-        except requests.exceptions.SSLError as exception:
+        except Exception as exception:
             _logger.info("Trying custom certificate")
             custom_cert = config.get("muk_custom_certificate", False)
             try:
@@ -73,7 +74,7 @@ def get_response(url):
                     return 501, [], str(e)
     else:
         try:
-            response = requests.post(url)
+            response = requests.get(url)
             return response.status_code, response.headers, response.content
         except requests.exceptions.RequestException as exception:
             try:
