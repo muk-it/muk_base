@@ -64,11 +64,12 @@ def get_response(url):
                     response = session.post("%s%s" % (base_url, path), params, verify=custom_cert)
                     return response.status_code, response.headers, response.reason
                 except Exception as e:
-                    response = session.post("%s%s" % (base_url, path), params, verify=False)
-                    return response.status_code, response.headers, response.reason
-            except Exception as e:
-                _logger.exception("Request failed!")
-                return 501, [], str(e)
+                    try:
+                        response = session.post("%s%s" % (base_url, path), params, verify=False)
+                        return response.status_code, response.headers, response.reason
+                    except Exception as e:
+                        _logger.exception("Request failed!")
+                        return 501, [], str(e)
     else:
         try:
             response = requests.get(url)
