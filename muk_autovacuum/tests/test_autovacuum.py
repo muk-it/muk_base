@@ -26,45 +26,55 @@ _logger = logging.getLogger(__name__)
 
 class AutoVacuumTestCase(common.TransactionCase):
     
-    at_install = False
-    post_install = True
-    
     def setUp(self):
         super(AutoVacuumTestCase, self).setUp()
-        # create test rules
-        model_model = self.env['ir.model']
-        model_fields = self.env['ir.model.fields']
-        model_logs = model_model.search([('model', '=', 'ir.logging')], limit=1)
+        self.logs = self.env['ir.logging']
+        self.rules = self.env['muk_autovacuum.rules']
+        self.model_model = self.env['ir.model']
+        self.model_fields = self.env['ir.model.fields']
+        self.model_logs = self.model_model.search([('model', '=', 'ir.logging')], limit=1)
         time_field_domain = [
-            ('model_id', '=', model_logs.id),
+            ('model_id', '=', self.model_logs.id),
             ('ttype', '=', 'datetime'),
             ('name', '=', 'create_date')]
-        time_field_logs = model_fields.search(time_field_domain, limit=1)
-        self.rules = self.env['muk_autovacuum.rules']
-        self.rules |= self.rules.create({
-            'name': "Delete Logs after 2 Day",
+        self.time_field_logs = self.model_fields.search(time_field_domain, limit=1)
+    
+    def test_autovacuum_time(self):
+        self.create_logs()
+        self.rules.create({
+            'name': "Delete Logs after 1 Minute",
             'state': 'time',
-            'model': model_logs.id,
-            'time_field': time_field_logs.id,
-            'time_type': 'days',
-            'time': 2})
-        self.rules |= self.rules.create({
+            'model': self.model_logs.id,
+            'time_field': self.time_field_logs.id,
+            'time_type': 'minutes',
+            'time': 1})
+        self.run_autovacuum()
+        
+    def test_autovacuum_size(self):
+        self.create_logs()
+        self.rules.create({
             'name': "Delete Logs Count > 1",
             'state': 'size',
-            'model': model_logs.id,
+            'model': self.model_logs.id,
             'size': 1,
             'size_order': "id desc",
             'size_type': 'fixed'})
-        self.rules |= self.rules.create({
+        self.run_autovacuum()
+        
+    def test_autovacuum_domain(self):
+        self.create_logs()
+        self.rules.create({
             'name': "Delete Logs with Domain",
             'state': 'domain',
-            'model': model_logs.id,
+            'model': self.model_logs.id,
             'domain': "[]"})
-        # create test logs
-        self.logs = self.env['ir.logging']
+        self.run_autovacuum()
+    
+    def create_logs(self):
+        ids = []
         time = datetime.datetime.utcnow()
         for index in range(0, 10):
-            self.logs |= self.logs.create({
+            log = self.logs.create({
                 'create_date': time - datetime.timedelta(days=index),
                 'create_uid': self.env.user.id,
                 'name': "Test %s" % index,
@@ -75,13 +85,10 @@ class AutoVacuumTestCase(common.TransactionCase):
                 'path': "PATH",
                 'func': "TEST",
                 'line': 1})
-        
-    def tearDown(self):
-        super(AutoVacuumTestCase, self).tearDown()
-        self.logs.unlink()
-        self.rules.unlink()
+            ids.append(log.id)
+        return ids
     
-    def test_autovacuum(self):
+    def run_autovacuum(self):
         count_before = self.env['ir.logging'].search([], count=True)
         self.env['ir.cron'].search([('model_id', '=', 'ir.autovacuum')]).ir_actions_server_id.run()
         count_after = self.env['ir.logging'].search([], count=True)
