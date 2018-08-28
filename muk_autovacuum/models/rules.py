@@ -279,6 +279,13 @@ class AutoVacuumRules(models.Model):
         else:
             return None
 
+    @api.model
+    def get_import_templates(self):
+        return [{
+            'label': _('Import Template for Auto Vacuum Rules'),
+            'template': '/muk_autovacuum/static/xls/muk_autovacuum_rules.xls'
+        }]
+
     #----------------------------------------------------------
     # Read
     #----------------------------------------------------------
