@@ -128,6 +128,7 @@
                                 	<li><code>uid</code>, <code>user</code>: User on which the rule is triggered</li>
                                     <li><code>env</code>: Odoo Environment on which the rule is triggered</li>
                                     <li><code>model</code>: Odoo Model of the record on which the rule is triggered</li>
+                                    <li><code>b64encode</code>, <code>b64decode</code>: Base64 converter</li>
                                     <li><code>time</code>, <code>datetime</code>, <code>dateutil</code>, <code>timezone</code>: useful Python libraries</li>
                                     <li><code>date_format</code>, <code>datetime_format</code>: server date and time formats</li>
                                     <li><code>logger.info(message)</code>: Python logging framework</li>

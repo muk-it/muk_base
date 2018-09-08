@@ -18,6 +18,7 @@
 ###################################################################################
 
 import time
+import base64
 import logging
 import datetime
 import dateutil
@@ -241,6 +242,7 @@ class AutoVacuumRules(models.Model):
         return {
             'datetime': datetime,
             'dateutil': dateutil,
+            'timezone': timezone,
             'time': time,
             'uid': self.env.uid,
             'user': self.env.user
@@ -257,6 +259,8 @@ class AutoVacuumRules(models.Model):
             'datetime': datetime,
             'dateutil': dateutil,
             'timezone': timezone,
+            'b64encode': base64.b64encode,
+            'b64decode': base64.b64decode,
             'date_format': DEFAULT_SERVER_DATE_FORMAT,
             'datetime_format': DEFAULT_SERVER_DATETIME_FORMAT,
             'Warning': Warning,
