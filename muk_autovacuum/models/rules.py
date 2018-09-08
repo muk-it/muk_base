@@ -196,6 +196,7 @@ class AutoVacuumRules(models.Model):
             'size': [('invisible', True)], 
             'domain': [('invisible', True)] ,
             'code': [('required', True)]},
+        default="# Enter Python code here. Help about Python expression is available in the help tab of this document.",
         help="Code which will be executed during the clean up.")
     
     protect_starred = fields.Boolean(
