@@ -69,7 +69,7 @@ class AutoVacuum(models.AbstractModel):
                         records = model.with_context({'active_test': False}).search([], order=rule.size_order, limit=limit)
                 elif rule.state == 'domain':
                     _logger.info(_("GC domain: %s"), rule.domain)
-                    domain = safe_eval(rule.domain, rules._get_eval_domain_context())
+                    domain = safe_eval(rule.domain or "[]", rules._get_eval_domain_context())
                     records = model.with_context({'active_test': False}).search(domain)
                 if rule.only_attachments:
                     attachments = self.env['ir.attachment'].sudo().search([
