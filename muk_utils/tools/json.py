@@ -23,8 +23,6 @@ import datetime
 
 from odoo import models, tools
 
-from odoo.addons.muk_rest import exceptions
-
 _logger = logging.getLogger(__name__)
 
 class ResponseEncoder(json.JSONEncoder):
