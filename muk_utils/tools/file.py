@@ -26,7 +26,6 @@ import logging
 import tempfile
 import mimetypes
 
-from odoo.tools import config
 from odoo.tools.mimetypes import guess_mimetype
 
 _logger = logging.getLogger(__name__)
@@ -48,14 +47,11 @@ def unique_name(name, names, escape_suffix=False):
             name = compute_name(name, suffix, escape_suffix)
         return name
     
-def guess_extension(binary, filename, mimetype):
-    extension = None
-    if not mimetype and not filename:
-        mimetype = guess_mimetype(binary, default=False)
-    if not mimetype and filename:
-        mimetype = mimetypes.guess_type(urllib.request.pathname2url(filename))[0]
-    if filename:
-        extension = os.path.splitext(filename)[1][1:].strip().lower() 
-    if not extension and mimetype and mimetype != 'application/octet-stream':
+def guess_extension(filename=None, mimetype=None, binary=None):
+    extension = filename and os.path.splitext(filename)[1][1:].strip().lower()
+    if not extension and mimetype:
+        extension = mimetypes.guess_extension(mimetype)[1:].strip().lower()
+    if not extension and binary:
+        mimetype = guess_mimetype(binary, default="")
         extension = mimetypes.guess_extension(mimetype)[1:].strip().lower()
     return extension
