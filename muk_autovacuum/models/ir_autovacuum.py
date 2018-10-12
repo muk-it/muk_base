@@ -63,7 +63,7 @@ class AutoVacuum(models.AbstractModel):
                 elif rule.state == 'size':
                     size = rule.size if rule.size_type == 'fixed' else rule.size_parameter_value
                     count = model.with_context({'active_test': False}).search([], count=True)
-                    if count > size:
+                    if size and size > 0 and count > size:
                         limit = count - size
                         _logger.info(_("GC domain: [] order: %s limit: %s"), rule.size_order, limit)
                         records = model.with_context({'active_test': False}).search([], order=rule.size_order, limit=limit)
