@@ -19,3 +19,4 @@
 
 from . import file
 from . import json
+from . import cache
