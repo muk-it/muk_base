@@ -19,40 +19,42 @@
 
 import time
 import logging
+import datetime
 import functools
 
 _logger = logging.getLogger(__name__)
 
-class memoize(object):
-    
-    _caches = {}
-    _timeouts = {}
 
-    def __init__(self, timeout=2):
+#----------------------------------------------------------
+# Properties
+#----------------------------------------------------------
+
+class cached_property(object):
+
+    def __init__(self, timeout=None):
         self.timeout = timeout
 
-    def collect(self):
-        for func in self._caches:
-            cleaned_cache = {}
-            current_time = time.time()
-            for key in self._caches[func]:
-                if (current_time - self._caches[func][key][1]) < self._timeouts[func]:
-                    cleaned_cache[key] = self._caches[func][key]
-            self._caches[func] = cleaned_cache
-
     def __call__(self, func):
-        self.cache = self._caches[func] = {}
-        self._timeouts[func] = self.timeout
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            current_time = time.time()
-            kw = sorted(kwargs.items())
-            key = (args, tuple(kw))
-            try:
-                value = self.cache[key]
-                if (current_time - value[1]) > self.timeout:
-                    raise KeyError
-            except KeyError:
-                value = self.cache[key] = (func(*args,**kwargs), current_time)
-            return value[0]
-        return wrapper
+        return functools.update_wrapper(self, func)
+
+    def __get__(self, obj, cls):
+        if obj is None:
+            return self
+        try:
+            value, last_updated =  obj.__dict__[self.__name__]
+        except KeyError:
+            pass
+        else:
+            if self.timeout is None:
+                return value
+            elif self.timeout >= time.time() - last_updated:
+                return value
+        value = self.__wrapped__(obj)
+        obj.__dict__[self.__name__] = (value, time.time())
+        return value
+
+    def __delete__(self, obj):
+        obj.__dict__.pop(self.__name__, None)
+
+    def __set__(self, obj, value):
+        obj.__dict__[self.__name__] = (value, time())

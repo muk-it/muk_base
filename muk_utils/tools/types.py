@@ -21,6 +21,10 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+#----------------------------------------------------------
+# Meta Classes
+#----------------------------------------------------------
+
 class Singleton(type):
     
     _instances = {}

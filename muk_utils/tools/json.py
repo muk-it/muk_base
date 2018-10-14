@@ -25,6 +25,10 @@ from odoo import models, tools
 
 _logger = logging.getLogger(__name__)
 
+#----------------------------------------------------------
+# JSON Encoder
+#----------------------------------------------------------
+
 class ResponseEncoder(json.JSONEncoder):
     
     def default(self, obj):

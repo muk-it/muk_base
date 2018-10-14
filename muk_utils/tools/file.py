@@ -30,6 +30,10 @@ from odoo.tools.mimetypes import guess_mimetype
 
 _logger = logging.getLogger(__name__)
 
+#----------------------------------------------------------
+# File Helper
+#----------------------------------------------------------
+
 def unique_name(name, names, escape_suffix=False):
     def compute_name(name, suffix, escape_suffix):
         if escape_suffix:
@@ -46,7 +50,7 @@ def unique_name(name, names, escape_suffix=False):
             suffix += 1
             name = compute_name(name, suffix, escape_suffix)
         return name
-    
+
 def guess_extension(filename=None, mimetype=None, binary=None):
     extension = filename and os.path.splitext(filename)[1][1:].strip().lower()
     if not extension and mimetype:
