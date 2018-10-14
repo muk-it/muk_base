@@ -18,8 +18,13 @@
 ###################################################################################
 
 import time
+import logging
+import functools
+
+_logger = logging.getLogger(__name__)
 
 class memoize(object):
+    
     _caches = {}
     _timeouts = {}
 
@@ -38,16 +43,20 @@ class memoize(object):
     def __call__(self, func):
         self.cache = self._caches[func] = {}
         self._timeouts[func] = self.timeout
+        @functools.wraps(func)
         def wrapper(*args, **kwargs):
             current_time = time.time()
             kw = sorted(kwargs.items())
             key = (args, tuple(kw))
             try:
+                print("TRY CACHE")
                 value = self.cache[key]
+                print("VALUE")
                 if (current_time - value[1]) > self.timeout:
+                    print("TIMEOUT")
                     raise KeyError
             except KeyError:
+                print("NEW")
                 value = self.cache[key] = (func(*args,**kwargs), current_time)
             return value[0]
-        wrapper.func_name = func.__name__
         return wrapper
