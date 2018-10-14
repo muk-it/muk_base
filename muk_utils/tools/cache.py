@@ -49,14 +49,10 @@ class memoize(object):
             kw = sorted(kwargs.items())
             key = (args, tuple(kw))
             try:
-                print("TRY CACHE")
                 value = self.cache[key]
-                print("VALUE")
                 if (current_time - value[1]) > self.timeout:
-                    print("TIMEOUT")
                     raise KeyError
             except KeyError:
-                print("NEW")
                 value = self.cache[key] = (func(*args,**kwargs), current_time)
             return value[0]
         return wrapper
