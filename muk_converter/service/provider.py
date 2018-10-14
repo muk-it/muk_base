@@ -22,12 +22,12 @@ import logging
 
 from odoo.addons.iap import jsonrpc
 
-from odoo.addons.muk_utils.tools.cache import memoize
+from odoo.addons.muk_utils.tools.cache import cached_property
 from odoo.addons.muk_utils.tools.file import guess_extension
 
 _logger = logging.getLogger(__name__)
 
-CONVERTER_DEFAULT_ENDPOINT = 'http://localhost:8069'
+CONVERTER_DEFAULT_ENDPOINT = 'https://iap-converter.mukit.at'
 CONVERTER_ENDPOINT_FORMATS = '/iap/converter/1/formats'
 CONVERTER_ENDPOINT_IMPORTS = '/iap/converter/1/imports'
 CONVERTER_ENDPOINT_CONVERT = '/iap/converter/1/convert'
@@ -51,13 +51,12 @@ class RemoteConverter(object):
     def account(self):
         return self._account
     
-    @property
-    @memoize(timeout=3600)
+    @cached_property(timeout=3600)
     def formats(self):
+        print("FORMATS")
         return jsonrpc(self.endpoint(CONVERTER_ENDPOINT_FORMATS), params=self.payload())
     
-    @property
-    @memoize(timeout=3600)
+    @cached_property(timeout=3600)
     def imports(self):
         return jsonrpc(self.endpoint(CONVERTER_ENDPOINT_IMPORTS), params=self.payload())
     
