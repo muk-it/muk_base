@@ -1,5 +1,5 @@
 ###################################################################################
-# 
+#
 #    Copyright (C) 2018 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -17,5 +17,6 @@
 #
 ###################################################################################
 
-from . import models
-from . import tools
+from . import ir_attachment
+from . import res_config_settings
+

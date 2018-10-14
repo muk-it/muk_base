@@ -20,7 +20,7 @@
 {
     "name": "MuK Utils",
     "summary": """Utility Features""",
-    "version": '12.0.1.0.17',   
+    "version": '12.0.1.0.18',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "author": "MuK IT",
@@ -30,9 +30,10 @@
         "Mathias Markl <mathias.markl@mukit.at>",
     ],
     "depends": [
-        "base",
+        "base_setup",
     ],
     "data": [
+        "views/res_config_settings_view.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",
