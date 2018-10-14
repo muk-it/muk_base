@@ -30,7 +30,7 @@
         "Mathias Markl <mathias.markl@mukit.at>",
     ],
     "depends": [
-        "base",
+        "muk_utils",
     ],
     "qweb": [
         "static/src/xml/*.xml",
