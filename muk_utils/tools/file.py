@@ -18,13 +18,16 @@
 ###################################################################################
 
 import os
+import re
 import io
+import sys
 import base64
 import shutil
 import urllib
 import logging
 import tempfile
 import mimetypes
+import unicodedata
 
 from odoo.tools.mimetypes import guess_mimetype
 
@@ -61,7 +64,8 @@ def unique_name(name, names, escape_suffix=False):
         return name 
 
 def unique_files(files):
-    ufiles = unames = []
+    ufiles = []
+    unames = []
     for file in files:
         uname = unique_name(file[0], unames, escape_suffix=True)
         ufiles.append((uname, file[1]))

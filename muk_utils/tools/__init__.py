@@ -21,3 +21,4 @@ from . import file
 from . import json
 from . import cache
 from . import types
+from . import http
