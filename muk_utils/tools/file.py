@@ -34,13 +34,14 @@ _logger = logging.getLogger(__name__)
 # File Helper
 #----------------------------------------------------------
 
+def compute_name(name, suffix, escape_suffix):
+    if escape_suffix:
+        name, extension = os.path.splitext(name)
+        return "%s(%s)%s" % (name, suffix, extension)
+    else:
+        return "%s(%s)" % (name, suffix)
+
 def unique_name(name, names, escape_suffix=False):
-    def compute_name(name, suffix, escape_suffix):
-        if escape_suffix:
-            name, extension = os.path.splitext(name)
-            return "%s(%s)%s" % (name, suffix, extension)
-        else:
-            return "%s(%s)" % (name, suffix)
     if not name in names:
         return name
     else:
@@ -49,7 +50,15 @@ def unique_name(name, names, escape_suffix=False):
         while name in names:
             suffix += 1
             name = compute_name(name, suffix, escape_suffix)
-        return name
+        return name 
+
+def unique_files(files):
+    ufiles = unames = []
+    for file in files:
+        uname = unique_name(file[0], unames, escape_suffix=True)
+        ufiles.append((uname, file[1]))
+        unames.append(uname)
+    return ufiles  
 
 def guess_extension(filename=None, mimetype=None, binary=None):
     extension = filename and os.path.splitext(filename)[1][1:].strip().lower()
