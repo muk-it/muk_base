@@ -37,7 +37,8 @@ def lobject_content(xmlid=None, model=None, id=None, field='content', unique=Fal
 
 class LargeObjectController(http.Controller):
     
-    @http.route(['/web/lobject',
+    @http.route([
+        '/web/lobject',
         '/web/lobject/<string:xmlid>',
         '/web/lobject/<string:xmlid>/<string:filename>',
         '/web/lobject/<int:id>',
@@ -45,7 +46,8 @@ class LargeObjectController(http.Controller):
         '/web/lobject/<int:id>-<string:unique>',
         '/web/lobject/<int:id>-<string:unique>/<string:filename>',
         '/web/lobject/<string:model>/<int:id>/<string:field>',
-        '/web/lobject/<string:model>/<int:id>/<string:field>/<string:filename>'], type='http', auth="public")
+        '/web/lobject/<string:model>/<int:id>/<string:field>/<string:filename>'
+    ], type='http', auth="public")
     def content_lobject(self, xmlid=None, model=None, id=None, field='content',
                         filename=None, filename_field='content_fname', unique=None, 
                         mimetype=None, download=None, data=None, token=None):
