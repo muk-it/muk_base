@@ -34,6 +34,14 @@ _logger = logging.getLogger(__name__)
 # File Helper
 #----------------------------------------------------------
 
+def slugify(value):
+    value = str(unicodedata.normalize('NFKD', value))
+    if sys.version_info < (3,):
+        value = str(value.encode('ascii', 'ignore'))
+    value = str(re.sub('[^\w\s-]', '', value).strip().lower())
+    value = str(re.sub('[-\s]+', '-', value))
+    return value
+
 def compute_name(name, suffix, escape_suffix):
     if escape_suffix:
         name, extension = os.path.splitext(name)
