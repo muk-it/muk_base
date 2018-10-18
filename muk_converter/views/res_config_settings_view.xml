@@ -27,7 +27,7 @@
 	        <div name="multi_company" position="after">
 	            <h2>File Converter</h2>
 	            <div class="row mt16 o_settings_container" name="web_client">
-	                <div class="col-xs-12 col-md-6 o_setting_box">
+	                <div class="col-12 col-lg-6 o_setting_box">
 	                    <div class="o_setting_left_pane"></div>
 	                    <div class="o_setting_right_pane">
 							<label for="converter_service"/>
@@ -44,7 +44,7 @@
 	                		</div>
                     	</div>
 	                </div>
-	                <div class="col-xs-12 col-md-6 o_setting_box">
+	                <div class="col-12 col-lg-6 o_setting_box">
 	                    <div class="o_setting_left_pane"></div>
 	                    <div class="o_setting_right_pane">
 							<label for="converter_max_store"/>

@@ -31,7 +31,6 @@
     ],
     "depends": [
         "iap",
-        "base_setup",
         "muk_autovacuum",
         "muk_fields_lobject",
     ],
