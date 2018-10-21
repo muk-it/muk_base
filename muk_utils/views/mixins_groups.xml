@@ -20,8 +20,8 @@
 <odoo>
 
 <record id="view_groups_tree" model="ir.ui.view">
-	<field name="name">muk_utils_groups.tree</field>
-	<field name="model">muk_utils.groups</field>
+	<field name="name">muk_utils_mixins_groups.tree</field>
+	<field name="model">muk_utils.mixins.groups</field>
 	<field name="arch" type="xml">
 		<tree string="Groups">
 			<field name="name" />
@@ -31,8 +31,8 @@
 </record>
 
 <record id="view_groups_form" model="ir.ui.view">
-	<field name="name">muk_utils_groups.form</field>
-	<field name="model">muk_utils.groups</field>
+	<field name="name">muk_utils_mixins_groups.form</field>
+	<field name="model">muk_utils.mixins.groups</field>
 	<field name="arch" type="xml">
 		<form string="Group">
 			<sheet>

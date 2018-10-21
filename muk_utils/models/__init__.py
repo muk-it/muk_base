@@ -17,7 +17,7 @@
 #
 ###################################################################################
 
-from . import groups
+from . import mixins_groups
 from . import ir_attachment
 from . import res_config_settings
 
