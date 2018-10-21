@@ -20,7 +20,7 @@
 {
     "name": "MuK Utils",
     "summary": """Utility Features""",
-    "version": '12.0.1.1.1',   
+    "version": '12.0.1.1.2',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "author": "MuK IT",
@@ -33,6 +33,7 @@
         "base_setup",
     ],
     "data": [
+        "views/groups.xml",
         "views/res_config_settings_view.xml",
     ],
     "qweb": [
