@@ -22,6 +22,7 @@ from odoo import models, fields, api
 class Groups(models.AbstractModel):
     
     _name = 'muk_utils.mixins.groups'
+    _description = 'Group Mixin'
     
     _parent_store = True
     _parent_name = "parent_group"
