@@ -82,7 +82,7 @@ class AccessGroupsModel(models.AbstractModel):
                 groups=self._suspend_groups))
         add('groups', fields.Many2many(
             _module=self._module,
-            comodel_name='muk_security.groups',
+            comodel_name='muk_security.access_groups',
             relation='%s_groups_rel' % (self._table),
             column1='aid',
             column2='gid',
@@ -91,7 +91,7 @@ class AccessGroupsModel(models.AbstractModel):
             groups=self._field_groups))
         add('complete_groups', fields.Many2many(
             _module=self._module,
-            comodel_name='muk_security.groups',
+            comodel_name='muk_security.access_groups',
             relation='%s_complete_groups_rel' % (self._table),
             column1='aid',
             column2='gid',
