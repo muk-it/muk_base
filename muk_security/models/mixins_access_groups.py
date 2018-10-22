@@ -27,7 +27,7 @@ from odoo.addons.muk_security.tools.security import NoSecurityUid
 
 _logger = logging.getLogger(__name__)
 
-class BaseModelAccessGroups(models.AbstractModel):
+class AccessGroupsModel(models.AbstractModel):
     
     _name = 'muk_security.mixins.access_groups'
     _description = "Group Access Mixin"
@@ -39,6 +39,9 @@ class BaseModelAccessGroups(models.AbstractModel):
     # If set the group fields are restricted by the access group
     _field_groups = None 
     
+    # If set to True the model is extended by fields to suspend the checks
+    _active_suspend = False 
+    
     # If set the suspend fields are restricted by the access group
     _suspend_groups = None 
     
@@ -48,39 +51,39 @@ class BaseModelAccessGroups(models.AbstractModel):
 
     @api.model
     def _add_magic_fields(self):
-        super(BaseModelAccessGroups, self)._add_magic_fields()
+        super(AccessGroupsModel, self)._add_magic_fields()
         def add(name, field):
             if name not in self._fields:
                 self._add_field(name, field)
-        model = self._name.split(".")[-1]
-        add('suspend_security_read', fields.Boolean(
-            _module=self._module,
-            string="Suspend Security for Read",
-            automatic=True,
-            default=False,
-            groups=self._suspend_groups))
-        add('suspend_security_create', fields.Boolean(
-            _module=self._module,
-            string="Suspend Security for Create",
-            automatic=True,
-            default=False,
-            groups=self._suspend_groups))
-        add('suspend_security_write', fields.Boolean(
-            _module=self._module,
-            string="Suspend Security for Write",
-            automatic=True,
-            default=False,
-            groups=self._suspend_groups))
-        add('suspend_security_unlink', fields.Boolean(
-            _module=self._module,
-            string="Suspend Security for Unlink",
-            automatic=True,
-            default=False,
-            groups=self._suspend_groups))
+        if self._active_suspend:
+            add('suspend_security_read', fields.Boolean(
+                _module=self._module,
+                string="Suspend Security for Read",
+                automatic=True,
+                default=False,
+                groups=self._suspend_groups))
+            add('suspend_security_create', fields.Boolean(
+                _module=self._module,
+                string="Suspend Security for Create",
+                automatic=True,
+                default=False,
+                groups=self._suspend_groups))
+            add('suspend_security_write', fields.Boolean(
+                _module=self._module,
+                string="Suspend Security for Write",
+                automatic=True,
+                default=False,
+                groups=self._suspend_groups))
+            add('suspend_security_unlink', fields.Boolean(
+                _module=self._module,
+                string="Suspend Security for Unlink",
+                automatic=True,
+                default=False,
+                groups=self._suspend_groups))
         add('groups', fields.Many2many(
             _module=self._module,
             comodel_name='muk_security.groups',
-            relation='muk_groups_%s_rel' % model,
+            relation='%s_groups_rel' % (self._table),
             column1='aid',
             column2='gid',
             string="Groups",
@@ -89,7 +92,7 @@ class BaseModelAccessGroups(models.AbstractModel):
         add('complete_groups', fields.Many2many(
             _module=self._module,
             comodel_name='muk_security.groups',
-            relation='muk_groups_complete_%s_rel' % model,
+            relation='%s_complete_groups_rel' % (self._table),
             column1='aid',
             column2='gid',
             string="Complete Groups", 
@@ -104,17 +107,16 @@ class BaseModelAccessGroups(models.AbstractModel):
     
     @api.model
     def _get_no_access_ids(self):
-        model = self._name.split(".")[-1]
         if not self._strict_security:
             sql = '''
                 SELECT id
                 FROM %s a
                 WHERE NOT EXISTS (
                     SELECT *
-                    FROM muk_groups_complete_%s_rel r
+                    FROM %s_complete_groups_rel r
                     WHERE r.aid = a.id
                 );         
-            ''' % (self._table, model)
+            ''' % (self._table, self._table)
             self.env.cr.execute(sql)
             fetch = self.env.cr.fetchall()
             return len(fetch) > 0 and list(map(lambda x: x[0], fetch)) or []
@@ -123,26 +125,28 @@ class BaseModelAccessGroups(models.AbstractModel):
     
     @api.model
     def _get_suspended_access_ids(self, operation):
-        model = self._name.split(".")[-1]
-        sql = '''
-            SELECT id
-            FROM %s a
-            WHERE a.suspend_security_%s = true
-        ''' % (self._table, operation)
-        self.env.cr.execute(sql)
-        fetch = self.env.cr.fetchall()
-        return len(fetch) > 0 and list(map(lambda x: x[0], fetch)) or []
-    
+        if self._active_suspend:
+            sql = '''
+                SELECT id
+                FROM %s a
+                WHERE a.suspend_security_%s = true
+            ''' % (self._table, operation)
+            self.env.cr.execute(sql)
+            fetch = self.env.cr.fetchall()
+            return len(fetch) > 0 and list(map(lambda x: x[0], fetch)) or []
+        else:
+            return []
+        
     @api.model
     def _get_access_ids(self):
         model = self._name.split(".")[-1]
         sql = '''
             SELECT r.aid
-            FROM muk_groups_complete_%s_rel r
-            JOIN muk_security_groups g ON r.gid = g.id
-            JOIN muk_security_groups_users_rel u ON r.gid = u.gid
+            FROM %s_complete_groups_rel r
+            JOIN muk_security_access_groups g ON r.gid = g.id
+            JOIN muk_security_access_groups_users_rel u ON r.gid = u.gid
             WHERE u.uid = %s AND g.perm_read = true
-        ''' % (model, self.env.user.id)
+        ''' % (self._table, self.env.user.id)
         self.env.cr.execute(sql)
         fetch = self.env.cr.fetchall()
         access_ids = len(fetch) > 0 and list(map(lambda x: x[0], fetch)) or []
@@ -171,16 +175,15 @@ class BaseModelAccessGroups(models.AbstractModel):
     def check_access_groups(self, operation):
         if self.env.user.id == SUPERUSER_ID or self._eval_access_skip(operation):
             return None
-        model = self._name.split(".")[-1]
         filter_ids = self._get_ids_without_security(operation)
         for record in self.filtered(lambda rec: rec.id not in filter_ids):
             sql = '''
                 SELECT perm_%s                
-                FROM muk_groups_complete_%s_rel r
-                JOIN muk_security_groups g ON g.id = r.gid
-                JOIN muk_security_groups_users_rel u ON u.gid = g.id
+                FROM %s_complete_groups_rel r
+                JOIN muk_security_access_groups g ON r.gid = g.id
+                JOIN muk_security_access_groups_users_rel u ON r.gid = u.gid
                 WHERE r.aid = %s AND u.uid = %s
-            ''' % (operation, model, record.id, self.env.user.id)
+            ''' % (operation, self._table, record.id, self.env.user.id)
             self.env.cr.execute(sql)
             fetch = self.env.cr.fetchall()
             if not any(list(map(lambda x: x[0], fetch))):
@@ -191,13 +194,10 @@ class BaseModelAccessGroups(models.AbstractModel):
         res = super(BaseModelAccessGroups, self).check_access(operation, raise_exception)
         try:
             access_groups = self.check_access_groups(operation) == None
-            access = res and access_groups
-            if not access and raise_exception:
-                raise AccessError(_("This operation is forbidden!"))
-            return access
+            return res and access_groups
         except AccessError:
             if raise_exception:
-                raise AccessError(_("This operation is forbidden!"))
+                raise
             return False
         
     #----------------------------------------------------------
