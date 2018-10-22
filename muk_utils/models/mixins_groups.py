@@ -102,7 +102,6 @@ class Groups(models.AbstractModel):
     
     @api.depends('parent_group', 'parent_group.users', 'groups', 'groups.users', 'explicit_users')
     def _compute_users(self):
-        print(self)
         for record in self:
             users = record.mapped('groups.users')
             users |= record.mapped('explicit_users')
