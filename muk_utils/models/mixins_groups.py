@@ -87,7 +87,7 @@ class Groups(models.AbstractModel):
             relation='%s_users_rel' % (self._table),
             column1='gid',
             column2='uid', 
-            string='Users',
+            string='Group Users',
             compute='_compute_users', 
             store=True,
             automatic=True))
