@@ -30,7 +30,7 @@ _logger = logging.getLogger(__name__)
 class BaseModelAccessGroups(models.AbstractModel):
     
     _name = 'muk_security.mixins.access_groups'
-    _description = "MuK Access Groups Model"
+    _description = "Group Access Mixin"
     _inherit = 'muk_security.mixins.access'
     
     # Set it to True to enforced security even if no group has been set
