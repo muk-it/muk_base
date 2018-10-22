@@ -51,6 +51,7 @@ class Groups(models.AbstractModel):
             if name not in self._fields:
                 self._add_field(name, field)
         add('parent_group', fields.Many2one(
+            _module=self._module,
             comodel_name=self._name,
             string='Parent Group', 
             ondelete='cascade', 
@@ -58,11 +59,13 @@ class Groups(models.AbstractModel):
             index=True,
             automatic=True))
         add('child_groups', fields.One2many(
+            _module=self._module,
             comodel_name=self._name,
             inverse_name='parent_group', 
             string='Child Groups',
             automatic=True))
         add('groups', fields.Many2many(
+            _module=self._module,
             comodel_name='res.groups',
             relation='%s_groups_rel' % (self._table),
             column1='gid',
@@ -70,6 +73,7 @@ class Groups(models.AbstractModel):
             string='Groups',
             automatic=True))
         add('explicit_users', fields.Many2many(
+            _module=self._module,
             comodel_name='res.users',
             relation='%s_explicit_users_rel' % (self._table),
             column1='gid',
@@ -77,6 +81,7 @@ class Groups(models.AbstractModel):
             string='Explicit Users',
             automatic=True))
         add('users', fields.Many2many(
+            _module=self._module,
             comodel_name='res.users',
             relation='%s_users_rel' % (self._table),
             column1='gid',
