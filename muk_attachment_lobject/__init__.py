@@ -17,4 +17,23 @@
 #
 ###################################################################################
 
+from odoo import api, SUPERUSER_ID
+from odoo.tools import config
+
 from . import models
+
+def _install_force_storage(cr, registry):
+    if config.get("auto_storage_migration", False):
+        env = api.Environment(cr, SUPERUSER_ID, {})
+        params = env['ir.config_parameter'].sudo()
+        params.set_param('ir_attachment.location', 'lobject')
+        attachment = env['ir.attachment'].sudo().force_storage()
+    
+def _uninstall_force_storage(cr, registry):
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    params = env['ir.config_parameter'].sudo()
+    location = params.get_param('ir_attachment.location')
+    if location == 'lobject':
+        params.set_param('ir_attachment.location', 'file')
+        attachment = env['ir.attachment'].sudo().force_storage()
+
