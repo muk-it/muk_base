@@ -36,20 +36,28 @@ class LObjectIrAttachment(models.Model):
         string="Data")
     
     @api.model
+    def storage_locations(self):
+        locations = super(LObjectIrAttachment, self).storage_locations()
+        locations.append('lobject')
+        return locations
+    
+    @api.model
     def force_storage(self):
         if not self.env.user._is_admin():
             raise AccessError(_('Only administrators can execute this action.'))
-        storage_domain = {
-            'db': ('store_lobject', '=', False),
-            'file': ('store_fname', '=', False), 
-        }
-        record_domain = [
-            '&', storage_domain[self._storage()], 
-            '|', ('res_field', '=', False), ('res_field', '!=', False)
-        ]
-        self.search(record_domain).migrate()
-        return True
-        
+        if self._storage() != 'lobject':
+            return super(LObjectIrAttachment, self).force_storage()
+        else:
+            storage_domain = {
+                'lobject': ('store_lobject', '=', False),
+            }
+            record_domain = [
+                '&', storage_domain[self._storage()], 
+                '|', ('res_field', '=', False), ('res_field', '!=', False)
+            ]
+            self.search(record_domain).migrate()
+            return True
+                
     @api.depends('store_lobject')
     def _compute_datas(self):
         bin_size = self._context.get('bin_size')
