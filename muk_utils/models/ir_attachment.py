@@ -23,6 +23,7 @@ import mimetypes
 
 from odoo import api, models, _
 from odoo.exceptions import AccessError
+from odoo.tools.mimetypes import guess_mimetype
 
 _logger = logging.getLogger(__name__)
 
@@ -59,4 +60,15 @@ class Attachment(models.Model):
         storage = self._storage().upper()
         for index, attach in enumerate(self):
             _logger.info(_("Migrate Attachment %s of %s to %s") % (index + 1, record_count, storage))
-            attach.write({'datas': attach.datas})
+            attach.with_context(migration=True).write({'datas': attach.datas})
+            
+    #----------------------------------------------------------
+    # Read
+    #----------------------------------------------------------
+    
+    def _compute_mimetype(self, values):
+        if self.env.context.get('migration') and len(self) == 1:
+            return self.mimetype or 'application/octet-stream'
+        else:
+            return super(Attachment, self)._compute_mimetype(values)
+        
