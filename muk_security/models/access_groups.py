@@ -123,7 +123,7 @@ class BaseModelAccessGroups(models.AbstractModel):
         return groups
     
     @api.model
-    def _get_no_access_ids(self):
+    def _get_no_access_ids(self, operation):
         base, model = self._name.split(".")
         if not self._strict_security:
             sql = '''
@@ -132,9 +132,9 @@ class BaseModelAccessGroups(models.AbstractModel):
                 WHERE NOT EXISTS (
                     SELECT *
                     FROM muk_groups_complete_%s_rel r
-                    WHERE r.aid = a.id
+                    WHERE r.aid = a.id AND perm_%s = true
                 );         
-            ''' % (self._table, model)
+            ''' % (self._table, model, operation)
             self.env.cr.execute(sql)
             fetch = self.env.cr.fetchall()
             return len(fetch) > 0 and list(map(lambda x: x[0], fetch)) or []
@@ -170,14 +170,14 @@ class BaseModelAccessGroups(models.AbstractModel):
     
     @api.model
     def _get_ids_without_security(self, operation):
-        no_access_ids = self._get_no_access_ids()
+        no_access_ids = self._get_no_access_ids(operation)
         suspended_access_ids = self._get_suspended_access_ids(operation)
         return list(set(no_access_ids).union(suspended_access_ids))
     
     @api.model
     def _get_complete_access_ids(self, operation):
         access_ids = self._get_access_ids()
-        no_access_ids = self._get_no_access_ids()
+        no_access_ids = self._get_no_access_ids(operation)
         suspended_access_ids = self._get_suspended_access_ids(operation)
         return list(set(access_ids).union(no_access_ids, suspended_access_ids))
     
