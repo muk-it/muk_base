@@ -1,0 +1,351 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* muk_security
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0-20181126\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-10 13:00+0000\n"
+"PO-Revision-Date: 2018-12-10 14:09+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: de\n"
+"X-Generator: Poedit 2.1.1\n"
+
+#. module: muk_security
+#: model:ir.actions.act_window,name:muk_security.action_security_groups
+#: model:ir.model,name:muk_security.model_muk_security_groups
+#: model:ir.model,name:muk_security.model_res_groups
+#: model:ir.ui.menu,name:muk_security.menu_security_groups
+msgid "Access Groups"
+msgstr "Berechtigungsgruppen"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_child_groups
+#: model:ir.ui.view,arch_db:muk_security.view_security_groups_form
+msgid "Child Groups"
+msgstr "Geerbte Gruppen"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_complete_groups
+msgid "Complete Groups"
+msgstr "Vervollständigte Gruppe"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_access_permission_create
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_directory_permission_create
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_file_permission_create
+#: model:ir.model.fields,field_description:muk_security.field_muk_quality_docs_document_permission_create
+#: model:ir.model.fields,field_description:muk_security.field_muk_quality_docs_template_permission_create
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_permission_create
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_permission_create
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_perm_create
+msgid "Create Access"
+msgstr "Erstellrecht"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_create_uid
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_create_date
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_access_permission_unlink
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_directory_permission_unlink
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_file_permission_unlink
+#: model:ir.model.fields,field_description:muk_security.field_muk_quality_docs_document_permission_unlink
+#: model:ir.model.fields,field_description:muk_security.field_muk_quality_docs_template_permission_unlink
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_permission_unlink
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_permission_unlink
+msgid "Delete Access"
+msgstr "Löschrecht"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_departments
+msgid "Departments"
+msgstr "Abteilungen"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_display_name
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_display_name
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_display_name
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_display_name
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_locking_display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_directory_editor
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_file_editor
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_locking_editor
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_locking_editor
+msgid "Editor"
+msgstr "Bearbeiter"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_explicit_users
+#: model:ir.ui.view,arch_db:muk_security.view_security_groups_form
+msgid "Explicit Users"
+msgstr "Benutzer"
+
+#. module: muk_security
+#: model:ir.ui.view,arch_db:muk_security.view_security_groups_form
+msgid "Group"
+msgstr "Gruppe"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_groups
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_groups
+#: model:ir.model.fields,field_description:muk_security.field_res_groups_security_groups
+#: model:ir.model.fields,field_description:muk_security.field_res_users_security_groups
+#: model:ir.ui.view,arch_db:muk_security.view_security_groups_form
+#: model:ir.ui.view,arch_db:muk_security.view_security_groups_tree
+msgid "Groups"
+msgstr "Gruppen"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_id
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_id
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_id
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_id
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_locking_id
+msgid "ID"
+msgstr "ID"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_jobs
+msgid "Jobs"
+msgstr "Stellen"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access___last_update
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups___last_update
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups___last_update
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock___last_update
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_locking___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_write_uid
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt bearbeitet durch"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_write_date
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt bearbeitet am"
+
+#. module: muk_security
+#: model:ir.model,name:muk_security.model_muk_security_lock
+msgid "Lock"
+msgstr "Sperren"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_directory_locked
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_directory_locked_state
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_file_locked
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_file_locked_state
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_locking_locked
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_locking_locked_state
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_locking_locked
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_locking_locked_state
+msgid "Locked"
+msgstr "Gesperrt"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_directory_locked_by
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_file_locked_by
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_locking_locked_by
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_locked_by
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_locked_by_ref
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_locking_locked_by
+msgid "Locked by"
+msgstr "Gesperrt von"
+
+#. module: muk_security
+#: model:ir.ui.view,arch_db:muk_security.view_security_lock_tree
+msgid "Locks"
+msgstr "Gesperrte"
+
+#. module: muk_security
+#: model:ir.model,name:muk_security.model_muk_security_access_groups
+msgid "MuK Access Groups Model"
+msgstr "MuK Access Groups Model"
+
+#. module: muk_security
+#: model:ir.model,name:muk_security.model_muk_security_access
+msgid "MuK Access Model"
+msgstr "MuK Access Model"
+
+#. module: muk_security
+#: model:ir.model,name:muk_security.model_muk_security_locking
+msgid "MuK Locking Model"
+msgstr "MuK Locking Model"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_name
+msgid "Name"
+msgstr "Name"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_operation
+msgid "Operation"
+msgstr "Operation"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_parent_group
+msgid "Parent Group"
+msgstr "Übergeordnete Gruppe"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_access_permission_read
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_directory_permission_read
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_file_permission_read
+#: model:ir.model.fields,field_description:muk_security.field_muk_quality_docs_document_permission_read
+#: model:ir.model.fields,field_description:muk_security.field_muk_quality_docs_template_permission_read
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_permission_read
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_permission_read
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_perm_read
+msgid "Read Access"
+msgstr "Leserecht"
+
+#. module: muk_security
+#: model:ir.actions.act_window,name:muk_security.action_security_lock
+#: model:ir.ui.menu,name:muk_security.menu_security_lock
+msgid "Record Locks"
+msgstr "Record Locks"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_lock_ref
+msgid "Reference"
+msgstr "Interne Referenz"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_lock_ref_id
+msgid "Reference ID"
+msgstr "Referenz ID"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_lock_ref_model
+msgid "Reference Model"
+msgstr "Referenz Model"
+
+#. module: muk_security
+#: model:ir.ui.view,arch_db:muk_security.view_security_groups_form
+msgid "Settings"
+msgstr "Einstellungen"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_suspend_security_create
+msgid "Suspend Security for Create"
+msgstr "Suspend Security for Create"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_suspend_security_read
+msgid "Suspend Security for Read"
+msgstr "Suspend Security for Read"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_suspend_security_unlink
+msgid "Suspend Security for Unlink"
+msgstr "Suspend Security for Unlink"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_suspend_security_write
+msgid "Suspend Security for Write"
+msgstr "Suspend Security for Write"
+
+#. module: muk_security
+#: code:addons/muk_security/models/locking.py:140
+#, python-format
+msgid "The record (%s[%s]) is locked by a user, so it can't be changes or deleted."
+msgstr "Der Eintrag (%s[%s]) wurde von einem Benutzer gesperrt. Er kann weder geändert noch gelöscht werden!"
+
+#. module: muk_security
+#: code:addons/muk_security/models/locking.py:151
+#, python-format
+msgid "The record (%s[%s]) is locked, so it can't be changes or deleted."
+msgstr "Der Eintrag (%s[%s]) wurde gesperrt. Er kann weder geändert noch gelöscht werden!"
+
+#. module: muk_security
+#: code:addons/muk_security/models/locking.py:82
+#, python-format
+msgid "The record (%s[%s]) is locked, so it can't be locked again."
+msgstr "Der Eintrag (%s[%s]) wurde bereits gesperrt. "
+
+#. module: muk_security
+#: code:addons/muk_security/models/locking.py:160
+#: code:addons/muk_security/models/locking.py:174
+#, python-format
+msgid "The record is already locked by another user. (%s)"
+msgstr "Der Eintrag wurde bereits von einem Benutzer gesperrt. (%s)"
+
+#. module: muk_security
+#: code:addons/muk_security/models/locking.py:162
+#: code:addons/muk_security/models/locking.py:176
+#, python-format
+msgid "The record is already locked."
+msgstr "Der Eintrag wurde bereits von einem Benutzer gesperrt."
+
+#. module: muk_security
+#: code:addons/muk_security/models/access.py:85
+#: code:addons/muk_security/models/access.py:89
+#: code:addons/muk_security/models/access_groups.py:207
+#: code:addons/muk_security/models/access_groups.py:216
+#: code:addons/muk_security/models/access_groups.py:220
+#, python-format
+msgid "This operation is forbidden!"
+msgstr "Diese Aktion ist verboten!"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_lock_token
+msgid "Token"
+msgstr "Token"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_perm_unlink
+msgid "Unlink Access"
+msgstr "Unlink Access"
+
+#. module: muk_security
+#: model:ir.model,name:muk_security.model_res_users
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_users
+#: model:ir.ui.view,arch_db:muk_security.view_security_groups_form
+msgid "Users"
+msgstr "Benutzer"
+
+#. module: muk_security
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_access_permission_write
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_directory_permission_write
+#: model:ir.model.fields,field_description:muk_security.field_muk_dms_file_permission_write
+#: model:ir.model.fields,field_description:muk_security.field_muk_quality_docs_document_permission_write
+#: model:ir.model.fields,field_description:muk_security.field_muk_quality_docs_template_permission_write
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups_permission_write
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_access_permission_write
+#: model:ir.model.fields,field_description:muk_security.field_muk_security_groups_perm_write
+msgid "Write Access"
+msgstr "Schreibrechte"
+
+#. module: muk_security
+#: model:ir.model,name:muk_security.model_ir_model_access
+msgid "ir.model.access"
+msgstr "ir.model.access"
+
+#. module: muk_security
+#: model:ir.model,name:muk_security.model_ir_rule
+msgid "ir.rule"
+msgstr "ir.rule"
