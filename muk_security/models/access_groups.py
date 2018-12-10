@@ -132,7 +132,8 @@ class BaseModelAccessGroups(models.AbstractModel):
                 WHERE NOT EXISTS (
                     SELECT *
                     FROM muk_groups_complete_%s_rel r
-                    WHERE r.aid = a.id AND perm_%s = true
+                    JOIN muk_security_groups g ON r.gid = g.id
+                    WHERE r.aid = a.id AND g.perm_%s = true
                 );         
             ''' % (self._table, model, operation)
             self.env.cr.execute(sql)
