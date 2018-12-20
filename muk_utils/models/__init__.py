@@ -17,6 +17,7 @@
 #
 ###################################################################################
 
+from . import base
 from . import mixins_groups
 from . import ir_attachment
 from . import scss_editor
