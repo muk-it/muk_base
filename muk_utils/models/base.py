@@ -66,8 +66,8 @@ class Base(models.AbstractModel):
         
     @api.model
     def _search_parents(self, domain=[], order=None):
-        if not self._parent_store or self._parent_name not in self._fields:
-            raise TypeError("Model %r does not exist in registry." % name)
+        if self._parent_name not in self._fields:
+            raise TypeError("The parent (%s) field does not exist." % self._parent_name)
         self.check_access_rights('read')
         if expression.is_false(self, domain):
             return []
