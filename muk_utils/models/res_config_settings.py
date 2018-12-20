@@ -74,6 +74,6 @@ class ResConfigSettings(models.TransientModel):
     @api.depends('attachment_location')
     def _compute_attachment_location_changed(self):
         params = self.env['ir.config_parameter'].sudo()
-        attachment_location = params.get_param('ir_attachment.location', 'file')
+        location = params.get_param('ir_attachment.location', 'file')
         for record in self:
-            record.attachment_location_changed = attachment_location != self.attachment_location
+            record.attachment_location_changed = location != self.attachment_location
