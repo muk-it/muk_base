@@ -52,23 +52,35 @@ class ScssEditor(models.AbstractModel):
     def _get_variables(self, content, variables):
         return {var: self._get_variable(content, var) for var in variables}
     
+    def _replace_variables(self, content, variables):
+        for variable in variables:
+            variable_content = '{0}: {1};'.format(
+                variable['name'],
+                variable['value']
+            )
+            regex = r'{0}\:?\s(.*?);'.format(variable['name'])
+            content = re.sub(regex, variable_content, content)
+        return content
+    
     #----------------------------------------------------------
     # Read
     #----------------------------------------------------------
     
-    def get_value(self, url, xmlid, variables):
+    def get_content(self, url, xmlid):
         custom_url = self._get_custom_url(url, xmlid)
         custom_attachment = self._get_custom_attachment(custom_url)
         if custom_attachment.exists():
-            content = str(base64.b64decode(custom_attachment.datas))
-            return self._get_variables(content, variables)
+            return base64.b64decode(custom_attachment.datas).decode('utf-8')
         else:
             match = re.compile("^/(\w+)/(.+?)(\.custom\.(.+))?\.(\w+)$").match(url)
             module_path = module.get_module_path(match.group(1))
             resource_path = "%s.%s" % (match.group(2), match.group(5))
             module_resource_path = module.get_resource_path(module_path, resource_path)
             with open(module_resource_path, "rb") as file:
-                return self._get_variables(str(file.read()), variables)
+                return file.read().decode('utf-8')
+    
+    def get_values(self, url, xmlid, variables):
+        return self._get_variables(self.get_content(url, xmlid), variables)
 
     #----------------------------------------------------------
     # Write
@@ -111,3 +123,9 @@ class ScssEditor(models.AbstractModel):
                 }
             })
         self.env["ir.qweb"].clear_caches()
+        
+    def replace_values(self, url, xmlid, variables):
+        content = self._replace_variables(
+            self.get_content(url, xmlid), variables
+        )
+        self.replace_content(url, xmlid, content)
