@@ -41,6 +41,11 @@ class ResConfigSettings(models.TransientModel):
         required=True,
         help="Attachment storage location.")
     
+    
+    attachment_location_changed = fields.Boolean(
+        compute='_compute_attachment_location_changed',
+        string='Storage Location Changed')
+    
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
@@ -59,6 +64,16 @@ class ResConfigSettings(models.TransientModel):
         res.update(attachment_location=params.get_param('ir_attachment.location', 'file'))
         return res
     
-    @api.multi
     def attachment_force_storage(self):
         self.env['ir.attachment'].force_storage()
+        
+    #----------------------------------------------------------
+    # Read
+    #----------------------------------------------------------
+    
+    @api.depends('attachment_location')
+    def _compute_attachment_location_changed(self):
+        params = self.env['ir.config_parameter'].sudo()
+        attachment_location = params.get_param('ir_attachment.location', 'file')
+        for record in self:
+            record.attachment_location_changed = attachment_location != self.attachment_location
