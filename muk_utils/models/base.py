@@ -31,6 +31,20 @@ class Base(models.AbstractModel):
     _inherit = 'base'
     
     #----------------------------------------------------------
+    # Helper Methods
+    #----------------------------------------------------------
+    
+    def _check_parent_field(self):
+        if self._parent_name not in self._fields:
+            raise TypeError("The parent (%s) field does not exist." % self._parent_name)
+    
+    
+    def _build_search_childs_domain(self, parent_id, domain=[]):
+        self._check_parent_field()
+        parent_domain = [[self._parent_name, '=', parent_id]]
+        return expression.AND(parent_domain, domain) if domain else parent_domain
+    
+    #----------------------------------------------------------
     # Hierarchy Methods
     #----------------------------------------------------------
     
@@ -63,11 +77,12 @@ class Base(models.AbstractModel):
             return result
         index = {vals['id']: vals for vals in result}
         return [index[record.id] for record in records if record.id in index]
-        
+    
+    
+    
     @api.model
     def _search_parents(self, domain=[], order=None):
-        if self._parent_name not in self._fields:
-            raise TypeError("The parent (%s) field does not exist." % self._parent_name)
+        self._check_parent_field()
         self.check_access_rights('read')
         if expression.is_false(self, domain):
             return []
@@ -101,3 +116,34 @@ class Base(models.AbstractModel):
         complete_where_clause_params = where_clause_params + where_clause_arguments
         self._cr.execute(query_str, complete_where_clause_params)
         return utils.uniquify_list([x[0] for x in self._cr.fetchall()])
+    
+    @api.model
+    def search_childs(self, parent_id, domain=[], offset=0, limit=None, order=None, count=False):
+        """ This method finds the direct child elements of the parent record for a given search query.
+            
+            :param parent_id: the integer representing the ID of the parent record
+            :param domain: a search domain <reference/orm/domains> (default: empty list)
+            :param offset: the number of results to ignore (default: none)
+            :param limit: maximum number of records to return (default: all)
+            :param order: a string to define the sort order of the query (default: none)
+            :param count: counts and returns the number of matching records (default: False)
+            :returns: the top level elements for the given search query 
+        """
+        domain = self._build_search_childs_domain(parent_id, domain=domain)
+        return self.search(domain, offset=offset, limit=limit, order=order, count=count)
+    
+    @api.model
+    def search_read_childs(self, parent_id, domain=[], fields=None, offset=0, limit=None, order=None):
+        """ This method finds the direct child elements of the parent record for a given search query.
+            
+            :param parent_id: the integer representing the ID of the parent record
+            :param domain: a search domain <reference/orm/domains> (default: empty list)
+            :param fields: a list of fields to read (default: all fields of the model)
+            :param offset: the number of results to ignore (default: none)
+            :param limit: maximum number of records to return (default: all)
+            :param order: a string to define the sort order of the query (default: none)
+            :returns: the top level elements for the given search query 
+        """
+        domain = self._build_search_childs_domain(parent_id, domain=domain)
+        return self.search_read(domain=domain, fields=fields, offset=offset, limit=limit, order=order)
+        
