@@ -92,7 +92,8 @@ Configuration
 =============
 
 The module has an init hook, which automatically stores all attachments in
-large objects, so no additional configuration is needed to use this module.
+large objects. To activate this hook the config parameter `auto_storage_migration`
+has to be set to `true`.
 
 Usage
 =============
