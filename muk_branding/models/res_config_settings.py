@@ -27,6 +27,22 @@ class ResConfigSettings(models.TransientModel):
     # Database
     #----------------------------------------------------------
     
+    module_muk_web_branding = fields.Boolean(
+        string="Web Branding",
+        help="Customize the backend according to your needs.")
+    
+    module_muk_mail_branding = fields.Boolean(
+        string="Mail Branding",
+        help="Brand your outgoing mails with your own style.")
+    
+    module_muk_website_branding = fields.Boolean(
+        string="Website Branding",
+        help="Brand the website according to your needs.")
+    
+    module_muk_pos_branding = fields.Boolean(
+        string="PoS Branding",
+        help="Brand the PoS panel according to your needs.")
+    
     branding_system_name = fields.Char(
         string='System Name')
     

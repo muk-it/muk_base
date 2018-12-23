@@ -90,13 +90,13 @@ If a new system should be branded automatically, it is recommended to set the
 flag ``auto_install`` of this module to ``True`` and to adjust the corresponding
 variables in the config file.
 
-* branding_system_name
-* branding_publisher
-* branding_website
-* branding_documentation
-* branding_support
-* branding_store
-* branding_share
+* ``branding_system_name``
+* ``branding_publisher``
+* ``branding_website``
+* ``branding_documentation``
+* ``branding_support``
+* ``branding_store``
+* ``branding_share``
 
 Usage
 =============
