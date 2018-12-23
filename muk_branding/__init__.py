@@ -18,6 +18,7 @@
 ###################################################################################
 
 from odoo import api, SUPERUSER_ID
+from odoo.release import version_info
 from odoo.tools import config, convert_file
 from odoo.modules.module import get_module_resource
 
@@ -36,11 +37,13 @@ def _patch_system():
 #----------------------------------------------------------
 
 def _install_debrand_system(cr, registry):
-    env = api.Environment(cr, SUPERUSER_ID, {})
-    env['ir.module.module'].search([('to_buy', '=', True)]).unlink()
+    if version_info[5] != 'e':
+        env = api.Environment(cr, SUPERUSER_ID, {})
+        env['ir.module.module'].search([('to_buy', '=', True)]).unlink()
         
 def _uninstall_rebrand_system(cr, registry):
-    filename = get_module_resource('base', 'data', 'ir_module_module.xml')
-    convert_file(cr, 'base', filename, {}, 'init', False, 'data', registry._assertion_report)
+    if version_info[5] != 'e':
+        filename = get_module_resource('base', 'data', 'ir_module_module.xml')
+        convert_file(cr, 'base', filename, {}, 'init', False, 'data', registry._assertion_report)
   
 
