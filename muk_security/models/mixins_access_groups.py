@@ -133,8 +133,8 @@ class AccessGroupsModel(models.AbstractModel):
         subset = self.ids and 'AND r.aid = ANY (VALUES {ids})'.format(
             ids=', '.join(map(lambda id: '(%s)' % id, self.ids))
         )
-        groups_mode = self._access_groups_mode and 'AND g.perm_{mode} = true'.format(
-            mode=mode
+        groups_mode = self._access_groups_mode and 'AND g.perm_{operation} = true'.format(
+            operation=operation
         )
         sql_query = sql_query.format(
             table=self._table,
