@@ -99,7 +99,7 @@ class AccessModel(models.AbstractModel):
         records = self._filter_access('create')
         for record in records:
             record.update({'permission_create': True})
-        for record in no_records:
+        for record in self - records:
             record.update({'permission_create': False})
             
     @api.multi
@@ -107,7 +107,7 @@ class AccessModel(models.AbstractModel):
         records = self._filter_access('write')
         for record in records:
             record.update({'permission_write': True})
-        for record in no_records:
+        for record in self - records:
             record.update({'permission_write': False})
             
     @api.multi
@@ -115,5 +115,5 @@ class AccessModel(models.AbstractModel):
         records = self._filter_access('unlink')
         for record in records:
             record.update({'permission_unlink': True})
-        for record in no_records:
+        for record in self - records:
             record.update({'permission_unlink': False})

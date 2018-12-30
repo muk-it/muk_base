@@ -87,22 +87,22 @@ class AccessGroupsModel(models.AbstractModel):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return None
         where_clause = '''
-            "{table}".id IN (
-                SELECT r.aid
-                JOIN {table}_complete_groups_rel r
-                JOIN muk_security_access_groups g ON r.gid = g.id
-                JOIN muk_security_access_groups_users_rel u ON r.gid = u.gid
-                WHERE u.uid = %s AND g.perm_{mode} = true
-            )
+            "{table}".id IN ( 
+                SELECT r.aid 
+                FROM {table}_complete_groups_rel r 
+                JOIN muk_security_access_groups g ON r.gid = g.id 
+                JOIN muk_security_access_groups_users_rel u ON r.gid = u.gid 
+                WHERE u.uid = %s AND g.perm_{mode} = true 
+            ) 
         '''.format(table=self._table, mode=mode)
         if not self._access_groups_strict:
             exists_clause = '''
-                NOT EXISTS (
-                    SELECT 1
-                        FROM {table}_complete_groups_rel r
-                        JOIN muk_security_access_groups g ON r.gid = g.id
-                        WHERE r.aid = "{table}".id {groups_mode}
-                )
+                NOT EXISTS ( 
+                    SELECT 1 
+                        FROM {table}_complete_groups_rel r 
+                        JOIN muk_security_access_groups g ON r.gid = g.id 
+                        WHERE r.aid = "{table}".id {groups_mode} 
+                ) 
             '''
             groups_mode = self._access_groups_mode and 'AND sg.perm_{mode} = true'.format(mode=mode)
             exists_clause = exists_clause.format(table=self._table, groups_mode=groups_mode or "")  
@@ -117,7 +117,33 @@ class AccessGroupsModel(models.AbstractModel):
     def _apply_ir_rules(self, query, mode='read'):
         super(AccessGroupsModel, self)._apply_ir_rules(query, mode=mode)
         self._apply_access_groups(query, mode=mode)
-    
+        
+    @api.multi
+    def _get_ids_without_access_groups(self, operation):
+        sql_query = '''
+            SELECT id 
+            FROM {table} a 
+            WHERE NOT EXISTS ( 
+                SELECT 1 
+                FROM {table}_complete_groups_rel r 
+                JOIN muk_security_access_groups g ON r.gid = g.id 
+                WHERE r.aid = a.id {subset} {groups_mode} 
+            ); 
+        '''
+        subset = self.ids and 'AND r.aid = ANY (VALUES {ids})'.format(
+            ids=', '.join(map(lambda id: '(%s)' % id, self.ids))
+        )
+        groups_mode = self._access_groups_mode and 'AND sg.perm_{mode} = true'.format(
+            mode=mode
+        )
+        sql_query = sql_query.format(
+            table=self._table,
+            subset=subset or "",
+            groups_mode=groups_mode or "",
+        )  
+        self.env.cr.execute(sql_query)
+        return list(map(lambda val: val[0], self.env.cr.fetchall()))
+          
     #----------------------------------------------------------
     # Function
     #----------------------------------------------------------
@@ -135,74 +161,52 @@ class AccessGroupsModel(models.AbstractModel):
     #----------------------------------------------------------
     # Security
     #----------------------------------------------------------
-    
+
     @api.multi
     def check_access_groups(self, operation):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return None
-        exists_query = '''
-            SELECT id
-            FROM {table} a
-            WHERE NOT EXISTS (
-                SELECT 1
-                FROM {table}_complete_groups_rel r
-                JOIN muk_security_access_groups g ON r.gid = g.id
-                WHERE r.aid = "{table}".id {groups_mode}
-            );         
-        '''
-        groups_mode = self._access_groups_mode and 'AND sg.perm_{mode} = true'.format(mode=mode)
-        exists_query = exists_query.format(table=self._table, groups_mode=groups_mode or "")  
-        self.env.cr.execute(exists_query)
-        group_ids = set(self.ids) - set(map(lambda val: val[0], self.env.cr.fetchall()))
-        group_query = '''
-            SELECT perm_{operation}                
-            FROM {table}_complete_groups_rel r
-            JOIN muk_security_access_groups g ON r.gid = g.id
-            JOIN muk_security_access_groups_users_rel u ON r.gid = u.gid
-            WHERE (r.aid = ANY (VALUES {ids}) AND u.uid = %s)
-        '''.format(
-            operation=operation,
-            table=self._table,
-            ids=', '.join(map(lambda id: '(%s)' % id, group_ids)),
-        )
-        self.env.cr.execute(sql_query, [self.env.user.id])
-        if len(result) < group_ids or any(list(map(lambda val: val[0], self.env.cr.fetchall()))):
-            raise AccessError(_(
-                'The requested operation cannot be completed due to security restrictions. '
-                'Please contact your system administrator.\n\n(Document type: %s, Operation: %s)'
-            ) % (self._description, operation))
+        group_ids = set(self.ids) - set(self._get_ids_without_access_groups(operation))
+        if group_ids:
+            sql_query = '''
+                SELECT perm_{operation}       
+                FROM {table}_complete_groups_rel r 
+                JOIN muk_security_access_groups g ON r.gid = g.id 
+                JOIN muk_security_access_groups_users_rel u ON r.gid = u.gid 
+                WHERE r.aid = ANY (VALUES {ids}) AND u.uid = %s;
+            '''.format(
+                operation=operation,
+                table=self._table,
+                ids=', '.join(map(lambda id: '(%s)' % id, group_ids)),
+            )
+            self.env.cr.execute(sql_query, [self.env.user.id])
+            if len(result) < group_ids or any(list(map(lambda val: val[0], self.env.cr.fetchall()))):
+                raise AccessError(_(
+                    'The requested operation cannot be completed due to security restrictions. '
+                    'Please contact your system administrator.\n\n(Document type: %s, Operation: %s)'
+                ) % (self._description, operation))
     
     @api.multi
     def filter_access_groups(self, operation):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):
             return self
-        exists_query = '''
-            SELECT id
-            FROM {table} a
-            WHERE NOT EXISTS (
-                SELECT 1
-                FROM {table}_complete_groups_rel r
-                JOIN muk_security_access_groups g ON r.gid = g.id
-                WHERE r.aid = "{table}".id {groups_mode}
-            );         
-        '''
-        groups_mode = self._access_groups_mode and 'AND sg.perm_{mode} = true'.format(mode=mode)
-        exists_query = exists_query.format(table=self._table, groups_mode=groups_mode or "")  
-        self.env.cr.execute(exists_query)
-        group_ids = set(self.ids) - set(map(lambda val: val[0], self.env.cr.fetchall()))
-        sql_query = '''
-            SELECT r.aid
-            FROM {table}_complete_groups_rel r
-            JOIN muk_security_access_groups g ON r.gid = g.id
-            JOIN muk_security_access_groups_users_rel u ON r.gid = u.gid
-            WHERE (r.aid = ANY (VALUES {ids}) AND u.uid = %s AND g.perm_{operation} = true)
-        '''.format(
-            table=self._table,
-            ids=', '.join(map(lambda id: '(%s)' % id, group_ids)),
-            operation=operation,
-        )
-        self.env.cr.execute(sql_query, [self.env.user.id])
-        return self.browse(list(map(lambda val: val[0], self.env.cr.fetchall())) + list(group_ids))
+        ids_with_access = self._get_ids_without_access_groups(operation)
+        group_ids = set(self.ids) - set(ids_with_access)
+        if group_ids:
+            sql_query = '''
+                SELECT r.aid 
+                FROM {table}_complete_groups_rel r 
+                JOIN muk_security_access_groups g ON r.gid = g.id 
+                JOIN muk_security_access_groups_users_rel u ON r.gid = u.gid 
+                WHERE r.aid = ANY (VALUES {ids}) AND u.uid = %s AND g.perm_{operation} = true; 
+            '''.format(
+                table=self._table,
+                ids=', '.join(map(lambda id: '(%s)' % id, group_ids)),
+                operation=operation,
+            )
+            self.env.cr.execute(sql_query, [self.env.user.id])
+            ids_with_access += list(map(lambda val: val[0], self.env.cr.fetchall()))
+        return self.browse(ids_with_access)
 
     #----------------------------------------------------------
     # Create, Update, Delete 
