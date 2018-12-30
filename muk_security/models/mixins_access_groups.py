@@ -180,7 +180,8 @@ class AccessGroupsModel(models.AbstractModel):
                 ids=', '.join(map(lambda id: '(%s)' % id, group_ids)),
             )
             self.env.cr.execute(sql_query, [self.env.user.id])
-            if len(result) < group_ids or any(list(map(lambda val: val[0], self.env.cr.fetchall()))):
+            result = self.env.cr.fetchall()
+            if len(result) < group_ids or any(list(map(lambda val: val[0], result))):
                 raise AccessError(_(
                     'The requested operation cannot be completed due to security restrictions. '
                     'Please contact your system administrator.\n\n(Document type: %s, Operation: %s)'
