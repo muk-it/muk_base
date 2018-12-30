@@ -27,7 +27,7 @@ _logger = logging.getLogger(__name__)
 
 class AccessModel(models.AbstractModel):
     
-    _name = 'muk_security.mixins.access'
+    _name = 'muk_security.mixins.access_rights'
     _description = 'Access Mixin'
     
     #----------------------------------------------------------
@@ -53,21 +53,6 @@ class AccessModel(models.AbstractModel):
         compute='_compute_permissions_unlink', 
         search='_search_permission_unlink',
         string="Delete Access")
-        
-    #----------------------------------------------------------
-    # Function
-    #----------------------------------------------------------
-    
-    @api.multi
-    def check_access(self, operation, raise_exception=False):
-        try:
-            access_right = self.check_access_rights(operation, raise_exception)
-            access_rule = self.check_access_rule(operation) is None
-            return access_right and access_rule
-        except AccessError:
-            if raise_exception:
-                raise
-            return False
 
     #----------------------------------------------------------
     # Search
@@ -75,31 +60,27 @@ class AccessModel(models.AbstractModel):
     
     @api.model
     def _search_permission_read(self, operator, operand):
-        records = self.search([]).filtered(lambda r: r.check_access('read') == True)
         if operator == '=' and operand:
-            return [('id', 'in', records.mapped('id'))]
-        return [('id', 'not in', records.mapped('id'))]
+            return [('id', 'in', self._filter_access_ids('read'))]
+        return [('id', 'not in', self._filter_access_ids('read'))]
     
     @api.model
     def _search_permission_create(self, operator, operand):
-        records = self.search([]).filtered(lambda r: r.check_access('create') == True)
         if operator == '=' and operand:
-            return [('id', 'in', records.mapped('id'))]
-        return [('id', 'not in', records.mapped('id'))]
+            return [('id', 'in', self._filter_access_ids('create'))]
+        return [('id', 'not in', self._filter_access_ids('create'))]
     
     @api.model
     def _search_permission_write(self, operator, operand):
-        records = self.search([]).filtered(lambda r: r.check_access('write') == True)
         if operator == '=' and operand:
-            return [('id', 'in', records.mapped('id'))]
-        return [('id', 'not in', records.mapped('id'))]
+            return [('id', 'in', self._filter_access_ids('write'))]
+        return [('id', 'not in', self._filter_access_ids('write'))]
     
     @api.model
     def _search_permission_unlink(self, operator, operand):
-        records = self.search([]).filtered(lambda r: r.check_access('unlink') == True)
         if operator == '=' and operand:
-            return [('id', 'in', records.mapped('id'))]
-        return [('id', 'not in', records.mapped('id'))]
+            return [('id', 'in', self._filter_access_ids('unlink'))]
+        return [('id', 'not in', self._filter_access_ids('unlink'))]
 
     #----------------------------------------------------------
     # Read, View 
@@ -107,20 +88,32 @@ class AccessModel(models.AbstractModel):
     
     @api.multi
     def _compute_permissions_read(self):
-        for record in self:
-            record.update({'permission_read': record.check_access('read')})
+        records = self._filter_access('read')
+        for record in records:
+            record.update({'permission_read': True})
+        for record in self - records:
+            record.update({'permission_read': False})
             
     @api.multi
     def _compute_permissions_create(self):
-        for record in self:
-            record.update({'permission_create': record.check_access('create')})
+        records = self._filter_access('create')
+        for record in records:
+            record.update({'permission_create': True})
+        for record in no_records:
+            record.update({'permission_create': False})
             
     @api.multi
     def _compute_permissions_write(self):
-        for record in self:
-            record.update({'permission_write': record.check_access('write')})
+        records = self._filter_access('write')
+        for record in records:
+            record.update({'permission_write': True})
+        for record in no_records:
+            record.update({'permission_write': False})
             
     @api.multi
     def _compute_permissions_unlink(self):
-        for record in self:
-            record.update({'permission_unlink': record.check_access('unlink')})
+        records = self._filter_access('unlink')
+        for record in records:
+            record.update({'permission_unlink': True})
+        for record in no_records:
+            record.update({'permission_unlink': False})

@@ -19,7 +19,7 @@
 
 from . import base
 from . import mixins_locking
-from . import mixins_access
+from . import mixins_access_rights
 from . import mixins_access_groups
 from . import access_groups
 from . import ir_model_access

@@ -26,6 +26,8 @@ from odoo import _, SUPERUSER_ID
 from odoo import models, api, fields
 from odoo.exceptions import AccessError
 
+from odoo.addons.muk_security.tools.security import NoSecurityUid
+
 _logger = logging.getLogger(__name__)
 
 class LockingModel(models.AbstractModel):
@@ -60,11 +62,15 @@ class LockingModel(models.AbstractModel):
     @api.multi
     def unlock(self):
         self.write({'locked_by': None})
+
+    @api.model
+    def _check_lock_user(self, uid):
+        return uid in (self.env.uid, SUPERUSER_ID) or isinstance(self.env.uid, NoSecurityUid)
     
     @api.multi
     def check_lock(self, *largs, **kwargs):
         for record in self:
-            if record.locked_by.exists() and not record.locked_by.id in (self.env.uid, SUPERUSER_ID):
+            if record.locked_by.exists() and not self._check_lock_user(record.locked_by.id):
                 raise AccessError(_("The record (%s [%s]) is locked, by an other user.") % (record._description, record.id)) 
 
     #----------------------------------------------------------
