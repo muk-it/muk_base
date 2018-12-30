@@ -104,7 +104,7 @@ class AccessGroupsModel(models.AbstractModel):
                         WHERE r.aid = "{table}".id {groups_mode} 
                 ) 
             '''
-            groups_mode = self._access_groups_mode and 'AND sg.perm_{mode} = true'.format(mode=mode)
+            groups_mode = self._access_groups_mode and 'AND g.perm_{mode} = true'.format(mode=mode)
             exists_clause = exists_clause.format(table=self._table, groups_mode=groups_mode or "")  
             where_clause = '({groups_clause} OR {exists_clause})'.format(
                 groups_clause=where_clause,
@@ -133,7 +133,7 @@ class AccessGroupsModel(models.AbstractModel):
         subset = self.ids and 'AND r.aid = ANY (VALUES {ids})'.format(
             ids=', '.join(map(lambda id: '(%s)' % id, self.ids))
         )
-        groups_mode = self._access_groups_mode and 'AND sg.perm_{mode} = true'.format(
+        groups_mode = self._access_groups_mode and 'AND g.perm_{mode} = true'.format(
             mode=mode
         )
         sql_query = sql_query.format(
