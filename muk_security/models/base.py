@@ -46,7 +46,7 @@ class Base(models.AbstractModel):
     
     @api.multi
     def _filter_access_ids(self, operation):
-        return self._filter_access_rules(operation).ids
+        return self._filter_access(operation).ids
     
     @api.model
     def _apply_ir_rules(self, query, mode='read'):

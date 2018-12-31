@@ -61,26 +61,26 @@ class AccessModel(models.AbstractModel):
     @api.model
     def _search_permission_read(self, operator, operand):
         if operator == '=' and operand:
-            return [('id', 'in', self._filter_access_ids('read'))]
-        return [('id', 'not in', self._filter_access_ids('read'))]
+            return [('id', 'in', self.search([])._filter_access_ids('read'))]
+        return [('id', 'not in', self.search([])._filter_access_ids('read'))]
     
     @api.model
     def _search_permission_create(self, operator, operand):
         if operator == '=' and operand:
-            return [('id', 'in', self._filter_access_ids('create'))]
-        return [('id', 'not in', self._filter_access_ids('create'))]
+            return [('id', 'in', self.search([])._filter_access_ids('create'))]
+        return [('id', 'not in', self.search([])._filter_access_ids('create'))]
     
     @api.model
     def _search_permission_write(self, operator, operand):
         if operator == '=' and operand:
-            return [('id', 'in', self._filter_access_ids('write'))]
-        return [('id', 'not in', self._filter_access_ids('write'))]
+            return [('id', 'in', self.search([])._filter_access_ids('write'))]
+        return [('id', 'not in', self.search([])._filter_access_ids('write'))]
     
     @api.model
     def _search_permission_unlink(self, operator, operand):
         if operator == '=' and operand:
-            return [('id', 'in', self._filter_access_ids('unlink'))]
-        return [('id', 'not in', self._filter_access_ids('unlink'))]
+            return [('id', 'in', self.search([])._filter_access_ids('unlink'))]
+        return [('id', 'not in', self.search([])._filter_access_ids('unlink'))]
 
     #----------------------------------------------------------
     # Read, View 
