@@ -19,6 +19,8 @@
 
 import logging
 
+from collections import defaultdict
+
 from odoo import _, models, api, fields, SUPERUSER_ID
 from odoo.exceptions import AccessError
 from odoo.osv import expression
@@ -169,7 +171,7 @@ class AccessGroupsModel(models.AbstractModel):
         group_ids = set(self.ids) - set(self._get_ids_without_access_groups(operation))
         if group_ids:
             sql_query = '''
-                SELECT perm_{operation}       
+                SELECT r.aid, perm_{operation}       
                 FROM {table}_complete_groups_rel r 
                 JOIN muk_security_access_groups g ON r.gid = g.id 
                 JOIN muk_security_access_groups_users_rel u ON r.gid = u.gid 
@@ -180,13 +182,15 @@ class AccessGroupsModel(models.AbstractModel):
                 ids=', '.join(map(lambda id: '(%s)' % id, group_ids)),
             )
             self.env.cr.execute(sql_query, [self.env.user.id])
-            result = self.env.cr.fetchall()
-            if len(result) < len(group_ids) or not any(list(map(lambda val: val[0], result))):
+            result = defaultdict(list)
+            for key, val in self.env.cr.fetchall(): 
+                result[key].append(val)
+            if len(result.keys()) < len(group_ids) or not all(list(map(lambda val: any(val), result.values()))):
                 raise AccessError(_(
-                    'The requested operation cannot be completed due to security restrictions. '
+                    'The requested operation cannot be completed due to group security restrictions. '
                     'Please contact your system administrator.\n\n(Document type: %s, Operation: %s)'
                 ) % (self._description, operation))
-    
+                
     @api.multi
     def filter_access_groups(self, operation):
         if self.env.user.id == SUPERUSER_ID or isinstance(self.env.uid, NoSecurityUid):

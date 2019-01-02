@@ -20,7 +20,7 @@
 {
     "name": "MuK Security",
     "summary": """Security Features""",
-    "version": "12.0.1.2.6",
+    "version": "12.0.1.2.7",
     "category": "Extra Tools",
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
