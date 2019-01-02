@@ -78,8 +78,6 @@ class Base(models.AbstractModel):
         index = {vals['id']: vals for vals in result}
         return [index[record.id] for record in records if record.id in index]
     
-    
-    
     @api.model
     def _search_parents(self, domain=[], order=None):
         self._check_parent_field()
