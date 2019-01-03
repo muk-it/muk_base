@@ -32,7 +32,7 @@
 	                    <div class="o_setting_right_pane">
 				            <label for="attachment_location"/>
 				            <div class="text-muted">
-				                Attachment storage location.
+				                Attachment storage location
 				            </div>
 				            <div class="mt8">
 				                <field name="attachment_location" class="o_light_label"/>
