@@ -73,7 +73,7 @@ class Hierarchy(models.AbstractModel):
         ids = set(functools.reduce(operator.concat, paths))
         data = dict(self.browse(ids).name_get())
         for record in self:
-            path_names = []
+            path_names = [""]
             path_json = []
             for id in reversed(list(map(int, record.parent_path.split('/')[:-1]))):
                 if id not in data:
