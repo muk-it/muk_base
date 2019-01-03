@@ -71,19 +71,18 @@ class Hierarchy(models.AbstractModel):
     def _compute_parent_path(self):
         paths = [list(map(int, rec.parent_path.split('/')[:-1])) for rec in self]
         ids = set(functools.reduce(operator.concat, paths))
-        recs = self.with_context(prefetch_fields=False).browse(ids)
-        data = {rec.id: (rec._name, rec.name) for rec in recs}
+        data = dict(self.browse(ids).name_get())
         for record in self:
             path_names = []
             path_json = []
             for id in reversed(list(map(int, record.parent_path.split('/')[:-1]))):
                 if id not in data:
                     break
-                path_names.append(data[id][1])
+                path_names.append(data[id][0])
                 path_json.append({
-                    'model': data[id][0],
-                    'name': data[id][1],
-                    'id': id,
+                    'model': record._name,
+                    'name': data[id][0],
+                    'id': record.id,
                 })
             path_names.reverse()
             path_json.reverse()
