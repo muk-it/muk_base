@@ -16,36 +16,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###################################################################################
-{
-    "name": "MuK Utils",
-    "summary": """Utility Features""",
-    "version": '12.0.1.1.20',   
-    "category": 'Extra Tools',   
-    "license": "AGPL-3",
-    "author": "MuK IT",
-    "website": "https://www.mukit.at",
-    'live_test_url': 'https://mukit.at/r/SgN',
-    "contributors": [
-        "Mathias Markl <mathias.markl@mukit.at>",
-    ],
-    "depends": [
-        "base_setup",
-    ],
-    "data": [
-        "views/mixins_groups.xml",
-        "views/res_config_settings_view.xml",
-    ],
-    "qweb": [
-        "static/src/xml/*.xml",
-    ],
-    "images": [
-        'static/description/banner.png'
-    ],
-    "external_dependencies": {
-        "python": [],
-        "bin": [],
-    },
-    "application": False,
-    "installable": True,
-    "auto_install": False,
-}
+
+from . import common
+from . import test_search_parents
