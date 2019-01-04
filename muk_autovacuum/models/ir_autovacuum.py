@@ -59,18 +59,18 @@ class AutoVacuum(models.AbstractModel):
                     if rule.only_inactive and "active" in rule.model.field_id.mapped("name"):
                         domain.append(('active', '=', False))
                     _logger.info(_("GC domain: %s"), domain)
-                    records = model.with_context({'active_test': False}).search(domain)
+                    records = model.with_context(active_test=False).search(domain)
                 elif rule.state == 'size':
                     size = rule.size if rule.size_type == 'fixed' else rule.size_parameter_value
-                    count = model.with_context({'active_test': False}).search([], count=True)
+                    count = model.with_context(active_test=False).search([], count=True)
                     if size and size > 0 and count > size:
                         limit = count - size
                         _logger.info(_("GC domain: [] order: %s limit: %s"), rule.size_order, limit)
-                        records = model.with_context({'active_test': False}).search([], order=rule.size_order, limit=limit)
+                        records = model.with_context(active_test=False).search([], order=rule.size_order, limit=limit)
                 elif rule.state == 'domain':
                     _logger.info(_("GC domain: %s"), rule.domain)
                     domain = safe_eval(rule.domain or "[]", rules._get_eval_domain_context())
-                    records = model.with_context({'active_test': False}).search(domain)
+                    records = model.with_context(active_test=False).search(domain)
                 if rule.only_attachments:
                     attachments = self.env['ir.attachment'].sudo().search([
                         ('res_model', '=', rule.model.model),
