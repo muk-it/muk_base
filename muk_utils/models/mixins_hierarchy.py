@@ -91,3 +91,15 @@ class Hierarchy(models.AbstractModel):
                 'parent_path_json': json.dumps(path_json),
             })
             
+    #----------------------------------------------------------
+    # Create, Update, Delete
+    #----------------------------------------------------------
+    
+    @api.multi
+    def write(self, vals):
+        res = super(Hierarchy, self).write(vals)
+        if self._rec_name_fallback() in vals:
+            domain = [('id', 'child_of', self.ids)]
+            self.search(domain).modified(['parent_path'])
+        return res
+            
