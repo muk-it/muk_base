@@ -100,6 +100,7 @@ class Hierarchy(models.AbstractModel):
         res = super(Hierarchy, self).write(vals)
         if self._rec_name_fallback() in vals:
             domain = [('id', 'child_of', self.ids)]
-            self.search(domain).modified(['parent_path'])
+            records = self.sudo().search(domain)
+            records.modified(['parent_path'])
         return res
             
