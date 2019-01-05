@@ -78,10 +78,10 @@ class Hierarchy(models.AbstractModel):
             for id in reversed(list(map(int, record.parent_path.split('/')[:-1]))):
                 if id not in data:
                     break
-                path_names.append(data[id][0])
+                path_names.append(data[id])
                 path_json.append({
                     'model': record._name,
-                    'name': data[id][0],
+                    'name': data[id],
                     'id': record.id,
                 })
             path_names.reverse()
