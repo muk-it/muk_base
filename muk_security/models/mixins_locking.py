@@ -64,14 +64,15 @@ class LockingModel(models.AbstractModel):
         self.write({'locked_by': None})
 
     @api.model
-    def _check_lock_user(self, uid):
-        return uid in (self.env.uid, SUPERUSER_ID) or isinstance(self.env.uid, NoSecurityUid)
+    def _check_lock_editor(self, lock_uid):
+        return lock_uid in (self.env.uid, SUPERUSER_ID) or isinstance(self.env.uid, NoSecurityUid)
     
     @api.multi
-    def check_lock(self, *largs, **kwargs):
+    def check_lock(self):
         for record in self:
-            if record.locked_by.exists() and not self._check_lock_user(record.locked_by.id):
-                raise AccessError(_("The record (%s [%s]) is locked, by an other user.") % (record._description, record.id)) 
+            if record.locked_by.exists() and not self._check_lock_editor(record.locked_by.id):
+                message = _("The record (%s [%s]) is locked, by an other user.")
+                raise AccessError(message % (record._description, record.id)) 
 
     #----------------------------------------------------------
     # Read, View 
@@ -90,9 +91,9 @@ class LockingModel(models.AbstractModel):
     #----------------------------------------------------------
 
     @api.multi
-    def write(self, vals):
+    def _write(self, vals):
         self.check_lock()
-        return super(BaseModelLocking, self).write(vals)
+        return super(BaseModelLocking, self)._write(vals)
 
 
     @api.multi
