@@ -93,11 +93,11 @@ class LockingModel(models.AbstractModel):
     @api.multi
     def _write(self, vals):
         self.check_lock()
-        return super(BaseModelLocking, self)._write(vals)
+        return super(LockingModel, self)._write(vals)
 
 
     @api.multi
     def unlink(self):  
         self.check_lock()
-        return super(BaseModelLocking, self).unlink()
+        return super(LockingModel, self).unlink()
     
