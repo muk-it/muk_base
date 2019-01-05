@@ -97,10 +97,14 @@ class Hierarchy(models.AbstractModel):
     
     @api.multi
     def write(self, vals):
-        res = super(Hierarchy, self).write(vals)
         if self._rec_name_fallback() in vals:
-            domain = [('id', 'child_of', self.ids)]
-            records = self.sudo().search(domain)
-            records.modified(['parent_path'])
-        return res
+            with self.env.norecompute():
+                res = super(Hierarchy, self).write(vals)
+                domain = [('id', 'child_of', self.ids)]
+                records = self.sudo().search(domain)
+                records.modified(['parent_path'])
+            if self.env.recompute and self.env.context.get('recompute', True):
+                records.recompute()
+            return res  
+        return super(Hierarchy, self).write(vals)        
             
