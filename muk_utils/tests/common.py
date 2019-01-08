@@ -87,7 +87,7 @@ def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], rai
                         _logger.error(result['error'], exc_info=True)
                     test_fails.append(result)
             if test_fails:
-                message = "%s out of %s tests failed" % (len(test_results), len(test_fails))
+                message = "%s out of %s tests failed" % (len(test_fails), len(test_results))
                 if raise_exception:
                     raise AssertionError(message, test_fails[0]['error']) 
                 else:
