@@ -64,7 +64,7 @@ def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], rai
                     else:
                         self.uid = user[0]
                     func(self, *args, **kwargs)
-                except AssertionError as error:
+                except Exception as error:
                     test_results.append({
                         'user': user[0], 
                         'expect': user[1],
@@ -89,7 +89,7 @@ def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], rai
             if test_fails:
                 message = "%s out of %s tests failed" % (len(test_fails), len(test_results))
                 if raise_exception:
-                    raise AssertionError(message, test_fails[0]['error']) 
+                    raise test_fails[0]['error']
                 else:
                     _logger.info(message)
             return test_results
