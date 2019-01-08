@@ -51,13 +51,14 @@ _logger = logging.getLogger(__name__)
 # Decorators
 #----------------------------------------------------------
 
-def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], raise_exception=True):
+def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], reset=True, raise_exception=True):
     def decorator(func):
         @functools.wraps(func)
         def wrapper(self, *args, **kwargs):
             user_list = users(self) if callable(users) else users
             test_results = []
             for user in user_list:
+                self.cr.execute('SAVEPOINT test_multi_users')
                 try:
                     if not isinstance(user[0], int):
                         self.uid = self.ref(user[0])
@@ -78,6 +79,11 @@ def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], rai
                         'result': True,
                         'error': None,
                     })
+                if reset:
+                    self.cr.execute('ROLLBACK TO SAVEPOINT test_multi_users')
+                    self.registry.reset_changes()
+                else:
+                    self._cr.execute('RELEASE SAVEPOINT test_multi_users')
             test_fails = []
             for result in test_results:
                 if result['expect'] != result['result']:
