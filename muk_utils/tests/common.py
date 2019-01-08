@@ -39,11 +39,66 @@ import time
 import hmac
 import hashlib
 import logging
+import functools
+import traceback
 
 from odoo.tests import common, HOST, PORT
 
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
+
+#----------------------------------------------------------
+# Decorators
+#----------------------------------------------------------
+
+def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], raise_exception=True):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(self, *args, **kwargs):
+            user_list = users(self) if callable(users) else users
+            test_results = []
+            for user in user_list:
+                try:
+                    if not isinstance(user[0], int):
+                        self.uid = self.ref(user[0])
+                    else:
+                        self.uid = user[0]
+                    func(self, *args, **kwargs)
+                except AssertionError as error:
+                    test_results.append({
+                        'user': user[0], 
+                        'expect': user[1],
+                        'result': False,
+                        'error': error,
+                    })
+                else:
+                    test_results.append({
+                        'user': user[0], 
+                        'expect': user[1],
+                        'result': True,
+                        'error': None,
+                    })
+            test_fails = []
+            for result in test_results:
+                if result['expect'] != result['result']:
+                    message = "Test (%s) with user (%s) failed!"
+                    _logger.info(message % (func.__name__, result['user']))
+                    if result['error']:
+                        _logger.error(result['error'], exc_info=True)
+                    test_fails.append(result)
+            if test_fails:
+                message = "%s out of %s tests failed" % (len(test_results), len(test_fails))
+                if raise_exception:
+                    raise AssertionError(message, test_fails[0]['error']) 
+                else:
+                    _logger.info(message)
+            return test_results
+        return wrapper
+    return decorator
+
+#----------------------------------------------------------
+# Test Cases
+#----------------------------------------------------------
 
 class HttpCase(common.HttpCase):
     
