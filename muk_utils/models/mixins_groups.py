@@ -97,6 +97,20 @@ class Groups(models.AbstractModel):
     ]
     
     #----------------------------------------------------------
+    # Functions
+    #----------------------------------------------------------
+    
+    @api.model
+    def default_get(self, fields_list):
+        res = super(Groups, self).default_get(fields_list)
+        if not self.env.context.get('groups_no_autojoin'):
+            if 'explicit_users' in res and res['explicit_users']:
+                res['explicit_users'] = res['explicit_users'] + [self.env.uid]
+            else:
+                res['explicit_users'] = [self.env.uid]
+        return res
+    
+    #----------------------------------------------------------
     # Read, View 
     #----------------------------------------------------------
     
