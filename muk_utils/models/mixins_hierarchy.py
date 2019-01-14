@@ -71,7 +71,7 @@ class Hierarchy(models.AbstractModel):
     def _compute_parent_path(self):
         paths = [list(map(int, rec.parent_path.split('/')[:-1])) for rec in self]
         ids = set(functools.reduce(operator.concat, paths))
-        data = dict(self.browse(ids).name_get())
+        data = dict(self.browse(ids)._filter_access('read').name_get())
         for record in self:
             path_names = [""]
             path_json = []

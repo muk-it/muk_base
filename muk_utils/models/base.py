@@ -45,6 +45,31 @@ class Base(models.AbstractModel):
         return expression.AND(parent_domain, domain) if domain else parent_domain
     
     #----------------------------------------------------------
+    # Security
+    #----------------------------------------------------------
+    
+    @api.multi
+    def _filter_access(self, operation):
+        if self.check_access_rights(operation, False):
+            return self._filter_access_rules(operation)
+        return self.env[self._name]
+    
+    @api.multi
+    def _filter_access_ids(self, operation):
+        return self._filter_access(operation).ids
+    
+    @api.multi
+    def check_access(self, operation, raise_exception=False):
+        try:
+            access_right = self.check_access_rights(operation, raise_exception)
+            access_rule = self.check_access_rule(operation) is None
+            return access_right and access_rule
+        except AccessError:
+            if raise_exception:
+                raise
+            return False
+        
+    #----------------------------------------------------------
     # Hierarchy Methods
     #----------------------------------------------------------
     
