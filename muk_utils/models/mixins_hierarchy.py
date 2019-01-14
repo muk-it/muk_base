@@ -69,10 +69,11 @@ class Hierarchy(models.AbstractModel):
     
     @api.depends('parent_path')
     def _compute_parent_path(self):
-        paths = [list(map(int, rec.parent_path.split('/')[:-1])) for rec in self]
-        ids = set(functools.reduce(operator.concat, paths))
+        records = self.filtered(lambda record: record.parent_path)
+        paths = [list(map(int, rec.parent_path.split('/')[:-1])) for rec in records]
+        ids = paths and set(functools.reduce(operator.concat, paths)) or []
         data = dict(self.browse(ids)._filter_access('read').name_get())
-        for record in self:
+        for record in records:
             path_names = [""]
             path_json = []
             for id in reversed(list(map(int, record.parent_path.split('/')[:-1]))):
