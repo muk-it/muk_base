@@ -38,16 +38,6 @@ class Base(models.AbstractModel):
             return self
         return super(Base, self)._filter_access_rules(operation)
     
-    @api.multi
-    def _filter_access(self, operation):
-        if self.check_access_rights('read', False):
-            return self._filter_access_rules(operation)
-        return self.env[self._name]
-    
-    @api.multi
-    def _filter_access_ids(self, operation):
-        return self._filter_access(operation).ids
-    
     @api.model
     def _apply_ir_rules(self, query, mode='read'):
         if isinstance(self.env.uid, NoSecurityUid):
@@ -73,14 +63,3 @@ class Base(models.AbstractModel):
         if isinstance(self.env.uid, NoSecurityUid):
             return fields or list(self._fields)
         return super(Base, self).check_field_access_rights(operation, fields)
-    
-    @api.multi
-    def check_access(self, operation, raise_exception=False):
-        try:
-            access_right = self.check_access_rights(operation, raise_exception)
-            access_rule = self.check_access_rule(operation) is None
-            return access_right and access_rule
-        except AccessError:
-            if raise_exception:
-                raise
-            return False
