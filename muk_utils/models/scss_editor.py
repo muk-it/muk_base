@@ -44,6 +44,9 @@ class ScssEditor(models.AbstractModel):
             bin_size=False, bin_size_datas=False
         ).search([("url", '=', url)])
     
+    def _get_custom_view(self, url):
+        return self.env["ir.ui.view"].search([("name", '=', url)])
+    
     def _get_variable(self, content, variable):
         regex = r'{0}\:?\s(.*?);'.format(variable)
         value = re.search(regex, content)
@@ -129,3 +132,8 @@ class ScssEditor(models.AbstractModel):
             self.get_content(url, xmlid), variables
         )
         self.replace_content(url, xmlid, content)
+        
+    def reset_values(self, url, xmlid):
+        custom_url = self._get_custom_url(url, xmlid)
+        self._get_custom_attachment(custom_url).unlink()
+        self._get_custom_view(custom_url).unlink()
