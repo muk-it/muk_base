@@ -41,10 +41,11 @@ def debrand_documentation(text, value, expression):
     return text
 
 def debrand_link(text, value, expression):
-    return re.sub(
-        r'\b{0}.com\b'.format(expression),
+    text = re.sub(
+        r'(http(s)?:\/\/)?(www.)?{0}.com'.format(expression),
         value, text, flags=re.IGNORECASE
     )
+    return text
 
 def debrand_text(text, value, expression):
     cases = {
