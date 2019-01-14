@@ -83,7 +83,7 @@ class Hierarchy(models.AbstractModel):
                 path_json.append({
                     'model': record._name,
                     'name': data[id],
-                    'id': record.id,
+                    'id': id,
                 })
             path_names.reverse()
             path_json.reverse()
