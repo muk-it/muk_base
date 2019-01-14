@@ -38,6 +38,9 @@ class AccessGroupsModel(models.AbstractModel):
     # If set the group fields are restricted by the access group
     _access_groups_fields = None
     
+    # If set the group fields are recomputed as super administrator
+    _access_groups_sudo = False
+    
     # Set it to True to enforced security even if no group has been set
     _access_groups_strict = False
     
@@ -70,9 +73,11 @@ class AccessGroupsModel(models.AbstractModel):
             column1='aid',
             column2='gid',
             string="Complete Groups", 
-            compute='_compute_groups', 
+            compute='_compute_groups',
+            readonly=True,
             store=True,
             automatic=True,
+            compute_sudo=self._access_groups_sudo,
             groups=self._access_groups_fields))
     
     #----------------------------------------------------------
