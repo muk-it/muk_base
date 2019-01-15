@@ -216,7 +216,7 @@ class AccessGroupsModel(models.AbstractModel):
             )
             self.env.cr.execute(sql_query, [self.env.user.id])
             ids_with_access += list(map(lambda val: val[0], self.env.cr.fetchall()))
-        return self.browse(ids_with_access)
+        return self & self.browse(ids_with_access)
 
     #----------------------------------------------------------
     # Create, Update, Delete 
