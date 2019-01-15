@@ -99,7 +99,7 @@ class Hierarchy(models.AbstractModel):
     
     @api.multi
     def write(self, vals):
-        if self._rec_name_fallback() in vals:
+        if self._parent_path_store and self._rec_name_fallback() in vals:
             with self.env.norecompute():
                 res = super(Hierarchy, self).write(vals)
                 domain = [('id', 'child_of', self.ids)]
