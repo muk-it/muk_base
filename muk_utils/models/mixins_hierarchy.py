@@ -31,6 +31,7 @@ class Hierarchy(models.AbstractModel):
     
     _parent_store = True
     _parent_path_sudo = False
+    _parent_path_store = False
     
     #----------------------------------------------------------
     # Database
@@ -50,17 +51,17 @@ class Hierarchy(models.AbstractModel):
             _module=self._module,
             compute='_compute_parent_path',
             compute_sudo=self._parent_path_sudo,
+            store=self._parent_path_store,
             string="Path Names",
             readonly=True,
-            store=True,
             automatic=True))
         add('parent_path_json', fields.Text(
             _module=self._module,
             compute='_compute_parent_path',
             compute_sudo=self._parent_path_sudo,
+            store=self._parent_path_store,
             string="Path Json",
             readonly=True,
-            store=True,
             automatic=True))
     
     #----------------------------------------------------------
