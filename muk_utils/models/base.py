@@ -42,7 +42,7 @@ class Base(models.AbstractModel):
     def _build_search_childs_domain(self, parent_id, domain=[]):
         self._check_parent_field()
         parent_domain = [[self._parent_name, '=', parent_id]]
-        return expression.AND(parent_domain, domain) if domain else parent_domain
+        return expression.AND([parent_domain, domain]) if domain else parent_domain
     
     #----------------------------------------------------------
     # Security

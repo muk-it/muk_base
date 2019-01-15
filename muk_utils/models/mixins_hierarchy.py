@@ -23,6 +23,7 @@ import functools
 import collections
 
 from odoo import models, fields, api
+from odoo.osv import expression
 
 class Hierarchy(models.AbstractModel):
     
@@ -49,10 +50,10 @@ class Hierarchy(models.AbstractModel):
                 self._add_field(name, field)
         path_names_search = None
         if not self._parent_path_store:
-            path_names_search = '_search_parent_path_names',
+            path_names_search = '_search_parent_path_names'
         add('parent_path_names', fields.Char(
             _module=self._module,
-            compute='_compute_parent_path',
+            compute='_compute_parent_paths',
             compute_sudo=self._parent_path_sudo,
             store=self._parent_path_store,
             search=path_names_search,
@@ -61,12 +62,26 @@ class Hierarchy(models.AbstractModel):
             automatic=True))
         add('parent_path_json', fields.Text(
             _module=self._module,
-            compute='_compute_parent_path',
+            compute='_compute_parent_paths',
             compute_sudo=self._parent_path_sudo,
             store=self._parent_path_store,
             string="Path Json",
             readonly=True,
             automatic=True))
+
+    #----------------------------------------------------------
+    # Helper
+    #----------------------------------------------------------
+
+    def _get_depends_parent_paths(self):
+        depends = ['parent_path']
+        if self._rec_name:
+            depends += [self._rec_name]
+        elif 'name' in self._fields:
+            depends += ['name']
+        elif 'x_name' in self._fields:
+            depends += ['x_name']
+        return depends
 
     #----------------------------------------------------------
     # Search
@@ -77,15 +92,15 @@ class Hierarchy(models.AbstractModel):
         domain = []
         for value in operand.split('/'):
             args = [(self._rec_name_fallback(), operator, value)]
-            domain = expression.OR(args, domain) if domain else args
-        return domain
+            domain = expression.OR([args, domain]) if domain else args
+        return domain if domain else [(self._rec_name_fallback(), operator, "")]
 
     #----------------------------------------------------------
     # Read, View 
     #----------------------------------------------------------
     
-    @api.depends('parent_path')
-    def _compute_parent_path(self):
+    @api.depends(lambda self: self._get_depends_parent_paths())
+    def _compute_parent_paths(self):
         records = self.filtered(lambda record: record.parent_path)
         paths = [list(map(int, rec.parent_path.split('/')[:-1])) for rec in records]
         ids = paths and set(functools.reduce(operator.concat, paths)) or []
