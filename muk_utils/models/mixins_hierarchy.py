@@ -75,7 +75,7 @@ class Hierarchy(models.AbstractModel):
     @api.model
     def _search_parent_path_names(self, operator, operand):
         domain = []
-        for value in operand.split('/')
+        for value in operand.split('/'):
             args = [(self._rec_name_fallback(), operator, value)]
             domain = expression.OR(args, domain) if domain else args
         return domain
