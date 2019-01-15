@@ -47,11 +47,15 @@ class Hierarchy(models.AbstractModel):
         def add(name, field):
             if name not in self._fields:
                 self._add_field(name, field)
+        path_names_search = None
+        if not self._parent_path_store:
+            path_names_search = '_search_parent_path_names',
         add('parent_path_names', fields.Char(
             _module=self._module,
             compute='_compute_parent_path',
             compute_sudo=self._parent_path_sudo,
             store=self._parent_path_store,
+            search=path_names_search,
             string="Path Names",
             readonly=True,
             automatic=True))
@@ -63,7 +67,19 @@ class Hierarchy(models.AbstractModel):
             string="Path Json",
             readonly=True,
             automatic=True))
+
+    #----------------------------------------------------------
+    # Search
+    #----------------------------------------------------------
     
+    @api.model
+    def _search_parent_path_names(self, operator, operand):
+        domain = []
+        for value in operand.split('/')
+            args = [(self._rec_name_fallback(), operator, value)]
+            domain = expression.OR(args, domain) if domain else args
+        return domain
+
     #----------------------------------------------------------
     # Read, View 
     #----------------------------------------------------------
