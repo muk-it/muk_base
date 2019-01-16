@@ -20,7 +20,7 @@
 {
     "name": "MuK Session Store",
     "summary": """Session Store Options""",
-    "version": "11.0.1.0.0",
+    "version": "11.0.1.0.1",
     "category": "Extra Tools",
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -44,7 +44,6 @@
         "python": [],
         "bin": [],
     },
-    "auto_install": True,
     "application": False,
     "installable": True,
     "post_load": "_patch_system",

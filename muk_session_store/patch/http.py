@@ -54,7 +54,7 @@ def db_monodb(httprequest=None):
             return dbs[0]
         return None
     else:
-        db_monodb.super(httprequest)
+        return db_monodb.super(httprequest)
 
 @monkey_patch(http)
 def db_filter(dbs, httprequest=None):
