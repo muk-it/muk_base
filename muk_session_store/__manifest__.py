@@ -44,7 +44,6 @@
         "python": [],
         "bin": [],
     },
-    "auto_install": False,
     "application": False,
     "installable": True,
     "post_load": "_patch_system",
