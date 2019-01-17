@@ -17,6 +17,7 @@
 #
 ###################################################################################
 
+import io
 import logging
 import mimetypes
 
@@ -66,7 +67,7 @@ class LargeObjectControllerIrHttp(models.AbstractModel):
         except AccessError:
             return (403, [], None)
         status, headers, content = None, [], None
-        content = obj.with_context({'stream': True})[field] or b''
+        content = obj.with_context({'stream': True})[field] or io.BytesIO()
         if not filename:
             if filename_field in obj:
                 filename = obj[filename_field]
