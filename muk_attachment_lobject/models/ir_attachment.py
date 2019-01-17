@@ -64,7 +64,7 @@ class LObjectIrAttachment(models.Model):
         for attach in self:
             if attach.store_lobject:
                 if bin_size:
-                    attach.datas = attach.store_lobject
+                    attach.datas = attach.with_context({'human_size': True}).store_lobject
                 else:
                     attach.datas = attach.with_context({'base64': True}).store_lobject
             else:
