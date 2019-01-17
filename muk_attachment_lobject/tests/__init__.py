@@ -18,3 +18,4 @@
 ###################################################################################
 
 from . import test_attachment
+from . import test_download

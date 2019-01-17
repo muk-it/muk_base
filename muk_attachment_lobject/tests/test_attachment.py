@@ -34,12 +34,12 @@ class AttachmentTestCase(common.HttpCase):
         super(AttachmentTestCase, self).setUp()
         self.attachment = self.env['ir.attachment'].sudo()
         self.param = self.env['ir.config_parameter'].sudo()
+        self.param.set_param('ir_attachment.location', 'lobject')
         
     def tearDown(self):
         super(AttachmentTestCase, self).tearDown()
     
     def test_attachment(self):
-        self.param.set_param('ir_attachment.location', 'lobject')
         attach = self.attachment.create({
             'name': "Test",
             'datas': base64.b64encode(b"\xff data")})
@@ -58,5 +58,4 @@ class AttachmentTestCase(common.HttpCase):
     
     @unittest.skip("The test takes a long time and is therefore skipped by default.")
     def test_migration(self):
-        self.param.set_param('ir_attachment.location', 'lobject')
         self.attachment.force_storage()
