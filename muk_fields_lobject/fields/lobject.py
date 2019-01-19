@@ -45,15 +45,9 @@ class LargeObject(fields.Field):
             return None
         lobject = record.env.cr._cnx.lobject(0, 'wb')
         if isinstance(value, bytes):
-            try:
-                if base64.b64encode(base64.b64decode(value)) == value:
-                    lobject.write(base64.b64decode(value))
-                else:
-                    lobject.write(value)
-            except binascii.Error:
-                lobject.write(value)
+            lobject.write(value)
         elif isinstance(value, str):
-            lobject.write(base64.b64decode(value.encode('ascii')))
+            lobject.write(base64.b64decode(value))
         else:
             while True:
                 chunk = value.read(4096)
