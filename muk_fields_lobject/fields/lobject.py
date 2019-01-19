@@ -82,7 +82,7 @@ class LargeObject(fields.Field):
                         return file
                     file.write(chunk)
             elif record._context.get('checksum'):
-                checksum = hashlib.md5()
+                checksum = hashlib.sha1()
                 while True:
                     chunk = lobject.read(4096)
                     if not chunk:
