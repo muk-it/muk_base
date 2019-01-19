@@ -25,10 +25,13 @@ import base64
 import shutil
 import urllib
 import logging
+import hashlib
+import binascii
 import tempfile
 import mimetypes
 import unicodedata
 
+from odoo.tools import human_size
 from odoo.tools.mimetypes import guess_mimetype
 
 _logger = logging.getLogger(__name__)
@@ -90,3 +93,24 @@ def guess_extension(filename=None, mimetype=None, binary=None):
         mimetype = guess_mimetype(binary, default="")
         extension = mimetypes.guess_extension(mimetype)[1:].strip().lower()
     return extension
+
+#----------------------------------------------------------
+# System Helper
+#----------------------------------------------------------
+
+def ensure_path_directories(path):
+    directory_path = os.path.dirname(path)
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+
+def remove_empty_directories(path):
+    if not os.path.isdir(path):
+        return
+    entries = os.listdir(path)
+    if len(entries) > 0:
+        for entry in entries:
+            subpath = os.path.join(path, entry)
+            if os.path.isdir(subpath):
+                self._remove_empty_directories(subpath)
+    else:
+        os.rmdir(path)
