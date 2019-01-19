@@ -34,15 +34,20 @@ class Base(models.AbstractModel):
     # Helper Methods
     #----------------------------------------------------------
     
+    @api.model
     def _check_parent_field(self):
         if self._parent_name not in self._fields:
             raise TypeError("The parent (%s) field does not exist." % self._parent_name)
     
-    
+    @api.model
     def _build_search_childs_domain(self, parent_id, domain=[]):
         self._check_parent_field()
         parent_domain = [[self._parent_name, '=', parent_id]]
         return expression.AND([parent_domain, domain]) if domain else parent_domain
+    
+    @api.model
+    def _check_context_bin_size(self, field):
+        return any(key in self.env.context for key in ['bin_size', 'bin_size_%s' % (field)])
     
     #----------------------------------------------------------
     # Security
