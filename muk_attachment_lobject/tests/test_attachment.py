@@ -44,10 +44,12 @@ class AttachmentTestCase(common.HttpCase):
             'name': "Test",
             'datas': base64.b64encode(b"\xff data")})
         self.assertTrue(attach.datas)
+        self.assertTrue(attach.store_lobject)
         self.assertTrue(attach.with_context({'bin_size': True}).datas)
-        self.assertTrue(attach.with_context({'human_size': True}).datas)
-        self.assertTrue(attach.with_context({'base64': True}).datas)
-        self.assertTrue(attach.with_context({'stream': True}).datas)
+        self.assertTrue(attach.with_context({'bin_size': True}).store_lobject)
+        self.assertTrue(attach.with_context({'human_size': True}).store_lobject)
+        self.assertTrue(attach.with_context({'base64': True}).store_lobject)
+        self.assertTrue(attach.with_context({'stream': True}).store_lobject)
         oid = attach.with_context({'oid': True}).store_lobject
         self.assertTrue(oid)
         attach.write({'datas': base64.b64encode(b"\xff data")})
