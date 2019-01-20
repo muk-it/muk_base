@@ -27,7 +27,7 @@ from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
 
-class LargeObjectControllerIrHttp(models.AbstractModel):
+class LargeObjectIrHttp(models.AbstractModel):
     
     _inherit = 'ir.http'
     
