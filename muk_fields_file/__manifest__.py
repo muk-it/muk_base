@@ -18,7 +18,7 @@
 ###################################################################################
 
 {
-    "name": "MuK Files",
+    "name": "MuK Filestore Field",
     "summary": """Filestore Support for Fields""",
     "version": '12.0.1.0.0',   
     "category": 'Extra Tools',   
