@@ -1,5 +1,5 @@
 ###################################################################################
-# 
+#
 #    Copyright (C) 2018 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -17,13 +17,25 @@
 #
 ###################################################################################
 
-from . import fields
-from . import models
-from . import controllers
+import time
+import logging
+import datetime
+import dateutil
 
-#----------------------------------------------------------
-# Patch System on Load
-#----------------------------------------------------------
+from odoo import _
+from odoo import models, api, fields
+from odoo.tools.safe_eval import safe_eval
 
-def _patch_system():
-    from . import patch
+from odoo.addons.muk_fields_file.fields import file
+
+_logger = logging.getLogger(__name__)
+
+class AutoVacuum(models.AbstractModel):
+    
+    _inherit = 'ir.autovacuum'
+    
+    @api.model
+    def power_on(self, *args, **kwargs):
+        res = super(AutoVacuum, self).power_on(*args, **kwargs)
+        file.clean_store(self.env.cr.dbname, self.env)
+        return res

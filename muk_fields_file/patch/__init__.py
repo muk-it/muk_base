@@ -1,5 +1,5 @@
 ###################################################################################
-# 
+#
 #    Copyright (C) 2018 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -18,12 +18,4 @@
 ###################################################################################
 
 from . import fields
-from . import models
-from . import controllers
-
-#----------------------------------------------------------
-# Patch System on Load
-#----------------------------------------------------------
-
-def _patch_system():
-    from . import patch
+from . import service_db

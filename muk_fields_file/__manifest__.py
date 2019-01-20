@@ -18,9 +18,9 @@
 ###################################################################################
 
 {
-    "name": "MuK Large Objects",
-    "summary": """PGSQL Large Objects Support""",
-    "version": '12.0.2.2.4',   
+    "name": "MuK Files",
+    "summary": """Filestore Support for Fields""",
+    "version": '12.0.1.0.0',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "https://www.mukit.at",
@@ -45,4 +45,5 @@
     "auto_install": False,
     "application": False,
     "installable": True,
+    "post_load": "_patch_system",
 }

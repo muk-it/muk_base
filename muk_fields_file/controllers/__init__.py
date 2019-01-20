@@ -17,13 +17,4 @@
 #
 ###################################################################################
 
-from . import fields
-from . import models
-from . import controllers
-
-#----------------------------------------------------------
-# Patch System on Load
-#----------------------------------------------------------
-
-def _patch_system():
-    from . import patch
+from . import main

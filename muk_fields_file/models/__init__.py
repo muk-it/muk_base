@@ -1,4 +1,4 @@
-###################################################################################
+ ###################################################################################
 # 
 #    Copyright (C) 2018 MuK IT GmbH
 #
@@ -17,13 +17,7 @@
 #
 ###################################################################################
 
-from . import fields
-from . import models
-from . import controllers
-
-#----------------------------------------------------------
-# Patch System on Load
-#----------------------------------------------------------
-
-def _patch_system():
-    from . import patch
+from . import base
+from . import ir_http
+from . import ir_autovacuum
+from . import ir_model_fields

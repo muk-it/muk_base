@@ -17,13 +17,8 @@
 #
 ###################################################################################
 
-from . import fields
-from . import models
-from . import controllers
+from odoo import fields
 
-#----------------------------------------------------------
-# Patch System on Load
-#----------------------------------------------------------
+from odoo.addons.muk_fields_file.fields.file import File
 
-def _patch_system():
-    from . import patch
+fields.File = File
