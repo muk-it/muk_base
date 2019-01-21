@@ -278,11 +278,8 @@ class AutoVacuumRules(models.Model):
             ('model_id', '=', self.model.id),
             ('ttype', '=', 'datetime'),
             ('name', '=', 'create_date')]
-        record = self.env['ir.model.fields'].sudo().search(field_domain, limit=1)
-        if len(record):
-            self.time_field = record
-        else:
-            return None
+        model = self.env['ir.model.fields'].sudo()
+        self.time_field = model.search(field_domain, limit=1)
 
     @api.model
     def get_import_templates(self):
