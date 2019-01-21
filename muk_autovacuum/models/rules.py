@@ -279,7 +279,7 @@ class AutoVacuumRules(models.Model):
             ('ttype', '=', 'datetime'),
             ('name', '=', 'create_date')]
         record = self.env['ir.model.fields'].sudo().search(field_domain, limit=1)
-        if record.exists():
+        if len(record):
             self.time_field = record
         else:
             return None
