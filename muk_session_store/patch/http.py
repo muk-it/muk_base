@@ -21,6 +21,7 @@ import random
 import logging
 
 from odoo import http, tools
+from odoo.http import request
 from odoo.tools.func import lazy_property
 
 from odoo.addons.muk_utils.tools.patch import monkey_patch
