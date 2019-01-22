@@ -96,15 +96,24 @@ class PostgresSessionStore(SessionStore):
     @ensure_cursor
     def delete(self, session):
         self.cursor.execute("DELETE FROM sessions WHERE sid=%s;", [session.sid])
-
+    
     @ensure_cursor
     def get(self, sid):
         if not self.is_valid_key(sid):
             return self.new()
-        self.cursor.execute("UPDATE sessions SET write_date = now() at time zone 'UTC' WHERE sid=%s;", [sid])
-        self.cursor.execute("SELECT payload FROM sessions WHERE sid=%s;", [sid])
+        self.cursor.execute("""
+            SELECT payload, write_date 
+            FROM sessions WHERE sid=%s;
+        """, [sid])
         try:
-            return self.session_class(json.loads(self.cursor.fetchone()[0]), sid, False)
+            payload, write_date = self.cursor.fetchone()
+            if write_date.date() != datetime.today().date():
+                self.cursor.execute("""
+                    UPDATE sessions 
+                    SET write_date = now() at time zone 'UTC' 
+                    WHERE sid=%s;
+                """, [sid])
+            return self.session_class(json.loads(payload), sid, False)
         except Exception:
             return self.session_class({}, sid, False)
     
