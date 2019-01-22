@@ -17,5 +17,8 @@
 #
 ###################################################################################
 
+from odoo.tools import config
+
 def _patch_system():
-    from . import patch
+    if 'muk_session_store' in config.get('server_wide_modules'):
+        from . import patch
