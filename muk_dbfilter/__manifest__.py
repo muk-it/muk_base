@@ -39,6 +39,7 @@
     "qweb": [
     ],
     "images": [
+        'static/description/banner.png'
     ],
     "external_dependencies": {
         "python": [],
