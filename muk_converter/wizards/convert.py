@@ -60,6 +60,7 @@ class ConverterWizard(models.TransientModel):
     
     input_binary = fields.Binary(
         string="File",
+        attachment=False,
         states={'export': [('required', True)]})
     
     format = fields.Selection(
@@ -76,6 +77,7 @@ class ConverterWizard(models.TransientModel):
     output_binary = fields.Binary(
         string="File",
         readonly=True,
+        attachment=False,
         states={'download': [('required', True)]})
     
     #----------------------------------------------------------
