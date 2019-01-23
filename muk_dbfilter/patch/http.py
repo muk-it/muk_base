@@ -17,7 +17,8 @@
 #
 ###################################################################################
 
-import random 
+import random
+import re
 import logging
 
 from odoo import http, tools
