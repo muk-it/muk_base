@@ -32,10 +32,10 @@ _logger = logging.getLogger(__name__)
 class ResponseEncoder(json.JSONEncoder):
     
     def default(self, obj):
-        if isinstance(obj, datetime.date):
-            return obj.strftime(tools.DEFAULT_SERVER_DATE_FORMAT)
         if isinstance(obj, datetime.datetime):
             return obj.strftime(tools.DEFAULT_SERVER_DATETIME_FORMAT)
+        if isinstance(obj, datetime.date):
+            return obj.strftime(tools.DEFAULT_SERVER_DATE_FORMAT)
         if isinstance(obj, (bytes, bytearray)):
             return obj.decode()
         return json.JSONEncoder.default(self, obj)
