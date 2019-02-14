@@ -32,8 +32,26 @@ class LObjectIrAttachment(models.Model):
     
     _inherit = 'ir.attachment'
 
+    #----------------------------------------------------------
+    # Database
+    #----------------------------------------------------------
+    
     store_lobject = LargeObject(
         string="Data")
+    
+    #----------------------------------------------------------
+    # Helper
+    #----------------------------------------------------------
+    
+    @api.model
+    def _get_datas_inital_vals(self):
+        vals = super(LObjectIrAttachment, self)._get_datas_inital_vals()
+        vals.update({'store_lobject': False})
+        return vals
+        
+    #----------------------------------------------------------
+    # Function
+    #----------------------------------------------------------
     
     @api.model
     def storage_locations(self):
@@ -57,7 +75,11 @@ class LObjectIrAttachment(models.Model):
             ]
             self.search(record_domain).migrate()
             return True
-                
+    
+    #----------------------------------------------------------
+    # Read
+    #----------------------------------------------------------
+    
     @api.depends('store_lobject')
     def _compute_datas(self):
         bin_size = self._context.get('bin_size')
@@ -70,20 +92,23 @@ class LObjectIrAttachment(models.Model):
             else:
                 super(LObjectIrAttachment, attach)._compute_datas()
         
+    #----------------------------------------------------------
+    # Create, Write, Delete
+    #----------------------------------------------------------
+    
     def _inverse_datas(self):
         location = self._storage()
         for attach in self:
             if location == 'lobject':
                 value = attach.datas
                 bin_data = base64.b64decode(value) if value else b''
-                vals = {
+                vals = self._get_datas_inital_vals()
+                vals.update({
                     'file_size': len(bin_data),
                     'checksum': self._compute_checksum(bin_data),
                     'index_content': self._index(bin_data, attach.datas_fname, attach.mimetype),
-                    'store_fname': False,
-                    'db_datas': False,
                     'store_lobject': bin_data,
-                }
+                })
                 fname = attach.store_fname
                 super(LObjectIrAttachment, attach.sudo()).write(vals)
                 if fname:
