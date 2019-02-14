@@ -27,10 +27,21 @@ from odoo.tools.mimetypes import guess_mimetype
 
 _logger = logging.getLogger(__name__)
 
-class Attachment(models.Model):
+class IrAttachment(models.Model):
     
     _inherit = 'ir.attachment'
     
+    #----------------------------------------------------------
+    # Helper
+    #----------------------------------------------------------
+    
+    @api.model
+    def _get_datas_inital_vals(self):
+        return {
+            'store_fname': False,
+            'db_datas': False,
+        }
+   
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
@@ -70,5 +81,29 @@ class Attachment(models.Model):
         if self.env.context.get('migration') and len(self) == 1:
             return self.mimetype or 'application/octet-stream'
         else:
-            return super(Attachment, self)._compute_mimetype(values)
+            return super(IrAttachment, self)._compute_mimetype(values)
+        
+    #----------------------------------------------------------
+    # Create, Write, Delete
+    #----------------------------------------------------------
+    
+    def _inverse_datas(self):
+        location = self._storage()
+        for attach in self:
+            value = attach.datas
+            bin_data = base64.b64decode(value) if value else b''
+            vals = self._get_datas_inital_vals()
+            vals.update({
+                'file_size': len(bin_data),
+                'checksum': self._compute_checksum(bin_data),
+                'index_content': self._index(bin_data, attach.datas_fname, attach.mimetype),
+            })
+            if value and location != 'db':
+                vals['store_fname'] = self._file_write(value, vals['checksum'])
+            else:
+                vals['db_datas'] = value
+            fname = attach.store_fname
+            super(IrAttachment, attach.sudo()).write(vals)
+            if fname:
+                self._file_delete(fname)
         
