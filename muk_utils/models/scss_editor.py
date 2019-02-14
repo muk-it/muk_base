@@ -111,6 +111,7 @@ class ScssEditor(models.AbstractModel):
                 'name': custom_url,
                 'key': 'web_editor.scss_%s' % str(uuid.uuid4())[:6],
                 'mode': "extension",
+                'priority': view_to_xpath.priority,
                 'inherit_id': view_to_xpath.id,
                 'arch': """
                     <data inherit_id="%(inherit_xml_id)s" name="%(name)s">
