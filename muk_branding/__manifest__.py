@@ -19,7 +19,7 @@
 
 {
     "name": "MuK Branding",
-    "summary": """Branding Features""",
+    "summary": """Branding and Debranding""",
     "version": "12.0.1.0.2",
     "category": "Extra Tools",
     "license": "AGPL-3",
