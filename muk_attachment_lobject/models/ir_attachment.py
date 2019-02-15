@@ -96,6 +96,7 @@ class LObjectIrAttachment(models.Model):
     # Create, Write, Delete
     #----------------------------------------------------------
     
+    @api.multi
     def _inverse_datas(self):
         location = self._storage()
         for attach in self:
