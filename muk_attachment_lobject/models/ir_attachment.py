@@ -48,7 +48,7 @@ class LObjectIrAttachment(models.Model):
         vals = super(LObjectIrAttachment, self)._get_datas_inital_vals()
         vals.update({'store_lobject': False})
         return vals
-        
+    
     #----------------------------------------------------------
     # Function
     #----------------------------------------------------------
@@ -103,12 +103,8 @@ class LObjectIrAttachment(models.Model):
                 value = attach.datas
                 bin_data = base64.b64decode(value) if value else b''
                 vals = self._get_datas_inital_vals()
-                vals.update({
-                    'file_size': len(bin_data),
-                    'checksum': self._compute_checksum(bin_data),
-                    'index_content': self._index(bin_data, attach.datas_fname, attach.mimetype),
-                    'store_lobject': bin_data,
-                })
+                vals = self._update_datas_vals(vals, attach, bin_data)
+                vals['store_lobject'] = bin_data
                 fname = attach.store_fname
                 super(LObjectIrAttachment, attach.sudo()).write(vals)
                 if fname:

@@ -20,7 +20,7 @@
 {
     "name": "MuK Large Objects Attachment",
     "summary": """Large Objects Attachment Location""",
-    "version": '12.0.2.1.3',   
+    "version": '12.0.2.1.4',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
