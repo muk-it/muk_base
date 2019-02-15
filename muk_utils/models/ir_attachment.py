@@ -41,7 +41,24 @@ class IrAttachment(models.Model):
             'store_fname': False,
             'db_datas': False,
         }
+    
+    @api.model
+    def _update_datas_vals(self, vals, attach, bin_data):
+        vals.update({
+            'file_size': len(bin_data),
+            'checksum': self._compute_checksum(bin_data),
+            'index_content': self._index(bin_data, attach.datas_fname, attach.mimetype),
+        })
+        return vals
    
+    #----------------------------------------------------------
+    # Actions
+    #----------------------------------------------------------
+    
+    @api.multi
+    def action_migrate(self):
+        self.migrate()
+    
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
@@ -93,11 +110,7 @@ class IrAttachment(models.Model):
             value = attach.datas
             bin_data = base64.b64decode(value) if value else b''
             vals = self._get_datas_inital_vals()
-            vals.update({
-                'file_size': len(bin_data),
-                'checksum': self._compute_checksum(bin_data),
-                'index_content': self._index(bin_data, attach.datas_fname, attach.mimetype),
-            })
+            vals = self._update_datas_vals(vals, attach, bin_data)
             if value and location != 'db':
                 vals['store_fname'] = self._file_write(value, vals['checksum'])
             else:

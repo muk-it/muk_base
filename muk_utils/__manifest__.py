@@ -19,7 +19,7 @@
 {
     "name": "MuK Utils",
     "summary": """Utility Features""",
-    "version": '12.0.1.4.18',   
+    "version": '12.0.1.5.0',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "author": "MuK IT",
@@ -32,6 +32,7 @@
         "base_setup",
     ],
     "data": [
+        "actions/ir_attachment.xml",
         "views/mixins_groups.xml",
         "views/res_config_settings_view.xml",
     ],

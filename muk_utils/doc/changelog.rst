@@ -1,3 +1,8 @@
+`1.5.0`
+-------
+
+- Storage Migration Action
+
 `1.4.0`
 -------
 
@@ -16,9 +21,9 @@
 `1.1.0`
 -------
 
-- Added storage settings
+- Added Storage Settings
 
 `1.0.0`
 -------
 
-- Init version
+- Init Version
