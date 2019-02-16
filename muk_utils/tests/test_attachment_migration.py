@@ -32,7 +32,7 @@ class MigrationTestCase(common.TransactionCase):
     def setUp(self):
         super(MigrationTestCase, self).setUp()
         self.model = self.env['ir.attachment']
-        self.params = env['ir.config_parameter'].sudo()
+        self.params = self.env['ir.config_parameter'].sudo()
         self.location = self.params.get_param('ir_attachment.location')
         if self.location == 'file':
             self.params.set_param('ir_attachment.location', 'db')
