@@ -19,7 +19,7 @@
 {
     "name": "MuK Utils",
     "summary": """Utility Features""",
-    "version": '12.0.1.5.0',   
+    "version": '12.0.1.6.3',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "author": "MuK IT",
@@ -33,8 +33,9 @@
     ],
     "data": [
         "actions/ir_attachment.xml",
+        "views/ir_attachment.xml",
         "views/mixins_groups.xml",
-        "views/res_config_settings_view.xml",
+        "views/res_config_settings.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",
@@ -46,6 +47,7 @@
         "python": [],
         "bin": [],
     },
+    "sequence": 3,
     "application": False,
     "installable": True,
     "auto_install": False,

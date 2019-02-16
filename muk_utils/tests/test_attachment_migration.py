@@ -27,36 +27,22 @@ from odoo.tests import common
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
 
-class SearchParentTestCase(common.TransactionCase):
+class MigrationTestCase(common.TransactionCase):
     
     def setUp(self):
-        super(SearchParentTestCase, self).setUp()
-        self.model = self.env['res.partner.category']
-        
+        super(MigrationTestCase, self).setUp()
+        self.model = self.env['ir.attachment']
+        self.params = env['ir.config_parameter'].sudo()
+        self.location = self.params.get_param('ir_attachment.location')
+        if self.location == 'file':
+            self.params.set_param('ir_attachment.location', 'db')
+        else:
+            self.params.set_param('ir_attachment.location', 'file')
+
     def tearDown(self):
-        super(SearchParentTestCase, self).tearDown()
+        self.params.set_param('ir_attachment.location', self.location)
+        super(MigrationTestCase, self).tearDown()
     
-    def _evaluate_parent_result(self, parents, records):
-        for parent in parents:
-            self.assertTrue(
-                not parent.parent_id or 
-                parent.parent_id.id not in records.ids
-            )
+    def test_migration(self):
+        self.model.search([], limit=5).action_migrate()
     
-    def test_search_parents(self):
-        records = self.model.search([])
-        parents = self.model.search_parents([])
-        self._evaluate_parent_result(parents, records)
-    
-    def test_search_parents_domain(self):
-        records = self.model.search([('id', '!=', 1)])
-        parents = self.model.search_parents([('id', '!=', 1)])
-        self._evaluate_parent_result(parents, records)
-    
-    def test_search_read_parents(self):
-        parents = self.model.search_parents([])
-        read_names = parents.read(['name'])
-        search_names = self.model.search_read_parents([], ['name'])
-        self.assertTrue(read_names == search_names)
-        
-        

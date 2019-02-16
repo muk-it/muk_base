@@ -50,6 +50,18 @@ class IrAttachment(models.Model):
             'index_content': self._index(bin_data, attach.datas_fname, attach.mimetype),
         })
         return vals
+    
+    @api.model
+    def _get_datas_clean_vals(self, attach):
+        vals = {}
+        if attach.store_fname:
+            vals['store_fname'] = attach.store_fname
+        return vals
+    
+    @api.model
+    def _clean_datas_after_write(self, vals):
+        if 'store_fname' in vals:
+            self._file_delete(vals['store_fname'])
    
     #----------------------------------------------------------
     # Actions
@@ -76,6 +88,7 @@ class IrAttachment(models.Model):
             'file': ('store_fname', '=', False), 
         }
         record_domain = [
+            '&', ('type', '=', 'binary'),
             '&', storage_domain[self._storage()], 
             '|', ('res_field', '=', False), ('res_field', '!=', False)
         ]
@@ -94,6 +107,7 @@ class IrAttachment(models.Model):
     # Read
     #----------------------------------------------------------
     
+    @api.multi
     def _compute_mimetype(self, values):
         if self.env.context.get('migration') and len(self) == 1:
             return self.mimetype or 'application/octet-stream'
@@ -104,6 +118,7 @@ class IrAttachment(models.Model):
     # Create, Write, Delete
     #----------------------------------------------------------
     
+    @api.multi
     def _inverse_datas(self):
         location = self._storage()
         for attach in self:
@@ -115,8 +130,7 @@ class IrAttachment(models.Model):
                 vals['store_fname'] = self._file_write(value, vals['checksum'])
             else:
                 vals['db_datas'] = value
-            fname = attach.store_fname
+            clean_vals = self._get_datas_clean_vals(attach)
             super(IrAttachment, attach.sudo()).write(vals)
-            if fname:
-                self._file_delete(fname)
+            self._clean_datas_after_write(clean_vals)
         

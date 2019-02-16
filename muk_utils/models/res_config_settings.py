@@ -36,7 +36,7 @@ class ResConfigSettings(models.TransientModel):
     #----------------------------------------------------------
     
     attachment_location = fields.Selection(
-        selection=_attachment_location_selection,
+        selection=lambda self: self._attachment_location_selection(),
         string='Storage Location',
         required=True,
         help="Attachment storage location.")

@@ -1,3 +1,8 @@
+`1.6.0`
+-------
+
+- Override Attachment to make it more extendable
+
 `1.5.0`
 -------
 
