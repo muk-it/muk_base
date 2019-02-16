@@ -70,6 +70,7 @@ class LObjectIrAttachment(models.Model):
                 'lobject': ('store_lobject', '=', False),
             }
             record_domain = [
+                '&', ('type', '=', 'binary'),
                 '&', storage_domain[self._storage()], 
                 '|', ('res_field', '=', False), ('res_field', '!=', False)
             ]
@@ -106,9 +107,8 @@ class LObjectIrAttachment(models.Model):
                 vals = self._get_datas_inital_vals()
                 vals = self._update_datas_vals(vals, attach, bin_data)
                 vals['store_lobject'] = bin_data
-                fname = attach.store_fname
+                clean_vals = self._get_datas_clean_vals(attach)
                 super(LObjectIrAttachment, attach.sudo()).write(vals)
-                if fname:
-                    self._file_delete(fname)
+                self._clean_datas_after_write(clean_vals)
             else:
                 super(LObjectIrAttachment, attach)._inverse_datas()

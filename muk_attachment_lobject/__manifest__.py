@@ -20,7 +20,7 @@
 {
     "name": "MuK Large Objects Attachment",
     "summary": """Large Objects Attachment Location""",
-    "version": '12.0.2.1.4',   
+    "version": '12.0.2.1.7',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -31,6 +31,9 @@
     ],
     'depends': [
         'muk_fields_lobject',
+    ],
+    "data": [
+        "views/ir_attachment.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",
