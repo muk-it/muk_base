@@ -28,18 +28,15 @@ _logger = logging.getLogger(__name__)
 class AttachmentTestCase(common.HttpCase):
     
     def setUp(self):
-        super(MigrationTestCase, self).setUp()
+        super(AttachmentTestCase, self).setUp()
         self.attachment = self.env['ir.attachment'].sudo()
         self.params = self.env['ir.config_parameter'].sudo()
         self.location = self.params.get_param('ir_attachment.location')
-        if self.location == 'file':
-            self.params.set_param('ir_attachment.location', 'db')
-        else:
-            self.params.set_param('ir_attachment.location', 'file')
+        self.params.set_param('ir_attachment.location', 'lobject')
 
     def tearDown(self):
         self.params.set_param('ir_attachment.location', self.location)
-        super(MigrationTestCase, self).tearDown()
+        super(AttachmentTestCase, self).tearDown()
     
     def test_attachment(self):
         attach = self.attachment.create({

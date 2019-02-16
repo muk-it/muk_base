@@ -36,10 +36,12 @@ class DownloadTestCase(common.HttpCase):
     def setUp(self):
         super(DownloadTestCase, self).setUp()
         self.attachment = self.env['ir.attachment'].sudo()
-        self.param = self.env['ir.config_parameter'].sudo()
-        self.param.set_param('ir_attachment.location', 'lobject')
-        
+        self.params = self.env['ir.config_parameter'].sudo()
+        self.location = self.params.get_param('ir_attachment.location')
+        self.params.set_param('ir_attachment.location', 'lobject')
+
     def tearDown(self):
+        self.params.set_param('ir_attachment.location', self.location)
         super(DownloadTestCase, self).tearDown()
     
     def test_attachment_download(self):
