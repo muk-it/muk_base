@@ -50,8 +50,8 @@ class AccessUser(models.Model):
     #----------------------------------------------------------
     
     @classmethod
-    def _browse(cls, ids, env, prefetch=None):
+    def _browse(cls, ids, env, prefetch=None, add_prefetch=True):
         return super(AccessUser, cls)._browse([
             id if not isinstance(id, helper.NoSecurityUid)
             else super(helper.NoSecurityUid, id).__int__() 
-            for id in ids], env, prefetch=prefetch)
+            for id in ids], env, prefetch=prefetch, add_prefetch=add_prefetch)
