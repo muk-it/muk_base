@@ -80,8 +80,10 @@ def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], res
                         'error': None,
                     })
                 if reset:
-                    self.cr.execute('ROLLBACK TO SAVEPOINT test_multi_users')
+                    self.env.cache.invalidate()
+                    self.registry.clear_caches()
                     self.registry.reset_changes()
+                    self.cr.execute('ROLLBACK TO SAVEPOINT test_multi_users')
                 else:
                     self._cr.execute('RELEASE SAVEPOINT test_multi_users')
             test_fails = []
