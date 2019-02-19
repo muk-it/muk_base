@@ -89,7 +89,7 @@ class PostgresSessionStore(SessionStore):
    
     @retry_database
     def save(self, session):
-        with open_cursor() as cursor:
+        with self.open_cursor() as cursor:
             cursor.execute("""
                 INSERT INTO sessions (sid, write_date, payload)
                 VALUES (%(sid)s, now() at time zone 'UTC', %(payload)s)
@@ -99,14 +99,14 @@ class PostgresSessionStore(SessionStore):
         
     @retry_database
     def delete(self, session):
-        with open_cursor() as cursor:
+        with self.open_cursor() as cursor:
             cursor.execute("DELETE FROM sessions WHERE sid=%s;", [session.sid])
 
     @retry_database
     def get(self, sid):
         if not self.is_valid_key(sid):
             return self.new()
-        with open_cursor() as cursor:
+        with self.open_cursor() as cursor:
             cursor.execute("""
                 SELECT payload, write_date 
                 FROM sessions WHERE sid=%s;
@@ -125,13 +125,13 @@ class PostgresSessionStore(SessionStore):
     
     @retry_database
     def list(self):
-        with open_cursor() as cursor:
+        with self.open_cursor() as cursor:
             cursor.execute("SELECT sid FROM sessions;")
             return [record[0] for record in cursor.fetchall()]
     
     @retry_database
     def clean(self):
-        with open_cursor() as cursor:
+        with self.open_cursor() as cursor:
             cursor.execute("""
                 DELETE FROM sessions 
                 WHERE now() at time zone 'UTC' - write_date > '7 days';
