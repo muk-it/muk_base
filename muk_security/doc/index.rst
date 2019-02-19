@@ -100,6 +100,13 @@ Some pictures are based on or inspired by the icon set of Font Awesome:
 
 * `Font Awesome <https://fontawesome.com>`_
 
+Projects
+------------
+
+Parts of the module are based on or inspired by:
+
+* `Suspend Security <https://github.com/OCA/server-backend>`_
+
 Author & Maintainer
 -------------------
 
