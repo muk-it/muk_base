@@ -74,6 +74,9 @@ class PostgresSessionStore(SessionStore):
                 raise
             self._create_database()
             return self._open_connection(create_db=False)
+    
+    def __del__(self):
+        self.cursor.close()
 
     @ensure_cursor
     def _setup_db(self):
