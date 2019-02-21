@@ -75,7 +75,7 @@ class AutoVacuumRules(models.Model):
 
     sequence = fields.Integer(
         string='Sequence',
-        default=_default_sequence,
+        default=lambda self: self._default_sequence(),
         required=True)
     
     model = fields.Many2one(
