@@ -52,8 +52,8 @@ class AccessUser(models.Model):
     @classmethod
     def _browse(cls, ids, *args, **kwargs):
         def convert_security_uid(id):
-            if isinstance(id, NoSecurityUid):
-                return super(NoSecurityUid, id).__int__()
+            if isinstance(id, helper.NoSecurityUid):
+                return super(helper.NoSecurityUid, id).__int__()
             return id
         access_ids = [convert_security_uid(id) for id in ids]
         return super(AccessUser, cls)._browse(access_ids, *args, **kwargs)
