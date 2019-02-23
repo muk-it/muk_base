@@ -58,7 +58,6 @@ class PostgresSessionStore(SessionStore):
                 cursor.autocommit(True)
                 self._create_table(cursor)
         except:
-            _logger.exception("REMOVE ME AFTER IT WORKS!")
             self._create_database()
             self._setup_database()
 
