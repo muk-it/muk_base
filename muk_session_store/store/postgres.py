@@ -72,7 +72,7 @@ class PostgresSessionStore(SessionStore):
             """.format(dbname=self.dbname))
 
     def _create_table(self, cursor):
-        self.cursor.execute("""
+        cursor.execute("""
             CREATE TABLE IF NOT EXISTS sessions (
                 sid varchar PRIMARY KEY,
                 write_date timestamp without time zone NOT NULL,
