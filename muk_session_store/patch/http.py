@@ -25,8 +25,8 @@ from odoo.http import request
 from odoo.tools.func import lazy_property
 
 from odoo.addons.muk_utils.tools.patch import monkey_patch
-from odoo.addons.muk_session_store.store import postgres
-from odoo.addons.muk_session_store.store import redis
+from odoo.addons.muk_session_store.store.postgres import PostgresSessionStore
+from odoo.addons.muk_session_store.store.redis import RedisSessionStore
 
 _logger = logging.getLogger(__name__)
 
@@ -79,9 +79,9 @@ class Root(http.Root):
     @lazy_property
     def session_store(self):
         if tools.config.get('session_store_database'):
-            return postgres.PostgresSessionStore(session_class=http.OpenERPSession)
+            return PostgresSessionStore(session_class=http.OpenERPSession)
         elif tools.config.get('session_store_redis') and redis:
-            return redis.RedisSessionStore(session_class=http.OpenERPSession)
+            return RedisSessionStore(session_class=http.OpenERPSession)
         return super(Root, self).session_store
     
 http.root = Root()
