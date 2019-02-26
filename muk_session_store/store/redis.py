@@ -59,11 +59,11 @@ class RedisSessionStore(SessionStore):
             password=config.get('session_store_pass', None)
         )
     
-    def _encode_session_key(self, kex):
+    def _encode_session_key(self, key):
         return key.encode('utf-8') if isinstance(key, str) else key
     
     def _get_session_key(self, sid):
-        return self._encode_session_key(self.key_prefix + sid)
+        return self._encode_session_key(self.prefix + sid)
     
     @retry_redis
     def save(self, session):
