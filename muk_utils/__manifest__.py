@@ -19,7 +19,7 @@
 {
     "name": "MuK Utils",
     "summary": """Utility Features""",
-    "version": '12.0.1.6.4',   
+    "version": '12.0.1.6.5',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "author": "MuK IT",
