@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190128\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 13:07+0000\n"
-"PO-Revision-Date: 2019-02-27 13:07+0000\n"
+"POT-Creation-Date: 2019-02-27 13:08+0000\n"
+"PO-Revision-Date: 2019-02-27 13:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,12 +23,12 @@ msgstr ""
 #. module: muk_fields_lobject
 #: model:ir.model.fields,field_description:muk_fields_lobject.field_ir_model_fields__ttype
 msgid "Field Type"
-msgstr ""
+msgstr "Tipo de campo"
 
 #. module: muk_fields_lobject
 #: model:ir.model,name:muk_fields_lobject.model_ir_model_fields
 msgid "Fields"
-msgstr ""
+msgstr "Campos"
 
 #. module: muk_fields_lobject
 #: model:ir.model,name:muk_fields_lobject.model_ir_http
@@ -38,32 +38,32 @@ msgstr ""
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "binary"
-msgstr ""
+msgstr "binario"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "boolean"
-msgstr ""
+msgstr "booleano"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "char"
-msgstr ""
+msgstr "Carácter"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "date"
-msgstr ""
+msgstr "fecha"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "datetime"
-msgstr ""
+msgstr "Fecha y hora"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "float"
-msgstr ""
+msgstr "número flotante"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
@@ -73,7 +73,7 @@ msgstr ""
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "integer"
-msgstr ""
+msgstr "entero"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
@@ -83,35 +83,35 @@ msgstr ""
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "many2many"
-msgstr ""
+msgstr "Muchos A Muchos"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "many2one"
-msgstr ""
+msgstr "MuchosAUno"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "monetary"
-msgstr ""
+msgstr "Monetario"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "one2many"
-msgstr ""
+msgstr "UnoAMuchos"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "reference"
-msgstr ""
+msgstr "Referencia"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "selection"
-msgstr ""
+msgstr "Selección"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "text"
-msgstr ""
+msgstr "texto"
 

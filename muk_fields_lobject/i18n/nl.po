@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190128\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 13:07+0000\n"
-"PO-Revision-Date: 2019-02-27 13:07+0000\n"
+"POT-Creation-Date: 2019-02-27 13:08+0000\n"
+"PO-Revision-Date: 2019-02-27 13:08+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,27 +18,27 @@ msgstr ""
 #. module: muk_fields_lobject
 #: model:ir.model,name:muk_fields_lobject.model_base
 msgid "Base"
-msgstr ""
+msgstr "Basis"
 
 #. module: muk_fields_lobject
 #: model:ir.model.fields,field_description:muk_fields_lobject.field_ir_model_fields__ttype
 msgid "Field Type"
-msgstr ""
+msgstr "Soort veld"
 
 #. module: muk_fields_lobject
 #: model:ir.model,name:muk_fields_lobject.model_ir_model_fields
 msgid "Fields"
-msgstr ""
+msgstr "Velden"
 
 #. module: muk_fields_lobject
 #: model:ir.model,name:muk_fields_lobject.model_ir_http
 msgid "HTTP Routing"
-msgstr ""
+msgstr "HTTP routing"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "binary"
-msgstr ""
+msgstr "binair"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
@@ -53,7 +53,7 @@ msgstr ""
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "date"
-msgstr ""
+msgstr "datum"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
@@ -93,7 +93,7 @@ msgstr ""
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "monetary"
-msgstr ""
+msgstr "monetair"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
@@ -103,15 +103,15 @@ msgstr ""
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "reference"
-msgstr ""
+msgstr "referentie"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "selection"
-msgstr ""
+msgstr "selectie"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "text"
-msgstr ""
+msgstr "tekst"
 
