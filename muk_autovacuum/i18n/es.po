@@ -1,56 +1,59 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* muk_autovacuum
+#	* muk_autovacuum
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0alpha1\n"
+"Project-Id-Version: Odoo Server 12.0-20190128\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-16 13:55+0000\n"
-"PO-Revision-Date: 2018-08-16 15:56+0200\n"
+"POT-Creation-Date: 2019-02-27 13:36+0000\n"
+"PO-Revision-Date: 2019-02-27 13:36+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-"Language: es\n"
-"X-Generator: Poedit 2.0.6\n"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>Warning</code>: Warning Exception to use with <code>raise</code>"
-msgstr "<code>Advertencia</code>: Advertencia Excepción a utilizar con <code>raise</code>"
+msgstr "<code>Advertencia</code>: Excepción de Advertencia para usar con <code>aumento</code>"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+msgid "<code>b64encode</code>, <code>b64decode</code>: Base64 converter"
+msgstr ""
+
+#. module: muk_autovacuum
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>date_format</code>, <code>datetime_format</code>: server date and time formats"
-msgstr "<code>date_format</code>, <code>datetime_format</code>: formatos de fecha y hora del servidor"
+msgstr ""
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>env</code>: Odoo Environment on which the rule is triggered"
-msgstr "<code>env</code>: Odoo Entorno en el que se desencadena la regla"
+msgstr ""
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>logger.info(message)</code>: Python logging framework"
-msgstr "<code>logger.info(mensaje)</code>: Marco de trabajo de registro Python"
+msgstr ""
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>model</code>: Odoo Model of the record on which the rule is triggered"
-msgstr "<code>modelo</code>: Odoo Modelo del registro en el que se lanza la regla"
+msgstr ""
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>time</code>, <code>datetime</code>, <code>dateutil</code>, <code>timezone</code>: useful Python libraries"
-msgstr "<code>time</code>, <code>datetime</code>, <code>dateutil</code>, <code>timezone</code>: librerías Python útiles"
+msgstr ""
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>uid</code>, <code>user</code>: User on which the rule is triggered"
-msgstr "<code>uid</code>, <code>user</code>: Usuario en el que se lanza la regla"
+msgstr ""
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__active
@@ -58,7 +61,7 @@ msgid "Active"
 msgstr "Activo"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_search
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_search
 msgid "All"
 msgstr "Todos"
 
@@ -66,11 +69,16 @@ msgstr "Todos"
 #: model:ir.actions.act_window,name:muk_autovacuum.action_autovacuum_rule
 #: model:ir.model,name:muk_autovacuum.model_muk_autovacuum_rules
 #: model:ir.ui.menu,name:muk_autovacuum.menu_autovacuum_rules
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_search
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_tree
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_search
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_tree
 msgid "Auto Vacuum Rules"
 msgstr "Reglas de vacío automático"
+
+#. module: muk_autovacuum
+#: model:ir.model,name:muk_autovacuum.model_ir_autovacuum
+msgid "Automatic Vacuum"
+msgstr ""
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__code
@@ -83,9 +91,9 @@ msgid "Code Based"
 msgstr "Basado en código"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Code Settings"
-msgstr "Configuración del código"
+msgstr ""
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,help:muk_autovacuum.field_muk_autovacuum_rules__code
@@ -126,19 +134,17 @@ msgstr "Eliminar registros con un índice am mayor que x."
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__display_name
 msgid "Display Name"
-msgstr "Nombre para mostrar"
+msgstr "Nombre mostrado"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,help:muk_autovacuum.field_muk_autovacuum_rules__protect_starred
-msgid ""
-"Do not delete starred records.\n"
+msgid "Do not delete starred records.\n"
 "            Checks for the following fields:\n"
 "                - starred\n"
 "                - favorite\n"
 "                - is_starred\n"
 "                - is_favorite"
-msgstr ""
-"No borre los registros marcados con asterisco.\n"
+msgstr "No borre los registros marcados con asterisco.\n"
 "            Verifica los siguientes campos:\n"
 "                - marcado\n"
 "                - preferido\n"
@@ -156,14 +162,14 @@ msgid "Domain Based"
 msgstr "Basado en dominio"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Domain Settings"
-msgstr "Configuración del dominio"
+msgstr ""
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Enter Python code here. Help about Python expression is available in the help tab of this document."
-msgstr "Introduzca el código Python aquí. La ayuda sobre la expresión Python está disponible en la pestaña de ayuda de este documento."
+msgstr "Introduzca código Python aquí. Ayuda disponible sobre expresiones Python en la pestaña de ayuda de este documento."
 
 #. module: muk_autovacuum
 #: selection:muk_autovacuum.rules,size_type:0
@@ -196,19 +202,19 @@ msgid "GC'd %s attachments from %s entries"
 msgstr "GC'd %s adjuntos de las entradas %s"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_search
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_search
 msgid "Group By"
 msgstr "Agrupar por"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Help"
 msgstr "Ayuda"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Help with Python expressions"
-msgstr "Ayuda con las expresiones de Python"
+msgstr "Ayuda con expresiones Python"
 
 #. module: muk_autovacuum
 #: selection:muk_autovacuum.rules,time_type:0
@@ -218,12 +224,18 @@ msgstr "Horas"
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__id
 msgid "ID"
-msgstr "CARNÉ DE IDENTIDAD"
+msgstr ""
+
+#. module: muk_autovacuum
+#: code:addons/muk_autovacuum/models/rules.py:287
+#, python-format
+msgid "Import Template for Auto Vacuum Rules"
+msgstr ""
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules____last_update
 msgid "Last Modified on"
-msgstr "Última modificación el"
+msgstr "Última modificación en"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__write_uid
@@ -242,7 +254,7 @@ msgstr "Actas"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__model
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_search
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_search
 msgid "Model"
 msgstr "Modelo"
 
@@ -302,7 +314,7 @@ msgid "Rule Type"
 msgstr "Clase de regla"
 
 #. module: muk_autovacuum
-#: code:addons/muk_autovacuum/models/rules.py:318
+#: code:addons/muk_autovacuum/models/rules.py:327
 #, python-format
 msgid "Rule validation has failed!"
 msgstr "La validación de reglas ha fallado!"
@@ -328,9 +340,9 @@ msgid "Size Order"
 msgstr "Orden de tallas"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Size Settings"
-msgstr "Ajustes de tamaño"
+msgstr ""
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__size_type
@@ -340,7 +352,7 @@ msgstr "Tamaño Tipo"
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__size_parameter_value
 msgid "Size Value"
-msgstr "Tamaño Valor"
+msgstr ""
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__size_parameter
@@ -364,9 +376,9 @@ msgid "Time Field"
 msgstr "Campo de tiempo"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Time Settings"
-msgstr "Ajuste de la hora"
+msgstr ""
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__time_type
@@ -374,9 +386,9 @@ msgid "Time Unit"
 msgstr "Unidad de tiempo"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Various fields may use Python code or Python expressions. The following variables can be used:"
-msgstr "Varios campos pueden usar código Python o expresiones Python. Se pueden utilizar las siguientes variables:"
+msgstr "Varios campos pueden usar código Python o expresiones Python. Se pueden usar las siguientes variables:"
 
 #. module: muk_autovacuum
 #: selection:muk_autovacuum.rules,time_type:0
@@ -389,11 +401,7 @@ msgid "Years"
 msgstr "Años"
 
 #. module: muk_autovacuum
-#: model:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
+#: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "e.g. Delete Logs after 30 Days"
-msgstr "p.ej. Borrar registros después de 30 días"
-
-#. module: muk_autovacuum
-#: model:ir.model,name:muk_autovacuum.model_ir_autovacuum
-msgid "ir.autovacuum"
 msgstr ""
+
