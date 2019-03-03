@@ -16,10 +16,10 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###################################################################################
-{
+{ 
     "name": "MuK Utils",
     "summary": """Utility Features""",
-    "version": '12.0.1.6.7',   
+    "version": '12.0.1.6.8',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "author": "MuK IT",

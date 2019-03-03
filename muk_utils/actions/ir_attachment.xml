@@ -21,8 +21,8 @@
 
 <record id="action_attachment_migrate" model="ir.actions.server">
 	<field name="name">Migrate</field>
-	<field name="model_id" ref="model_ir_attachment" />
-	<field name="binding_model_id" ref="muk_utils.model_ir_attachment" />
+	<field name="model_id" ref="base.model_ir_attachment" />
+	<field name="binding_model_id" ref="base.model_ir_attachment" />
 	<field name="state">code</field>
 	<field name="code">records.action_migrate()</field>
 </record>
