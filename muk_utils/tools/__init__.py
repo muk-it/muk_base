@@ -17,6 +17,7 @@
 #
 ###################################################################################
 
+from . import rst
 from . import file
 from . import json
 from . import cache
