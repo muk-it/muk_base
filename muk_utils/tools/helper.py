@@ -31,8 +31,7 @@ _logger = logging.getLogger(__name__)
 
 def slugify(value):
     value = str(unicodedata.normalize('NFKD', value))
-    if sys.version_info < (3,):
-        value = str(value.encode('ascii', 'ignore'))
+    value = str(value.encode('ascii', 'ignore'))
     value = str(re.sub('[^\w\s-]', '', value).strip().lower())
     value = str(re.sub('[-\s]+', '-', value))
     return value

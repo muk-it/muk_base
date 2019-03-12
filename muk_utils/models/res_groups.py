@@ -62,7 +62,7 @@ class ResGroups(models.Model):
             model = self.env[model_name].sudo()
             if not model._abstract:
                 model_recs[model_name] = model.search([['groups', 'in', self.mapped('id')]])
-        result = super(ResGroups, self).unlink()
+        result = super(ResGroups, self).unlink(vals)
         for tuple in model_recs.items():
             tuple[1].trigger_computation(['users'])
         return result
