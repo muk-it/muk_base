@@ -42,10 +42,10 @@ _logger = logging.getLogger(__name__)
 
 def slugify(value):
     value = str(unicodedata.normalize('NFKD', value))
-    if sys.version_info < (3,):
-        value = str(value.encode('ascii', 'ignore'))
-    value = str(re.sub('[^\w\s-]', '', value).strip().lower())
+    value = str(value.encode('ascii', 'ignore'))
+    value = str(re.sub('[^\w\s-]', '', value))
     value = str(re.sub('[-\s]+', '-', value))
+    value = value.strip().lower()
     return value
 
 def check_name(name):
