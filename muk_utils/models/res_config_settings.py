@@ -39,8 +39,8 @@ class ResConfigSettings(models.TransientModel):
         selection=lambda self: self._attachment_location_selection(),
         string='Storage Location',
         required=True,
+        default='file',
         help="Attachment storage location.")
-    
     
     attachment_location_changed = fields.Boolean(
         compute='_compute_attachment_location_changed',
