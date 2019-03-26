@@ -40,13 +40,13 @@ _logger = logging.getLogger(__name__)
 # File Helper
 #----------------------------------------------------------
 
-def slugify(value):
+def slugify(value, lower=True):
     value = str(unicodedata.normalize('NFKD', value))
     value = str(value.encode('ascii', 'ignore'))
     value = str(re.sub('[^\w\s-]', '', value))
     value = str(re.sub('[-\s]+', '-', value))
-    value = value.strip().lower()
-    return value
+    value = value.lower() if lower else value
+    return value.strip()
 
 def check_name(name):
     tmp_dir = tempfile.mkdtemp()
