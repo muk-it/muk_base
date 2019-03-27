@@ -41,11 +41,11 @@ _logger = logging.getLogger(__name__)
 #----------------------------------------------------------
 
 def slugify(value, lower=True):
-    value = str(unicodedata.normalize('NFKD', value))
-    value = str(value.encode('ascii', 'ignore'))
-    value = str(re.sub('[^\w\s-]', '', value))
-    value = str(re.sub('[-\s]+', '-', value))
+    value = unicodedata.normalize('NFKD', value)
+    value = value.encode('ascii', 'ignore').decode('ascii')
     value = value.lower() if lower else value
+    value = re.sub('[^\w\s-]', '', value)
+    value = re.sub('[-\s]+', '-', value)
     return value.strip()
 
 def check_name(name):
