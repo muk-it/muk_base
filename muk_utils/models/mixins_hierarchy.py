@@ -107,7 +107,7 @@ class Hierarchy(models.AbstractModel):
         paths = [list(map(int, rec.parent_path.split('/')[:-1])) for rec in records]
         ids = paths and set(functools.reduce(operator.concat, paths)) or []
         model_without_path = self.with_context(**{self._name_path_context: False})
-        filtered_records = model_without_path._filter_access('read').browse(ids)
+        filtered_records = model_without_path.browse(ids)._filter_access('read')
         data = dict(filtered_records.name_get())
         for record in records:
             path_names = [""]
