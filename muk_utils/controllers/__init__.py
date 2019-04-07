@@ -1,6 +1,6 @@
 ###################################################################################
 # 
-#    Copyright (C) 2018 MuK IT GmbH
+#    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,6 +17,4 @@
 #
 ###################################################################################
 
-from . import controllers
-from . import models
-from . import tools
+from . import backend
