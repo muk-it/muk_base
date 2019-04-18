@@ -108,19 +108,23 @@ def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], res
 def track_function(func):
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
-        time_start = time.time()
-        query_time = threading.current_thread().query_time
-        query_count = threading.current_thread().query_count
+        threading.current_thread().query_time = 0
+        threading.current_thread().query_count = 0
+        threading.current_thread().perf_t0 = time.time()
         result = func(*args, **kwargs)
-        query_time = threading.current_thread().query_time - query_time
-        query_count = threading.current_thread().query_count - query_count
-        time_taken = time.time() - time_start
-        info = "Function: %s" % func.__name__
+        message = "Track: %s" % func.__name__
         if args and hasattr(args[0], "uid"):
-            info = "UID: %s" % args[0].uid
-        _logger.info("%s - %s %.2fs %.2fs" % (
-            info, query_count, query_time, time_taken
-        ))
+            message = "(UID: %s)" % args[0].uid
+        if hasattr(threading.current_thread(), "query_count"):
+            query_count = threading.current_thread().query_count
+            query_time = threading.current_thread().query_time
+            perf_t0 = threading.current_thread().perf_t0
+            remaining_time = time.time() - perf_t0 - query_time
+            time_taken = query_time + remaining_time
+            message += "- %s Q %.3fs QT %.3fs OT %.3fs TT" % (
+                query_count, query_time, remaining_time, time_taken
+            )
+        _logger.info(message)
         return result
     return wrapper
 
