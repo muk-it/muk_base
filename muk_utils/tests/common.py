@@ -40,6 +40,7 @@ import hmac
 import hashlib
 import logging
 import functools
+import threading
 import traceback
 
 from odoo.tests import common, HOST, PORT
@@ -103,6 +104,22 @@ def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], res
             return test_results
         return wrapper
     return decorator
+
+def track_function(func):
+    @functools.wraps(func)
+    def wrapper(self, *args, **kwargs):
+        time_start = time.time()
+        query_time = threading.current_thread().query_time
+        query_count = threading.current_thread().query_count
+        result = func(self, *args, **kwargs)
+        query_time = threading.current_thread().query_time - query_time
+        query_count = threading.current_thread().query_count - query_count
+        time_taken = time.time() - time_start
+        _logger.info("UID: %s - %s %.2fs %.2fs" % (
+            self.uid, query_count, query_time, time_taken
+        ))
+        return result
+    return wrapper
 
 #----------------------------------------------------------
 # Test Cases
