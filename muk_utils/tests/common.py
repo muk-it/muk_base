@@ -107,16 +107,19 @@ def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], res
 
 def track_function(func):
     @functools.wraps(func)
-    def wrapper(self, *args, **kwargs):
+    def wrapper(*args, **kwargs):
         time_start = time.time()
         query_time = threading.current_thread().query_time
         query_count = threading.current_thread().query_count
-        result = func(self, *args, **kwargs)
+        result = func(*args, **kwargs)
         query_time = threading.current_thread().query_time - query_time
         query_count = threading.current_thread().query_count - query_count
         time_taken = time.time() - time_start
-        _logger.info("UID: %s - %s %.2fs %.2fs" % (
-            self.uid, query_count, query_time, time_taken
+        info = "Function: %s" % func.__name__
+        if args and hasattr(args[0], "uid"):
+            info = "UID: %s" % args[0].uid
+        _logger.info("%s - %s %.2fs %.2fs" % (
+            info, query_count, query_time, time_taken
         ))
         return result
     return wrapper
