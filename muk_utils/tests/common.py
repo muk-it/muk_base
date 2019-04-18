@@ -112,16 +112,16 @@ def track_function(func):
         threading.current_thread().query_count = 0
         threading.current_thread().perf_t0 = time.time()
         result = func(*args, **kwargs)
-        message = "Track: %s" % func.__name__
+        message = "%s" % func.__name__
         if args and hasattr(args[0], "uid"):
-            message = "(UID: %s)" % args[0].uid
+            message = " (%s)" % args[0].uid
         if hasattr(threading.current_thread(), "query_count"):
             query_count = threading.current_thread().query_count
             query_time = threading.current_thread().query_time
             perf_t0 = threading.current_thread().perf_t0
             remaining_time = time.time() - perf_t0 - query_time
             time_taken = query_time + remaining_time
-            message += "- %s Q %.3fs QT %.3fs OT %.3fs TT" % (
+            message += " - %s Q %.3fs QT %.3fs OT %.3fs TT" % (
                 query_count, query_time, remaining_time, time_taken
             )
         _logger.info(message)
