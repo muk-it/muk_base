@@ -46,3 +46,24 @@ class SuspendSecurityTestCase(common.TransactionCase):
         
     def test_normalize(self):
         self.env['res.users'].browse(self.env['res.users'].suspend_security().env.uid)
+    
+    def test_search_one2many(self):
+        user = self.env.ref('base.user_demo')
+        model = self.env['res.partner'].sudo(user.id)
+        self.assertTrue(model.env.user.id == user.id)
+        normal_domain = [('user_ids.id', '=', model.env.uid)]
+        suspend_domain = [('user_ids.id', '=', model.suspend_security().env.uid)]
+        normal_partner = model.search(normal_domain, limit=1)
+        suspend_partner = model.search(suspend_domain, limit=1)
+        self.assertEqual(normal_partner, suspend_partner)
+        normal_domain = [('user_ids', '=', model.env.uid)]
+        suspend_domain = [('user_ids', '=', model.suspend_security().env.uid)]
+        normal_partner = model.search(normal_domain, limit=1)
+        suspend_partner = model.search(suspend_domain, limit=1)
+        self.assertEqual(normal_partner, suspend_partner)
+        normal_domain = [('user_ids.id', 'in', [model.env.uid])]
+        suspend_domain = [('user_ids.id', 'in', [model.suspend_security().env.uid])]
+        normal_partner = model.search(normal_domain, limit=1)
+        suspend_partner = model.search(suspend_domain, limit=1)
+        self.assertEqual(normal_partner, suspend_partner)
+                

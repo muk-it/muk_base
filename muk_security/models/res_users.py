@@ -24,6 +24,8 @@ from odoo import tools, _
 from odoo.exceptions import ValidationError
 
 from odoo.addons.muk_security.tools.security import NoSecurityUid
+from odoo.addons.muk_security.tools.security import convert_security_uid
+
 
 _logger = logging.getLogger(__name__)
 
@@ -35,11 +37,10 @@ class AccessUser(models.Model):
     # Functions
     #----------------------------------------------------------
     
+    def browse(self, arg=None, *args, **kwargs):
+        return super(AccessUser, self).browse(arg=convert_security_uid(arg), **kwargs)
+    
     @classmethod
     def _browse(cls, ids, *args, **kwargs):
-        def convert_security_uid(id):
-            if isinstance(id, NoSecurityUid):
-                return super(NoSecurityUid, id).__int__()
-            return id
         access_ids = [convert_security_uid(id) for id in ids]
         return super(AccessUser, cls)._browse(access_ids, *args, **kwargs)
