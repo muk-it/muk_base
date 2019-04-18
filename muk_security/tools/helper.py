@@ -29,8 +29,5 @@ class NoSecurityUid(int):
             return False
         return super(NoSecurityUid, self).__int__() == other
 
-    def __iter__(self):
-        yield super(NoSecurityUid, self).__int__()
-        
     def __hash__(self):
         return super(NoSecurityUid, self).__hash__()
