@@ -105,28 +105,42 @@ def multi_users(users=[['base.user_root', True], ['base.user_admin', True]], res
         return wrapper
     return decorator
 
-def track_function(func):
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        threading.current_thread().query_time = 0
-        threading.current_thread().query_count = 0
-        threading.current_thread().perf_t0 = time.time()
-        result = func(*args, **kwargs)
-        message = "%s" % func.__name__
-        if args and hasattr(args[0], "uid"):
-            message = " (%s)" % args[0].uid
-        if hasattr(threading.current_thread(), "query_count"):
-            query_count = threading.current_thread().query_count
-            query_time = threading.current_thread().query_time
-            perf_t0 = threading.current_thread().perf_t0
-            remaining_time = time.time() - perf_t0 - query_time
-            time_taken = query_time + remaining_time
-            message += " - %s Q %.3fs QT %.3fs OT %.3fs TT" % (
-                query_count, query_time, remaining_time, time_taken
-            )
-        _logger.info(message)
-        return result
-    return wrapper
+def track_function(max_query_count=None, max_query_time=None, max_time=None, return_tracking=False):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            tracking_parameters = [func.__name__]
+            threading.current_thread().query_time = 0
+            threading.current_thread().query_count = 0
+            threading.current_thread().perf_t0 = time.time()
+            result = func(*args, **kwargs)
+            message = "%s" % func.__name__
+            if args and hasattr(args[0], "uid"):
+                message = " (%s)" % args[0].uid
+            if hasattr(threading.current_thread(), "query_count"):
+                query_count = threading.current_thread().query_count
+                query_time = threading.current_thread().query_time
+                perf_t0 = threading.current_thread().perf_t0
+                remaining_time = time.time() - perf_t0 - query_time
+                time_taken = query_time + remaining_time
+                message += " - %s Q %.3fs QT %.3fs OT %.3fs TT" % (
+                    query_count, query_time, remaining_time, time_taken
+                )
+                tracking_parameters += [
+                    query_count, query_time, remaining_time, time_taken
+                ]
+                if max_query_count and query_count > max_query_count:
+                    raise AssertionError("More than %s queries" % max_query_count)
+                if max_query_time and query_time > max_query_time:
+                    raise AssertionError("Queries took longer than %.3fs" % max_query_time)
+                if max_time and time_taken > max_time:
+                    raise AssertionError("Function took longer than %.3fs" % max_time)
+            _logger.info(message)
+            if return_tracking:
+                return result, tracking_parameters
+            return result
+        return wrapper
+    return decorator
 
 #----------------------------------------------------------
 # Test Cases
