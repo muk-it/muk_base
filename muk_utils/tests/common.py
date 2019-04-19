@@ -135,7 +135,8 @@ def track_function(max_query_count=None, max_query_time=None, max_time=None, ret
                     raise AssertionError("Queries took longer than %.3fs" % max_query_time)
                 if max_time and time_taken > max_time:
                     raise AssertionError("Function took longer than %.3fs" % max_time)
-            _logger.info(message)
+            if not return_tracking:
+                _logger.info(message)
             if return_tracking:
                 return result, tracking_parameters
             return result
