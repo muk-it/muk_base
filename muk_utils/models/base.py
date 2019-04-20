@@ -79,17 +79,18 @@ class Base(models.AbstractModel):
     #----------------------------------------------------------
     
     @api.model
-    def search_parents(self, domain=[], order=None):
+    def search_parents(self, domain=[], offset=0, limit=None, order=None, count=False):
         """ This method finds the top level elements of the hierarchy for a given search query.
             
             :param domain: a search domain <reference/orm/domains> (default: empty list)
             :param order: a string to define the sort order of the query (default: none)
             :returns: the top level elements for the given search query 
         """
-        return self.browse(self._search_parents(domain=domain, order=order))
+        res = self._search_parents(domain=domain, offset=offset, limit=limit, order=order, count=count)
+        return res if count else self.browse(res)
     
     @api.model
-    def search_read_parents(self, domain=[], fields=None, order=None):
+    def search_read_parents(self, domain=[], fields=None, offset=0, limit=None, order=None):
         """ This method finds the top level elements of the hierarchy for a given search query.
             
             :param domain: a search domain <reference/orm/domains> (default: empty list)
@@ -97,7 +98,7 @@ class Base(models.AbstractModel):
             :param order: a string to define the sort order of the query (default: none)
             :returns: the top level elements for the given search query 
         """
-        records = self.search_parents(domain=domain, order=order)
+        records = self.search_parents(domain=domain, offset=offset, limit=limit, order=order)
         if not records:
             return []
         if fields and fields == ['id']:
@@ -109,7 +110,7 @@ class Base(models.AbstractModel):
         return [index[record.id] for record in records if record.id in index]
     
     @api.model
-    def _search_parents(self, domain=[], order=None):
+    def _search_parents(self, domain=[], offset=0, limit=None, order=None, count=False):
         self._check_parent_field()
         self.check_access_rights('read')
         if expression.is_false(self, domain):
@@ -134,13 +135,18 @@ class Base(models.AbstractModel):
         )
         order_by = self._generate_order_by(order, query)
         from_clause, where_clause, where_clause_params = query.get_sql()
-
         where_str = (
             where_clause and 
             (" WHERE %s AND %s" % (where_clause, parent_clause)) or 
             (" WHERE %s" % parent_clause)
         )
-        query_str = 'SELECT "%s".id FROM ' % self._table + from_clause + where_str + order_by
+        if count:
+            query_str = 'SELECT count(1) FROM ' + from_clause + where_str
+            self._cr.execute(query_str, where_clause_params)
+            return self._cr.fetchone()[0]
+        limit_str = limit and ' limit %d' % limit or ''
+        offset_str = offset and ' offset %d' % offset or ''
+        query_str = 'SELECT "%s".id FROM ' % self._table + from_clause + where_str + order_by + limit_str + offset_str
         complete_where_clause_params = where_clause_params + where_clause_arguments
         self._cr.execute(query_str, complete_where_clause_params)
         return utils.uniquify_list([x[0] for x in self._cr.fetchall()])
