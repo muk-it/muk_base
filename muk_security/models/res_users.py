@@ -51,8 +51,8 @@ class AccessUser(models.Model):
     
     def browse(self, arg=None, *args, **kwargs):
         if isinstance(arg, helper.NoSecurityUid):
-            arg = super(helper.NoSecurityUid, id).__int__()
-        return super(AccessUser, self).browse(arg=arg, **kwargs)
+            arg = super(helper.NoSecurityUid, arg).__int__()
+        return super(AccessUser, self).browse(arg=arg, *args **kwargs)
     
     
     @classmethod
