@@ -131,6 +131,6 @@ class IrAttachment(models.Model):
             else:
                 vals['db_datas'] = value
             clean_vals = self._get_datas_clean_vals(attach)
-            super(IrAttachment, attach.sudo()).write(vals)
+            models.Model.write(attach.sudo(), vals)
             self._clean_datas_after_write(clean_vals)
         
