@@ -38,7 +38,7 @@ class AccessUser(models.Model):
     #----------------------------------------------------------
     
     def browse(self, arg=None, *args, **kwargs):
-        return super(AccessUser, self).browse(arg=convert_security_uid(arg), **kwargs)
+        return super(AccessUser, self).browse(convert_security_uid(arg), *args, **kwargs)
     
     @classmethod
     def _browse(cls, ids, *args, **kwargs):
