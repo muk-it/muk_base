@@ -48,11 +48,13 @@ class AccessUser(models.Model):
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
-    
-    def browse(self, arg=None, *args, **kwargs):
-        if isinstance(arg, helper.NoSecurityUid):
-            arg = super(helper.NoSecurityUid, arg).__int__()
-        return super(AccessUser, self).browse(arg=arg, *args, **kwargs)
+   
+    def browse(self, *args, **kwargs):
+        if len(args) and isinstance(args[0], helper.NoSecurityUid):
+            args = list(args)
+            args[0] = super(helper.NoSecurityUid, args[0]).__int__()
+            args = tuple(args)
+        return super(AccessUser, self).browse(*args, **kwargs)
     
     
     @classmethod
