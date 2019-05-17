@@ -16,11 +16,11 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ###################################################################################
-
+ 
 {
     "name": "MuK Large Objects Attachment",
     "summary": """Large Objects Attachment Location""",
-    "version": '12.0.2.1.7',   
+    "version": '12.0.2.1.8',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "http://www.mukit.at",

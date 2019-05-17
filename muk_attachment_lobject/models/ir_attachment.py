@@ -108,7 +108,7 @@ class LObjectIrAttachment(models.Model):
                 vals = self._update_datas_vals(vals, attach, bin_data)
                 vals['store_lobject'] = bin_data
                 clean_vals = self._get_datas_clean_vals(attach)
-                super(LObjectIrAttachment, attach.sudo()).write(vals)
+                models.Model.write(attach.sudo(), vals)
                 self._clean_datas_after_write(clean_vals)
             else:
                 super(LObjectIrAttachment, attach)._inverse_datas()
