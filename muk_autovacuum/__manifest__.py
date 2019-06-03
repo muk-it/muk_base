@@ -17,10 +17,10 @@
 #
 ###################################################################################
 
-{
+{ 
     'name': 'MuK Autovacuum',
     'summary': 'Configure automatic garbage collection',
-    'version': '12.0.2.1.13',
+    'version': '12.0.2.1.14',
     'category': 'Extra Tools',
     'license': 'AGPL-3',
     'author': 'MuK IT',
