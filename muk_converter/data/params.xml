@@ -19,6 +19,12 @@
 
 <odoo noupdate="1">
 
+	<record id="muk_converter_service" model="ir.config_parameter">
+        <field name="key">muk_converter.service</field>
+        <field name="value">unoconv</field>
+        <field name="group_ids" eval="[(4, ref('base.group_system'))]"/>
+    </record>
+
 	<record id="muk_converter_max_store" model="ir.config_parameter">
         <field name="key">muk_converter.max_store</field>
         <field name="value">20</field>

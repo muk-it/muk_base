@@ -17,5 +17,6 @@
 #
 ###################################################################################
 
-from . import converter
 from . import store
+from . import converter
+from . import res_config_settings

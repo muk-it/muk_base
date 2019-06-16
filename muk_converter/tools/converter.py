@@ -21,25 +21,25 @@ import logging
 
 from odoo import tools
 
-from odoo.addons.muk_converter.service import unoconv
+from odoo.addons.muk_converter.service.unoconv import unoconv
 
 _logger = logging.getLogger(__name__)
 
 def formats():
-    return unoconv.formats()
+    return unoconv.formats
 
 def selection_formats():
-    return list(map(lambda format: (format, format.upper()), unoconv.formats()))
+    return list(map(lambda format: (format, format.upper()), unoconv.formats)
 
 def imports():
-    return unoconv.imports()
+    return unoconv.imports
 
 def convert(filename, content, format):
-    return unoconv.convert_binary(binary=content, filename=filename, format=format)
+    return unoconv.convert(content, filename=filename, format=format)
 
 def convert2pdf(filename, content):
-    return unoconv.convert_binary(binary=content, filename=filename)
+    return unoconv.convert(content, filename=filename, format="pdf")
     
 def convert2html(filename, content):
-    output = unoconv.convert_binary(binary=content, filename=filename, format="html")
+    output = unoconv.convert(content, filename=filename, format="html")
     return tools.html_sanitize(output)

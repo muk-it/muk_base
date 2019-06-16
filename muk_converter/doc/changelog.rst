@@ -1,3 +1,8 @@
+`1.2.0`
+-------
+
+- Added In-App Purchases option
+
 `1.1.0`
 -------
 

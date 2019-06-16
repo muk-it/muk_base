@@ -27,12 +27,8 @@
 				<group states="export">
 					<field invisible="1" name="state" />
 					<group>
-						<field name="type" />
-						<field name="input_url" widget="url"
-							attrs="{'required':[('type','=','url')], 'invisible':[('type','=','binary')]}" />
 						<field name="input_name" invisible="1" />
-						<field name="input_binary" filename="input_name"
-							attrs="{'required':[('type','=','binary')], 'invisible':[('type','=','url')]}" />
+						<field name="input_binary" filename="input_name" />
 					</group>
 					<group>
 						<field name="format" />

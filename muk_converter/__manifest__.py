@@ -20,7 +20,7 @@
 {
     "name": "MuK Converter",
     "summary": """Universal Converter""",
-    "version": '11.0.1.1.6',   
+    "version": '11.0.1.2.2',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "https://www.mukit.at",
@@ -30,15 +30,17 @@
         "Mathias Markl <mathias.markl@mukit.at>",
     ],
     "depends": [
-        "muk_utils",
+        "iap",
+        "base_setup",
         "muk_autovacuum",
         "muk_fields_lobject",
     ],
     "data": [
         "security/ir.model.access.csv",
-        "views/convert.xml",
         "data/params.xml",
         "data/autovacuum.xml",
+        "views/convert.xml",
+        "views/res_config_settings_view.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",
@@ -48,9 +50,7 @@
     ],
     "external_dependencies": {
         "python": [],
-        "bin": [
-            "unoconv",
-        ],
+        "bin": [],
     },
     "application": False,
     "installable": True,

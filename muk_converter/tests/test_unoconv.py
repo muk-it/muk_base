@@ -23,7 +23,7 @@ import unittest
 
 from odoo.tests import common
 
-from odoo.addons.muk_converter.service import unoconv
+from odoo.addons.muk_converter.service.unoconv import UnoconvConverter
 
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
@@ -32,12 +32,13 @@ class UnoconvTestCase(common.TransactionCase):
     
     def setUp(self):
         super(UnoconvTestCase, self).setUp()
+        self.unoconv = UnoconvConverter()
 
     def tearDown(self):
         super(UnoconvTestCase, self).tearDown()
     
     @unittest.skipIf(os.environ.get('TRAVIS', False), "Skipped for Travis CI")
-    def test_convert_binary(self):
+    def test_convert(self):
         with open(os.path.join(_path, 'tests/data', 'sample.png'), 'rb') as file:
-            self.assertTrue(unoconv.convert_binary(file.read()))
+            self.assertTrue(self.unoconv.convert(file.read(), filename='sample.png'))
         

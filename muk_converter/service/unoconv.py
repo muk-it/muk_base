@@ -35,11 +35,11 @@ from contextlib import closing
 from odoo.tools import config
 from odoo.tools.mimetypes import guess_mimetype
 
-from odoo.addons.muk_utils.tools import utils_os
+from odoo.addons.muk_utils.tools.file import guess_extension
 
 _logger = logging.getLogger(__name__)
 
-FORMATS = [
+UNOCONV_FORMATS = [
     "bib", "bmp", "csv", "dbf", "dif", "doc", "doc6", "doc95", "docbook", "docx", "docx7", "emf",
     "eps", "fodg", "fodp", "fods", "fodt", "gif", "html", "jpg", "latex", "mediawiki", "met", "odd",
     "odg", "odp", "ods", "odt", "ooxml", "otg", "otp", "ots", "ott", "pbm", "pct", "pdb", "pdf", "pgm",
@@ -57,7 +57,7 @@ FORMATS = [
     "xls95", "xlsx", "xlt", "xlt5", "xlt95", "xpm"
 ]
 
-IMPORTS = [
+UNOCONV_IMPORTS = [
     "bmp", "csv", "dbf", "dif", "doc", "docx", "dot", "emf", "eps", "epub", "fodg", "fodp", "fods",
     "fodt", "gif", "gnm", "gnumeric", "htm", "html", "jpeg", "jpg", "met", "mml", "odb", "odf", "odg",
     "odp", "ods", "odt", "pbm", "pct", "pdb", "pdf", "pgm", "png", "pot", "ppm", "pps", "ppt", "pptx",
@@ -72,85 +72,76 @@ IMPORTS = [
     "wmf", "wri", "xls", "xlsx", "xlt", "xlw", "xml", "xpm"
 ]
 
-def formats():
-    return FORMATS
-
-def imports():
-    return IMPORTS
-
-def unoconv_environ():
-    env = os.environ.copy()
-    uno_path = config.get('uno_path', False)
-    if uno_path:
-        env['UNO_PATH'] = config['uno_path']   
-    return env
-
-def convert(input_path, output_path, doctype="document", format="pdf"):
-    """
-    Convert a file to the given format.
+class UnoconvConverter(object):
     
-    :param input_path: The path of the file to convert.
-    :param output_path: The path of the output where the converted file is to be saved.
-    :param doctype: Specify the document type (document, graphics, presentation, spreadsheet).
-    :param format: Specify the output format for the document.
-    :raises CalledProcessError: The command returned non-zero exit status 1.
-    :raises OSError: This exception is raised when a system function returns a system-related error.
-    """
-    try:
-        env = unoconv_environ()
-        shell = True if os.name in ('nt', 'os2') else False
-        args = ['unoconv', '--format=%s' % format, '--output=%s' % output_path, input_path]
-        process = Popen(args, stdout=PIPE, env=env, shell=shell)
-        outs, errs = process.communicate()
-        return_code = process.wait()
-        if return_code:
-            raise CalledProcessError(return_code, args, outs, errs)
-    except CalledProcessError:
-        _logger.exception("Error while running unoconv.")
-        raise
-    except OSError:
-        _logger.exception("Error while running unoconv.")
-        raise
+    @property
+    def formats(self):
+        return UNOCONV_FORMATS
     
-def convert_binary(binary, mimetype=None, filename=None, export="binary", doctype="document", format="pdf"):
-    """
-    Converts a binary value to the given format.
+    @property
+    def imports(self):
+        return UNOCONV_IMPORTS
     
-    :param binary: The binary value.
-    :param mimetype: The mimetype of the binary value.
-    :param filename: The filename of the binary value.
-    :param export: The output format (binary, file, base64).
-    :param doctype: Specify the document type (document, graphics, presentation, spreadsheet).
-    :param format: Specify the output format for the document.
-    :return: Returns the output depending on the given format.
-    :raises ValueError: The file extension could not be determined or the format is invalid.
-    """
-    extension = utils_os.get_extension(binary, filename, mimetype)
-    if not extension:
-        raise ValueError("The file extension could not be determined.")
-    if format not in FORMATS:
-        raise ValueError("Invalid export format.")
-    if extension not in IMPORTS:
-        raise ValueError("Invalid import format.")
-    tmp_dir = tempfile.mkdtemp()
-    try:
-        tmp_wpath = os.path.join(tmp_dir, "tmpfile." + extension)
-        tmp_ppath = os.path.join(tmp_dir, "tmpfile." + format)
-        if os.name == 'nt':
-            tmp_wpath = tmp_wpath.replace("\\", "/")
-            tmp_ppath = tmp_ppath.replace("\\", "/")
-        with closing(open(tmp_wpath, 'wb')) as file:
-            file.write(binary)    
-        convert(tmp_wpath, tmp_ppath, doctype, format)
-        with closing(open(tmp_ppath, 'rb')) as file:
-            if export == 'file':
-                output = io.BytesIO()
-                output.write(file.read())
-                output.close()
-                return output
-            elif export == 'base64':
-                return base64.b64encode(file.read())
-            else:
-                return file.read()
-    finally:
-        shutil.rmtree(tmp_dir)
+    def environ(self):
+        env = os.environ.copy()
+        uno_path = config.get('uno_path', False)
+        if uno_path:
+            env['UNO_PATH'] = config['uno_path']   
+        return env
+
+    def convert(self, binary, mimetype=None, filename=None, export="binary", doctype="document", format="pdf"):
+        """ Converts a binary value to the given format.
+        
+            :param binary: The binary value.
+            :param mimetype: The mimetype of the binary value.
+            :param filename: The filename of the binary value.
+            :param export: The output format (binary, file, base64).
+            :param doctype: Specify the document type (document, graphics, presentation, spreadsheet).
+            :param format: Specify the output format for the document.
+            :return: Returns the output depending on the given format.
+            :raises ValueError: The file extension could not be determined or the format is invalid.
+        """
+        extension = guess_extension(filename=filename, mimetype=mimetype, binary=binary)
+        if not extension:
+            raise ValueError("The file extension could not be determined.")
+        if format not in self.formats:
+            raise ValueError("Invalid export format.")
+        if extension not in self.imports:
+            raise ValueError("Invalid import format.")
+        tmp_dir = tempfile.mkdtemp()
+        try:
+            tmp_wpath = os.path.join(tmp_dir, "tmpfile." + extension)
+            tmp_ppath = os.path.join(tmp_dir, "tmpfile." + format)
+            if os.name == 'nt':
+                tmp_wpath = tmp_wpath.replace("\\", "/")
+                tmp_ppath = tmp_ppath.replace("\\", "/")
+            with closing(open(tmp_wpath, 'wb')) as file:
+                file.write(binary)    
+            shell = True if os.name in ('nt', 'os2') else False
+            args = ['unoconv', '--format=%s' % format, '--output=%s' % tmp_ppath, tmp_wpath]
+            process = Popen(args, stdout=PIPE, env=self.environ(), shell=shell)
+            outs, errs = process.communicate()
+            return_code = process.wait()
+            if return_code:
+                raise CalledProcessError(return_code, args, outs, errs)
+            with closing(open(tmp_ppath, 'rb')) as file:
+                if export == 'file':
+                    output = io.BytesIO()
+                    output.write(file.read())
+                    output.close()
+                    return output
+                elif export == 'base64':
+                    return base64.b64encode(file.read())
+                else:
+                    return file.read()
+        except CalledProcessError:
+            _logger.exception("Error while running unoconv.")
+            raise
+        except OSError:
+            _logger.exception("Error while running unoconv.")
+            raise
+        finally:
+            shutil.rmtree(tmp_dir)
+
+unoconv = UnoconvConverter()
+
