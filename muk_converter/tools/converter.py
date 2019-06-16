@@ -29,7 +29,7 @@ def formats():
     return unoconv.formats
 
 def selection_formats():
-    return list(map(lambda format: (format, format.upper()), unoconv.formats)
+    return list(map(lambda format: (format, format.upper()), unoconv.formats))
 
 def imports():
     return unoconv.imports
