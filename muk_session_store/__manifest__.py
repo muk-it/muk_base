@@ -20,7 +20,7 @@
 {
     "name": "MuK Session Store",
     "summary": """Session Store Options""",
-    "version": "12.0.1.0.9",
+    "version": "12.0.1.0.10",
     "category": "Extra Tools",
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
