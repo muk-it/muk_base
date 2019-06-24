@@ -20,7 +20,7 @@
 {
     "name": "MuK Filestore Field",
     "summary": """Filestore Support for Fields""",
-    "version": '12.0.1.0.0',   
+    "version": '12.0.1.0.1',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "https://www.mukit.at",
