@@ -4,19 +4,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190128\n"
+"Project-Id-Version: Odoo Server 12.0-20190522\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 12:32+0000\n"
-"PO-Revision-Date: 2019-06-24 14:21+0000\n"
-"Last-Translator: MuK IT <admin@mukit.at>\n"
-"Language-Team: German <http://weblate.mukit.at/projects/base-12/muk_security/"
-"de/>\n"
-"Language: de\n"
+"POT-Creation-Date: 2019-06-24 20:14+0000\n"
+"PO-Revision-Date: 2019-06-24 20:14+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7\n"
+"Plural-Forms: \n"
 
 #. module: muk_security
 #: model:ir.actions.act_window,name:muk_security.action_security_access_groups
@@ -49,7 +46,7 @@ msgstr "Komplette Gruppen"
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_groups__permission_create
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__permission_create
 msgid "Create Access"
-msgstr "Erstellen erlauben"
+msgstr "Objekterzeugung erlauben"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__create_uid
@@ -65,7 +62,7 @@ msgstr "Erstellt am"
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_groups__permission_unlink
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__permission_unlink
 msgid "Delete Access"
-msgstr "Löschen erlauben"
+msgstr "Zugang löschen"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__display_name
@@ -78,7 +75,7 @@ msgstr "Anzeigename"
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking__is_lock_editor
 msgid "Editor"
-msgstr "Editor"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__explicit_users
@@ -112,7 +109,7 @@ msgstr "Gruppen"
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__id
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups____last_update
@@ -196,10 +193,7 @@ msgstr "Der Eintrag (%s [%s]) ist von einem anderen Benutzer gesperrt."
 msgid "The requested operation cannot be completed due to group security restrictions. Please contact your system administrator.\n"
 "\n"
 "(Document type: %s, Operation: %s)"
-msgstr ""
-"Der angeforderte Vorgang kann aufgrund von Sicherheitseinschränkungen der "
-"Gruppe nicht abgeschlossen werden. Bitte verständigen Sie Ihren "
-"Systemadministrator.\n"
+msgstr "Der angeforderte Vorgang kann aufgrund von Sicherheitseinschränkungen der Gruppe nicht abgeschlossen werden. Bitte verständigen Sie Ihren Systemadministrator.\n"
 "\n"
 "(Document type: %s1, Operation: %s2)"
 
@@ -220,3 +214,4 @@ msgstr "Benutzer"
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__permission_write
 msgid "Write Access"
 msgstr "Schreibrechte"
+
