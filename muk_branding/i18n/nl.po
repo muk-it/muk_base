@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190128\n"
+"Project-Id-Version: Odoo Server 12.0-20190522\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 12:29+0000\n"
-"PO-Revision-Date: 2019-02-27 12:29+0000\n"
+"POT-Creation-Date: 2019-06-24 19:39+0000\n"
+"PO-Revision-Date: 2019-06-24 19:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -128,7 +128,7 @@ msgstr ""
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_muk_branding_debranding__display_name
 msgid "Display Name"
-msgstr "Weergave naam"
+msgstr "Weergavenaam"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
