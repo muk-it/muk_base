@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190128\n"
+"Project-Id-Version: Odoo Server 12.0-20190522\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 13:08+0000\n"
-"PO-Revision-Date: 2019-02-27 13:08+0000\n"
+"POT-Creation-Date: 2019-06-24 20:03+0000\n"
+"PO-Revision-Date: 2019-06-24 20:03+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr "Champs"
 #. module: muk_fields_lobject
 #: model:ir.model,name:muk_fields_lobject.model_ir_http
 msgid "HTTP Routing"
-msgstr ""
+msgstr "Routage HTTP"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
