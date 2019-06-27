@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190128\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-26 23:15+0000\n"
-"PO-Revision-Date: 2019-06-24 12:13+0000\n"
+"PO-Revision-Date: 2019-06-27 07:53+0000\n"
 "Last-Translator: MuK IT <admin@mukit.at>\n"
 "Language-Team: French <http://weblate.mukit.at/projects/base-12/muk_utils/fr/"
 ">\n"
@@ -26,17 +26,17 @@ msgstr "<strong>Save</strong> cette page avant de déclencher la migration."
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
 msgid "All Data"
-msgstr ""
+msgstr "Toutes les données"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
 msgid "Attached Document Field"
-msgstr ""
+msgstr "Champ du document joint"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
 msgid "Attached Document Model"
-msgstr ""
+msgstr "Modèle de document joint"
 
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_ir_attachment
@@ -46,12 +46,12 @@ msgstr "Pièce jointe"
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.res_config_settings_view_form
 msgid "Attachment storage location"
-msgstr ""
+msgstr "Pièce jointe"
 
 #. module: muk_utils
 #: model:ir.model.fields,help:muk_utils.field_res_config_settings__attachment_location
 msgid "Attachment storage location."
-msgstr ""
+msgstr "Emplacement de stockage des pièces jointes"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
@@ -61,13 +61,13 @@ msgstr "Pièces jointes"
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_base
 msgid "Base"
-msgstr ""
+msgstr "Pièces jointes"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__child_groups
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_mixins_groups_form
 msgid "Child Groups"
-msgstr ""
+msgstr "Base"
 
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_res_config_settings
@@ -85,17 +85,17 @@ msgstr "Nom affiché"
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__explicit_users
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_mixins_groups_form
 msgid "Explicit Users"
-msgstr ""
+msgstr "Nom d'affichage"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
 msgid "Field Data"
-msgstr ""
+msgstr "Utilisateurs explicites"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.res_config_settings_view_form
 msgid "Force Storage Migration"
-msgstr ""
+msgstr "Données de terrain"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_mixins_groups_form
@@ -105,7 +105,7 @@ msgstr "Groupe"
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_muk_utils_mixins_groups
 msgid "Group Mixin"
-msgstr ""
+msgstr "Groupe"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__name
@@ -115,7 +115,7 @@ msgstr "Nom du groupe"
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__users
 msgid "Group Users"
-msgstr ""
+msgstr "Nom du groupe"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__groups
@@ -127,14 +127,14 @@ msgstr "Groupes"
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_muk_utils_mixins_hierarchy
 msgid "Hierarchy Mixin"
-msgstr ""
+msgstr "Groupes"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__id
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_hierarchy__id
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_scss_editor__id
 msgid "ID"
-msgstr ""
+msgstr "Hiérarchie Mixin"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups____last_update
@@ -146,24 +146,24 @@ msgstr "Dernière modification le"
 #. module: muk_utils
 #: model:ir.actions.server,name:muk_utils.action_attachment_migrate
 msgid "Migrate"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: muk_utils
 #: code:addons/muk_utils/models/ir_attachment.py:103
 #, python-format
 msgid "Migrate Attachment %s of %s to %s"
-msgstr ""
+msgstr "Migrer les %s de pièces jointes de %s vers %s"
 
 #. module: muk_utils
 #: code:addons/muk_utils/models/ir_attachment.py:85
 #, python-format
 msgid "Only administrators can execute this action."
-msgstr ""
+msgstr "Seuls les administrateurs peuvent exécuter cette action."
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__parent_group
 msgid "Parent Group"
-msgstr ""
+msgstr "Seuls les administrateurs peuvent exécuter cette action."
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__parent_path
@@ -174,43 +174,43 @@ msgstr "Chemin parent"
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_hierarchy__parent_path_json
 msgid "Path Json"
-msgstr ""
+msgstr "Cheminement des parents"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_hierarchy__parent_path_names
 msgid "Path Names"
-msgstr ""
+msgstr "Sentier Json"
 
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_muk_utils_scss_editor
 msgid "Scss Editor"
-msgstr ""
+msgstr "Noms des chemins"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_form
 msgid "Storage"
-msgstr ""
+msgstr "Editeur Scss"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_res_config_settings__attachment_location
 msgid "Storage Location"
-msgstr ""
+msgstr "Stockage"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_res_config_settings__attachment_location_changed
 msgid "Storage Location Changed"
-msgstr ""
+msgstr "Emplacement de stockage"
 
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_ir_config_parameter
 msgid "System Parameter"
-msgstr ""
+msgstr "Paramètres du système"
 
 #. module: muk_utils
 #: sql_constraint:muk_utils.mixins.groups:0
 msgid "The name of the group must be unique!"
-msgstr ""
+msgstr "Changement de magasin"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__count_users

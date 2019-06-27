@@ -7,33 +7,36 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190128\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-26 23:15+0000\n"
-"PO-Revision-Date: 2019-02-26 23:15+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2019-06-27 07:53+0000\n"
+"Last-Translator: MuK IT <admin@mukit.at>\n"
+"Language-Team: Dutch <http://weblate.mukit.at/projects/base-12/muk_utils/nl/>"
+"\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.7\n"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.res_config_settings_view_form
 msgid "<strong>Save</strong> this page before triggering the migration."
-msgstr ""
+msgstr "<strong>Save</strong> deze pagina vooraleer de migratie te starten."
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
 msgid "All Data"
-msgstr ""
+msgstr "Alle gegevens"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
 msgid "Attached Document Field"
-msgstr ""
+msgstr "Bijgevoegd documentveld"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
 msgid "Attached Document Model"
-msgstr ""
+msgstr "Bijgevoegd documentmodel"
 
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_ir_attachment
@@ -43,12 +46,12 @@ msgstr "Bijlage"
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.res_config_settings_view_form
 msgid "Attachment storage location"
-msgstr ""
+msgstr "Opslaglocatie voor hulpstukken"
 
 #. module: muk_utils
 #: model:ir.model.fields,help:muk_utils.field_res_config_settings__attachment_location
 msgid "Attachment storage location."
-msgstr ""
+msgstr "Opslagplaats voor bevestigingsmateriaal."
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
@@ -64,7 +67,7 @@ msgstr "Basis"
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__child_groups
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_mixins_groups_form
 msgid "Child Groups"
-msgstr ""
+msgstr "Kind groepen"
 
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_res_config_settings
@@ -82,17 +85,17 @@ msgstr "Weergave naam"
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__explicit_users
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_mixins_groups_form
 msgid "Explicit Users"
-msgstr ""
+msgstr "Expliciete gebruikers"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_search
 msgid "Field Data"
-msgstr ""
+msgstr "Veldgegevens"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.res_config_settings_view_form
 msgid "Force Storage Migration"
-msgstr ""
+msgstr "Krachtenopslag migratie"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_mixins_groups_form
@@ -102,7 +105,7 @@ msgstr "Groep"
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_muk_utils_mixins_groups
 msgid "Group Mixin"
-msgstr ""
+msgstr "Groepsmixer"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__name
@@ -112,7 +115,7 @@ msgstr "Groepsnaam"
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__users
 msgid "Group Users"
-msgstr ""
+msgstr "Groep gebruikers"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__groups
@@ -124,14 +127,14 @@ msgstr "Groepen"
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_muk_utils_mixins_hierarchy
 msgid "Hierarchy Mixin"
-msgstr ""
+msgstr "HiÃ«rarchie Mixin"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__id
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_hierarchy__id
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_scss_editor__id
 msgid "ID"
-msgstr ""
+msgstr "IDENTITEITSBEWIJS"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups____last_update
@@ -143,24 +146,24 @@ msgstr "Laatst gewijzigd op"
 #. module: muk_utils
 #: model:ir.actions.server,name:muk_utils.action_attachment_migrate
 msgid "Migrate"
-msgstr ""
+msgstr "Migreren"
 
 #. module: muk_utils
 #: code:addons/muk_utils/models/ir_attachment.py:103
 #, python-format
 msgid "Migrate Attachment %s of %s to %s"
-msgstr ""
+msgstr "Migreer Attachment %s van %s naar %s"
 
 #. module: muk_utils
 #: code:addons/muk_utils/models/ir_attachment.py:85
 #, python-format
 msgid "Only administrators can execute this action."
-msgstr ""
+msgstr "Alleen beheerders kunnen deze actie uitvoeren."
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__parent_group
 msgid "Parent Group"
-msgstr ""
+msgstr "Moedergroep"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__parent_path
@@ -171,33 +174,33 @@ msgstr "Bovenliggend pad"
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_hierarchy__parent_path_json
 msgid "Path Json"
-msgstr ""
+msgstr "Pad Json"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_hierarchy__parent_path_names
 msgid "Path Names"
-msgstr ""
+msgstr "Padnamen"
 
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_muk_utils_scss_editor
 msgid "Scss Editor"
-msgstr ""
+msgstr "Scss-editor"
 
 #. module: muk_utils
 #: model_terms:ir.ui.view,arch_db:muk_utils.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_attachment_form
 msgid "Storage"
-msgstr ""
+msgstr "Opslag"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_res_config_settings__attachment_location
 msgid "Storage Location"
-msgstr ""
+msgstr "Opslaglocatie"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_res_config_settings__attachment_location_changed
 msgid "Storage Location Changed"
-msgstr ""
+msgstr "Opslaglocatie veranderd"
 
 #. module: muk_utils
 #: model:ir.model,name:muk_utils.model_ir_config_parameter
@@ -207,11 +210,10 @@ msgstr "Systeem parameter"
 #. module: muk_utils
 #: sql_constraint:muk_utils.mixins.groups:0
 msgid "The name of the group must be unique!"
-msgstr ""
+msgstr "De naam van de groep moet uniek zijn!"
 
 #. module: muk_utils
 #: model:ir.model.fields,field_description:muk_utils.field_muk_utils_mixins_groups__count_users
 #: model_terms:ir.ui.view,arch_db:muk_utils.view_mixins_groups_form
 msgid "Users"
 msgstr "Gebruikers"
-
