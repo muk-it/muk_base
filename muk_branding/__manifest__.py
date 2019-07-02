@@ -20,7 +20,7 @@
 {
     "name": "MuK Branding",
     "summary": """Branding and Debranding""", 
-    "version": "12.0.1.0.3",
+    "version": "12.0.1.0.6",
     "category": "Extra Tools",
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
@@ -33,8 +33,8 @@
         "muk_utils",
     ],
     "data": [
+        "data/company.xml",
         "views/res_config_settings_view.xml",
-        "data/users.xml",
     ],
     "qweb": [
         "static/src/xml/*.xml",

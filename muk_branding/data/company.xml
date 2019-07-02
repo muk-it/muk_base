@@ -17,12 +17,10 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 -->
 
-<odoo noupdate="1">
+<odoo>
         
-    <record id="base.partner_root" model="res.partner">
-        <field name="name">Bot</field>
-        <field name="image"></field>
-        <field name="email">bot@example.com</field>
+    <record id="base.main_company" model="res.company">
+        <field name="favicon" type="base64" file="muk_branding/static/src/img/favicon.ico"/>
     </record>
 
 </odoo>
