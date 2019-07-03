@@ -17,7 +17,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>. 
 -->
 
-<odoo>
+<odoo noupdate="1">
         
     <record id="base.main_company" model="res.company">
         <field name="favicon" type="base64" file="muk_branding/static/src/img/favicon.ico"/>

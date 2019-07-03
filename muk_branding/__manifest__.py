@@ -20,7 +20,7 @@
 {
     "name": "MuK Branding",
     "summary": """Branding and Debranding""", 
-    "version": "12.0.1.0.6",
+    "version": "12.0.1.0.7",
     "category": "Extra Tools",
     "license": "AGPL-3",
     "website": "http://www.mukit.at",
