@@ -1,5 +1,5 @@
 ###################################################################################
-# 
+#
 #    Copyright (C) 2017 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -30,13 +30,13 @@ from odoo.addons.muk_security.tools import helper
 _logger = logging.getLogger(__name__)
 
 class AccessUser(models.Model):
-    
+
     _inherit = 'res.users'
 
     #----------------------------------------------------------
     # Database
     #----------------------------------------------------------
-    
+
     security_groups = fields.Many2many(
         comodel_name='muk_security.groups',
         relation='muk_security_groups_explicit_users_rel',
@@ -48,10 +48,14 @@ class AccessUser(models.Model):
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
-    
+    def browse(self, arg=None, *args, **kwargs):
+        if isinstance(arg, helper.NoSecurityUid):
+            arg = super(helper.NoSecurityUid, arg).__int__()
+        return super(AccessUser, self).browse(arg=arg, **kwargs)
+
     @classmethod
     def _browse(cls, ids, env, prefetch=None, add_prefetch=True):
         return super(AccessUser, cls)._browse([
             id if not isinstance(id, helper.NoSecurityUid)
-            else super(helper.NoSecurityUid, id).__int__() 
+            else super(helper.NoSecurityUid, id).__int__()
             for id in ids], env, prefetch=prefetch)
