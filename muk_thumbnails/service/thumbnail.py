@@ -1,5 +1,5 @@
 ###################################################################################
-# 
+#
 #    Copyright (C) 2018 MuK IT GmbH
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -45,7 +45,7 @@ except ImportError:
     Image = False
     Color = False
     _logger.warn('Cannot `import wand`.')
-    
+
 try:
     import imageio
 except ImportError:
@@ -73,15 +73,15 @@ PDF_IMPORTS = [
 WAND_IMPORTS = [
     "aai", "art", "arw", "avi", "avs", "bpg", "brf", "cals", "cgm", "cin", "cip", "cmyk", "cmyka", "svg",
     "cr2", "crw", "cur", "cut", "dcm", "dcr", "dcx", "dds", "dib", "djvu", "dng", "dot", "dpx", "tim",
-    "emf", "epdf", "epi", "eps", "eps2", "eps3", "epsf", "epsi", "ept", "exr", "fax", "fig", "fits", 
+    "emf", "epdf", "epi", "eps", "eps2", "eps3", "epsf", "epsi", "ept", "exr", "fax", "fig", "fits",
     "fpx", "gplt", "gray", "graya", "hdr", "hdr", "heic", "hpgl", "hrz", "html", "ico", "info", "ttf",
-    "inline", "isobrl", "isobrl6", "jbig", "jng", "jp2", "jpt", "j2c", "j2k", "jxr", "json", "man", "bmp", 
+    "inline", "isobrl", "isobrl6", "jbig", "jng", "jp2", "jpt", "j2c", "j2k", "jxr", "json", "man", "bmp",
     "mat", "miff", "mono", "mng", "m2v", "mpeg", "mpc", "mpr", "mrw", "msl", "mtv", "mvg", "nef", "yuv",
     "orf", "otb", "p7", "palm", "pam", "clipboard", "pbm", "pcd", "pcds", "pcl", "pcx", "pdb", "jpe",
-    "pef", "pes", "pfa", "pfb", "pfm", "pgm", "picon", "pict", "pix", "png8", "png00", "png24", "tiff", 
-    "png32", "png48", "png64", "pnm", "ppm", "ps", "ps2", "ps3", "psb", "psd", "ptif", "pwp", "rad", 
-    "raf", "rgb", "rgba", "rgf", "rla", "rle", "sct", "sfw", "sgi", "shtml", "sid", " mrsid", "jpeg", 
-    "sparse-color", "sun", "tga", "ubrl", "ubrl6", "uyvy", "vicar", "viff", "wbmp", "jpg", "png", "uil", 
+    "pef", "pes", "pfa", "pfb", "pfm", "pgm", "picon", "pict", "pix", "png8", "png00", "png24", "tiff",
+    "png32", "png48", "png64", "pnm", "ppm", "ps", "ps2", "ps3", "psb", "psd", "ptif", "pwp", "rad",
+    "raf", "rgb", "rgba", "rgf", "rla", "rle", "sct", "sfw", "sgi", "shtml", "sid", " mrsid", "jpeg",
+    "sparse-color", "sun", "tga", "ubrl", "ubrl6", "uyvy", "vicar", "viff", "wbmp", "jpg", "png", "uil",
     "wdp", "webp", "wmf", "wpg", "x", "xbm", "xcf", "xpm", "xwd", "x3f", "ycbcr", "ycbcra", "bmp3", "bmp2",
 ]
 
@@ -89,13 +89,13 @@ def formats():
     return FORMATS
 
 def imports():
-    return VIDEO_IMPORTS + PDF_IMPORTS + WAND_IMPORTS + unoconv.IMPORTS
+    return VIDEO_IMPORTS + PDF_IMPORTS + WAND_IMPORTS + unoconv.UNOCONV_IMPORTS
 
 def create_thumbnail(binary, mimetype=None, filename=None, export="binary", format="png", page=0, frame=0,
                      animation=False, video_resize={'width': 256}, image_resize='256x256>', image_crop=None):
     """
     Converts a thumbnail for a given file.
-    
+
     :param binary: The binary value.
     :param mimetype: The mimetype of the binary value.
     :param filename: The filename of the binary value.
@@ -115,7 +115,7 @@ def create_thumbnail(binary, mimetype=None, filename=None, export="binary", form
         raise ValueError("The file extension could not be determined.")
     if format not in FORMATS:
         raise ValueError("Invalid export format.")
-    if extension not in (VIDEO_IMPORTS + PDF_IMPORTS + WAND_IMPORTS + unoconv.IMPORTS):
+    if extension not in (VIDEO_IMPORTS + PDF_IMPORTS + WAND_IMPORTS + unoconv.UNOCONV_IMPORTS):
         raise ValueError("Invalid import format.")
     if not imageio or not Image or not VideoFileClip:
         raise ValueError("Some libraries couldn't be imported.")
@@ -123,11 +123,11 @@ def create_thumbnail(binary, mimetype=None, filename=None, export="binary", form
     image_extension = extension
     if extension in WAND_IMPORTS:
         image_data = binary
-    elif not image_data and (extension in PDF_IMPORTS or extension in unoconv.IMPORTS):
+    elif not image_data and (extension in PDF_IMPORTS or extension in unoconv.UNOCONV_IMPORTS):
         pdf_data = binary if extension in PDF_IMPORTS else None
         if not pdf_data:
             image_extension = "pdf"
-            pdf_data = unoconv.convert_binary(binary, mimetype, filename)
+            pdf_data = unoconv.unoconv.convert(binary, mimetype, filename)
         reader = PyPDF2.PdfFileReader(io.BytesIO(pdf_data))
         writer = PyPDF2.PdfFileWriter()
         if reader.getNumPages() >= page:
@@ -160,7 +160,7 @@ def create_thumbnail(binary, mimetype=None, filename=None, export="binary", form
             if os.name == 'nt':
                 tmp_wpath = tmp_wpath.replace("\\", "/")
             with closing(open(tmp_wpath, 'wb')) as file:
-                file.write(binary)    
+                file.write(binary)
             clip = VideoFileClip(tmp_wpath)
             try:
                 tmp_opath = os.path.join(tmp_dir, "output.%s" % format)
