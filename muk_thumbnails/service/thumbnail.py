@@ -89,7 +89,7 @@ def formats():
     return FORMATS
 
 def imports():
-    return VIDEO_IMPORTS + PDF_IMPORTS + WAND_IMPORTS + unoconv.IMPORTS
+    return VIDEO_IMPORTS + PDF_IMPORTS + WAND_IMPORTS + unoconv.UNOCONV_IMPORTS
 
 def create_thumbnail(binary, mimetype=None, filename=None, export="binary", format="png", page=0, frame=0,
                      animation=False, video_resize={'width': 256}, image_resize='256x256>', image_crop=None):
@@ -115,7 +115,7 @@ def create_thumbnail(binary, mimetype=None, filename=None, export="binary", form
         raise ValueError("The file extension could not be determined.")
     if format not in FORMATS:
         raise ValueError("Invalid export format.")
-    if extension not in (VIDEO_IMPORTS + PDF_IMPORTS + WAND_IMPORTS + unoconv.IMPORTS):
+    if extension not in (VIDEO_IMPORTS + PDF_IMPORTS + WAND_IMPORTS + unoconv.UNOCONV_IMPORTS):
         raise ValueError("Invalid import format.")
     if not imageio or not Image or not VideoFileClip:
         raise ValueError("Some libraries couldn't be imported.")
@@ -123,11 +123,11 @@ def create_thumbnail(binary, mimetype=None, filename=None, export="binary", form
     image_extension = extension
     if extension in WAND_IMPORTS:
         image_data = binary
-    elif not image_data and (extension in PDF_IMPORTS or extension in unoconv.IMPORTS):
+    elif not image_data and (extension in PDF_IMPORTS or extension in unoconv.UNOCONV_IMPORTS):
         pdf_data = binary if extension in PDF_IMPORTS else None
         if not pdf_data:
             image_extension = "pdf"
-            pdf_data = unoconv.convert_binary(binary, mimetype, filename)
+            pdf_data = unoconv.unoconv.convert(binary, mimetype, filename)
         reader = PyPDF2.PdfFileReader(io.BytesIO(pdf_data))
         writer = PyPDF2.PdfFileWriter()
         if reader.getNumPages() >= page:
@@ -160,7 +160,7 @@ def create_thumbnail(binary, mimetype=None, filename=None, export="binary", form
             if os.name == 'nt':
                 tmp_wpath = tmp_wpath.replace("\\", "/")
             with closing(open(tmp_wpath, 'wb')) as file:
-                file.write(binary)    
+                file.write(binary)
             clip = VideoFileClip(tmp_wpath)
             try:
                 tmp_opath = os.path.join(tmp_dir, "output.%s" % format)
