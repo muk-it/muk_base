@@ -1,5 +1,5 @@
 ###################################################################################
-# 
+#
 #    MuK Document Management System
 #
 #    Copyright (C) 2018 MuK IT GmbH
@@ -23,6 +23,7 @@ import base64
 import logging
 import mimetypes
 
+import odoo
 from odoo import api, models, _
 from odoo.exceptions import AccessError
 
@@ -31,22 +32,78 @@ from odoo.addons.muk_fields_lobject.fields.lobject import LargeObject
 _logger = logging.getLogger(__name__)
 
 class LObjectIrAttachment(models.Model):
-    
+
     _inherit = 'ir.attachment'
 
     store_lobject = LargeObject(
         string="Data")
-    
+
+    def _force_storage_prepare_chunks(self):
+        """ Technical method to select attachments that need to be migrated
+            This method automaticaly splits attachment by chunks,
+            to speed up migration.
+
+            :return list: list of chunks where each chunk is list of attachment ids
+                          [[1,2,3],[40, 42, 12,33], ...]
+        """
+        CHUNK_SIZE = 100
+        attachments = self.search(['|', ['res_field', '=', False], ['res_field', '!=', False]])
+        storage = self._storage()
+        chunks = []
+        current_chunk = []
+        for attach in attachments:
+            # Detect storage_type of attachment
+            if attach.db_datas:
+                current = 'db'
+            elif attach.store_lobject:
+                current = 'lobject'
+            elif attach.store_fname:
+                current = 'file'
+            else:
+                current = None
+
+            if storage != current:
+                # This attachment needs migration, thus adding it to result
+                current_chunk += [attach.id]
+                if len(current_chunk) >= CHUNK_SIZE:
+                    chunks += [current_chunk]
+                    current_chunk = []
+
+        if current_chunk:
+            chunks += [current_chunk]
+        return chunks
+
     @api.model
     def force_storage(self):
         if not self.env.user._is_admin():
             raise AccessError(_('Only administrators can execute this action.'))
-        attachments = self.search(['|', ['res_field', '=', False], ['res_field', '!=', False]])
-        for index, attach in enumerate(attachments):
-            _logger.info(_("Migrate Attachment %s of %s") % (index, len(attachments)))
-            attach.write({'datas': attach.datas})
-        return True
-    
+
+        # Do migration by chunks to make it faster.
+        chunks_to_migrate = self._force_storage_prepare_chunks()
+        for chunk_index, chunk in enumerate(self._force_storage_prepare_chunks()):
+            # Here we need to precess each chunk in new transaction.
+            # When all attachments in chunk processed, then commit.
+            # In case of any errors - rollback
+            with api.Environment.manage():
+                with odoo.registry(self.env.cr.dbname).cursor() as new_cr:
+                    new_env = api.Environment(new_cr, self.env.uid,
+                                              self.env.context.copy())
+                    attachments = new_env['ir.attachment'].browse(chunk)
+                    try:
+                        for index, attach in enumerate(attachments):
+                            _logger.info(
+                                "Migrate Attachment %s of %s [chunk %s of %s]",
+                                    index, len(attachments),
+                                    chunk_index, len(chunks_to_migrate))
+                            attach.write({'datas': attach.datas})
+                    except Exception:
+                        _logger.error(
+                            "Cannot migrate attachments.", exc_info=True)
+                        new_cr.rollback()
+                        raise
+                    else:
+                        new_cr.commit()
+
     @api.depends('store_fname', 'db_datas', 'store_lobject')
     def _compute_datas(self):
         bin_size = self._context.get('bin_size')
@@ -58,7 +115,7 @@ class LObjectIrAttachment(models.Model):
                     attach.datas = attach.with_context({'base64': True}).store_lobject
             else:
                 super(LObjectIrAttachment, attach)._compute_datas()
-        
+
     def _inverse_datas(self):
         location = self._storage()
         for attach in self:
@@ -79,7 +136,12 @@ class LObjectIrAttachment(models.Model):
                     self._file_delete(fname)
             else:
                 super(LObjectIrAttachment, attach)._inverse_datas()
-                
+                # It is required to set 'store_lobject' to false, because it is
+                # used in muk_dms_attachment to detect storage type of
+                # attachment, thus it is impossible to detect attachments that
+                # need migration 'LObject -> File' or 'LObject -> smthng'
+                attach.write({'store_lobject': False})
+
     def _compute_mimetype(self, values):
         mimetype = super(LObjectIrAttachment, self)._compute_mimetype(values)
         if not mimetype or mimetype == 'application/octet-stream':
