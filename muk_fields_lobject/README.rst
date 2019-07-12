@@ -114,6 +114,13 @@ Contributors
 
 * Mathias Markl <mathias.markl@mukit.at>
 
+Images
+------------
+
+Some pictures are based on or inspired by the icon set of Font Awesome:
+
+* `Font Awesome <https://fontawesome.com>`_
+
 Author & Maintainer
 -------------------
 
