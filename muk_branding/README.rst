@@ -121,9 +121,8 @@ Some pictures are based on or inspired by the icon set of Font Awesome:
 Projects
 ------------
 
-Parts of the module are based on or inspired by:
+Parts of the module are inspired by:
 
-* `Mail Debrand <https://github.com/OCA/social>`_
 * `Backend Debranding <https://github.com/it-projects-llc/misc-addons>`_
 
 Author & Maintainer
