@@ -6,17 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190522\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-24 19:38+0000\n"
-"PO-Revision-Date: 2019-06-26 11:48+0000\n"
-"Last-Translator: MuK IT <admin@mukit.at>\n"
-"Language-Team: German <http://weblate.mukit.at/projects/base-12/muk_branding/"
-"de/>\n"
-"Language: de\n"
+"POT-Creation-Date: 2019-07-13 00:07+0000\n"
+"PO-Revision-Date: 2019-07-13 00:07+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.7\n"
+"Plural-Forms: \n"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
@@ -36,7 +33,7 @@ msgstr "<span class=\"o_form_label\">Dokumentation und Hilfe</span>"
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Logo</span>"
-msgstr "<span class=\"o_form_label\">Logo</span>"
+msgstr ""
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
@@ -126,7 +123,7 @@ msgstr "Passen Sie das Backend an Ihre Ansprüchen an."
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_muk_branding_debranding
 msgid "Debranding"
-msgstr "Debranding"
+msgstr ""
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_muk_branding_debranding__display_name
@@ -152,12 +149,12 @@ msgstr "Erweiterungen"
 #: model:ir.model.fields,field_description:muk_branding.field_res_company__favicon
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Favicon"
-msgstr "Favicon"
+msgstr ""
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_muk_branding_debranding__id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_muk_branding_debranding____last_update
@@ -304,3 +301,4 @@ msgstr "Webseitenanpassung"
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_website
 msgid "Website URL"
 msgstr "Webseiten URL"
+

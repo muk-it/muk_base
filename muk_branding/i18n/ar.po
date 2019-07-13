@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190522\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-13 00:08+0000\n"
-"PO-Revision-Date: 2019-07-13 00:08+0000\n"
+"POT-Creation-Date: 2019-07-13 00:07+0000\n"
+"PO-Revision-Date: 2019-07-13 00:07+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgstr ""
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_ir_actions_act_window
 msgid "Action Window"
-msgstr "Actie venster"
+msgstr ""
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
@@ -83,12 +83,12 @@ msgstr ""
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_res_company
 msgid "Companies"
-msgstr "Bedrijven"
+msgstr "المؤسسات"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Company Data"
-msgstr "Bedrijfsgegevens"
+msgstr "بيانات الشركة"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_company_favicon
@@ -98,17 +98,17 @@ msgstr ""
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_company_logo
 msgid "Company Logo"
-msgstr "Bedrijfslogo"
+msgstr "شعار الشركة"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_company_name
 msgid "Company Name"
-msgstr "Bedrijfsnaam"
+msgstr "اسم الشركة"
 
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_res_config_settings
 msgid "Config Settings"
-msgstr "Configuratie instellingen"
+msgstr "ضبط الإعدادات"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
@@ -128,7 +128,7 @@ msgstr ""
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_muk_branding_debranding__display_name
 msgid "Display Name"
-msgstr "Weergavenaam"
+msgstr "اسم العرض"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
@@ -154,12 +154,12 @@ msgstr ""
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_muk_branding_debranding__id
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_muk_branding_debranding____last_update
 msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
+msgstr "آخر تعديل في"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__module_muk_mail_branding
@@ -169,7 +169,7 @@ msgstr ""
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Name"
-msgstr "Naam"
+msgstr "الاسم"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__module_muk_pos_branding
@@ -260,27 +260,27 @@ msgstr ""
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_ir_config_parameter
 msgid "System Parameter"
-msgstr "Systeem parameter"
+msgstr "باراميتر النظام"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "System Parameters"
-msgstr "Systeem parameters"
+msgstr "معلمات النظام"
 
 #. module: muk_branding
 #: model:ir.model.fields,help:muk_branding.field_res_config_settings__branding_company_logo
 msgid "This field holds the image used as avatar for this contact, limited to 1024x1024px"
-msgstr "Dit veld bevat de afbeelding welke wordt gebruikt als schermafbeelding voor deze relatie. Beperk het formaat op 1024x1024px."
+msgstr ""
 
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_ir_translation
 msgid "Translation"
-msgstr "Vertaling"
+msgstr "الترجمة"
 
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_ir_ui_view
 msgid "View"
-msgstr "Weergave"
+msgstr "عرض"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__module_muk_web_branding
@@ -290,7 +290,7 @@ msgstr ""
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Website"
-msgstr ""
+msgstr "الموقع الإلكتروني"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__module_muk_website_branding
