@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190522\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-12 23:50+0000\n"
-"PO-Revision-Date: 2019-07-12 23:50+0000\n"
+"POT-Creation-Date: 2019-07-12 23:48+0000\n"
+"PO-Revision-Date: 2019-07-12 23:48+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,52 +18,52 @@ msgstr ""
 #. module: muk_fields_file
 #: model:ir.model,name:muk_fields_file.model_ir_autovacuum
 msgid "Automatic Vacuum"
-msgstr "Automatisch vacuum"
+msgstr "تفريغ تلقائي"
 
 #. module: muk_fields_file
 #: model:ir.model,name:muk_fields_file.model_base
 msgid "Base"
-msgstr "Basis"
+msgstr "الأساس"
 
 #. module: muk_fields_file
 #: model:ir.model.fields,field_description:muk_fields_file.field_ir_model_fields__ttype
 msgid "Field Type"
-msgstr "Soort veld"
+msgstr "نوع الحقل"
 
 #. module: muk_fields_file
 #: model:ir.model,name:muk_fields_file.model_ir_model_fields
 msgid "Fields"
-msgstr "Velden"
+msgstr "الحقول"
 
 #. module: muk_fields_file
 #: model:ir.model,name:muk_fields_file.model_ir_http
 msgid "HTTP Routing"
-msgstr "HTTP routing"
+msgstr "مسار HTTP"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "binary"
-msgstr "binair"
+msgstr "بيانات ثنائية"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "boolean"
-msgstr ""
+msgstr "قيمة منطقية"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "char"
-msgstr ""
+msgstr "محارف"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "date"
-msgstr "datum"
+msgstr "تاريخ"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "datetime"
-msgstr ""
+msgstr "التاريخ والوقت"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
@@ -73,7 +73,7 @@ msgstr ""
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "float"
-msgstr ""
+msgstr "فاصلة عائمة"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
@@ -83,40 +83,40 @@ msgstr ""
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "integer"
-msgstr ""
+msgstr "عدد صحيح"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "many2many"
-msgstr ""
+msgstr "علاقة متعدد لمتعدد"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "many2one"
-msgstr ""
+msgstr "علاقة متعدد لواحد"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "monetary"
-msgstr "monetair"
+msgstr "قيمة نقدية"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "one2many"
-msgstr ""
+msgstr "علاقة واحد لمتعدد"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "reference"
-msgstr "referentie"
+msgstr "المرجع"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "selection"
-msgstr "selectie"
+msgstr "قائمة خيارات"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "text"
-msgstr "tekst"
+msgstr "نص"
 

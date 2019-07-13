@@ -18,32 +18,32 @@ msgstr ""
 #. module: muk_fields_file
 #: model:ir.model,name:muk_fields_file.model_ir_autovacuum
 msgid "Automatic Vacuum"
-msgstr "Automatisch vacuum"
+msgstr ""
 
 #. module: muk_fields_file
 #: model:ir.model,name:muk_fields_file.model_base
 msgid "Base"
-msgstr "Basis"
+msgstr "Базовый"
 
 #. module: muk_fields_file
 #: model:ir.model.fields,field_description:muk_fields_file.field_ir_model_fields__ttype
 msgid "Field Type"
-msgstr "Soort veld"
+msgstr "Тип поля"
 
 #. module: muk_fields_file
 #: model:ir.model,name:muk_fields_file.model_ir_model_fields
 msgid "Fields"
-msgstr "Velden"
+msgstr "Поля"
 
 #. module: muk_fields_file
 #: model:ir.model,name:muk_fields_file.model_ir_http
 msgid "HTTP Routing"
-msgstr "HTTP routing"
+msgstr "Маршрутизация HTTP"
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "binary"
-msgstr "binair"
+msgstr ""
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
@@ -58,7 +58,7 @@ msgstr ""
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "date"
-msgstr "datum"
+msgstr ""
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
@@ -98,7 +98,7 @@ msgstr ""
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "monetary"
-msgstr "monetair"
+msgstr ""
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
@@ -108,15 +108,15 @@ msgstr ""
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "reference"
-msgstr "referentie"
+msgstr ""
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "selection"
-msgstr "selectie"
+msgstr ""
 
 #. module: muk_fields_file
 #: selection:ir.model.fields,ttype:0
 msgid "text"
-msgstr "tekst"
+msgstr ""
 
