@@ -48,7 +48,7 @@ class Converter(models.AbstractModel):
     @api.model
     def convert(self, filename, content, format="pdf", recompute=False, store=True):
         binary_content = base64.b64decode(content)
-        output = self.convert_raw(filename, content, format=format, recompute=recompute, store=store)
+        output = self.convert_raw(filename, binary_content, format=format, recompute=recompute, store=store)
         return base64.b64encode(output)
     
     @api.model
