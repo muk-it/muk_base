@@ -24,9 +24,9 @@ import logging
 import mimetypes
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
-# from odoo.addons.muk_utils.tools.http import get_response TODO
-#from odoo.addons.muk_converter.tools import converter
+from odoo.addons.muk_utils.tools.http import get_response
 
 _logger = logging.getLogger(__name__)
 
@@ -57,10 +57,12 @@ class ConverterWizard(models.TransientModel):
     input_name = fields.Char(
         string="Filename",
         states={'export': [('required', True)]})
+     
+    input_url = fields.Char(
+        string="URL")
     
     input_binary = fields.Binary(
-        string="File",
-        states={'export': [('required', True)]})
+        string="File")
     
     format = fields.Selection(
         selection=_format_selection,
@@ -85,8 +87,21 @@ class ConverterWizard(models.TransientModel):
     @api.multi
     def convert(self):
         self.ensure_one()
+
+        if not self.input_url and not self.input_binary:
+            raise UserError(_("Please choose a file to convert."))
+
+        if self.input_url:
+            status, headers, content = get_response(self.input_url)
+            if status != 200:
+                raise ValueError(_("Failed to retrieve the file from the url."))
+            else:
+                content = base64.b64encode(content)
+        else:
+            content = self.input_binary
+
         name = "%s.%s" % (os.path.splitext(self.input_name)[0], self.format)
-        output = self.env['muk_converter.converter'].convert(self.input_name, self.input_binary)
+        output = self.env['muk_converter.converter'].convert(self.input_name, content, format=self.format)
         self.write({
             'state': 'download',
             'output_name': name,

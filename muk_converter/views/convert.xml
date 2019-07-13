@@ -28,7 +28,8 @@
 					<field invisible="1" name="state" />
 					<group>
 						<field name="input_name" invisible="1" />
-						<field name="input_binary" filename="input_name" />
+						<field name="input_url" attrs="{'invisible':[('input_url','=',False)]}" readonly="1" />
+						<field name="input_binary" filename="input_name" attrs="{'invisible':[('input_url','!=',False)]}" />
 					</group>
 					<group>
 						<field name="format" />

@@ -20,7 +20,7 @@
 {
     "name": "MuK Converter",
     "summary": """Universal Converter""",
-    "version": '11.0.1.2.3',   
+    "version": '11.0.1.2.4',   
     "category": 'Extra Tools',   
     "license": "AGPL-3",
     "website": "https://www.mukit.at",
@@ -28,6 +28,7 @@
     "author": "MuK IT",
     "contributors": [
         "Mathias Markl <mathias.markl@mukit.at>",
+        "Kerrim Abd El-Hamed <kerrim.abdelhamed@mukit.at>",
     ],
     "depends": [
         "iap",
