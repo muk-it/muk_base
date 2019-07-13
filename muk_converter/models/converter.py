@@ -48,17 +48,22 @@ class Converter(models.AbstractModel):
     @api.model
     def convert(self, filename, content, format="pdf", recompute=False, store=True):
         binary_content = base64.b64decode(content)
+        output = self.convert_raw(filename, content, format=format, recompute=recompute, store=store)
+        return base64.b64encode(output)
+    
+    @api.model
+    def convert_raw(self, filename, binary_content, format="pdf", recompute=False, store=True):
         checksum = hashlib.sha1(binary_content).hexdigest()
         stored = self._retrieve(checksum, format)
         if not recompute and stored.exists():
-            return base64.b64encode(stored.content)
+            return stored.content
         else:
             name = "%s.%s" % (filename, format)
             output = self._parse(filename, binary_content, format)
             if store:
                 self._store(checksum, name, output, format, stored)
-            return base64.b64encode(output)
-    
+            return output
+
     #----------------------------------------------------------
     # Helper
     #----------------------------------------------------------
