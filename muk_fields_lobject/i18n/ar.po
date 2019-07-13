@@ -18,62 +18,62 @@ msgstr ""
 #. module: muk_fields_lobject
 #: model:ir.model,name:muk_fields_lobject.model_base
 msgid "Base"
-msgstr "Basis"
+msgstr "الأساس"
 
 #. module: muk_fields_lobject
 #: model:ir.model.fields,field_description:muk_fields_lobject.field_ir_model_fields__ttype
 msgid "Field Type"
-msgstr "Typfeld-Text"
+msgstr "نوع الحقل"
 
 #. module: muk_fields_lobject
 #: model:ir.model,name:muk_fields_lobject.model_ir_model_fields
 msgid "Fields"
-msgstr "Felder"
+msgstr "الحقول"
 
 #. module: muk_fields_lobject
 #: model:ir.model,name:muk_fields_lobject.model_ir_http
 msgid "HTTP Routing"
-msgstr ""
+msgstr "مسار HTTP"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "binary"
-msgstr "Binär"
+msgstr "بيانات ثنائية"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "boolean"
-msgstr "Boolean"
+msgstr "قيمة منطقية"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "char"
-msgstr "Zeichen"
+msgstr "محارف"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "date"
-msgstr "Datum"
+msgstr "تاريخ"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "datetime"
-msgstr "Datum/Zeit"
+msgstr "التاريخ والوقت"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "float"
-msgstr "Gleitkommazahl"
+msgstr "فاصلة عائمة"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "html"
-msgstr "HTML"
+msgstr ""
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "integer"
-msgstr "Ganzzahl"
+msgstr "عدد صحيح"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
@@ -83,35 +83,35 @@ msgstr ""
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "many2many"
-msgstr "Many2many"
+msgstr "علاقة متعدد لمتعدد"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "many2one"
-msgstr "Many2One"
+msgstr "علاقة متعدد لواحد"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "monetary"
-msgstr "monetär"
+msgstr "قيمة نقدية"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "one2many"
-msgstr "One2many"
+msgstr "علاقة واحد لمتعدد"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "reference"
-msgstr "Referenz"
+msgstr "المرجع"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "selection"
-msgstr "Auswahl"
+msgstr "قائمة خيارات"
 
 #. module: muk_fields_lobject
 #: selection:ir.model.fields,ttype:0
 msgid "text"
-msgstr "Text"
+msgstr "نص"
 
