@@ -18,7 +18,7 @@ msgstr ""
 #. module: muk_attachment_lobject
 #: model:ir.model,name:muk_attachment_lobject.model_ir_attachment
 msgid "Attachment"
-msgstr "Bijlage"
+msgstr ""
 
 #. module: muk_attachment_lobject
 #: model:ir.model.fields,field_description:muk_attachment_lobject.field_ir_attachment__store_lobject
