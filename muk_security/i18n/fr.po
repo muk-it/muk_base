@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190522\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-06-24 20:14+0000\n"
-"PO-Revision-Date: 2019-06-24 20:14+0000\n"
+"POT-Creation-Date: 2019-07-12 23:31+0000\n"
+"PO-Revision-Date: 2019-07-12 23:31+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -182,13 +182,13 @@ msgid "Settings"
 msgstr "Configuration"
 
 #. module: muk_security
-#: code:addons/muk_security/models/mixins_locking.py:74
+#: code:addons/muk_security/models/mixins_locking.py:77
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
 msgstr ""
 
 #. module: muk_security
-#: code:addons/muk_security/models/mixins_access_groups.py:194
+#: code:addons/muk_security/models/mixins_access_groups.py:197
 #, python-format
 msgid "The requested operation cannot be completed due to group security restrictions. Please contact your system administrator.\n"
 "\n"

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190522\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-12 23:31+0000\n"
-"PO-Revision-Date: 2019-07-12 23:31+0000\n"
+"POT-Creation-Date: 2019-07-12 23:30+0000\n"
+"PO-Revision-Date: 2019-07-12 23:30+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,50 +19,50 @@ msgstr ""
 #: model:ir.actions.act_window,name:muk_security.action_security_access_groups
 #: model:ir.ui.menu,name:muk_security.menu_security_access_groups
 msgid "Access Groups"
-msgstr "Gruppenzugriff"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_muk_security_mixins_access_rights
 msgid "Access Mixin"
-msgstr "Zugriff Mixin"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_base
 msgid "Base"
-msgstr "Basis"
+msgstr "الأساس"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__child_groups
 msgid "Child Groups"
-msgstr "Untergruppen"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_groups__complete_groups
 msgid "Complete Groups"
-msgstr "Komplette Gruppen"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__perm_create
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_groups__permission_create
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__permission_create
 msgid "Create Access"
-msgstr "Objekterzeugung erlauben"
+msgstr "صلاحيات الإنشاء"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__create_uid
 msgid "Created by"
-msgstr "Erstellt von"
+msgstr "أنشئ بواسطة"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__create_date
 msgid "Created on"
-msgstr "Erstellt am"
+msgstr "أنشئ في"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_groups__permission_unlink
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__permission_unlink
 msgid "Delete Access"
-msgstr "Zugang löschen"
+msgstr "صلاحيات الحذف"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__display_name
@@ -70,7 +70,7 @@ msgstr "Zugang löschen"
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__display_name
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking__display_name
 msgid "Display Name"
-msgstr "Anzeigename"
+msgstr "اسم العرض"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking__is_lock_editor
@@ -80,28 +80,28 @@ msgstr ""
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__explicit_users
 msgid "Explicit Users"
-msgstr "Explizite Benutzer"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_muk_security_mixins_access_groups
 msgid "Group Access Mixin"
-msgstr "Zugriffsgruppen Mixin"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__name
 msgid "Group Name"
-msgstr "Gruppenname"
+msgstr "اسم المجموعة"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__users
 msgid "Group Users"
-msgstr "Gruppenbenutzer"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__groups
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_groups__groups
 msgid "Groups"
-msgstr "Gruppen"
+msgstr "المجموعات"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__id
@@ -109,7 +109,7 @@ msgstr "Gruppen"
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__id
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking__id
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups____last_update
@@ -117,75 +117,75 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights____last_update
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking____last_update
 msgid "Last Modified on"
-msgstr "Zuletzt geändert am"
+msgstr "آخر تعديل في"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__write_uid
 msgid "Last Updated by"
-msgstr "Zuletzt aktualisiert durch"
+msgstr "آخر تحديث بواسطة"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__write_date
 msgid "Last Updated on"
-msgstr "Zuletzt aktualisiert am"
+msgstr "آخر تحديث في"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking__is_locked
 msgid "Locked"
-msgstr "Gesperrt"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking__locked_by
 msgid "Locked by"
-msgstr "Gesperrt von"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_muk_security_mixins_locking
 msgid "Locking Mixin"
-msgstr "Sperren Mixin"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_ir_model_access
 msgid "Model Access"
-msgstr "Modelzugriff"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__parent_group
 msgid "Parent Group"
-msgstr "Übergeordnete Gruppe"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__parent_path
 msgid "Parent Path"
-msgstr "Übergeordneter Pfad"
+msgstr "المسار الأصلي"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__perm_read
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_groups__permission_read
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__permission_read
 msgid "Read Access"
-msgstr "Leserecht"
+msgstr "صلاحيات القراءة"
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_muk_security_access_groups
 msgid "Record Access Groups"
-msgstr "Zugriffsgruppeneintrag"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_ir_rule
 msgid "Record Rule"
-msgstr "Datensatzregel"
+msgstr "تسجيل القاعدة"
 
 #. module: muk_security
 #: model_terms:ir.ui.view,arch_db:muk_security.view_security_access_groups_form
 msgid "Settings"
-msgstr "Einstellungen"
+msgstr "الإعدادات"
 
 #. module: muk_security
 #: code:addons/muk_security/models/mixins_locking.py:77
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
-msgstr "Der Eintrag (%s [%s]) ist von einem anderen Benutzer gesperrt."
+msgstr ""
 
 #. module: muk_security
 #: code:addons/muk_security/models/mixins_access_groups.py:197
@@ -193,25 +193,23 @@ msgstr "Der Eintrag (%s [%s]) ist von einem anderen Benutzer gesperrt."
 msgid "The requested operation cannot be completed due to group security restrictions. Please contact your system administrator.\n"
 "\n"
 "(Document type: %s, Operation: %s)"
-msgstr "Der angeforderte Vorgang kann aufgrund von Sicherheitseinschränkungen der Gruppe nicht abgeschlossen werden. Bitte verständigen Sie Ihren Systemadministrator.\n"
-"\n"
-"(Document type: %s1, Operation: %s2)"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__perm_unlink
 msgid "Unlink Access"
-msgstr "Löschen erlauben"
+msgstr ""
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_res_users
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__count_users
 msgid "Users"
-msgstr "Benutzer"
+msgstr "المستخدمون"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__perm_write
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_groups__permission_write
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_rights__permission_write
 msgid "Write Access"
-msgstr "Schreibrechte"
+msgstr "صلاحيات الكتابة"
 
