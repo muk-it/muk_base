@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0-20190522\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-13 00:12+0000\n"
-"PO-Revision-Date: 2019-07-13 00:12+0000\n"
+"POT-Creation-Date: 2019-07-13 00:13+0000\n"
+"PO-Revision-Date: 2019-07-13 00:13+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 #. module: muk_converter
 #: model_terms:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: muk_converter
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store__checksum
@@ -28,12 +28,12 @@ msgstr ""
 #. module: muk_converter
 #: model_terms:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 #. module: muk_converter
 #: model:ir.model,name:muk_converter.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Opciones de Configuración"
 
 #. module: muk_converter
 #: model_terms:ir.ui.view,arch_db:muk_converter.view_converter_convert_form
@@ -86,13 +86,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert__create_uid
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: muk_converter
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert__create_date
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: muk_converter
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store__content
@@ -104,7 +104,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_converter__display_name
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: muk_converter
 #: selection:muk_converter.convert,state:0
@@ -120,7 +120,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert__input_binary
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert__output_binary
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #. module: muk_converter
 #: model_terms:ir.ui.view,arch_db:muk_converter.res_config_settings_view_form
@@ -132,7 +132,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert__output_name
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store__content_fname
 msgid "Filename"
-msgstr ""
+msgstr "Nombre de archivo"
 
 #. module: muk_converter
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert__format
@@ -157,19 +157,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_converter____last_update
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: muk_converter
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert__write_uid
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: muk_converter
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert__write_date
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización el"
 
 #. module: muk_converter
 #: selection:res.config.settings,converter_service:0
@@ -184,7 +184,7 @@ msgstr ""
 #. module: muk_converter
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_store__name
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: muk_converter
 #: selection:res.config.settings,converter_service:0
@@ -194,7 +194,7 @@ msgstr ""
 #. module: muk_converter
 #: model:ir.model.fields,field_description:muk_converter.field_muk_converter_convert__state
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: muk_converter
 #: model:ir.model.fields,field_description:muk_converter.field_res_config_settings__converter_max_store
