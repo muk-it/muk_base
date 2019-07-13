@@ -142,7 +142,7 @@ Some pictures are based on or inspired by the icon set of Font Awesome:
 Projects
 ------------
 
-Parts of the module are based on or inspired by:
+Parts of the module are inspired by:
 
 * `Session DB <https://github.com/odoo/odoo-extra>`_
 * `PSQL Session Store <https://github.com/it-projects-llc/misc-addons>`_
