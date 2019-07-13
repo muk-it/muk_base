@@ -1,29 +1,34 @@
 ###################################################################################
 #
-#    Copyright (C) 2018 MuK IT GmbH
+#    Copyright (c) 2017-2019 MuK IT GmbH.
+#
+#    This file is part of MuK Utils 
+#    (see https://mukit.at).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
+#    it under the terms of the GNU Lesser General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+#    GNU Lesser General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    You should have received a copy of the GNU Lesser General Public License
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ###################################################################################
 
+import math
 import base64
 import logging
 import mimetypes
 
-from odoo import api, models, _
-from odoo.exceptions import AccessError
+from odoo import registry, api, models, _
 from odoo.tools.mimetypes import guess_mimetype
+from odoo.tools.misc import split_every
+from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
 
@@ -97,12 +102,30 @@ class IrAttachment(models.Model):
     
     @api.multi
     def migrate(self):
-        record_count = len(self)
-        storage = self._storage().upper()
-        for index, attach in enumerate(self):
-            _logger.info(_("Migrate Attachment %s of %s to %s") % (index + 1, record_count, storage))
-            attach.with_context(migration=True).write({'datas': attach.datas})
-            
+        storage_location = self._storage().upper()
+        batch_size = self.env.context.get('migration_batch_size', 100)
+        batches_to_migrate = math.ceil(len(self) / batch_size)
+        for batch_index, sub_ids in enumerate(split_every(batch_size, self.ids)):
+            with api.Environment.manage():
+                with registry(self.env.cr.dbname).cursor() as batch_cr:
+                    batch_env = api.Environment(batch_cr, self.env.uid, self.env.context.copy())
+                    attachment_records = batch_env['ir.attachment'].browse(sub_ids)
+                    batch_records_count = len(attachment_records)
+                    try:
+                        for index, attach in enumerate(attachment_records):
+                            _logger.info("Migrate Attachment %s of %s to %s [Batch %s of %s]",
+                                index + 1, batch_records_count, storage_location, 
+                                batch_index + 1, batches_to_migrate
+                            )
+                            attach.with_context(migration=True).write({
+                                'datas': attach.datas
+                            })
+                    except:
+                        batch_cr.rollback()
+                        raise
+                    else:
+                        batch_cr.commit()
+        
     #----------------------------------------------------------
     # Read
     #----------------------------------------------------------
