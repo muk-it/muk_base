@@ -45,7 +45,7 @@
         "python": [],
         "bin": [],
     },
-    "auto_install": True,
+    "auto_install": False,
     "application": False,
     "installable": True,
 }
