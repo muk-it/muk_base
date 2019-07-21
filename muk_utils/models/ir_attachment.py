@@ -102,21 +102,18 @@ class IrAttachment(models.Model):
     
     @api.multi
     def migrate(self, batch_size=None):
-        batch_size = batch_size or len(self)
+        batch_size = batch_size or 5
         storage_location = self._storage().upper()
         batches = math.ceil(len(self) / batch_size)
-        
-        print(batch_size, batches)
-        
         for index, attachment in enumerate(self, start=1):
             _logger.info("Migrate Attachment %s of %s to %s [Batch %s of %s]",
-                index % batch_size, math.ceil(index / batch_size), 
-                storage_location, (index / batch_size) + 1, batches
+                index % batch_size or batch_size, batch_size, storage_location, 
+                math.ceil(index / batch_size), batches
             )
             attachment.with_context(migration=True).write({
                 'datas': attachment.datas
             })
-            if not index % batch_size:
+            if batch_size and not index % batch_size:
                 self.env.cr.commit()     
         
     #----------------------------------------------------------
