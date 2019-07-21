@@ -97,35 +97,27 @@ class IrAttachment(models.Model):
             '&', storage_domain[self._storage()], 
             '|', ('res_field', '=', False), ('res_field', '!=', False)
         ]
-        self.search(record_domain).migrate()
+        self.search(record_domain).migrate(batch_size=100)
         return True
     
     @api.multi
-    def migrate(self):
-        self.env.cr.commit()
+    def migrate(self, batch_size=None):
+        batch_size = batch_size or len(self)
         storage_location = self._storage().upper()
-        batch_size = self.env.context.get('migration_batch_size', 100)
-        batches_to_migrate = math.ceil(len(self) / batch_size)
-        for batch_index, sub_ids in enumerate(split_every(batch_size, self.ids)):
-            with api.Environment.manage():
-                with registry(self.env.cr.dbname).cursor() as batch_cr:
-                    batch_env = api.Environment(batch_cr, self.env.uid, self.env.context.copy())
-                    attachment_records = batch_env['ir.attachment'].browse(sub_ids)
-                    batch_records_count = len(attachment_records)
-                    try:
-                        for index, attach in enumerate(attachment_records):
-                            _logger.info("Migrate Attachment %s of %s to %s [Batch %s of %s]",
-                                index + 1, batch_records_count, storage_location, 
-                                batch_index + 1, batches_to_migrate
-                            )
-                            attach.with_context(migration=True).write({
-                                'datas': attach.datas
-                            })
-                    except:
-                        batch_cr.rollback()
-                        raise
-                    else:
-                        batch_cr.commit()
+        batches = math.ceil(len(self) / batch_size)
+        
+        print(batch_size, batches)
+        
+        for index, attachment in enumerate(self, start=1):
+            _logger.info("Migrate Attachment %s of %s to %s [Batch %s of %s]",
+                index % batch_size, math.ceil(index / batch_size), 
+                storage_location, (index / batch_size) + 1, batches
+            )
+            attachment.with_context(migration=True).write({
+                'datas': attachment.datas
+            })
+            if not index % batch_size:
+                self.env.cr.commit()     
         
     #----------------------------------------------------------
     # Read

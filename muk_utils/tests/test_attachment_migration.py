@@ -47,5 +47,5 @@ class MigrationTestCase(common.TransactionCase):
         super(MigrationTestCase, self).tearDown()
     
     def test_migration(self):
-        self.model.search([], limit=25).with_context(migration_batch_size=5).action_migrate()
+        self.model.search([], limit=25).migrate(batch_size=5)
     
