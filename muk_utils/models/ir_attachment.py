@@ -97,16 +97,15 @@ class IrAttachment(models.Model):
             '&', storage_domain[self._storage()], 
             '|', ('res_field', '=', False), ('res_field', '!=', False)
         ]
-        self.env.cr.commit()
         self.search(record_domain).migrate()
         return True
     
     @api.multi
     def migrate(self):
+        self.env.cr.commit()
         storage_location = self._storage().upper()
         batch_size = self.env.context.get('migration_batch_size', 100)
         batches_to_migrate = math.ceil(len(self) / batch_size)
-
         for batch_index, sub_ids in enumerate(split_every(batch_size, self.ids)):
             with api.Environment.manage():
                 with registry(self.env.cr.dbname).cursor() as batch_cr:
