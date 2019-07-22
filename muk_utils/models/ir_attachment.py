@@ -102,7 +102,7 @@ class IrAttachment(models.Model):
     
     @api.multi
     def migrate(self, batch_size=None):
-        batch_size = batch_size or 5
+        batch_size = batch_size or batch_size 
         storage_location = self._storage().upper()
         batches = math.ceil(len(self) / batch_size)
         for index, attachment in enumerate(self, start=1):
