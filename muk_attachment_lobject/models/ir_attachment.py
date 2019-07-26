@@ -77,7 +77,7 @@ class LObjectIrAttachment(models.Model):
                 '&', storage_domain[self._storage()], 
                 '|', ('res_field', '=', False), ('res_field', '!=', False)
             ]
-            self.search(record_domain).migrate()
+            self.search(record_domain).migrate(batch_size=100)
             return True
     
     #----------------------------------------------------------
