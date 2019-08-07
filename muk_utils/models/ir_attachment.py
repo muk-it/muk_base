@@ -107,9 +107,13 @@ class IrAttachment(models.Model):
         storage_location = self._storage().upper()
         batches = math.ceil(len(self) / batch_size)
         for index, attachment in enumerate(self, start=1):
+            current_batch = math.ceil(index / batch_size)
+            counter = len(self) - (batches - 1) * batch_size
+            counter = counter if current_batch == batches else batch_size
             _logger.info("Migrate Attachment %s of %s to %s [Batch %s of %s]",
-                index % batch_size or batch_size, batch_size, storage_location, 
-                math.ceil(index / batch_size), batches
+                index % batch_size or batch_size, counter,
+                storage_location, current_batch, batches
+
             )
             attachment.with_context(migration=True).write({
                 'datas': attachment.datas
