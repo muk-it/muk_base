@@ -113,7 +113,6 @@ class IrAttachment(models.Model):
             _logger.info("Migrate Attachment %s of %s to %s [Batch %s of %s]",
                 index % batch_size or batch_size, counter,
                 storage_location, current_batch, batches
-
             )
             attachment.with_context(migration=True).write({
                 'datas': attachment.datas
