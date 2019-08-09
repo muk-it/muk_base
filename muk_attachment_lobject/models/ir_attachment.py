@@ -103,8 +103,8 @@ class LObjectIrAttachment(models.Model):
     @api.multi
     def _inverse_datas(self):
         location = self._storage()
-        for attach in self:
-            if location == 'lobject':
+        if location == 'lobject':
+            for attach in self:
                 value = attach.datas
                 bin_data = base64.b64decode(value) if value else b''
                 vals = self._get_datas_inital_vals()
@@ -113,5 +113,5 @@ class LObjectIrAttachment(models.Model):
                 clean_vals = self._get_datas_clean_vals(attach)
                 models.Model.write(attach.sudo(), vals)
                 self._clean_datas_after_write(clean_vals)
-            else:
-                super(LObjectIrAttachment, attach)._inverse_datas()
+        else:
+            super(LObjectIrAttachment, self)._inverse_datas()
