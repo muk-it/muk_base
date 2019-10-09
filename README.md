@@ -1,9 +1,9 @@
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
-[![Build Status](https://travis-ci.org/muk-it/muk_base.svg?branch=12.0)](https://travis-ci.org/muk-it/muk_base)
-[![codecov](https://codecov.io/gh/muk-it/muk_base/branch/12.0/graph/badge.svg)](https://codecov.io/gh/muk-it/muk_base)
+[![Build Status](https://travis-ci.org/muk-it/muk_base.svg?branch=13.0)](https://travis-ci.org/muk-it/muk_base)
+[![codecov](https://codecov.io/gh/muk-it/muk_base/branch/13.0/graph/badge.svg)](https://codecov.io/gh/muk-it/muk_base)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c867f25820614ed795e7567e37bd81c0)](https://www.codacy.com/app/keshrath/muk_base?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=muk-it/muk_base&amp;utm_campaign=Badge_Grade)
-[![Weblate](https://weblate.mukit.at/widgets/base-12/-/svg-badge.svg)](https://weblate.mukit.at/projects/base-12/)
-[![Demo](https://img.shields.io/badge/demo-Try%20me-243742.svg)](https://mukit.at/r/SgN)
+[![Weblate](https://weblate.mukit.at/widgets/base-13/-/svg-badge.svg)](https://weblate.mukit.at/projects/base-12/)
+[![Demo](https://img.shields.io/badge/demo-Try%20me-243742.svg)](https://demo.mukit.at)
 
 # MuK Odoo Base Modules
 
@@ -36,7 +36,7 @@ underscores are replaced by a dash.
 
 **Example:**
 
-`sudo -H pip3 install --extra-index-url https://nexus.mukit.at/repository/odoo/simple odoo11-addon-muk-utils`
+`sudo -H pip3 install --extra-index-url https://nexus.mukit.at/repository/odoo/simple odoo13-addon-muk-utils`
 
 Once the installation has been successfully completed, the app is
 already in the correct folder. Log on to your Odoo server and go to the
