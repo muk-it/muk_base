@@ -20,4 +20,4 @@
 #
 ###################################################################################
 
-from . import base, ir_autovacuum, ir_model_fields
+from . import base, ir_autovacuum, ir_http, ir_model_fields

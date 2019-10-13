@@ -2,7 +2,7 @@
 #
 #    Copyright (c) 2017-2019 MuK IT GmbH.
 #
-#    This file is part of MuK Filestore Field
+#    This file is part of MuK Binary Stream Support
 #    (see https://mukit.at).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,19 +20,24 @@
 #
 ###################################################################################
 
-{
-    "name": "MuK Filestore Field",
-    "summary": """Filestore Support for Fields""",
-    "version": "13.0.1.0.0",
-    "category": "Extra Tools",
-    "license": "LGPL-3",
-    "website": "https://www.mukit.at",
-    "author": "MuK IT",
-    "contributors": ["Mathias Markl <mathias.markl@mukit.at>"],
-    "depends": ["muk_fields_stream"],
-    "images": ["static/description/banner.png"],
-    "auto_install": False,
-    "application": False,
-    "installable": True,
-    "post_load": "_patch_system",
-}
+import io
+import logging
+import mimetypes
+
+from odoo import models
+
+_logger = logging.getLogger(__name__)
+
+
+class IrHttp(models.AbstractModel):
+
+    _inherit = "ir.http"
+
+    # ----------------------------------------------------------
+    # Helper
+    # ----------------------------------------------------------
+
+    def _check_streamable(record, field):
+        if record._fields[field].type == 'file':
+            return True
+        return super(IrHttp, self)._check_streamable(record, field)
