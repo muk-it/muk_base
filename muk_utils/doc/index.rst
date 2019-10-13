@@ -2,8 +2,10 @@
 MuK Utils
 =========
 
-Technical module to provide some utility features and libraries that can be used
-in other applications. This module has no direct effect on the running system.
+Technical module to provide tools and mixins. It extends the general settings
+view to include the option to migrate the attachment storage. Furthermore it
+offers a Group and Hierarchy mixin.
+
 
 Installation
 ============
@@ -20,8 +22,8 @@ Another way to install this module is via the package management for Python
 
 To install our modules using the package manager make sure
 `odoo-autodiscover <https://pypi.org/project/odoo-autodiscover/>`_ is installed
-correctly. Then open a console and install the module by entering the following
-command:
+correctly. Note that for Odoo version 11.0 and later this is not necessary anymore. 
+Then open a console and install the module by entering the following command:
 
 ``pip install --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>``
 
@@ -74,15 +76,18 @@ module in the same way. Just type the following command into the console:
 When the process is finished, restart your server and update the application in
 Odoo, just like you would normally.
 
+
 Configuration
 =============
 
 No additional configuration is needed to use this module.
 
+
 Usage
 =====
 
 This module has no direct visible effect on the system. It provide utility features.
+
 
 Credit
 ======
@@ -98,6 +103,7 @@ Images
 Some pictures are based on or inspired by the icon set of Font Awesome:
 
 * `Font Awesome <https://fontawesome.com>`_
+
 
 Author & Maintainer
 -------------------
