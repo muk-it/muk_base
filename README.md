@@ -22,7 +22,8 @@ Another way to install this module is via the package management for
 Python ([PyPI]).
 
 To install our modules using the package manager make sure
-[odoo-autodiscover] is installed correctly. Then open a console and
+[odoo-autodiscover] is installed correctly. Note that for Odoo version 
+11.0 and later this is not necessary anymore.  Then open a console and 
 install the module by entering the following command:
 
 `pip install --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>`
