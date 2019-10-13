@@ -16,7 +16,7 @@ The requirements are only required if Redis is used as the session store.
 Redis
 -------------
 
-A interface to the Redis key-value store for Python. To install Redis please follow the 
+A interface to the Redis key-value store for Python. To install Redis please follow the
 `instructions <https://github.com/andymccurdy/redis-py>`_ or install the library via pip.
 
 ``pip install redis``
@@ -36,7 +36,7 @@ Another way to install this module is via the package management for Python
 
 To install our modules using the package manager make sure
 `odoo-autodiscover <https://pypi.org/project/odoo-autodiscover/>`_ is installed
-correctly. Note that for Odoo version 11.0 and later this is not necessary anymore. 
+correctly. Note that for Odoo version 11.0 and later this is not necessary anymore.
 Then open a console and install the module by entering the following command:
 
 ``pip install --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>``
@@ -97,21 +97,21 @@ Configuration
 Since this module need to be activated even if no database is selected it should
 be loaded right at the server start. This can be done by editing the configuration
 file or passing a load parameter to the start script.
-				
+
 Parameter: ``--load=web,muk_session_store``
 
 The following fields can be modified in the config file:
 
-**Store:** 
+**Store:**
 
 * session_store_database
 * session_store_redis
 
-**Postgres:** 
+**Postgres:**
 
 * session_store_dbname
 
-**Redis:** 
+**Redis:**
 
 * session_store_prefix
 * session_store_host
