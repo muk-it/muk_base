@@ -35,6 +35,5 @@
     "images": ["static/description/banner.png"],
     "application": False,
     "installable": True,
-    "auto_install": False,
     "post_load": "_patch_system",
 }
