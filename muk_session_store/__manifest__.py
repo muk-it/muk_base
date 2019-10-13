@@ -27,7 +27,6 @@
     "category": "Extra Tools",
     "license": "LGPL-3",
     "website": "http://www.mukit.at",
-    "live_test_url": "https://mukit.at/r/SgN",
     "author": "MuK IT",
     "contributors": ["Mathias Markl <mathias.markl@mukit.at>"],
     "depends": ["muk_utils"],
