@@ -31,7 +31,6 @@
     "author": "MuK IT",
     "contributors": ["Mathias Markl <mathias.markl@mukit.at>"],
     "depends": ["muk_utils"],
-    "data": [],
     "images": ["static/description/banner.png"],
     "application": False,
     "installable": True,
