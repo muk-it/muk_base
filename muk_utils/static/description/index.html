@@ -5,20 +5,68 @@
     <h4 class="oe_slogan" style="font-size: 23px;">
       MuK IT GmbH - www.mukit.at
     </h4>
+    <div class="oe_demo oe_screenshot" style="max-width: 84%; margin: 16px 8%;">
+        <img src="screenshot.png">
+    </div>
   </div>
 </section>
 
 <section class="oe_container">
-  <div class="oe_row oe_spaced">
-    <div class="text-justify" style="max-width: 84%; margin: 16px 8%;">
-      <h3 class="oe_slogan">Overview</h3>
-      <p class="oe_mt32">
-        Technical module to provide some utility features. The module is mainly
-        used as a dependency by other modules and to provide a collection of
-        common libraries. It has no direct visible effect on the system.
-      </p>
-    </div>
-  </div>
+	<div class="oe_row oe_spaced">
+		<div class="text-justify" style="max-width: 84%; margin: 16px 8%;">
+			<h3 class="oe_slogan">Overview</h3>
+			<p class="oe_mt32">
+				Technical module to provide tools and mixins. It extends the 
+				general settings view to include the option to migrate the
+				attachment storage. Furthermore it offers a Group and
+				Hierarchy mixin.
+			</p>
+		</div>
+	</div>
+</section>
+
+<section class="oe_container oe_dark">
+	<div class="oe_row oe_spaced">
+		<div class="text-justify" style="max-width: 84%; margin: 16px 8%;">
+			<h3 class="oe_slogan">Groups</h3>
+			<div class="row">
+				<div class="mb16 col-lg-6">
+					<div class="oe_demo oe_screenshot">
+						<img src="screenshot_groups.png">
+					</div>
+				</div>
+				<div class="mb16 col-lg-6">
+					<p>
+						This mixin can be inherited to get a user field based
+						on groups, jobs and departments, which is automatically
+						updated.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="oe_container">
+	<div class="oe_row oe_spaced">
+		<div class="text-justify" style="max-width: 84%; margin: 16px 8%;">
+			<h3 class="oe_slogan">Hierarchy</h3>
+			<div class="row">
+				<div class="mb16 col-lg-6">
+					<p>
+						This mixin can be inherited by models with parent path to get an 
+						automatically updating field containing the names of the records
+						included in the parent path field.
+					</p>
+				</div>
+				<div class="mb16 col-lg-6">
+					<div class="oe_demo oe_screenshot">
+						<img src="screenshot_hierarchy.png">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 <section class="oe_container oe_dark">
