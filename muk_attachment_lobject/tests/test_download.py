@@ -24,7 +24,7 @@ import base64
 import logging
 import os
 
-from odoo.addons.muk_utils.tests import common
+from odoo.tests import common
 
 _path = os.path.dirname(os.path.dirname(__file__))
 _logger = logging.getLogger(__name__)
@@ -56,6 +56,6 @@ class DownloadTestCase(common.HttpCase):
             "filename_field": "datas_fname",
         }
         data.update({"id": attach_01.id})
-        self.assertTrue(self.url_open("/binary/content", data=data, csrf=True))
+        self.assertTrue(self.url_open("/binary/content", data=data))
         data.update({"id": attach_02.id})
-        self.assertTrue(self.url_open("/binary/content", data=data, csrf=True))
+        self.assertTrue(self.url_open("/binary/content", data=data))
