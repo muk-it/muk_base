@@ -2,7 +2,7 @@
 #
 #    Copyright (c) 2017-2019 MuK IT GmbH.
 #
-#    This file is part of MuK Large Objects Attachment 
+#    This file is part of MuK Large Objects Attachment
 #    (see https://mukit.at).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,5 +20,4 @@
 #
 ###################################################################################
 
-from . import test_attachment
-from . import test_download
+from . import test_attachment, test_download

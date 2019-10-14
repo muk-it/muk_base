@@ -2,7 +2,7 @@
 #
 #    Copyright (c) 2017-2019 MuK IT GmbH.
 #
-#    This file is part of MuK Large Objects Attachment 
+#    This file is part of MuK Large Objects Attachment
 #    (see https://mukit.at).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,35 +19,20 @@
 #    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ###################################################################################
- 
+
 {
     "name": "MuK Large Objects Attachment",
     "summary": """Large Objects Attachment Location""",
-    "version": '12.0.3.0.2',   
-    "category": 'Extra Tools',   
+    "version": "13.0.1.0.0",
+    "category": "Extra Tools",
     "license": "LGPL-3",
     "website": "http://www.mukit.at",
-    'live_test_url': 'https://mukit.at/r/SgN',
+    "live_test_url": "https://mukit.at/r/SgN",
     "author": "MuK IT",
-    "contributors": [
-        "Mathias Markl <mathias.markl@mukit.at>",
-    ],
-    'depends': [
-        'muk_fields_lobject',
-    ],
-    "data": [
-        "views/ir_attachment.xml",
-    ],
-    "qweb": [
-        "static/src/xml/*.xml",
-    ],
-    "images": [
-        'static/description/banner.png'
-    ],
-    "external_dependencies": {
-        "python": [],
-        "bin": [],
-    },
+    "contributors": ["Mathias Markl <mathias.markl@mukit.at>"],
+    "depends": ["muk_fields_lobject"],
+    "data": ["views/ir_attachment.xml"],
+    "images": ["static/description/banner.png"],
     "application": False,
     "installable": True,
     "auto_install": False,
