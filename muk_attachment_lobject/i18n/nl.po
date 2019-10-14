@@ -35,3 +35,4 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:muk_attachment_lobject.view_attachment_form
 msgid "Storage"
 msgstr ""
+
