@@ -22,10 +22,6 @@
 
 from . import fields, models
 
-# ----------------------------------------------------------
-# Patch System on Load
-# ----------------------------------------------------------
-
 
 def _patch_system():
     from . import patch
