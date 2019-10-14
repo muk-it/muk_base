@@ -20,7 +20,7 @@
 #
 ###################################################################################
 
-from . import controllers, fields, models
+from . import fields, models
 
 # ----------------------------------------------------------
 # Patch System on Load
