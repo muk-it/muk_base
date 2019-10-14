@@ -31,7 +31,6 @@ class Base(models.AbstractModel):
 
     _inherit = "base"
 
-    @api.multi
     def unlink(self):
         for name in self._fields:
             field = self._fields[name]
