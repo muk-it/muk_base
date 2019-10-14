@@ -30,8 +30,7 @@ _logger = logging.getLogger(__name__)
 class Base(models.AbstractModel):
 
     _inherit = "base"
-
-    @api.multi
+    
     def unlink(self):
         oids = []
         for name in self._fields:
