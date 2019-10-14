@@ -35,7 +35,10 @@ class LargeObject(fields.Field):
 
     type = "lobject"
     column_type = ("oid", "oid")
-    _slots = {"prefetch": False, "context_dependent": True}
+    _slots = {
+        "prefetch": False,
+        "depends_context": ("bin_size", "human_size", "path", "bytes", "stream"),
+    }
 
     def convert_to_column(self, value, record, values=None, validate=True):
         oid = record.with_context({"oid": True})[self.name]
@@ -65,8 +68,8 @@ class LargeObject(fields.Field):
                 return lobject.seek(0, 2)
             elif record._context.get("oid"):
                 return lobject.oid
-            elif record._context.get("base64"):
-                return base64.b64encode(lobject.read())
+            elif record._context.get("bytes"):
+                return lobject.read()
             elif record._context.get("stream"):
                 file = tempfile.TemporaryFile()
                 while True:
@@ -83,7 +86,7 @@ class LargeObject(fields.Field):
                         return checksum.hexdigest()
                     checksum.update(chunk)
             else:
-                return lobject.read()
+                return base64.b64encode(lobject.read())
         return None if value is False else value
 
     def convert_to_export(self, value, record):

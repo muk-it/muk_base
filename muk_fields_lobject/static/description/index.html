@@ -70,9 +70,10 @@ class LargeObjectModel(models.Model):
     @api.multi
     def data(self):
         for record in self:
-            bytes = record.data_content
+            base64 = record.data_content
             oid = record.with_context({'oid': True}).data_content
             size = record.with_context({'bin_size': True}).data_content
+            bytes = record.with_context({'bytes': True}).data_content
             stream = record.with_context({'stream': True}).data_content
 		    	</code>
 			</pre>
