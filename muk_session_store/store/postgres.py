@@ -20,16 +20,19 @@
 #
 ###################################################################################
 
-import functools
-import json
+import pickle
 import logging
-from contextlib import contextmanager
-from datetime import datetime
-
 import psycopg2
+import functools
+
+from contextlib import closing
+from contextlib import contextmanager
+from datetime import datetime, date
+
+from werkzeug.contrib.sessions import SessionStore
+
 from odoo.sql_db import db_connect
 from odoo.tools import config
-from werkzeug.contrib.sessions import SessionStore
 
 _logger = logging.getLogger(__name__)
 
@@ -52,6 +55,7 @@ class PostgresSessionStore(SessionStore):
     def __init__(self, *args, **kwargs):
         super(PostgresSessionStore, self).__init__(*args, **kwargs)
         self.dbname = config.get("session_store_dbname", "session_store")
+        self.dbtable = config.get("session_store_dbtable", "odoo_sessions")
         self._setup_database(raise_exception=False)
 
     def _setup_database(self, raise_exception=True):
@@ -68,7 +72,7 @@ class PostgresSessionStore(SessionStore):
             cursor.autocommit(True)
             cursor.execute(
                 """
-                CREATE DATABASE {dbname}
+                CREATE DATABASE {dbname} 
                 ENCODING 'unicode'
                 TEMPLATE 'template0';
             """.format(
@@ -79,12 +83,14 @@ class PostgresSessionStore(SessionStore):
     def _create_table(self, cursor):
         cursor.execute(
             """
-            CREATE TABLE IF NOT EXISTS sessions (
+            CREATE TABLE IF NOT EXISTS {dbtable} (
                 sid varchar PRIMARY KEY,
                 write_date timestamp without time zone NOT NULL,
-                payload text NOT NULL
+                payload bytea NOT NULL
             );
-        """
+        """.format(
+                dbtable=self.dbtable
+            )
         )
 
     @contextmanager
@@ -100,18 +106,28 @@ class PostgresSessionStore(SessionStore):
         with self.open_cursor() as cursor:
             cursor.execute(
                 """
-                INSERT INTO sessions (sid, write_date, payload)
+                INSERT INTO {dbtable} (sid, write_date, payload)
                 VALUES (%(sid)s, now() at time zone 'UTC', %(payload)s)
                 ON CONFLICT (sid)
                 DO UPDATE SET payload = %(payload)s, write_date = now() at time zone 'UTC';
-            """,
-                dict(sid=session.sid, payload=json.dumps(dict(session))),
+            """.format(
+                    dbtable=self.dbtable
+                ),
+                dict(
+                    sid=session.sid,
+                    payload=psycopg2.Binary(
+                        pickle.dumps(dict(session), pickle.HIGHEST_PROTOCOL)
+                    ),
+                ),
             )
 
     @retry_database
     def delete(self, session):
         with self.open_cursor() as cursor:
-            cursor.execute("DELETE FROM sessions WHERE sid=%s;", [session.sid])
+            cursor.execute(
+                "DELETE FROM {dbtable} WHERE sid=%s;".format(dbtable=self.dbtable),
+                [session.sid],
+            )
 
     @retry_database
     def get(self, sid):
@@ -120,9 +136,11 @@ class PostgresSessionStore(SessionStore):
         with self.open_cursor() as cursor:
             cursor.execute(
                 """
-                SELECT payload, write_date
-                FROM sessions WHERE sid=%s;
-            """,
+                SELECT payload, write_date 
+                FROM {dbtable} WHERE sid=%s;
+            """.format(
+                    dbtable=self.dbtable
+                ),
                 [sid],
             )
             try:
@@ -130,20 +148,22 @@ class PostgresSessionStore(SessionStore):
                 if write_date.date() != datetime.today().date():
                     cursor.execute(
                         """
-                        UPDATE sessions
-                        SET write_date = now() at time zone 'UTC'
+                        UPDATE {dbtable} 
+                        SET write_date = now() at time zone 'UTC' 
                         WHERE sid=%s;
-                    """,
+                    """.format(
+                            dbtable=self.dbtable
+                        ),
                         [sid],
                     )
-                return self.session_class(json.loads(payload), sid, False)
+                return self.session_class(pickle.loads(payload), sid, False)
             except Exception:
                 return self.session_class({}, sid, False)
 
     @retry_database
     def list(self):
         with self.open_cursor() as cursor:
-            cursor.execute("SELECT sid FROM sessions;")
+            cursor.execute("SELECT sid FROM {dbtable};".format(dbtable=self.dbtable))
             return [record[0] for record in cursor.fetchall()]
 
     @retry_database
@@ -151,7 +171,9 @@ class PostgresSessionStore(SessionStore):
         with self.open_cursor() as cursor:
             cursor.execute(
                 """
-                DELETE FROM sessions
+                DELETE FROM {dbtable} 
                 WHERE now() at time zone 'UTC' - write_date > '7 days';
-            """
+            """.format(
+                    dbtable=self.dbtable
+                )
             )

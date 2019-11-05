@@ -110,6 +110,7 @@ The following fields can be modified in the config file:
 **Postgres:**
 
 * session_store_dbname
+* session_store_dbtable
 
 **Redis:**
 
