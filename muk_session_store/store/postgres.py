@@ -23,11 +23,12 @@ import psycopg2
 import functools
 
 from contextlib import closing
+from datetime import datetime
 
 from werkzeug.contrib.sessions import SessionStore
 
 from odoo.sql_db import db_connect
-from odoo.tools import config
+from odoo.tools import config, DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
@@ -107,6 +108,10 @@ class PostgresSessionStore(SessionStore):
         """, [sid])
         try:
             payload, write_date = self.cursor.fetchone()
+            if isinstance(write_date, str):
+                write_date = datetime.strptime(
+                    write_date, DEFAULT_SERVER_DATETIME_FORMAT
+                )
             if write_date.date() != datetime.today().date():
                 self.cursor.execute("""
                     UPDATE sessions 
@@ -114,7 +119,8 @@ class PostgresSessionStore(SessionStore):
                     WHERE sid=%s;
                 """, [sid])
             return self.session_class(json.loads(payload), sid, False)
-        except Exception:
+        except Exception as error:
+            _logger.exception("PostgresSessionStore", exc_info=error)
             return self.session_class({}, sid, False)
     
     @ensure_cursor
