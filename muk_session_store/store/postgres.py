@@ -28,8 +28,10 @@ from werkzeug.contrib.sessions import SessionStore
 
 from odoo.sql_db import db_connect
 from odoo.tools import config
+from datetime import datetime
 
 _logger = logging.getLogger(__name__)
+
 
 def ensure_cursor(func):
     @functools.wraps(func)
@@ -45,14 +47,15 @@ def ensure_cursor(func):
                     raise error
     return wrapper
 
+
 class PostgresSessionStore(SessionStore):
-    
+
     def __init__(self, *args, **kwargs):
         super(PostgresSessionStore, self).__init__(*args, **kwargs)
         self.dbname = config.get('session_store_dbname', 'session_store')
         self._open_connection()
         self._setup_db()
-    
+
     def _create_database(self):
         with closing(db_connect("postgres").cursor()) as cursor:
             cursor.autocommit(True)
@@ -62,7 +65,7 @@ class PostgresSessionStore(SessionStore):
                 TEMPLATE 'template0';
             """.format(dbname=self.dbname))
         self._setup_db()
-        
+
     def _open_connection(self, create_db=True):
         try:
             connection = db_connect(self.dbname, allow_uri=True)
@@ -83,7 +86,7 @@ class PostgresSessionStore(SessionStore):
                 payload text NOT NULL
             );
         """)
-    
+
     @ensure_cursor
     def save(self, session):
         self.cursor.execute("""
@@ -92,11 +95,11 @@ class PostgresSessionStore(SessionStore):
             ON CONFLICT (sid)
             DO UPDATE SET payload = %(payload)s, write_date = now() at time zone 'UTC';
         """, dict(sid=session.sid, payload=json.dumps(dict(session))))
-        
+
     @ensure_cursor
     def delete(self, session):
         self.cursor.execute("DELETE FROM sessions WHERE sid=%s;", [session.sid])
-    
+
     @ensure_cursor
     def get(self, sid):
         if not self.is_valid_key(sid):
@@ -107,6 +110,11 @@ class PostgresSessionStore(SessionStore):
         """, [sid])
         try:
             payload, write_date = self.cursor.fetchone()
+            if isinstance(write_date, str):
+                _logger.warning("write_date is str")
+                write_date = datetime.strptime(
+                    write_date, '%Y-%m-%d %H:%M:%S.%f')
+
             if write_date.date() != datetime.today().date():
                 self.cursor.execute("""
                     UPDATE sessions 
@@ -114,14 +122,15 @@ class PostgresSessionStore(SessionStore):
                     WHERE sid=%s;
                 """, [sid])
             return self.session_class(json.loads(payload), sid, False)
-        except Exception:
+        except Exception as e:
+            _logger.exception("PostgresSessionStore.get error", exc_info=e)
             return self.session_class({}, sid, False)
-    
+
     @ensure_cursor
     def list(self):
         self.cursor.execute("SELECT sid FROM sessions;")
         return [record[0] for record in self.cursor.fetchall()]
-    
+
     @ensure_cursor
     def clean(self):
         self.cursor.execute("""
