@@ -76,7 +76,6 @@ class ScssEditor(models.AbstractModel):
         custom_url = self._get_custom_url(url, xmlid)
         custom_attachment = self._get_custom_attachment(custom_url)
         if custom_attachment.exists():
-            print(self.env.context, custom_attachment.datas)
             return base64.b64decode(custom_attachment.datas).decode('utf-8')
         else:
             match = re.compile("^/(\w+)/(.+?)(\.custom\.(.+))?\.(\w+)$").match(url)
