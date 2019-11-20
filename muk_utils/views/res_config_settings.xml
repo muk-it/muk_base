@@ -43,7 +43,7 @@
 				                <field name="attachment_location" class="o_light_label"/>
 				            </div>
 				            <div class="mt8">
-				               <button name="attachment_force_storage"
+				               <button name="action_attachment_force_storage"
 					           		string="Force Storage Migration"
 					            	type="object" icon="fa-refresh"/>
 				            </div>
