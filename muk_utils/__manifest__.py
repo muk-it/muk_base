@@ -22,7 +22,7 @@
 { 
     "name": "MuK Utils",
     "summary": """Utility Features""",
-    "version": '12.0.2.0.6',  
+    "version": '12.0.2.0.7',  
     "category": 'Extra Tools',   
     "license": "LGPL-3",
     "author": "MuK IT",
