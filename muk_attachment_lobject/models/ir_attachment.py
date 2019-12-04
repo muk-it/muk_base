@@ -93,6 +93,6 @@ class LObjectIrAttachment(models.Model):
                 "db_datas": False,
             }
             return values
-        return super(LObjectIrAttachment, attach)._get_datas_related_values(
+        return super(LObjectIrAttachment, self)._get_datas_related_values(
             data, mimetype
         )
