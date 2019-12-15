@@ -108,12 +108,14 @@
 								<div class="text-muted">
 									Set the system website
 								</div>
-								<div class="content-group">
-									<div class="mt16 row">
-										<label for="branding_website" string="Website" class="col-lg-3 o_light_label" />
-										<field name="branding_website" widget="url" class="oe_inline" />
-									</div>
-								</div>
+								<div class="mt8">
+					                <field name="branding_website" widget="url" class="o_light_label"/>
+					            </div>
+								<div class="mt8">
+				               		<button name="translations_reload"
+						           		string="Reload Translations" 
+						            	type="object" icon="fa-refresh"/>
+					            </div>
 							</div>
 						</div>
 					</div>
