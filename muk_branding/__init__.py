@@ -41,7 +41,7 @@ def _patch_system():
 
 def _pre_init_debrand_system(cr):
     env = api.Environment(cr, SUPERUSER_ID, {})
-    env['ir.translation'].clear_caches
+    env['ir.translation'].clear_caches()
     
 def _post_init_debrand_system(cr, registry):
     env = api.Environment(cr, SUPERUSER_ID, {})
@@ -53,5 +53,5 @@ def _post_init_debrand_system(cr, registry):
         env['base.update.translations'].create({
             'lang': lang
         }).act_update()
-    env['ir.translation'].clear_caches
+    env['ir.translation'].clear_caches()
     
