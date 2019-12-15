@@ -110,5 +110,5 @@ class ResConfigSettings(models.TransientModel):
     def translations_reload(self):
         for lang in self.env['res.lang'].sudo().search([('active','=',True)]).mapped('code'):
             self.env['base.language.install'].sudo().create({'lang': lang}).lang_install()
-            env['base.update.translations'].sudo().create({'lang': lang}).act_update()
+            self.env['base.update.translations'].sudo().create({'lang': lang}).act_update()
         self.sudo().env['ir.translation'].clear_caches
