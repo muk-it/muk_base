@@ -49,7 +49,7 @@ def _install_debrand_system(cr, registry):
         env['base.update.translations'].create({
             'lang': lang
         }).act_update()
-    env['ir.translation'].clear_caches
+    env['ir.translation'].clear_caches()
     if version_info[5] != 'e':
         env['ir.module.module'].search([('to_buy', '=', True)]).unlink()
         
