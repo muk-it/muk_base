@@ -23,7 +23,7 @@
 {
     "name": "MuK Branding",
     "summary": """Branding and Debranding""", 
-    "version": "12.0.2.0.2",
+    "version": "12.0.2.0.3", 
     "category": "Extra Tools",
     "license": "LGPL-3",
     "website": "http://www.mukit.at",
@@ -34,6 +34,7 @@
     ],
     "depends": [
         "muk_utils",
+        "muk_saas_branding",
     ],
     "data": [
         "data/company.xml",
