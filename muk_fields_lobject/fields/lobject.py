@@ -37,7 +37,7 @@ class LargeObject(fields.Field):
     column_type = ("oid", "oid")
     _slots = {
         "prefetch": False,
-        "depends_context": ("bin_size", "human_size", "path", "bytes", "stream"),
+        "depends_context": ("bin_size", "human_size", "oid", "bytes", "stream", "checksum", "base64"),
     }
 
     def convert_to_column(self, value, record, values=None, validate=True):
@@ -59,7 +59,7 @@ class LargeObject(fields.Field):
                 lobject.write(chunk)
         return lobject.oid
 
-    def convert_to_cache(self, value, record, validate=True):
+    def convert_to_record(self, value, record):
         if value and isinstance(value, int):
             lobject = record.env.cr._cnx.lobject(value, "rb")
             if record._context.get("human_size"):
