@@ -92,7 +92,7 @@ class File(fields.Field):
     column_type = ("varchar", "varchar")
     _slots = {
         "prefetch": False,
-        "depends_context": ("bin_size", "human_size", "path", "bytes", "stream"),
+        "depends_context": ("bin_size", "human_size", "path", "bytes", "stream", "checksum", "base64"),
     }
 
     def _get_file_path(self, checksume, dbname):
@@ -156,7 +156,7 @@ class File(fields.Field):
             _logger.warn("Writing file to %s failed!", path, exc_info=True)
         return path
 
-    def convert_to_cache(self, value, record, validate=True):
+    def convert_to_record(self, value, record):
         if value and isinstance(value, str) and os.path.exists(value):
             try:
                 with open(value, "rb") as file:
