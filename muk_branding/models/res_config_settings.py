@@ -109,26 +109,26 @@ class ResConfigSettings(models.TransientModel):
         res = super(ResConfigSettings, self).set_values()
         params = self.env['ir.config_parameter'].sudo()
         values = params.get_branding_settings_params()
-        if self.branding_system_name != values.get('muk_branding.system_name'):
-            self._delete_translations(values.get('muk_branding.system_name'))
+        if self.branding_system_name != values.get('branding_system_name'):
+            self._delete_translations(values.get('branding_system_name'))
             translation_changed = True
-        if self.branding_system_name != values.get('muk_branding.publisher'):
-            self._delete_translations(values.get('muk_branding.publisher'))
+        if self.branding_system_name != values.get('branding_publisher'):
+            self._delete_translations(values.get('branding_publisher'))
             translation_changed = True
-        if self.branding_system_name != values.get('muk_branding.website'):
-            self._delete_translations(values.get('muk_branding.website'))
+        if self.branding_system_name != values.get('branding_website'):
+            self._delete_translations(values.get('branding_website'))
             translation_changed = True
-        if self.branding_system_name != values.get('muk_branding.documentation'):
-            self._delete_translations(values.get('muk_branding.documentation'))
+        if self.branding_system_name != values.get('branding_documentation'):
+            self._delete_translations(values.get('branding_documentation'))
             translation_changed = True
-        if self.branding_system_name != values.get('muk_branding.support'):
-            self._delete_translations(values.get('muk_branding.support'))
+        if self.branding_system_name != values.get('branding_support'):
+            self._delete_translations(values.get('branding_support'))
             translation_changed = True
-        if self.branding_system_name != values.get('muk_branding.store'):
-            self._delete_translations(values.get('muk_branding.store'))
+        if self.branding_system_name != values.get('branding_store'):
+            self._delete_translations(values.get('branding_store'))
             translation_changed = True
-        if self.branding_system_name != values.get('muk_branding.share'):
-            self._delete_translations(values.get('muk_branding.share'))
+        if self.branding_system_name != values.get('branding_share'):
+            self._delete_translations(values.get('branding_share'))
             translation_changed = True
         if translation_changed:
             self.env['ir.config_parameter'].set_params({
