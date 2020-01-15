@@ -112,22 +112,22 @@ class ResConfigSettings(models.TransientModel):
         if self.branding_system_name != values.get('branding_system_name'):
             self._delete_translations(values.get('branding_system_name'))
             translation_changed = True
-        if self.branding_system_name != values.get('branding_publisher'):
+        if self.branding_publisher != values.get('branding_publisher'):
             self._delete_translations(values.get('branding_publisher'))
             translation_changed = True
-        if self.branding_system_name != values.get('branding_website'):
+        if self.branding_website != values.get('branding_website'):
             self._delete_translations(values.get('branding_website'))
             translation_changed = True
-        if self.branding_system_name != values.get('branding_documentation'):
+        if self.branding_documentation != values.get('branding_documentation'):
             self._delete_translations(values.get('branding_documentation'))
             translation_changed = True
-        if self.branding_system_name != values.get('branding_support'):
+        if self.branding_support != values.get('branding_support'):
             self._delete_translations(values.get('branding_support'))
             translation_changed = True
-        if self.branding_system_name != values.get('branding_store'):
+        if self.branding_store != values.get('branding_store'):
             self._delete_translations(values.get('branding_store'))
             translation_changed = True
-        if self.branding_system_name != values.get('branding_share'):
+        if self.branding_share != values.get('branding_share'):
             self._delete_translations(values.get('branding_share'))
             translation_changed = True
         if translation_changed:
