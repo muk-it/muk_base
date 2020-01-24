@@ -2,7 +2,7 @@
 #
 #    Copyright (c) 2017-2019 MuK IT GmbH.
 #
-#    This file is part of MuK Session Store 
+#    This file is part of MuK Session Store
 #    (see https://mukit.at).
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -51,7 +51,7 @@ def retry_redis(func):
     return wrapper
 
 class RedisSessionStore(SessionStore):
-    
+
     def __init__(self, *args, **kwargs):
         super(RedisSessionStore, self).__init__(*args, **kwargs)
         self.prefix = config.get('session_store_prefix', '')
@@ -59,25 +59,27 @@ class RedisSessionStore(SessionStore):
             host=config.get('session_store_host', 'localhost'),
             port=int(config.get('session_store_port', 6379)),
             db=int(config.get('session_store_dbindex', 1)),
-            password=config.get('session_store_pass', None)
+            password=config.get('session_store_pass', None),
+            ssl=config.get("session_store_ssl", False),
+            ssl_cert_reqs=config.get("session_store_ssl_cert_reqs", None),
         )
-    
+
     def _encode_session_key(self, key):
         return key.encode('utf-8') if isinstance(key, str) else key
-    
+
     def _get_session_key(self, sid):
         return self._encode_session_key(self.prefix + sid)
-    
+
     @retry_redis
     def save(self, session):
         key = self._get_session_key(session.sid)
         payload = pickle.dumps(dict(session), pickle.HIGHEST_PROTOCOL)
         self.server.setex(name=key, value=payload, time=SESSION_TIMEOUT)
-    
+
     @retry_redis
     def delete(self, session):
         self.server.delete(self._get_session_key(session.sid))
-    
+
     @retry_redis
     def get(self, sid):
         if not self.is_valid_key(sid):
