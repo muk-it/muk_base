@@ -119,6 +119,8 @@ The following fields can be modified in the config file:
 * session_store_port
 * session_store_dbindex
 * session_store_pass
+* session_store_ssl
+* session_store_ssl_cert_reqs
 
 Usage
 =====

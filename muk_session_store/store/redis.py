@@ -60,6 +60,8 @@ class RedisSessionStore(SessionStore):
             port=int(config.get("session_store_port", 6379)),
             db=int(config.get("session_store_dbindex", 1)),
             password=config.get("session_store_pass", None),
+            ssl=config.get("session_store_ssl", False),
+            ssl_cert_reqs=config.get("session_store_ssl_cert_reqs", None),
         )
 
     def _encode_session_key(self, key):
