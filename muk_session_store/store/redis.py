@@ -38,6 +38,7 @@ except ImportError:
 
 SESSION_TIMEOUT = 60 * 60 * 24 * 7
 
+
 def retry_redis(func):
     @functools.wraps(func)
     def wrapper(self, *args, **kwargs):
@@ -48,7 +49,9 @@ def retry_redis(func):
                 _logger.warn("SessionStore connection failed! (%s/5)" % attempts)
                 if attempts >= 5:
                     raise error
+
     return wrapper
+
 
 class RedisSessionStore(SessionStore):
 
