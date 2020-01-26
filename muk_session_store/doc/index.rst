@@ -119,11 +119,28 @@ The following fields can be modified in the config file:
 * session_store_port
 * session_store_dbindex
 * session_store_pass
+* session_store_ssl
+* session_store_ssl_cert_reqs
 
 Usage
 =====
 
 After setting the parameters, the session store is used automatically.
+
+In order to use ssl, which is a requirement of some databases, session_store_ssl
+should be set to True and session_store_ssl_cert_reqs should be set to 'required'
+except in the case where the server certificate does not match the host name.
+
+e.g.
+# Server has a proper certificate
+session_store_ssl=True
+session_store_ssl_cert_reqs=required
+
+# Server does not have a proper certificate (AWS possibly)
+session_store_ssl=True
+session_store_ssl_cert_reqs=None
+
+For more information please see the redis python module documentation
 
 Credit
 ======
