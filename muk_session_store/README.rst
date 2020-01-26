@@ -16,7 +16,7 @@ The requirements are only required if Redis is used as the session store.
 Redis
 -------------
 
-A interface to the Redis key-value store for Python. To install Redis please follow the 
+A interface to the Redis key-value store for Python. To install Redis please follow the
 `instructions <https://github.com/andymccurdy/redis-py>`_ or install the library via pip.
 
 ``pip install redis``
@@ -44,7 +44,7 @@ command:
 The module name consists of the Odoo version and the module name, where
 underscores are replaced by a dash.
 
-**Module:** 
+**Module:**
 
 ``odoo<version>-addon-<module_name>``
 
@@ -53,7 +53,7 @@ underscores are replaced by a dash.
 ``sudo -H pip3 install --extra-index-url https://nexus.mukit.at/repository/odoo/simple odoo11-addon-muk-utils``
 
 Once the installation has been successfully completed, the app is already in the
-correct folder. Log on to your Odoo server and go to the Apps menu. Trigger the 
+correct folder. Log on to your Odoo server and go to the Apps menu. Trigger the
 debug mode and update the list by clicking on the "Update Apps List" link. Now
 install the module by clicking on the install button.
 
@@ -62,7 +62,7 @@ using the "pip" command. To do this, enter the following command in your console
 
 ``pip install --upgrade --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>``
 
-When the process is finished, restart your server and update the application in 
+When the process is finished, restart your server and update the application in
 Odoo. The steps are the same as for the installation only the button has changed
 from "Install" to "Upgrade".
 
@@ -88,7 +88,7 @@ module in the same way. Just type the following command into the console:
 
 ``pip install --upgrade --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>``
 
-When the process is finished, restart your server and update the application in 
+When the process is finished, restart your server and update the application in
 Odoo, just like you would normally.
 
 Configuration
@@ -97,33 +97,50 @@ Configuration
 Since this module need to be activated even if no database is selected it should
 be loaded right at the server start. This can be done by editing the configuration
 file or passing a load parameter to the start script.
-				
+
 Parameter: ``--load=web,muk_session_store``
 
 The following fields can be modified in the config file:
 
-**Store:** 
+**Store:**
 
 * session_store_database
 * session_store_redis
 
-**Postgres:** 
+**Postgres:**
 
 * session_store_dbname
 * session_store_dbtable
 
-**Redis:** 
+**Redis:**
 
 * session_store_prefix
 * session_store_host
 * session_store_port
 * session_store_dbindex
 * session_store_pass
+* session_store_ssl
+* session_store_ssl_cert_reqs
 
 Usage
 =============
 
 After setting the parameters, the session store is used automatically.
+
+In order to use ssl, which is a requirement of some databases, session_store_ssl
+should be set to True and session_store_ssl_cert_reqs should be set to 'required'
+except in the case where the server certificate does not match the host name.
+
+e.g.
+# Server has a proper certificate
+session_store_ssl=True
+session_store_ssl_cert_reqs=required
+
+# Server does not have a proper certificate (AWS possibly)
+session_store_ssl=True
+session_store_ssl_cert_reqs=None
+
+For more information please see the redis python module documentation.
 
 Credits
 =======
