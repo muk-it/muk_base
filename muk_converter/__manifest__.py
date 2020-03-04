@@ -22,7 +22,7 @@
     "summary": """Universal Converter""",
     "version": '11.0.1.2.6',   
     "category": 'Extra Tools',   
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "website": "https://www.mukit.at",
     "live_test_url": "https://demo.mukit.at/web/login",
     "author": "MuK IT",
