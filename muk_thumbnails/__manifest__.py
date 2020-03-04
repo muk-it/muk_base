@@ -22,7 +22,7 @@
     "summary": """File Thumbnails""", 
     "version": '11.0.1.0.4',   
     "category": 'Document Management',   
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "website": "http://www.mukit.at",
     "author": "MuK IT",
     "contributors": [
