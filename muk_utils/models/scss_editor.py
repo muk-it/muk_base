@@ -45,7 +45,7 @@ class ScssEditor(models.AbstractModel):
     def _get_custom_attachment(self, url):
         return self.env["ir.attachment"].with_context(
             bin_size=False, bin_size_datas=False
-        ).search([("url", '=', url)])
+        ).search([("url", '=', url)], limit=1)
     
     def _get_custom_view(self, url):
         return self.env["ir.ui.view"].search([("name", '=', url)])
