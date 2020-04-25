@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190522\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-12 23:43+0000\n"
-"PO-Revision-Date: 2019-07-12 23:43+0000\n"
+"POT-Creation-Date: 2020-04-11 04:23+0000\n"
+"PO-Revision-Date: 2020-04-11 04:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,37 +23,37 @@ msgstr "<code>Advertencia</code>: Excepción de Advertencia para usar con <code>
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>b64encode</code>, <code>b64decode</code>: Base64 converter"
-msgstr ""
+msgstr "<code>b64encode</code>, <code>b64decode</code>: Convertidor Base64"
 
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>date_format</code>, <code>datetime_format</code>: server date and time formats"
-msgstr ""
+msgstr "<code>date_format</code>, <code>datetime_format</code>: formatos de fecha y hora del servidor"
 
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>env</code>: Odoo Environment on which the rule is triggered"
-msgstr ""
+msgstr "<code>env</code>: Entorno del sistema en el que se activa la regla"
 
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>logger.info(message)</code>: Python logging framework"
-msgstr ""
+msgstr "<code>logger.info(message)</code>: Python logging framework"
 
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>model</code>: Odoo Model of the record on which the rule is triggered"
-msgstr ""
+msgstr "<code>model</code>: Modelo del sistema del registro en el que se activa la regla"
 
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>time</code>, <code>datetime</code>, <code>dateutil</code>, <code>timezone</code>: useful Python libraries"
-msgstr ""
+msgstr "<code>time</code>, <code>datetime</code>, <code>dateutil</code>, <code>timezone</code>: útiles bibliotecas de Python"
 
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "<code>uid</code>, <code>user</code>: User on which the rule is triggered"
-msgstr ""
+msgstr "<code>uid</code>, <code>user</code>: usuario en el que se activa la regla"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__active
@@ -73,12 +73,12 @@ msgstr "Todos"
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_search
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_tree
 msgid "Auto Vacuum Rules"
-msgstr "Reglas de vacío automático"
+msgstr "Reglas de vaciado automático"
 
 #. module: muk_autovacuum
 #: model:ir.model,name:muk_autovacuum.model_ir_autovacuum
 msgid "Automatic Vacuum"
-msgstr ""
+msgstr "Vaciado automático"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__code
@@ -93,7 +93,7 @@ msgstr "Basado en código"
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Code Settings"
-msgstr ""
+msgstr "Ajustes del código"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,help:muk_autovacuum.field_muk_autovacuum_rules__code
@@ -164,7 +164,7 @@ msgstr "Basado en dominio"
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Domain Settings"
-msgstr ""
+msgstr "Ajustes del Dominio"
 
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
@@ -230,7 +230,7 @@ msgstr ""
 #: code:addons/muk_autovacuum/models/rules.py:290
 #, python-format
 msgid "Import Template for Auto Vacuum Rules"
-msgstr ""
+msgstr "Importar plantilla para reglas de vaciado automático"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules____last_update
@@ -342,7 +342,7 @@ msgstr "Orden de tallas"
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Size Settings"
-msgstr ""
+msgstr "Ajuste de tamaño"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__size_type
@@ -352,7 +352,7 @@ msgstr "Tamaño Tipo"
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__size_parameter_value
 msgid "Size Value"
-msgstr ""
+msgstr "Valor del Tamaño"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__size_parameter
@@ -378,7 +378,7 @@ msgstr "Campo de tiempo"
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "Time Settings"
-msgstr ""
+msgstr "Ajustes del Tiempo"
 
 #. module: muk_autovacuum
 #: model:ir.model.fields,field_description:muk_autovacuum.field_muk_autovacuum_rules__time_type
@@ -403,5 +403,5 @@ msgstr "Años"
 #. module: muk_autovacuum
 #: model_terms:ir.ui.view,arch_db:muk_autovacuum.view_autovacuum_rule_form
 msgid "e.g. Delete Logs after 30 Days"
-msgstr ""
+msgstr "ejemplo, Borar Logs despues de 30 días"
 

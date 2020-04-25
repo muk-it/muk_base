@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190522\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-13 00:08+0000\n"
-"PO-Revision-Date: 2019-07-13 00:08+0000\n"
+"POT-Creation-Date: 2020-04-11 04:24+0000\n"
+"PO-Revision-Date: 2020-04-11 04:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,17 +18,17 @@ msgstr ""
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Apps and Promotion</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Aplicaciones y Promoción</span>"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Company</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Empresa</span>"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">Documentation and Support</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Documentación y Soporte</span>"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
@@ -38,72 +38,72 @@ msgstr ""
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">System Names</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Nombre del Sistema</span>"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "<span class=\"o_form_label\">System Website</span>"
-msgstr ""
+msgstr "<span class=\"o_form_label\">Página Web</span>"
 
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_ir_actions_act_window
 msgid "Action Window"
-msgstr ""
+msgstr "Acción de ventana"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Brand the PoS panel according to your needs"
-msgstr ""
+msgstr "Tu Marca en el panel de PoS según tus necesidades"
 
 #. module: muk_branding
 #: model:ir.model.fields,help:muk_branding.field_res_config_settings__module_muk_pos_branding
 msgid "Brand the PoS panel according to your needs."
-msgstr ""
+msgstr "Tu Marca en el panel de PoS según tus  necesidades."
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Brand the website according to your needs"
-msgstr ""
+msgstr "Tu Marca en el sitio web según tus necesidades"
 
 #. module: muk_branding
 #: model:ir.model.fields,help:muk_branding.field_res_config_settings__module_muk_website_branding
 msgid "Brand the website according to your needs."
-msgstr ""
+msgstr "Tu Marca en el sitio web según tus necesidades."
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Brand your outgoing mails with your own style"
-msgstr ""
+msgstr "Tu Marca en los correos salientes con tu propio estilo"
 
 #. module: muk_branding
 #: model:ir.model.fields,help:muk_branding.field_res_config_settings__module_muk_mail_branding
 msgid "Brand your outgoing mails with your own style."
-msgstr ""
+msgstr "Tu Marca en los correos salientes con tu propio estilo."
 
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_res_company
 msgid "Companies"
-msgstr "Compañías"
+msgstr "Empresas"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Company Data"
-msgstr "Información de compañía"
+msgstr "Información de la Empresa"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_company_favicon
 msgid "Company Favicon"
-msgstr ""
+msgstr "Favicon"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_company_logo
 msgid "Company Logo"
-msgstr "Logotipo de la compañia"
+msgstr "Logotipo de la Empresa"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_company_name
 msgid "Company Name"
-msgstr "Nombre de la compañía"
+msgstr "Nombre de la Empresa"
 
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_res_config_settings
@@ -113,17 +113,17 @@ msgstr "Opciones de Configuración"
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Customize the Backend according to your needs"
-msgstr ""
+msgstr "Personaliza el Backend según tus necesidades"
 
 #. module: muk_branding
 #: model:ir.model.fields,help:muk_branding.field_res_config_settings__module_muk_web_branding
 msgid "Customize the backend according to your needs."
-msgstr ""
+msgstr "Personaliza el backend según tus necesidades."
 
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_muk_branding_debranding
 msgid "Debranding"
-msgstr ""
+msgstr "Tema y Marca"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_muk_branding_debranding__display_name
@@ -133,17 +133,17 @@ msgstr "Nombre mostrado"
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Documentation"
-msgstr ""
+msgstr "Documentación"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_documentation
 msgid "Documentation URL"
-msgstr ""
+msgstr "Documentación URL"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Extensions"
-msgstr ""
+msgstr "Extensiones"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_company__favicon
@@ -164,7 +164,7 @@ msgstr "Última modificación en"
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__module_muk_mail_branding
 msgid "Mail Branding"
-msgstr ""
+msgstr "Marca de correo"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
@@ -174,93 +174,98 @@ msgstr "Nombre"
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__module_muk_pos_branding
 msgid "PoS Branding"
-msgstr ""
+msgstr "Marca PoS"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_publisher
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Publisher"
-msgstr ""
+msgstr "Editor"
+
+#. module: muk_branding
+#: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
+msgid "Reload Translations"
+msgstr "Actualizar traducciones"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Set the company logo"
-msgstr ""
+msgstr "Establecer el logotipo de la empresa"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Set the links to the system documentation"
-msgstr ""
+msgstr "Establecer los enlaces a la documentación del sistema"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Set the system media links"
-msgstr ""
+msgstr "Establecer los enlaces de medios del sistema"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Set the system names"
-msgstr ""
+msgstr "Establecer los nombres del sistema"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Set the system website"
-msgstr ""
+msgstr "Establecer el sitio web del sistema"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Share"
-msgstr ""
+msgstr "Compartir"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_share
 msgid "Share URL"
-msgstr ""
+msgstr "Compartir URL"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Specify the name and favicon of the company"
-msgstr ""
+msgstr "Especifique el nombre y el favicon de la empresa."
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Store"
-msgstr ""
+msgstr "Tienda"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_store
 msgid "Store URL"
-msgstr ""
+msgstr "Tienda URL"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "Support"
-msgstr ""
+msgstr "Soporte"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_support
 msgid "Support URL"
-msgstr ""
+msgstr "Soporte URL"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "System"
-msgstr ""
+msgstr "Sistema"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
 msgid "System Links"
-msgstr ""
+msgstr "Enlaces del Sistema"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_system_name
 msgid "System Name"
-msgstr ""
+msgstr "Nombre del Sistema"
 
 #. module: muk_branding
 #: model:ir.model,name:muk_branding.model_ir_config_parameter
 msgid "System Parameter"
-msgstr ""
+msgstr "Parámetros del sistema"
 
 #. module: muk_branding
 #: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
@@ -285,20 +290,15 @@ msgstr "Ver"
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__module_muk_web_branding
 msgid "Web Branding"
-msgstr ""
-
-#. module: muk_branding
-#: model_terms:ir.ui.view,arch_db:muk_branding.res_config_settings_view_form
-msgid "Website"
-msgstr "Sitio web"
+msgstr "Marca Web"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__module_muk_website_branding
 msgid "Website Branding"
-msgstr ""
+msgstr "Marca Website"
 
 #. module: muk_branding
 #: model:ir.model.fields,field_description:muk_branding.field_res_config_settings__branding_website
 msgid "Website URL"
-msgstr ""
+msgstr "URL del sitio web"
 
