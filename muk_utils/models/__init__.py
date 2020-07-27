@@ -27,4 +27,5 @@ from . import (
     mixins_groups,
     mixins_hierarchy,
     res_config_settings,
+    scss_editor,
 )
