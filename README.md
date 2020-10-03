@@ -1,5 +1,5 @@
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
-[![PyPI](https://img.shields.io/badge/Weblate-Install%20me-5d8da8.svg)](https://nexus.mukit.at/#browse/browse:odoo)
+[![PyPI](https://img.shields.io/badge/PyPI-Install%20me-5d8da8.svg)](https://nexus.mukit.at/#browse/browse:odoo)
 [![Weblate](https://img.shields.io/badge/Weblate-Translate%20me-0094E9.svg)](https://weblate.mukit.at)
 [![Website](https://img.shields.io/badge/Website-Open%20me-243742.svg)](https://mukit.at/)
 
