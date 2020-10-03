@@ -1,9 +1,7 @@
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
-[![Build Status](https://travis-ci.org/muk-it/muk_base.svg?branch=13.0)](https://travis-ci.org/muk-it/muk_base)
-[![codecov](https://codecov.io/gh/muk-it/muk_base/branch/13.0/graph/badge.svg)](https://codecov.io/gh/muk-it/muk_base)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c867f25820614ed795e7567e37bd81c0)](https://www.codacy.com/app/keshrath/muk_base?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=muk-it/muk_base&amp;utm_campaign=Badge_Grade)
-[![Weblate](https://weblate.mukit.at/widgets/base-13/-/svg-badge.svg)](https://weblate.mukit.at/projects/base-13/)
-[![Demo](https://img.shields.io/badge/demo-Try%20me-243742.svg)](https://demo.mukit.at)
+[![PyPI](https://img.shields.io/badge/Weblate-Install%20me-5d8da8.svg)](https://nexus.mukit.at/#browse/browse:odoo)
+[![Weblate](https://img.shields.io/badge/Weblate-Translate%20me-0094E9.svg)](https://weblate.mukit.at)
+[![Website](https://img.shields.io/badge/Website-Open%20me-243742.svg)](https://mukit.at/)
 
 # MuK Odoo Base Modules
 
@@ -19,11 +17,7 @@ mode and update the list by clicking on the "Update Apps List" link. Now
 install the module by clicking on the install button.
 
 Another way to install this module is via the package management for
-Python ([PyPI]).
-
-To install our modules using the package manager make sure
-[odoo-autodiscover] is installed correctly. Note that for Odoo version 
-11.0 and later this is not necessary anymore.  Then open a console and 
+Python ([PyPI]). Then open a console and
 install the module by entering the following command:
 
 `pip install --extra-index-url https://nexus.mukit.at/repository/odoo/simple <module>`
@@ -65,8 +59,6 @@ console:
 When the process is finished, restart your server and update the
 application in Odoo, just like you would normally.
 
-  [PyPI]: https://pypi.org/project/pip/
-  [odoo-autodiscover]: https://pypi.org/project/odoo-autodiscover/
+  [PyPI]: https://pypi.org/user/mukit/
   [repository]: https://nexus.mukit.at/#browse/browse:odoo
   [website]: https://mukit.at/page/open-source
-  [MuK IT]: https://www.mukit.at/
