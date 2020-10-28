@@ -72,53 +72,56 @@ class IrAttachment(models.Model):
     # Actions
     #----------------------------------------------------------
     
-    # @api.multi
-    # def action_migrate(self):
-    #     self.migrate()
+    @api.multi
+    def action_migrate(self):
+        self.migrate()
     
     #----------------------------------------------------------
     # Functions
     #----------------------------------------------------------
     
-    # @api.model
-    # def storage_locations(self):
-    #     return ['db', 'file']
-    #
-    # @api.model
-    # def force_storage(self):
-    #     if not self.env.user._is_admin():
-    #         raise AccessError(_('Only administrators can execute this action.'))
-    #     storage_domain = {
-    #         'db': ('db_datas', '=', False),
-    #         'file': ('store_fname', '=', False),
-    #     }
-    #     record_domain = [
-    #         '&', ('type', '=', 'binary'),
-    #         '&', storage_domain[self._storage()],
-    #         '|', ('res_field', '=', False), ('res_field', '!=', False)
-    #     ]
-    #     self.search(record_domain).migrate(batch_size=100)
-    #     return True
+    @api.model
+    def storage_locations(self):
+        return ['db', 'file']
 
-    # @api.multi
-    # def migrate(self, batch_size=None):
-    #     commit_on_batch = bool(batch_size)
-    #     batch_size = batch_size or len(self) or 1
-    #     storage_location = self._storage().upper()
-    #     batches = math.ceil(len(self) / batch_size)
-    #     for index, attachment in enumerate(self, start=1):
-    #         current_batch = math.ceil(index / batch_size)
-    #         counter = len(self) - (batches - 1) * batch_size
-    #         counter = counter if current_batch == batches else batch_size
-    #         _logger.info("Migrate Attachment %s of %s to %s [Batch %s of %s]",
-    #             index % batch_size or batch_size, counter,
-    #             storage_location, current_batch, batches
-    #         )
-    #         attachment.with_context(migration=True).write({
-    #             'datas': attachment.datas
-    #         })
-    #         if commit_on_batch and not index % batch_size:
-    #             self.env.cr.commit()
+    @api.model
+    def force_storage(self):
+        if not self._storage() in self.storage_locations():
+            return super(IrAttachment, self).force_storage()
+
+        if not self.env.user._is_admin():
+            raise AccessError(_('Only administrators can execute this action.'))
+        storage_domain = {
+            'db': ('db_datas', '=', False),
+            'file': ('store_fname', '=', False),
+        }
+        record_domain = [
+            '&', ('type', '=', 'binary'),
+            '&', storage_domain[self._storage()],
+            '|', ('res_field', '=', False), ('res_field', '!=', False)
+        ]
+        self.search(record_domain).migrate(batch_size=100)
+        return True
+
+    @api.multi
+    def migrate(self, batch_size=None):
+        commit_on_batch = bool(batch_size)
+        batch_size = batch_size or len(self) or 1
+        storage_location = self._storage().upper()
+        batches = math.ceil(len(self) / batch_size)
+        for index, attachment in enumerate(self, start=1):
+            current_batch = math.ceil(index / batch_size)
+            counter = len(self) - (batches - 1) * batch_size
+            counter = counter if current_batch == batches else batch_size
+            _logger.info("Migrate Attachment %s of %s to %s [Batch %s of %s]",
+                index % batch_size or batch_size, counter,
+                storage_location, current_batch, batches
+            )
+            attachment.with_context(migration=True).write({
+                'datas': attachment.datas
+            })
+            if commit_on_batch and not index % batch_size:
+                self.env.cr.commit()
         
     #----------------------------------------------------------
     # Read
