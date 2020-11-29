@@ -61,7 +61,8 @@ class IrAttachment(models.Model):
 
     @api.model
     def force_storage(self):
-        """Force all attachments to be stored in the currently configured storage"""
+        if not self._storage() in self.storage_locations():
+            return super(IrAttachment, self).force_storage()
         if not self.env.user._is_admin():
             raise AccessError(_("Only administrators can execute this action."))
         self.search(
