@@ -86,6 +86,8 @@ class IrAttachment(models.Model):
     
     @api.model
     def force_storage(self):
+        if not self._storage() in self.storage_locations():
+            return super(IrAttachment, self).force_storage()
         if not self.env.user._is_admin():
             raise AccessError(_('Only administrators can execute this action.'))
         storage_domain = {
