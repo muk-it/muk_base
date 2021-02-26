@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0-20190522\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-12 23:31+0000\n"
-"PO-Revision-Date: 2019-07-12 23:31+0000\n"
+"POT-Creation-Date: 2020-04-11 04:39+0000\n"
+"PO-Revision-Date: 2020-04-11 04:39+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,12 +19,12 @@ msgstr ""
 #: model:ir.actions.act_window,name:muk_security.action_security_access_groups
 #: model:ir.ui.menu,name:muk_security.menu_security_access_groups
 msgid "Access Groups"
-msgstr ""
+msgstr "Grupos de acceso"
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_muk_security_mixins_access_rights
 msgid "Access Mixin"
-msgstr ""
+msgstr "Acceso Mixin"
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_base
@@ -34,12 +34,12 @@ msgstr ""
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__child_groups
 msgid "Child Groups"
-msgstr ""
+msgstr "Grupos Hijos"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_access_groups__complete_groups
 msgid "Complete Groups"
-msgstr ""
+msgstr "Grupos Completos"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__perm_create
@@ -80,12 +80,12 @@ msgstr ""
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__explicit_users
 msgid "Explicit Users"
-msgstr ""
+msgstr "Usuarios explícitos"
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_muk_security_mixins_access_groups
 msgid "Group Access Mixin"
-msgstr ""
+msgstr "Grupos de Acceso Mixin"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__name
@@ -95,7 +95,7 @@ msgstr "Nombre del grupo"
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__users
 msgid "Group Users"
-msgstr ""
+msgstr "Usuarios grupales"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__groups
@@ -132,32 +132,32 @@ msgstr "Última actualización el"
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking__is_locked
 msgid "Locked"
-msgstr ""
+msgstr "Bloqueado"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_mixins_locking__locked_by
 msgid "Locked by"
-msgstr ""
+msgstr "Bloqueado por"
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_muk_security_mixins_locking
 msgid "Locking Mixin"
-msgstr ""
+msgstr "Bloqueo Mixin"
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_ir_model_access
 msgid "Model Access"
-msgstr ""
+msgstr "Acceso al  Modelo"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__parent_group
 msgid "Parent Group"
-msgstr ""
+msgstr "Grupo Padre"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__parent_path
 msgid "Parent Path"
-msgstr ""
+msgstr "Ruta padre"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__perm_read
@@ -169,7 +169,7 @@ msgstr "Permiso para leer"
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_muk_security_access_groups
 msgid "Record Access Groups"
-msgstr ""
+msgstr "Grupos de acceso a registros"
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_ir_rule
@@ -185,7 +185,7 @@ msgstr "Ajustes"
 #: code:addons/muk_security/models/mixins_locking.py:77
 #, python-format
 msgid "The record (%s [%s]) is locked, by an other user."
-msgstr ""
+msgstr "El registro (%s [%s]) está bloqueado por otro usuario."
 
 #. module: muk_security
 #: code:addons/muk_security/models/mixins_access_groups.py:197
@@ -193,12 +193,14 @@ msgstr ""
 msgid "The requested operation cannot be completed due to group security restrictions. Please contact your system administrator.\n"
 "\n"
 "(Document type: %s, Operation: %s)"
-msgstr ""
+msgstr "La operación solicitada no se puede completar debido a restricciones de seguridad grupales. Póngase en contacto con el administrador del sistema..\n"
+"\n"
+"(Tipo de documento: %s, Operación: %s)"
 
 #. module: muk_security
 #: model:ir.model.fields,field_description:muk_security.field_muk_security_access_groups__perm_unlink
 msgid "Unlink Access"
-msgstr ""
+msgstr "Desvincular acceso"
 
 #. module: muk_security
 #: model:ir.model,name:muk_security.model_res_users
