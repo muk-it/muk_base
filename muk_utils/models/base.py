@@ -26,6 +26,7 @@ from odoo import api, models, fields
 from odoo.osv import expression
 
 from odoo.addons.muk_utils.tools import utils
+from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
 
